@@ -15,6 +15,7 @@
 package manifest
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -26,9 +27,7 @@ import (
 	"time" // For kubeclient GCP auth
 
 	"github.com/ghodss/yaml"
-	"github.com/hashicorp/go-multierror"
 	goversion "github.com/hashicorp/go-version"
-	"github.com/pkg/errors"
 	appsv1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"
 	apiextensionsv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
@@ -41,8 +40,6 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/kubernetes/scheme"
-
-	"istio.io/istio/pilot/pkg/model"
 
 	// For GCP auth functionality.
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
@@ -116,6 +113,7 @@ var (
 			name.PolicyComponentName,
 			name.TelemetryComponentName,
 			name.GalleyComponentName,
+			name.CitadelComponentName,
 			name.CNIComponentName,
 			name.IngressComponentName,
 			name.EgressComponentName,
@@ -266,7 +264,7 @@ func parseKubectlVersion(kubectlStdout string) (*goversion.Version, *goversion.V
 }
 
 // ApplyAll applies all given manifests using kubectl client.
-func ApplyAll(manifests name.ManifestMap, version pkgversion.Version, revision string, opts *kubectlcmd.Options) (CompositeOutput, error) {
+func ApplyAll(manifests name.ManifestMap, version pkgversion.Version, opts *kubectlcmd.Options) (CompositeOutput, error) {
 	scope.Infof("Preparing manifests for these components:")
 	for c := range manifests {
 		scope.Infof("- %s", c)
@@ -275,10 +273,10 @@ func ApplyAll(manifests name.ManifestMap, version pkgversion.Version, revision s
 	if _, err := InitK8SRestClient(opts.Kubeconfig, opts.Context); err != nil {
 		return nil, err
 	}
-	return applyRecursive(manifests, version, revision, opts)
+	return applyRecursive(manifests, version, opts)
 }
 
-func applyRecursive(manifests name.ManifestMap, version pkgversion.Version, revision string, opts *kubectlcmd.Options) (CompositeOutput, error) {
+func applyRecursive(manifests name.ManifestMap, version pkgversion.Version, opts *kubectlcmd.Options) (CompositeOutput, error) {
 	var wg sync.WaitGroup
 	var mu sync.Mutex
 	out := CompositeOutput{}
@@ -293,7 +291,7 @@ func applyRecursive(manifests name.ManifestMap, version pkgversion.Version, revi
 				<-s
 				scope.Infof("Prerequisite for %s has completed, proceeding with install.", c)
 			}
-			applyOut, appliedObjects := ApplyManifest(c, strings.Join(m, helm.YAMLSeparator), version.String(), revision, *opts)
+			applyOut, appliedObjects := ApplyManifest(c, strings.Join(m, helm.YAMLSeparator), version.String(), *opts)
 			mu.Lock()
 			out[c] = applyOut
 			allAppliedObjects = append(allAppliedObjects, appliedObjects...)
@@ -323,7 +321,7 @@ func applyRecursive(manifests name.ManifestMap, version pkgversion.Version, revi
 	return out, nil
 }
 
-func ApplyManifest(componentName name.ComponentName, manifestStr, version, revision string,
+func ApplyManifest(componentName name.ComponentName, manifestStr, version string,
 	opts kubectlcmd.Options) (*ComponentApplyOutput, object.K8sObjects) {
 	stdout, stderr := "", ""
 	appliedObjects := object.K8sObjects{}
@@ -332,9 +330,6 @@ func ApplyManifest(componentName name.ComponentName, manifestStr, version, revis
 		return buildComponentApplyOutput(stdout, stderr, appliedObjects, err), appliedObjects
 	}
 	componentLabel := fmt.Sprintf("%s=%s", istioComponentLabelStr, componentName)
-	if revision != "" {
-		componentLabel += fmt.Sprintf(",%s=%s", model.RevisionLabel, revision)
-	}
 
 	// TODO: remove this when `kubectl --prune` supports empty objects
 	//  (https://github.com/kubernetes/kubernetes/issues/40635)
@@ -381,9 +376,6 @@ func ApplyManifest(componentName name.ComponentName, manifestStr, version, revis
 		o.AddLabels(map[string]string{istioComponentLabelStr: string(componentName)})
 		o.AddLabels(map[string]string{operatorLabelStr: operatorReconcileStr})
 		o.AddLabels(map[string]string{istioVersionLabelStr: version})
-		if revision != "" {
-			o.AddLabels(map[string]string{model.RevisionLabel: revision})
-		}
 	}
 
 	opts.ExtraArgs = []string{"--force", "--selector", componentLabel}
@@ -427,22 +419,25 @@ func ApplyManifest(componentName name.ComponentName, manifestStr, version, revis
 	// We sort them by namespace so that we can pass the `-n` to the apply command. This is required for prune to work
 	// See https://github.com/kubernetes/kubernetes/issues/87756 for details
 	namespaces, nonNsCrdObjectsByNamespace := splitByNamespace(objectsNotInLists(objects, nsObjects, crdObjects))
-	var applyErrors *multierror.Error
+	var applyErr error
 	for _, ns := range namespaces {
 		nonNsCrdObjects := nonNsCrdObjectsByNamespace[ns]
 		nsOpts := opts
 		nsOpts.Namespace = ns
 		stdout, stderr, err = applyObjects(nonNsCrdObjects, &nsOpts, stdout, stderr)
 		if err != nil {
-			applyErrors = multierror.Append(applyErrors, errors.Wrapf(err, "error applying object to namespace %s", ns))
+			applyErr = fmt.Errorf("error applying object to %v: %v: %v", ns, err, applyErr)
 		}
 		appliedObjects = append(appliedObjects, nonNsCrdObjects...)
 	}
 	mark := "✔"
-	if err = applyErrors.ErrorOrNil(); err != nil {
+	if applyErr != nil {
 		mark = "✘"
 	}
 	logAndPrint("%s Finished applying manifest for component %s.", mark, componentName)
+	if applyErr != nil {
+		return buildComponentApplyOutput(stdout, stderr, appliedObjects, err), appliedObjects
+	}
 	return buildComponentApplyOutput(stdout, stderr, appliedObjects, err), appliedObjects
 }
 
@@ -714,6 +709,7 @@ func WaitForResources(objects object.K8sObjects, opts *kubectlcmd.Options) error
 
 	errPoll := wait.Poll(2*time.Second, opts.WaitTimeout, func() (bool, error) {
 		pods := []v1.Pod{}
+		services := []v1.Service{}
 		deployments := []deployment{}
 		namespaces := []v1.Namespace{}
 
@@ -786,16 +782,23 @@ func WaitForResources(objects object.K8sObjects, opts *kubectlcmd.Options) error
 					return false, err
 				}
 				pods = append(pods, list...)
+			case "Service":
+				svc, err := cs.CoreV1().Services(o.Namespace).Get(o.Name, metav1.GetOptions{})
+				if err != nil {
+					return false, err
+				}
+				services = append(services, *svc)
 			}
 		}
 		dr, dnr := deploymentsReady(deployments)
 		nsr, nnr := namespacesReady(namespaces)
 		pr, pnr := podsReady(pods)
-		isReady := dr && nsr && pr
+		sr, snr := servicesReady(services)
+		isReady := dr && nsr && pr && sr
 		if !isReady {
 			logAndPrint("  Waiting for resources to become ready...")
 		}
-		notReady = append(append(nnr, dnr...), pnr...)
+		notReady = joinStringSlices(nnr, dnr, pnr, snr)
 		return isReady, nil
 	})
 
@@ -855,6 +858,24 @@ func deploymentsReady(deployments []deployment) (bool, []string) {
 	for _, v := range deployments {
 		if v.replicaSets.Status.ReadyReplicas < *v.deployment.Spec.Replicas {
 			notReady = append(notReady, "Deployment/"+v.deployment.Namespace+"/"+v.deployment.Name)
+		}
+	}
+	return len(notReady) == 0, notReady
+}
+
+func servicesReady(svc []v1.Service) (bool, []string) {
+	var notReady []string
+	for _, s := range svc {
+		if s.Spec.Type == v1.ServiceTypeExternalName {
+			continue
+		}
+		if s.Spec.ClusterIP != v1.ClusterIPNone && s.Spec.ClusterIP == "" {
+			notReady = append(notReady, "Service/"+s.Namespace+"/"+s.Name)
+			continue
+		}
+		if s.Spec.Type == v1.ServiceTypeLoadBalancer && s.Status.LoadBalancer.Ingress == nil {
+			notReady = append(notReady, "Service/"+s.Namespace+"/"+s.Name)
+			continue
 		}
 	}
 	return len(notReady) == 0, notReady
@@ -982,4 +1003,12 @@ func logAndPrint(v ...interface{}) {
 	s := fmt.Sprintf(v[0].(string), v[1:]...)
 	scope.Infof(s)
 	fmt.Println(s)
+}
+
+func joinStringSlices(s ...[]string) []string {
+	var out []string
+	for _, ss := range s {
+		out = append(out, ss...)
+	}
+	return out
 }

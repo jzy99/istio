@@ -64,7 +64,7 @@ func addManifestApplyFlags(cmd *cobra.Command, args *manifestApplyArgs) {
 func manifestApplyCmd(rootArgs *rootArgs, maArgs *manifestApplyArgs) *cobra.Command {
 	return &cobra.Command{
 		Use:   "apply",
-		Short: "Applies an Istio manifest, installing or reconfiguring Istio on a cluster.",
+		Short: "Generates and applies an Istio install manifest.",
 		Long:  "The apply subcommand generates an Istio install manifest and applies it to a cluster.",
 		// nolint: lll
 		Example: `  # Apply a default Istio installation
@@ -119,7 +119,7 @@ func ApplyManifests(setOverlay []string, inFilenames []string, force bool, dryRu
 	if err != nil {
 		return err
 	}
-	manifests, iop, err := GenManifests(inFilenames, ysf, force, kubeconfig, l)
+	manifests, _, err := GenManifests(inFilenames, ysf, force, kubeconfig, l)
 	if err != nil {
 		return fmt.Errorf("failed to generate manifest: %v", err)
 	}
@@ -136,7 +136,7 @@ func ApplyManifests(setOverlay []string, inFilenames []string, force bool, dryRu
 		manifests[cn] = append(manifests[cn], fmt.Sprintf("# %s component has been deprecated.\n", cn))
 	}
 
-	out, err := manifest.ApplyAll(manifests, version.OperatorBinaryVersion, iop.Revision, opts)
+	out, err := manifest.ApplyAll(manifests, version.OperatorBinaryVersion, opts)
 	if err != nil {
 		return fmt.Errorf("failed to apply manifest with kubectl client: %v", err)
 	}

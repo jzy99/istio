@@ -435,18 +435,14 @@ func (t *Translator) setComponentProperties(root map[string]interface{}, iop *v1
 		}
 
 		hub, found, _ := tpath.GetFromStructPath(iop, "Components."+string(cn)+".Hub")
-		// Unmarshal unfortunately creates struct fields with "" for unset values. Skip these cases to avoid
-		// overwriting current value with an empty string.
-		hubStr, ok := hub.(string)
-		if found && !(ok && hubStr == "") {
+		if found && hub.(string) != "" {
 			if err := tpath.WriteNode(root, util.PathFromString(c.ToHelmValuesTreeRoot+"."+HelmValuesHubSubpath), hub); err != nil {
 				return err
 			}
 		}
 
 		tag, found, _ := tpath.GetFromStructPath(iop, "Components."+string(cn)+".Tag")
-		tagStr, ok := tag.(string)
-		if found && !(ok && tagStr == "") {
+		if found && tag.(string) != "" {
 			if err := tpath.WriteNode(root, util.PathFromString(c.ToHelmValuesTreeRoot+"."+HelmValuesTagSubpath), tag); err != nil {
 				return err
 			}

@@ -31,6 +31,10 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 5
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2048Mi
         strategy:
           rollingUpdate:
             maxSurge: "100%"
@@ -109,6 +113,9 @@ spec:
             maxSurge: "100%"
             maxUnavailable: "25%"
 
+    nodeAgent:
+      enabled: false
+
   # Config management feature
     galley:
       enabled: false
@@ -117,6 +124,16 @@ spec:
         resources:
           requests:
             cpu: 100m
+        strategy:
+          rollingUpdate:
+            maxSurge: "100%"
+            maxUnavailable: "25%"
+
+  # Auto injection feature
+    sidecarInjector:
+      enabled: false
+      k8s:
+        replicaCount: 1
         strategy:
           rollingUpdate:
             maxSurge: "100%"
@@ -201,7 +218,6 @@ spec:
       enabled: false
 
   # Global values passed through to helm global.yaml.
-  # Please keep this in sync with manifests/global.yaml
   values:
     global:
       istioNamespace: istio-system
@@ -280,9 +296,7 @@ spec:
           requests:
             cpu: 10m
             memory: 10Mi
-      # Specify image pull policy if default behavior isn't desired.
-      # Default behavior: latest images will be Always else IfNotPresent.
-      imagePullPolicy: ""
+      imagePullPolicy: IfNotPresent
       certificates: []
       operatorManageWebhooks: false
       controlPlaneSecurityEnabled: true
@@ -334,6 +348,8 @@ spec:
       outboundTrafficPolicy:
         mode: ALLOW_ANY
       sds:
+        enabled: false
+        udsPath: ""
         token:
           aud: istio-ca
       sts:
@@ -445,6 +461,9 @@ spec:
       dnsCerts:
         istio-pilot-service-account.istio-control: istio-pilot.istio-control
 
+    nodeagent:
+      image: node-agent-k8s
+
     gateways:
       istio-egressgateway:
         autoscaleEnabled: true
@@ -474,6 +493,19 @@ spec:
         debug: info
         domain: ""
         type: LoadBalancer
+        zvpn:
+          enabled: false
+          suffix: global
+        sds:
+          enabled: false
+          image: node-agent-k8s
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 2000m
+              memory: 1024Mi
         env:
           ISTIO_META_ROUTER_MODE: "sni-dnat"
         name: istio-ingressgateway
@@ -482,10 +514,9 @@ spec:
             targetPort: 15020
             name: status-port
           - port: 80
-            targetPort: 8080
+            targetPort: 80
             name: http2
           - port: 443
-            targetPort: 8443
             name: https
           - port: 15029
             targetPort: 15029
@@ -513,7 +544,7 @@ spec:
             targetPort: 8060
             name: tcp-citadel-grpc-tls
           - port: 853
-            targetPort: 8853
+            targetPort: 853
             name: tcp-dns-tls
         secretVolumes:
           - name: ingressgateway-certs
@@ -524,8 +555,10 @@ spec:
             mountPath: /etc/istio/ingressgateway-ca-certs
 
     sidecarInjectorWebhook:
+      image: sidecar_injector
       enableNamespacesByDefault: false
-      rewriteAppHTTPProbe: true
+      rewriteAppHTTPProbe: false
+      selfSigned: false
       injectLabel: istio-injection
       objectSelector:
         enabled: false
@@ -615,13 +648,13 @@ spec:
         accessMode: ReadWriteMany
       zipkin:
         hub: docker.io/openzipkin
-        tag: 2.20.0
-        probeStartupDelay: 10
+        tag: 2.14.2
+        probeStartupDelay: 200
         queryPort: 9411
         resources:
           limits:
-            cpu: 1000m
-            memory: 2048Mi
+            cpu: 300m
+            memory: 900Mi
           requests:
             cpu: 150m
             memory: 900Mi

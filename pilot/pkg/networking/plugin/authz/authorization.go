@@ -27,11 +27,9 @@ import (
 	istiolog "istio.io/pkg/log"
 
 	"istio.io/istio/pilot/pkg/model"
-	"istio.io/istio/pilot/pkg/networking"
 	"istio.io/istio/pilot/pkg/networking/plugin"
 	authzBuilder "istio.io/istio/pilot/pkg/security/authz/builder"
 	"istio.io/istio/pilot/pkg/security/trustdomain"
-	"istio.io/istio/pkg/config/labels"
 	"istio.io/istio/pkg/spiffe"
 )
 
@@ -49,7 +47,7 @@ func NewPlugin() plugin.Plugin {
 
 // OnOutboundListener is called whenever a new outbound listener is added to the LDS output for a given service
 // Can be used to add additional filters on the outbound path
-func (Plugin) OnOutboundListener(in *plugin.InputParams, mutable *networking.MutableObjects) error {
+func (Plugin) OnOutboundListener(in *plugin.InputParams, mutable *plugin.MutableObjects) error {
 	if in.Node.Type != model.Router {
 		// Only care about router.
 		return nil
@@ -60,14 +58,14 @@ func (Plugin) OnOutboundListener(in *plugin.InputParams, mutable *networking.Mut
 }
 
 // OnInboundFilterChains is called whenever a plugin needs to setup the filter chains, including relevant filter chain configuration.
-func (Plugin) OnInboundFilterChains(in *plugin.InputParams) []networking.FilterChain {
+func (Plugin) OnInboundFilterChains(in *plugin.InputParams) []plugin.FilterChain {
 	return nil
 }
 
 // OnInboundListener is called whenever a new listener is added to the LDS output for a given service
 // Can be used to add additional filters (e.g., mixer filter) or add more stuff to the HTTP connection manager
 // on the inbound path
-func (Plugin) OnInboundListener(in *plugin.InputParams, mutable *networking.MutableObjects) error {
+func (Plugin) OnInboundListener(in *plugin.InputParams, mutable *plugin.MutableObjects) error {
 	if in.Node.Type != model.SidecarProxy {
 		// Only care about sidecar.
 		return nil
@@ -77,18 +75,18 @@ func (Plugin) OnInboundListener(in *plugin.InputParams, mutable *networking.Muta
 	return nil
 }
 
-func buildFilter(in *plugin.InputParams, mutable *networking.MutableObjects) {
+func buildFilter(in *plugin.InputParams, mutable *plugin.MutableObjects) {
 	// TODO: Get trust domain from MeshConfig instead.
 	// https://github.com/istio/istio/issues/17873
 	trustDomainBundle := trustdomain.NewTrustDomainBundle(spiffe.GetTrustDomain(), in.Push.Mesh.TrustDomainAliases)
 	builder := authzBuilder.NewBuilder(trustDomainBundle, in.ServiceInstance,
-		labels.Collection{in.Node.Metadata.Labels}, in.Node.ConfigNamespace, in.Push.AuthzPolicies)
+		in.Node.WorkloadLabels, in.Node.ConfigNamespace, in.Push.AuthzPolicies)
 	if builder == nil {
 		return
 	}
 
 	switch in.ListenerProtocol {
-	case networking.ListenerProtocolTCP:
+	case plugin.ListenerProtocolTCP:
 		rbacLog.Debugf("building filter for TCP listener protocol")
 		tcpFilters := builder.BuildTCPFilters()
 		if in.Node.Type == model.Router {
@@ -97,7 +95,7 @@ func buildFilter(in *plugin.InputParams, mutable *networking.MutableObjects) {
 			// to decide the type of filter to attach
 			httpFilters := builder.BuildHTTPFilters()
 			for cnum := range mutable.FilterChains {
-				if mutable.FilterChains[cnum].ListenerProtocol == networking.ListenerProtocolHTTP {
+				if mutable.FilterChains[cnum].ListenerProtocol == plugin.ListenerProtocolHTTP {
 					for _, httpFilter := range httpFilters {
 						rbacLog.Debugf("added HTTP filter to gateway filter chain %d", cnum)
 						mutable.FilterChains[cnum].HTTP = append(mutable.FilterChains[cnum].HTTP, httpFilter)
@@ -117,7 +115,7 @@ func buildFilter(in *plugin.InputParams, mutable *networking.MutableObjects) {
 				}
 			}
 		}
-	case networking.ListenerProtocolHTTP:
+	case plugin.ListenerProtocolHTTP:
 		rbacLog.Debugf("building filter for HTTP listener protocol")
 		filters := builder.BuildHTTPFilters()
 		for _, filter := range filters {
@@ -126,19 +124,19 @@ func buildFilter(in *plugin.InputParams, mutable *networking.MutableObjects) {
 				mutable.FilterChains[cnum].HTTP = append(mutable.FilterChains[cnum].HTTP, filter)
 			}
 		}
-	case networking.ListenerProtocolAuto:
+	case plugin.ListenerProtocolAuto:
 		rbacLog.Debugf("building filter for AUTO listener protocol")
 		httpFilters := builder.BuildHTTPFilters()
 		tcpFilters := builder.BuildTCPFilters()
 
 		for cnum := range mutable.FilterChains {
 			switch mutable.FilterChains[cnum].ListenerProtocol {
-			case networking.ListenerProtocolTCP:
+			case plugin.ListenerProtocolTCP:
 				for _, tcpFilter := range tcpFilters {
 					rbacLog.Debugf("added TCP filter to filter chain %d", cnum)
 					mutable.FilterChains[cnum].TCP = append(mutable.FilterChains[cnum].TCP, tcpFilter)
 				}
-			case networking.ListenerProtocolHTTP:
+			case plugin.ListenerProtocolHTTP:
 				for _, httpFilter := range httpFilters {
 					rbacLog.Debugf("added HTTP filter to filter chain %d", cnum)
 					mutable.FilterChains[cnum].HTTP = append(mutable.FilterChains[cnum].HTTP, httpFilter)
@@ -149,7 +147,7 @@ func buildFilter(in *plugin.InputParams, mutable *networking.MutableObjects) {
 }
 
 // OnVirtualListener implements the Plugin interface method.
-func (Plugin) OnVirtualListener(in *plugin.InputParams, mutable *networking.MutableObjects) error {
+func (Plugin) OnVirtualListener(in *plugin.InputParams, mutable *plugin.MutableObjects) error {
 	return nil
 }
 
@@ -170,7 +168,7 @@ func (Plugin) OnOutboundCluster(in *plugin.InputParams, cluster *xdsapi.Cluster)
 }
 
 // OnInboundPassthrough is called whenever a new passthrough filter chain is added to the LDS output.
-func (Plugin) OnInboundPassthrough(in *plugin.InputParams, mutable *networking.MutableObjects) error {
+func (Plugin) OnInboundPassthrough(in *plugin.InputParams, mutable *plugin.MutableObjects) error {
 	if in.Node.Type != model.SidecarProxy {
 		// Only care about sidecar.
 		return nil
@@ -181,6 +179,6 @@ func (Plugin) OnInboundPassthrough(in *plugin.InputParams, mutable *networking.M
 }
 
 // OnInboundPassthroughFilterChains is called for plugin to update the pass through filter chain.
-func (Plugin) OnInboundPassthroughFilterChains(in *plugin.InputParams) []networking.FilterChain {
+func (Plugin) OnInboundPassthroughFilterChains(in *plugin.InputParams) []plugin.FilterChain {
 	return nil
 }

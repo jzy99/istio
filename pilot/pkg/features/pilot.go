@@ -129,6 +129,21 @@ var (
 		return time.Second * time.Duration(terminationDrainDurationVar.Get())
 	}
 
+	EnableFallthroughRoute = env.RegisterBoolVar(
+		"PILOT_ENABLE_FALLTHROUGH_ROUTE",
+		true,
+		"EnableFallthroughRoute provides an option to add a final wildcard match for routes. "+
+			"When ALLOW_ANY traffic policy is used, a Passthrough cluster is used. "+
+			"When REGISTRY_ONLY traffic policy is used, a 502 error is returned.",
+	)
+
+	// DisableXDSMarshalingToAny provides an option to disable the "xDS marshaling to Any" feature ("on" by default).
+	DisableXDSMarshalingToAny = env.RegisterBoolVar(
+		"PILOT_DISABLE_XDS_MARSHALING_TO_ANY",
+		false,
+		"",
+	).Get()
+
 	// EnableMysqlFilter enables injection of `envoy.filters.network.mysql_proxy` in the filter chain.
 	// Pilot injects this outbound filter if the service port name is `mysql`.
 	EnableMysqlFilter = env.RegisterBoolVar(
@@ -153,13 +168,13 @@ var (
 		"UseRemoteAddress sets useRemoteAddress to true for side car outbound listeners.",
 	)
 
-	// EnableThriftFilter enables injection of `envoy.filters.network.thrift_proxy` in the filter chain.
-	// Pilot injects this outbound filter if the service port name is `thrift`.
-	EnableThriftFilter = env.RegisterBoolVar(
-		"PILOT_ENABLE_THRIFT_FILTER",
+	// UseIstioJWTFilter enables to use Istio JWT filter as a fall back. Pilot injects the Istio JWT
+	// filter to the filter chains if this is set to true.
+	// TODO(yangminzhu): Remove after fully migrate to Envoy JWT filter.
+	UseIstioJWTFilter = env.RegisterBoolVar(
+		"USE_ISTIO_JWT_FILTER",
 		false,
-		"EnableThriftFilter enables injection of `envoy.filters.network.thrift_proxy` in the filter chain.",
-	)
+		"Use the Istio JWT filter for JWT token verification.")
 
 	// SkipValidateTrustDomain tells the server proxy to not to check the peer's trust domain when
 	// mTLS is enabled in authentication policy.
@@ -167,6 +182,14 @@ var (
 		"PILOT_SKIP_VALIDATE_TRUST_DOMAIN",
 		false,
 		"Skip validating the peer is from the same trust domain when mTLS is enabled in authentication policy")
+
+	RestrictPodIPTrafficLoops = env.RegisterBoolVar(
+		"PILOT_RESTRICT_POD_UP_TRAFFIC_LOOP",
+		true,
+		"If enabled, this will block inbound traffic from matching outbound listeners, which "+
+			"could result in an infinite loop of traffic. This option is only provided for backward compatibility purposes "+
+			"and will be removed in the near future.",
+	)
 
 	EnableProtocolSniffingForOutbound = env.RegisterBoolVar(
 		"PILOT_ENABLE_PROTOCOL_SNIFFING_FOR_OUTBOUND",
@@ -186,11 +209,25 @@ var (
 		"If enabled, metadata exchange will be enabled for TCP using ALPN and Network Metadata Exchange filters in Envoy",
 	)
 
+	ScopePushes = env.RegisterBoolVar(
+		"PILOT_SCOPE_PUSHES",
+		true,
+		"If enabled, pilot will attempt to limit unnecessary pushes by determining what proxies "+
+			"a config or endpoint update will impact.",
+	)
+
 	ScopeGatewayToNamespace = env.RegisterBoolVar(
 		"PILOT_SCOPE_GATEWAY_TO_NAMESPACE",
 		false,
 		"If enabled, a gateway workload can only select gateway resources in the same namespace. "+
 			"Gateways with same selectors in different namespaces will not be applicable.",
+	)
+
+	RespectDNSTTL = env.RegisterBoolVar(
+		"PILOT_RESPECT_DNS_TTL",
+		true,
+		"If enabled, DNS based clusters will respect the TTL of the DNS, rather than polling at a fixed rate. "+
+			"This option is only provided for backward compatibility purposes and will be removed in the near future.",
 	)
 
 	InboundProtocolDetectionTimeout = env.RegisterDurationVar(
@@ -265,22 +302,6 @@ var (
 	JwtPolicy = env.RegisterStringVar("JWT_POLICY", jwt.JWTPolicyThirdPartyJWT,
 		"The JWT validation policy.")
 
-	// Default request timeout for virtual services if a timeout is not configured in virtual service. It defaults to zero
-	// which disables timeout when it is not configured, to preserve the current behavior.
-	defaultRequestTimeoutVar = env.RegisterDurationVar(
-		"ISTIO_DEFAULT_REQUEST_TIMEOUT",
-		0*time.Millisecond,
-		"Default Http and gRPC Request timeout",
-	)
-
-	DefaultRequestTimeout = func() *duration.Duration {
-		return ptypes.DurationProto(defaultRequestTimeoutVar.Get())
-	}
-
-	EnableServiceApis = env.RegisterBoolVar("PILOT_ENABLED_SERVICE_APIS", false,
-		"If this is set to true, support for Kubernetes service-apis (github.com/kubernetes-sigs/service-apis) will "+
-			" be enabled. This feature is currently experimental, and is off by default.").Get()
-
 	ClusterName = env.RegisterStringVar("CLUSTER_ID", "Kubernetes",
-		"Defines the cluster and service registry that this Istiod instance is belongs to")
+		"Defines the cluster and service registry that this Istiod instance belongs to")
 )

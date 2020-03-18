@@ -95,6 +95,8 @@ spec:
             maxSurge: 100%
             maxUnavailable: 25%
       name: istio-ingressgateway
+    nodeAgent:
+      enabled: false
     pilot:
       enabled: false
       k8s:
@@ -116,6 +118,10 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 5
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2048Mi
         strategy:
           rollingUpdate:
             maxSurge: 100%
@@ -149,6 +155,12 @@ spec:
       enabled: false
     sidecarInjector:
       enabled: false
+      k8s:
+        replicaCount: 1
+        strategy:
+          rollingUpdate:
+            maxSurge: 100%
+            maxUnavailable: 25%
     telemetry:
       enabled: false
       k8s:
@@ -233,7 +245,7 @@ spec:
           targetPort: 8060
         - name: tcp-dns-tls
           port: 853
-          targetPort: 8853
+          targetPort: 853
         name: istio-ingressgateway
         ports:
         - name: status-port
@@ -241,10 +253,9 @@ spec:
           targetPort: 15020
         - name: http2
           port: 80
-          targetPort: 8080
+          targetPort: 80
         - name: https
           port: 443
-          targetPort: 8443
         - name: kiali
           port: 15029
           targetPort: 15029
@@ -260,6 +271,16 @@ spec:
         - name: tls
           port: 15443
           targetPort: 15443
+        sds:
+          enabled: false
+          image: node-agent-k8s
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 1024Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
         secretVolumes:
         - mountPath: /etc/istio/ingressgateway-certs
           name: ingressgateway-certs
@@ -268,6 +289,9 @@ spec:
           name: ingressgateway-ca-certs
           secretName: istio-ingressgateway-ca-certs
         type: LoadBalancer
+        zvpn:
+          enabled: false
+          suffix: global
     global:
       arch:
         amd64: 2
@@ -285,7 +309,7 @@ spec:
       disablePolicyChecks: true
       enableHelmTest: false
       enableTracing: true
-      imagePullPolicy: ""
+      imagePullPolicy: IfNotPresent
       imagePullSecrets: []
       istioNamespace: istio-system
       istiod:
@@ -375,8 +399,10 @@ spec:
             cpu: 10m
             memory: 10Mi
       sds:
+        enabled: false
         token:
           aud: istio-ca
+        udsPath: ""
       sts:
         servicePort: 0
       tracer:
@@ -509,6 +535,8 @@ spec:
         reportBatchMaxTime: 1s
         sessionAffinityEnabled: false
         tolerations: []
+    nodeagent:
+      image: node-agent-k8s
     pilot:
       appNamespaces: []
       autoscaleEnabled: true
@@ -562,11 +590,13 @@ spec:
       selfSigned: true
     sidecarInjectorWebhook:
       enableNamespacesByDefault: false
+      image: sidecar_injector
       injectLabel: istio-injection
       objectSelector:
         autoInject: true
         enabled: false
-      rewriteAppHTTPProbe: true
+      rewriteAppHTTPProbe: false
+      selfSigned: false
     telemetry:
       enabled: true
       v1:
@@ -621,15 +651,15 @@ spec:
         maxSpans: 500000
         node:
           cpus: 2
-        probeStartupDelay: 10
+        probeStartupDelay: 200
         queryPort: 9411
         resources:
           limits:
-            cpu: 1000m
-            memory: 2048Mi
+            cpu: 300m
+            memory: 900Mi
           requests:
             cpu: 150m
             memory: 900Mi
-        tag: 2.20.0
+        tag: 2.14.2
     version: ""
 

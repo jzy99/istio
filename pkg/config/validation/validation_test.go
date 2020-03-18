@@ -1852,10 +1852,6 @@ func TestValidateHTTPRetry(t *testing.T) {
 			PerTryTimeout: &types.Duration{Seconds: 2},
 			RetryOn:       "600,connect-failure",
 		}, valid: false},
-		{name: "invalid, retryRemoteLocalities configured but attempts set to zero", in: &networking.HTTPRetry{
-			Attempts:              0,
-			RetryRemoteLocalities: &types.BoolValue{Value: false},
-		}, valid: false},
 	}
 
 	for _, tc := range testCases {
@@ -2262,31 +2258,6 @@ func TestValidateHTTPRoute(t *testing.T) {
 			Match: nil,
 		}, valid: true},
 		{name: "match with nil element", route: &networking.HTTPRoute{
-			Route: []*networking.HTTPRouteDestination{{
-				Destination: &networking.Destination{Host: "foo.bar"},
-			}},
-			Match: []*networking.HTTPMatchRequest{nil},
-		}, valid: true},
-		{name: "invalid mirror percent", route: &networking.HTTPRoute{
-			MirrorPercent: &types.UInt32Value{Value: 101},
-			Route: []*networking.HTTPRouteDestination{{
-				Destination: &networking.Destination{Host: "foo.bar"},
-			}},
-			Match: []*networking.HTTPMatchRequest{nil},
-		}, valid: false},
-		{name: "invalid mirror percentage", route: &networking.HTTPRoute{
-			MirrorPercentage: &networking.Percent{
-				Value: 101,
-			},
-			Route: []*networking.HTTPRouteDestination{{
-				Destination: &networking.Destination{Host: "foo.bar"},
-			}},
-			Match: []*networking.HTTPMatchRequest{nil},
-		}, valid: false},
-		{name: "valid mirror percentage", route: &networking.HTTPRoute{
-			MirrorPercentage: &networking.Percent{
-				Value: 1,
-			},
 			Route: []*networking.HTTPRouteDestination{{
 				Destination: &networking.Destination{Host: "foo.bar"},
 			}},
@@ -2901,7 +2872,7 @@ func TestValidateConnectionPool(t *testing.T) {
 }
 
 func TestValidateLoadBalancer(t *testing.T) {
-	duration := types.Duration{Seconds: int64(time.Hour / time.Second)}
+	duration := time.Hour
 	cases := []struct {
 		name  string
 		in    networking.LoadBalancerSettings
@@ -4193,6 +4164,32 @@ func TestValidateAuthorizationPolicy(t *testing.T) {
 			valid: false,
 		},
 		{
+			name: "invalid ip and port",
+			in: &security_beta.AuthorizationPolicy{
+				Rules: []*security_beta.Rule{
+					{
+						From: []*security_beta.Rule_From{
+							{
+								Source: &security_beta.Source{
+									IpBlocks:    []string{"1.2.3.4", "ip1"},
+									NotIpBlocks: []string{"5.6.7.8", "ip2"},
+								},
+							},
+						},
+						To: []*security_beta.Rule_To{
+							{
+								Operation: &security_beta.Operation{
+									Ports:    []string{"80", "port1"},
+									NotPorts: []string{"90", "port2"},
+								},
+							},
+						},
+					},
+				},
+			},
+			valid: false,
+		},
+		{
 			name: "Principals-empty",
 			in: &security_beta.AuthorizationPolicy{
 				Rules: []*security_beta.Rule{
@@ -5358,162 +5355,6 @@ func TestValidateSidecar(t *testing.T) {
 				},
 			},
 		}, true},
-		{"ALLOW_ANY sidecar egress policy with no egress proxy ", &networking.Sidecar{
-			OutboundTrafficPolicy: &networking.OutboundTrafficPolicy{
-				Mode: networking.OutboundTrafficPolicy_ALLOW_ANY,
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, true},
-		{"sidecar egress proxy with RESGISTRY_ONLY(default)", &networking.Sidecar{
-			OutboundTrafficPolicy: &networking.OutboundTrafficPolicy{
-				EgressProxy: &networking.Destination{
-					Host:   "foo.bar",
-					Subset: "shiny",
-					Port: &networking.PortSelector{
-						Number: 5000,
-					},
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, false},
-		{"sidecar egress proxy with ALLOW_ANY", &networking.Sidecar{
-			OutboundTrafficPolicy: &networking.OutboundTrafficPolicy{
-				Mode: networking.OutboundTrafficPolicy_ALLOW_ANY,
-				EgressProxy: &networking.Destination{
-					Host:   "foo.bar",
-					Subset: "shiny",
-					Port: &networking.PortSelector{
-						Number: 5000,
-					},
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, true},
-		{"sidecar egress proxy with ALLOW_ANY, service hostname invalid fqdn", &networking.Sidecar{
-			OutboundTrafficPolicy: &networking.OutboundTrafficPolicy{
-				Mode: networking.OutboundTrafficPolicy_ALLOW_ANY,
-				EgressProxy: &networking.Destination{
-					Host:   "foobar*123",
-					Subset: "shiny",
-					Port: &networking.PortSelector{
-						Number: 5000,
-					},
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, false},
-		{"sidecar egress proxy(without Port) with ALLOW_ANY", &networking.Sidecar{
-			OutboundTrafficPolicy: &networking.OutboundTrafficPolicy{
-				Mode: networking.OutboundTrafficPolicy_ALLOW_ANY,
-				EgressProxy: &networking.Destination{
-					Host:   "foo.bar",
-					Subset: "shiny",
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, false},
-		{"invalid ingress tls mode", &networking.Sidecar{
-			Ingress: []*networking.IstioIngressListener{
-				{
-					Port: &networking.Port{
-						Protocol: "http",
-						Number:   90,
-						Name:     "foo",
-					},
-					DefaultEndpoint: "127.0.0.1:9999",
-					InboundTls:      &networking.Server_TLSOptions{Mode: networking.Server_TLSOptions_AUTO_PASSTHROUGH},
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, false},
-		{"invalid ingress with httpsRedirect", &networking.Sidecar{
-			Ingress: []*networking.IstioIngressListener{
-				{
-					Port: &networking.Port{
-						Protocol: "http",
-						Number:   90,
-						Name:     "foo",
-					},
-					DefaultEndpoint: "127.0.0.1:9999",
-					InboundTls:      &networking.Server_TLSOptions{HttpsRedirect: true},
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, false},
-		{"valid ingress with tls", &networking.Sidecar{
-			Ingress: []*networking.IstioIngressListener{
-				{
-					Port: &networking.Port{
-						Protocol: "https",
-						Number:   90,
-						Name:     "foo",
-					},
-					DefaultEndpoint: "127.0.0.1:9999",
-					InboundTls: &networking.Server_TLSOptions{
-						Mode:              networking.Server_TLSOptions_MUTUAL,
-						ServerCertificate: "/etc/certs/cert",
-						PrivateKey:        "/etc/certs/key",
-						CaCertificates:    "/etc/certs/ca",
-					},
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, true},
-		{"invalid ingress non tls port with tls", &networking.Sidecar{
-			Ingress: []*networking.IstioIngressListener{
-				{
-					Port: &networking.Port{
-						Protocol: "http",
-						Number:   90,
-						Name:     "foo",
-					},
-					DefaultEndpoint: "127.0.0.1:9999",
-					InboundTls: &networking.Server_TLSOptions{
-						Mode:              networking.Server_TLSOptions_MUTUAL,
-						ServerCertificate: "/etc/certs/cert",
-						PrivateKey:        "/etc/certs/key",
-						CaCertificates:    "/etc/certs/ca",
-					},
-				},
-			},
-			Egress: []*networking.IstioEgressListener{
-				{
-					Hosts: []string{"*/*"},
-				},
-			},
-		}, false},
 	}
 
 	for _, tt := range tests {

@@ -20,9 +20,9 @@ import (
 	"testing"
 
 	"istio.io/istio/pkg/test/framework/label"
-	"istio.io/istio/pkg/test/framework/resource/environment"
 
 	"istio.io/istio/pkg/test/framework"
+	"istio.io/istio/pkg/test/framework/components/environment"
 	"istio.io/istio/pkg/test/framework/components/istio"
 	"istio.io/istio/pkg/test/framework/components/istioctl"
 )
@@ -37,7 +37,6 @@ func TestMain(m *testing.M) {
 		NewSuite("istioctl_webhook_test", m).
 		Label(label.CustomSetup).
 		RequireEnvironment(environment.Kube).
-		RequireSingleCluster().
 		// Deploy Istio
 		SetupOnEnv(environment.Kube, istio.Setup(&inst, setupConfig)).
 		Run()
@@ -57,13 +56,17 @@ func TestWebhookManagement(t *testing.T) {
 	framework.
 		NewTest(t).
 		Run(func(ctx framework.TestContext) {
-			ctx.Skip("TODO(github.com/istio/istio/issues/20289)")
+			ctx.Skip("https://github.com/istio/istio/issues/21574")
+			cfg := inst.Settings()
+			if cfg.IsIstiodEnabled() {
+				ctx.Skip("TODO(github.com/istio/istio/issues/20289)")
+			}
 
 			// Test that webhook configurations are enabled through istioctl successfully.
 			args := []string{"experimental", "post-install", "webhook", "enable", "--validation", "--webhook-secret",
 				"dns.istio-galley-service-account", "--namespace", "istio-system", "--validation-path", "./config/galley-webhook.yaml",
 				"--injection-path", "./config/sidecar-injector-webhook.yaml"}
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 			output, fErr := istioCtl.Invoke(args)
 			if fErr != nil {
 				t.Fatalf("error returned for 'istioctl %s': %v", strings.Join(args, " "), fErr)
@@ -85,7 +88,7 @@ func TestWebhookManagement(t *testing.T) {
 
 			// Test that webhook statuses returned by running istioctl are as expected.
 			args = []string{"experimental", "post-install", "webhook", "status"}
-			istioCtl = istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl = istioctl.NewOrFail(t, ctx, istioctl.Config{})
 			output, fErr = istioCtl.Invoke(args)
 			if fErr != nil {
 				t.Fatalf("error returned for 'istioctl %s': %v", strings.Join(args, " "), fErr)

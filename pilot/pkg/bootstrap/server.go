@@ -114,6 +114,7 @@ func init() {
 // startFunc defines a function that will be used to start one or more components of the Pilot discovery service.
 type startFunc func(stop <-chan struct{}) error
 
+// nolint: maligned
 // Server contains the runtime configuration for the Pilot discovery service.
 type Server struct {
 	SecureGRPCListeningAddr net.Addr
@@ -151,6 +152,8 @@ type Server struct {
 	GRPCListener    net.Listener
 	GRPCDNSListener net.Listener
 
+	basePort int
+
 	// for test
 	forceStop bool
 
@@ -171,12 +174,15 @@ type Server struct {
 
 // NewServer creates a new Server instance based on the provided arguments.
 func NewServer(args *PilotArgs) (*Server, error) {
+	// TODO(hzxuzhonghu): move out of NewServer
+	args.Default()
 	e := &model.Environment{
 		ServiceDiscovery: aggregate.NewController(),
 		PushContext:      model.NewPushContext(),
 	}
 
 	s := &Server{
+		basePort:       args.BasePort,
 		clusterID:      getClusterID(args),
 		environment:    e,
 		EnvoyXdsServer: envoyv2.NewDiscoveryServer(e, args.Plugins),
@@ -242,10 +248,7 @@ func NewServer(args *PilotArgs) (*Server, error) {
 		if err != nil {
 			return nil, fmt.Errorf("enableCA: %v", err)
 		}
-		err = s.initPublicKey()
-		if err != nil {
-			return nil, fmt.Errorf("init public key: %v", err)
-		}
+
 	}
 
 	// initDNSListener() must be called after the createCA()
@@ -344,7 +347,6 @@ func (s *Server) Start(stop <-chan struct{}) error {
 			if !s.waitForCacheSync(stop) {
 				return
 			}
-			log.Infof("starting secure (DNS) gRPC discovery service at %s", s.GRPCDNSListener.Addr())
 			if err := s.secureGRPCServerDNS.Serve(s.GRPCDNSListener); err != nil {
 				log.Errorf("error from GRPC server: %v", err)
 			}
@@ -819,11 +821,7 @@ func (s *Server) initEventHandlers() error {
 			}
 			s.EnvoyXdsServer.ConfigUpdate(pushReq)
 		}
-		schemas := collections.Pilot.All()
-		if features.EnableServiceApis {
-			schemas = collections.PilotServiceApi.All()
-		}
-		for _, schema := range schemas {
+		for _, schema := range collections.Pilot.All() {
 			// This resource type was handled in external/servicediscovery.go, no need to rehandle here.
 			if schema.Resource().GroupVersionKind() == collections.IstioNetworkingV1Alpha3Serviceentries.
 				Resource().GroupVersionKind() {

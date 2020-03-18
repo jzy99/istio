@@ -46,7 +46,7 @@ type manifestMigrateArgs struct {
 
 func addManifestMigrateFlags(cmd *cobra.Command, args *manifestMigrateArgs) {
 	cmd.PersistentFlags().StringVarP(&args.namespace, "namespace", "n", defaultNamespace,
-		"Default namespace for output IstioOperator custom resource")
+		" Default namespace for output IstioOperator CustomResource")
 	cmd.PersistentFlags().BoolVar(&args.force, "force", false, "Proceed even with validation errors")
 }
 
@@ -151,7 +151,7 @@ func migrateFromClusterConfig(rootArgs *rootArgs, mmArgs *manifestMigrateArgs, l
 	c := kubectlcmd.New()
 	opts := &kubectlcmd.Options{
 		Namespace: mmArgs.namespace,
-		Output:    "jsonpath='{.data.values}'",
+		ExtraArgs: []string{"jsonpath='{.data.values}'"},
 	}
 	output, stderr, err := c.GetConfigMap("istio-sidecar-injector", opts)
 	if err != nil {

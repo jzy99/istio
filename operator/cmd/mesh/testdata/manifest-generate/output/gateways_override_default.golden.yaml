@@ -138,9 +138,8 @@ data:
       relabel_configs:
       - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
         action: keep
-        regex: istiod;http-monitoring
-      - source_labels: [__meta_kubernetes_service_label_app]
-        target_label: app
+        regex: istio-pilot;http-monitoring
+
     - job_name: 'galley'
       kubernetes_sd_configs:
       - role: endpoints
@@ -331,6 +330,7 @@ spec:
       containers:
         - name: prometheus
           image: "docker.io/prom/prometheus:v2.15.1"
+          imagePullPolicy: IfNotPresent
           args:
             - '--storage.tsdb.retention=6h'
             - '--config.file=/etc/prometheus/prometheus.yml'
@@ -371,12 +371,24 @@ spec:
             - "/usr/local/bin/envoy"
             - --serviceCluster
             - "istio-proxy-prometheus"
+            - --drainDuration
+            - "45s"
+            - --parentShutdownDuration
+            - "1m0s"
+            - --discoveryAddress
+            - istio-pilot.istio-system.svc:15012
             - --proxyLogLevel=warning
             - --proxyComponentLogLevel=misc:error
+            - --connectTimeout
+            - "10s"
             - --proxyAdminPort
             - "15000"
             - --controlPlaneAuthPolicy
             - NONE
+            - --dnsRefreshRate
+            - "300s"
+            - --statusPort
+            - "15020"
             - --trust-domain=cluster.local
             - --controlPlaneBootstrap=false
           env:
@@ -388,7 +400,7 @@ spec:
               value: istiod
             # Temp, pending PR to make it default or based on the istiodAddr env
             - name: CA_ADDR
-              value: istiod.istio-system.svc:15012
+              value: istio-pilot.istio-system.svc:15012
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -421,7 +433,7 @@ spec:
               value: "cluster.local"
             - name: ISTIO_META_CLUSTER_ID
               value: "Kubernetes"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           readinessProbe:
             failureThreshold: 30
             httpGet:
@@ -441,14 +453,8 @@ spec:
               name: istio-token
             - mountPath: /etc/istio-certs/
               name: istio-certs
-            - name: istio-config-volume
-              mountPath: /etc/istio/config
 
       volumes:
-      - name: istio-config-volume
-        configMap:
-          name: istio
-          optional: true
       - name: config-volume
         configMap:
           name: prometheus
@@ -542,6 +548,8 @@ metadata:
 
 # Base component is disabled.
 
+# Citadel component is disabled.
+
 # Cni component is disabled.
 
 # EgressGateways istio-egressgateway component is disabled.
@@ -604,7 +612,7 @@ spec:
         app: istio-ingressgateway
         istio: ingressgateway
         service.istio.io/canonical-name: istio-ingress-1
-        service.istio.io/canonical-revision: latest
+        service.istio.io/canonical-revision: "1.5"
     spec:
       affinity:
         nodeAffinity:
@@ -648,10 +656,20 @@ spec:
         - --proxyLogLevel=warning
         - --proxyComponentLogLevel=misc:error
         - --log_output_level=default:info
+        - --drainDuration
+        - 45s
+        - --parentShutdownDuration
+        - 1m0s
+        - --connectTimeout
+        - 10s
         - --serviceCluster
         - istio-ingress-1
+        - --zipkinAddress
+        - zipkin.istio-system:9411
         - --proxyAdminPort
         - "15000"
+        - --statusPort
+        - "15020"
         - --controlPlaneAuthPolicy
         - NONE
         - --discoveryAddress
@@ -665,7 +683,7 @@ spec:
         - name: ISTIO_META_USER_SDS
           value: "true"
         - name: CA_ADDR
-          value: istiod.istio-system.svc:15012
+          value: istio-pilot.istio-system.svc:15012
         - name: NODE_NAME
           valueFrom:
             fieldRef:
@@ -717,11 +735,12 @@ spec:
         - name: ISTIO_META_CLUSTER_ID
           value: Kubernetes
         image: gcr.io/istio-testing/proxyv2:latest
+        imagePullPolicy: IfNotPresent
         name: istio-proxy
         ports:
         - containerPort: 15020
-        - containerPort: 8080
-        - containerPort: 8443
+        - containerPort: 80
+        - containerPort: 443
         - containerPort: 15029
         - containerPort: 15030
         - containerPort: 15031
@@ -752,8 +771,6 @@ spec:
             cpu: 111m
             memory: 222Mi
         volumeMounts:
-        - mountPath: /etc/istio/config
-          name: config-volume
         - mountPath: /var/run/secrets/istio
           name: istiod-ca-cert
         - mountPath: /var/run/secrets/tokens
@@ -792,10 +809,6 @@ spec:
               audience: istio-ca
               expirationSeconds: 43200
               path: istio-token
-      - configMap:
-          name: istio
-          optional: true
-        name: config-volume
       - name: ingressgateway-certs
         secret:
           optional: true
@@ -805,6 +818,27 @@ spec:
           optional: true
           secretName: istio-ingressgateway-ca-certs
 
+---
+
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: ingressgateway
+  namespace: istio-ingress-ns
+  labels:
+    release: istio
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+      - "*"
+    # Additional ports in gateaway for the ingressPorts - apps using dedicated port instead of hostname
 ---
 
 
@@ -885,11 +919,10 @@ spec:
     -
       name: http2
       port: 80
-      targetPort: 8080
+      targetPort: 80
     -
       name: https
       port: 443
-      targetPort: 8443
     -
       name: kiali
       port: 15029
@@ -925,9 +958,27 @@ metadata:
     release: istio
 ---
 
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Sidecar
+metadata:
+  name: default
+  namespace: istio-ingress-ns
+  labels:
+    release: istio
+spec:
+  egress:
+    - hosts:
+        - "*/*"
+---
+
+# NodeAgent component is disabled.
+
 # Pilot istiod component is disabled.
 
 # Policy component is disabled.
+
+# SidecarInjector component is disabled.
 
 # Telemetry component is disabled.
 

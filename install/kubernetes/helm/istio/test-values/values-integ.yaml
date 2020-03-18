@@ -10,9 +10,6 @@ global:
 
     accessLogFile: "/dev/stdout"
 
-  outboundTrafficPolicy:
-    mode: REGISTRY_ONLY
-
 prometheus:
   enabled: false
   scrapeInterval: 5s

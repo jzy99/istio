@@ -3,7 +3,30 @@ apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
   components:
+    pilot:
+      enabled: true
+    policy:
+      enabled: false
+    telemetry:
+      enabled: false
+    proxy:
+      enabled: false
+    sidecarInjector:
+      enabled: false
+    citadel:
+      enabled: false
+    nodeAgent:
+      enabled: false
+    galley:
+      enabled: false
+    cni:
+      enabled: false
     ingressGateways:
+    - name: istio-ingressgateway
+      enabled: false
+    egressGateways:
+    - name: istio-egressgateway
+      enabled: false
 
   addonComponents:
     prometheus:
@@ -11,5 +34,16 @@ spec:
 
   values:
     global:
+      useMCP: false
+      controlPlaneSecurityEnabled: false
+      proxy:
+        envoyStatsd:
+          enabled: false
+          host:
+          port:
       mtls:
         auto: false
+
+    pilot:
+      sidecar: false
+      useMCP: false

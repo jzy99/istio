@@ -19,10 +19,10 @@ ISTIO_GO := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 export ISTIO_GO
 SHELL := /bin/bash -o pipefail
 
-VERSION ?= 1.6-dev
+VERSION ?= 1.5-dev
 
 # Base version of Istio image to use
-BASE_VERSION ?= 1.6-dev.0
+BASE_VERSION ?= 1.5-dev.2
 
 export GO111MODULE ?= on
 export GOPROXY ?= https://proxy.golang.org
@@ -265,19 +265,24 @@ buildcache:
 BINARIES:=./istioctl/cmd/istioctl \
   ./pilot/cmd/pilot-discovery \
   ./pilot/cmd/pilot-agent \
+  ./sidecar-injector/cmd/sidecar-injector \
   ./mixer/cmd/mixs \
   ./mixer/cmd/mixc \
   ./mixer/tools/mixgen \
   ./galley/cmd/galley \
   ./security/cmd/node_agent \
+  ./security/cmd/node_agent_k8s \
+  ./security/cmd/istio_ca \
   ./security/tools/sdsclient \
   ./pkg/test/echo/cmd/client \
   ./pkg/test/echo/cmd/server \
   ./mixer/test/policybackend \
+  ./tools/istio-iptables \
+  ./tools/istio-clean-iptables \
   ./operator/cmd/operator
 
 # List of binaries included in releases
-RELEASE_BINARIES:=pilot-discovery pilot-agent mixc mixs mixgen node_agent istioctl galley sdsclient
+RELEASE_BINARIES:=pilot-discovery pilot-agent sidecar-injector mixc mixs mixgen node_agent node_agent_k8s istio_ca istioctl galley sdsclient
 
 .PHONY: build
 build: depend
@@ -323,6 +328,7 @@ lint-go-split:
 	@golangci-lint run -c ./common/config/.golangci.yml ./pkg/...
 	@golangci-lint run -c ./common/config/.golangci.yml ./samples/...
 	@golangci-lint run -c ./common/config/.golangci.yml ./security/...
+	@golangci-lint run -c ./common/config/.golangci.yml ./sidecar-injector/...
 	@golangci-lint run -c ./common/config/.golangci.yml ./tests/...
 	@golangci-lint run -c ./common/config/.golangci.yml ./tools/...
 	@golangci-lint run -c ./common/config/.golangci.yml ./operator/...
@@ -330,11 +336,13 @@ lint-go-split:
 lint-helm-global:
 	find manifests -name 'Chart.yaml' -print0 | ${XARGS} -L 1 dirname | xargs -r helm lint --strict -f manifests/global.yaml
 
-lint: lint-python lint-copyright-banner lint-scripts lint-go lint-dockerfiles lint-markdown lint-yaml lint-licenses lint-helm-global
+lint: lint-python lint-copyright-banner lint-scripts lint-go-split lint-dockerfiles lint-markdown lint-yaml lint-licenses lint-helm-global
+	@bin/check_helm.sh
 	@bin/check_samples.sh
+	@bin/check_dashboards.sh
 	@go run mixer/tools/adapterlinter/main.go ./mixer/adapter/...
 	@testlinter
-	@envvarlinter galley istioctl mixer pilot security
+	@envvarlinter galley istioctl mixer pilot security sidecar-injector
 
 go-gen:
 	@mkdir -p /tmp/bin
@@ -350,15 +358,9 @@ refresh-goldens:
 
 update-golden: refresh-goldens
 
-gen: go-gen mirror-licenses format update-crds operator-proto gen-kustomize gen-charts update-golden
+gen: go-gen mirror-licenses format update-crds operator-proto gen-charts update-golden
 
 gen-check: gen check-clean-repo
-
-# Generate kustomize templates.
-gen-kustomize:
-	helm template -n istio-base manifests/base > manifests/base/files/gen-istio-cluster.yaml
-	helm template -n istio-base --namespace istio-system manifests/istio-control/istio-discovery \
-		-f manifests/global.yaml > manifests/istio-control/istio-discovery/files/gen-istio.yaml
 
 #-----------------------------------------------------------------------------
 # Target: go build
@@ -444,8 +446,10 @@ operator-test:
 .PHONY: mixer-test
 mixer-test: mixer-racetest
 
+# Galley test is not using -race yet. See https://github.com/istio/istio/issues/20110
 .PHONY: galley-test
-galley-test: galley-racetest
+galley-test:
+	go test ${GOBUILDFLAGS} ${T} ./galley/...
 
 .PHONY: security-test
 security-test: security-racetest
@@ -531,6 +535,8 @@ security-racetest:
 
 .PHONY: common-racetest
 common-racetest: ${BUILD_DEPS}
+	# Execute bash shell unit tests scripts
+	LOCAL_OUT=$(LOCAL_OUT) ./tests/scripts/istio-iptables-test.sh
 	go test ${GOBUILDFLAGS} ${T} -race ./pkg/... ./tests/common/... ./tools/istio-iptables/...
 
 #-----------------------------------------------------------------------------
@@ -621,6 +627,9 @@ show.goenv: ; $(info $(H) go environment...)
 # show makefile variables. Usage: make show.<variable-name>
 show.%: ; $(info $* $(H) $($*))
 	$(Q) true
+
+# Deprecated. This target exists only to satisify old CI tests that cannot be updated atomically, and can be removed.
+localTestEnv:
 
 #-----------------------------------------------------------------------------
 # Target: custom resource definitions

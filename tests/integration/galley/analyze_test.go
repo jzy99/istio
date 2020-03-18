@@ -25,9 +25,9 @@ import (
 	"istio.io/istio/galley/pkg/config/analysis/msg"
 	"istio.io/istio/istioctl/cmd"
 	"istio.io/istio/pkg/test/framework"
+	"istio.io/istio/pkg/test/framework/components/environment"
 	"istio.io/istio/pkg/test/framework/components/istioctl"
 	"istio.io/istio/pkg/test/framework/components/namespace"
-	"istio.io/istio/pkg/test/framework/resource/environment"
 )
 
 const (
@@ -35,9 +35,15 @@ const (
 	serviceRoleFile        = "testdata/servicerole.yaml"
 	invalidFile            = "testdata/invalid.yaml"
 	dirWithConfig          = "testdata/some-dir/"
+
+	suppressDefaultMeshConfigDeprecated = "IST0121=MeshPolicy default"
 )
 
-var analyzerFoundIssuesError = cmd.AnalyzerFoundIssuesError{}
+var (
+	analyzerFoundIssuesError = cmd.AnalyzerFoundIssuesError{}
+
+	suppressor = []string{}
+)
 
 func TestEmptyCluster(t *testing.T) {
 	framework.
@@ -51,10 +57,10 @@ func TestEmptyCluster(t *testing.T) {
 				Inject: true,
 			})
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// For a clean istio install with injection enabled, expect no validation errors
-			output, err := istioctlSafe(t, istioCtl, ns.Name(), true)
+			output, err := istioctlSafe(t, istioCtl, ns.Name(), true, suppressor...)
 			expectNoMessages(t, g, output)
 			g.Expect(err).To(BeNil())
 
@@ -72,7 +78,7 @@ func TestFileOnly(t *testing.T) {
 				Inject: true,
 			})
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// Validation error if we have a service role binding without a service role
 			output, err := istioctlSafe(t, istioCtl, ns.Name(), false, serviceRoleBindingFile)
@@ -97,7 +103,7 @@ func TestDirectoryWithoutRecursion(t *testing.T) {
 				Inject: true,
 			})
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// Recursive is false, so we should only analyze
 			// testdata/some-dir/missing-gateway.yaml and get a
@@ -120,7 +126,7 @@ func TestDirectoryWithRecursion(t *testing.T) {
 				Inject: true,
 			})
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// Recursive is true, so we should see two errors (SchemaValidationError and UnknownAnnotation).
 			output, err := istioctlSafe(t, istioCtl, ns.Name(), false, "--recursive=true", dirWithConfig)
@@ -140,7 +146,7 @@ func TestFileParseError(t *testing.T) {
 				Inject: true,
 			})
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// Parse error as the yaml file itself is not valid yaml.
 			output, err := istioctlSafe(t, istioCtl, ns.Name(), false, invalidFile)
@@ -165,16 +171,16 @@ func TestKubeOnly(t *testing.T) {
 
 			applyFileOrFail(t, ns.Name(), serviceRoleBindingFile)
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// Validation error if we have a service role binding without a service role
-			output, err := istioctlSafe(t, istioCtl, ns.Name(), true)
+			output, err := istioctlSafe(t, istioCtl, ns.Name(), true, suppressor...)
 			expectMessages(t, g, output, msg.ReferencedResourceNotFound)
 			g.Expect(err).To(BeIdenticalTo(analyzerFoundIssuesError))
 
 			// Error goes away if we include both the binding and its role
 			applyFileOrFail(t, ns.Name(), serviceRoleFile)
-			output, err = istioctlSafe(t, istioCtl, ns.Name(), true)
+			output, err = istioctlSafe(t, istioCtl, ns.Name(), true, suppressor...)
 			expectNoMessages(t, g, output)
 			g.Expect(err).To(BeNil())
 		})
@@ -194,11 +200,12 @@ func TestFileAndKubeCombined(t *testing.T) {
 
 			applyFileOrFail(t, ns.Name(), serviceRoleBindingFile)
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// Simulating applying the service role to a cluster that already has the binding, we should
 			// fix the error and thus see no message
-			output, err := istioctlSafe(t, istioCtl, ns.Name(), true, serviceRoleFile)
+			suppressors := append([]string{serviceRoleFile}, suppressor...)
+			output, err := istioctlSafe(t, istioCtl, ns.Name(), true, suppressors...)
 			expectNoMessages(t, g, output)
 			g.Expect(err).To(BeNil())
 		})
@@ -223,14 +230,15 @@ func TestAllNamespaces(t *testing.T) {
 			applyFileOrFail(t, ns1.Name(), serviceRoleBindingFile)
 			applyFileOrFail(t, ns2.Name(), serviceRoleBindingFile)
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// If we look at one namespace, we should successfully run and see one message (and not anything from any other namespace)
-			output, _ := istioctlSafe(t, istioCtl, ns1.Name(), true)
+			output, _ := istioctlSafe(t, istioCtl, ns1.Name(), true, suppressor...)
 			expectMessages(t, g, output, msg.ReferencedResourceNotFound)
 
 			// If we use --all-namespaces, we should successfully run and see a message from each namespace
-			output, _ = istioctlSafe(t, istioCtl, "", true, "--all-namespaces")
+			suppressors := append([]string{"--all-namespaces"}, suppressor...)
+			output, _ = istioctlSafe(t, istioCtl, "", true, suppressors...)
 			// Since this test runs in a cluster with lots of other namespaces we don't actually care about, only look for ns1 and ns2
 			foundCount := 0
 			for _, line := range output {
@@ -258,7 +266,7 @@ func TestTimeout(t *testing.T) {
 				Inject: true,
 			})
 
-			istioCtl := istioctl.NewOrFail(ctx, ctx, istioctl.Config{})
+			istioCtl := istioctl.NewOrFail(t, ctx, istioctl.Config{})
 
 			// We should time out immediately.
 			_, err := istioctlSafe(t, istioCtl, ns.Name(), true, "--timeout=0s")
@@ -309,7 +317,7 @@ func istioctlSafe(t *testing.T, i istioctl.Instance, ns string, useKube bool, ex
 
 func applyFileOrFail(t *testing.T, ns, filename string) {
 	t.Helper()
-	if err := cluster.Apply(ns, filename); err != nil {
+	if err := env.Apply(ns, filename); err != nil {
 		t.Fatal(err)
 	}
 }

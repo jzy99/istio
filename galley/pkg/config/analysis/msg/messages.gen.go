@@ -100,10 +100,6 @@ var (
 	// MeshPolicyResourceIsDeprecated defines a diag.MessageType for message "MeshPolicyResourceIsDeprecated".
 	// Description: The MeshPolicy resource is deprecated and will be removed in a future Istio release. Migrate to the PeerAuthentication resource.
 	MeshPolicyResourceIsDeprecated = diag.NewMessageType(diag.Info, "IST0121", "The MeshPolicy resource is deprecated and will be removed in a future Istio release. Migrate to the PeerAuthentication resource.")
-
-	// InvalidRegexp defines a diag.MessageType for message "InvalidRegexp".
-	// Description: Invalid Regex
-	InvalidRegexp = diag.NewMessageType(diag.Warning, "IST0122", "Field %q regular expression invalid: %q (%s)")
 )
 
 // All returns a list of all known message types.
@@ -132,7 +128,6 @@ func All() []*diag.MessageType {
 		JwtFailureDueToInvalidServicePortPrefix,
 		PolicyResourceIsDeprecated,
 		MeshPolicyResourceIsDeprecated,
-		InvalidRegexp,
 	}
 }
 
@@ -359,16 +354,5 @@ func NewMeshPolicyResourceIsDeprecated(r *resource.Instance) diag.Message {
 	return diag.NewMessage(
 		MeshPolicyResourceIsDeprecated,
 		r,
-	)
-}
-
-// NewInvalidRegexp returns a new diag.Message based on InvalidRegexp.
-func NewInvalidRegexp(r *resource.Instance, where string, re string, problem string) diag.Message {
-	return diag.NewMessage(
-		InvalidRegexp,
-		r,
-		where,
-		re,
-		problem,
 	)
 }

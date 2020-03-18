@@ -2884,12 +2884,11 @@ No
 </tr>
 </thead>
 <tbody>
-<tr id="IstiodConfig-enabled" class="deprecated ">
+<tr id="IstiodConfig-enabled">
 <td><code>enabled</code></td>
 <td><code><a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#boolvalue">BoolValue</a></code></td>
 <td>
-<p>If enabled, all control plane functionality will be handled by a single deployment.
-Deprecated. This field is always ignored and assumed true.</p>
+<p>If enabled, all control plane functionality will be handled by a single deployment.</p>
 
 </td>
 <td>
@@ -6910,15 +6909,6 @@ No
 No
 </td>
 </tr>
-<tr id="TelemetryV2Config-metadata_exchange">
-<td><code>metadataExchange</code></td>
-<td><code><a href="#TelemetryV2MetadataExchangeConfig">TelemetryV2MetadataExchangeConfig</a></code></td>
-<td>
-</td>
-<td>
-No
-</td>
-</tr>
 <tr id="TelemetryV2Config-prometheus">
 <td><code>prometheus</code></td>
 <td><code><a href="#TelemetryV2PrometheusConfig">TelemetryV2PrometheusConfig</a></code></td>
@@ -6931,6 +6921,15 @@ No
 <tr id="TelemetryV2Config-stackdriver">
 <td><code>stackdriver</code></td>
 <td><code><a href="#TelemetryV2StackDriverConfig">TelemetryV2StackDriverConfig</a></code></td>
+<td>
+</td>
+<td>
+No
+</td>
+</tr>
+<tr id="TelemetryV2Config-metadata_exchange">
+<td><code>metadataExchange</code></td>
+<td><code><a href="#TelemetryV2MetadataExchangeConfig">TelemetryV2MetadataExchangeConfig</a></code></td>
 <td>
 </td>
 <td>
@@ -7802,18 +7801,7 @@ No
 <td><code>probeStartupDelay</code></td>
 <td><code>uint32</code></td>
 <td>
-<p>InitialDelaySeconds of readiness probe for Zipkin deployment</p>
-
-</td>
-<td>
-No
-</td>
-</tr>
-<tr id="TracingZipkinConfig-livenessProbeStartupDelay">
-<td><code>livenessProbeStartupDelay</code></td>
-<td><code>uint32</code></td>
-<td>
-<p>InitialDelaySeconds of liveness probe for Zipkin deployment</p>
+<p>InitialDelaySeconds of livenessProbe for Zipkin deployment</p>
 
 </td>
 <td>
@@ -8027,6 +8015,15 @@ No
 No
 </td>
 </tr>
+<tr id="Values-nodeagent">
+<td><code>nodeagent</code></td>
+<td><code><a href="#NodeAgentConfig">NodeAgentConfig</a></code></td>
+<td>
+</td>
+<td>
+No
+</td>
+</tr>
 <tr id="Values-pilot">
 <td><code>pilot</code></td>
 <td><code><a href="#PilotConfig">PilotConfig</a></code></td>
@@ -8144,15 +8141,6 @@ No
 <tr id="Values-revision">
 <td><code>revision</code></td>
 <td><code>string</code></td>
-<td>
-</td>
-<td>
-No
-</td>
-</tr>
-<tr id="Values-nodeagent" class="deprecated ">
-<td><code>nodeagent</code></td>
-<td><code><a href="#NodeAgentConfig">NodeAgentConfig</a></code></td>
 <td>
 </td>
 <td>

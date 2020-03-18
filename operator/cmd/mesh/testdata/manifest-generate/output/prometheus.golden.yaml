@@ -138,9 +138,8 @@ data:
       relabel_configs:
       - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
         action: keep
-        regex: istiod;http-monitoring
-      - source_labels: [__meta_kubernetes_service_label_app]
-        target_label: app
+        regex: istio-pilot;http-monitoring
+
     - job_name: 'galley'
       kubernetes_sd_configs:
       - role: endpoints
@@ -331,6 +330,7 @@ spec:
       containers:
         - name: prometheus
           image: "docker.io/prom/prometheus:v2.15.1"
+          imagePullPolicy: IfNotPresent
           args:
             - '--storage.tsdb.retention=6h'
             - '--config.file=/etc/prometheus/prometheus.yml'
@@ -371,12 +371,24 @@ spec:
             - "/usr/local/bin/envoy"
             - --serviceCluster
             - "istio-proxy-prometheus"
+            - --drainDuration
+            - "45s"
+            - --parentShutdownDuration
+            - "1m0s"
+            - --discoveryAddress
+            - istio-pilot.istio-system.svc:15012
             - --proxyLogLevel=warning
             - --proxyComponentLogLevel=misc:error
+            - --connectTimeout
+            - "10s"
             - --proxyAdminPort
             - "15000"
             - --controlPlaneAuthPolicy
             - NONE
+            - --dnsRefreshRate
+            - "300s"
+            - --statusPort
+            - "15020"
             - --trust-domain=cluster.local
             - --controlPlaneBootstrap=false
           env:
@@ -388,7 +400,7 @@ spec:
               value: istiod
             # Temp, pending PR to make it default or based on the istiodAddr env
             - name: CA_ADDR
-              value: istiod.istio-system.svc:15012
+              value: istio-pilot.istio-system.svc:15012
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -421,7 +433,7 @@ spec:
               value: "cluster.local"
             - name: ISTIO_META_CLUSTER_ID
               value: "Kubernetes"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           readinessProbe:
             failureThreshold: 30
             httpGet:
@@ -441,14 +453,8 @@ spec:
               name: istio-token
             - mountPath: /etc/istio-certs/
               name: istio-certs
-            - name: istio-config-volume
-              mountPath: /etc/istio/config
 
       volumes:
-      - name: istio-config-volume
-        configMap:
-          name: istio
-          optional: true
       - name: config-volume
         configMap:
           name: prometheus
@@ -542,15 +548,19 @@ metadata:
 
 # Base component is disabled.
 
+# Citadel component is disabled.
+
 # Cni component is disabled.
 
-# EgressGateways istio-egressgateway component is disabled.
-
 # Galley component is disabled.
+
+# NodeAgent component is disabled.
 
 # Pilot istiod component is disabled.
 
 # Policy component is disabled.
+
+# SidecarInjector component is disabled.
 
 # Telemetry component is disabled.
 

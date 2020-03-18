@@ -33,7 +33,6 @@ import (
 	"k8s.io/apimachinery/pkg/api/meta"
 	kubeApiMeta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
-	kubeLabels "k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	kubeSchema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -406,7 +405,7 @@ func (c *Controller) isEndpointReady() (ready bool, reason string, err error) {
 	return ready, reason, nil
 }
 
-const deniedRequestMessageFragment = `admission webhook "validation.istio.io" denied the request`
+const deniedRequestMessageFragment = `denied the request`
 
 // Confirm invalid configuration is successfully rejected before switching to FAIL-CLOSE.
 func (c *Controller) isDryRunOfInvalidConfigRejected() (rejected bool, reason string) {
@@ -441,18 +440,6 @@ func isEndpointReady(endpoint *kubeApiCore.Endpoints) (ready bool, reason string
 		}
 	}
 	return false, "no subset addresses ready"
-}
-
-func (c *Controller) galleyPodsRunning() (running bool, err error) {
-	selector := kubeLabels.SelectorFromSet(map[string]string{"istio": "galley"})
-	pods, err := c.sharedInformers.Core().V1().Pods().Lister().List(selector)
-	if err != nil {
-		return true, err
-	}
-	if len(pods) > 0 {
-		return true, nil
-	}
-	return false, nil
 }
 
 func (c *Controller) deleteValidatingWebhookConfiguration() error {

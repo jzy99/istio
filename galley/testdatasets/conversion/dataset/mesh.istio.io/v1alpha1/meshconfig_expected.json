@@ -8,13 +8,13 @@
             "Body": {
                 "accessLogFile": "/dev/stdout",
                 "connectTimeout": {
-                    "seconds": 10
+                    "seconds": 1
                 },
                 "defaultConfig": {
                   "binaryPath": "/usr/local/bin/envoy",
                   "configPath": "/etc/istio/proxy",
                   "connectTimeout": {
-                    "seconds": 10
+                    "seconds": 1
                   },
                   "discoveryAddress": "istio-pilot:15010",
                   "drainDuration": {
@@ -27,8 +27,7 @@
                   },
                   "proxyAdminPort": 15000,
                   "serviceCluster": "istio-proxy",
-                  "statNameLength": 189,
-                  "statusPort": 15020
+                  "statNameLength": 189
                 },
                 "defaultDestinationRuleExportTo": [
                   "*"
@@ -48,7 +47,6 @@
                 "ingressClass": "istio",
                 "ingressControllerMode": 2,
                 "ingressService": "istio-ingressgateway",
-                "localityLbSetting": {},
                 "outboundTrafficPolicy": {
                     "mode": 1
                 },
@@ -56,13 +54,7 @@
                   "nanos": 100000000
                 },
                 "proxyListenPort": 15001,
-                "reportBatchMaxEntries": 100,
-                "reportBatchMaxTime": {
-                  "seconds": 1
-                },
-                "rootNamespace": "istio-system",
-                "thriftConfig":{},
-                "trustDomain": "cluster.local"
+                "rootNamespace": "istio-system"
             }
         }
     ]

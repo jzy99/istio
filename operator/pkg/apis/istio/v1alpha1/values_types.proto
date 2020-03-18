@@ -1327,6 +1327,13 @@ message TelemetryV2Config {
   TelemetryV2PrometheusConfig prometheus = 2;
 
   TelemetryV2StackDriverConfig stackdriver = 3;
+
+  TelemetryV2MetadataExchangeConfig metadata_exchange = 4;
+}
+
+message TelemetryV2MetadataExchangeConfig {
+  // Controls whether enabled WebAssembly runtime for metadata exchange filter.
+  google.protobuf.BoolValue wasmEnabled = 2;
 }
 
 message TelemetryV2MetadataExchangeConfig {

@@ -61,8 +61,7 @@ func (s *Server) initCertController(args *PilotArgs) error {
 
 	meshConfig := s.environment.Mesh()
 	if meshConfig.GetCertificates() == nil || len(meshConfig.GetCertificates()) == 0 {
-		// TODO: if the provider is set to Citadel, use that instead of k8s so the API is still preserved.
-		log.Info("No certificates specified, skipping K8S DNS certificate controller")
+		log.Info("No certificates specified, skipping DNS certificate controller")
 		return nil
 	}
 
@@ -135,14 +134,12 @@ func (s *Server) initDNSCerts(hostname, namespace string) error {
 
 		s.caBundlePath = defaultCACertPath
 	} else if features.PilotCertProvider.Get() == IstiodCAProvider {
-		log.Infof("Generating istiod-signed cert for %v", names)
+		log.Infof("Generating Citadel-signed cert for %v", names)
 		certChain, keyPEM, err = s.ca.GenKeyCert(names, SelfSignedCACertTTL.Get())
 
-		signingKeyFile := path.Join(LocalCertDir.Get(), "ca-key.pem")
-		// check if signing key file exists the cert dir
+		signingKeyFile := path.Join(localCertDir.Get(), "ca-key.pem")
 		if _, err := os.Stat(signingKeyFile); err != nil {
 			log.Infof("No plugged-in cert at %v; self-signed cert is used", signingKeyFile)
-
 			// When Citadel is configured to use self-signed certs, keep a local copy so other
 			// components can load it via file (e.g. webhook config controller).
 			if err := os.MkdirAll(dnsCertDir, 0700); err != nil {
@@ -180,12 +177,12 @@ func (s *Server) initDNSCerts(hostname, namespace string) error {
 			s.caBundlePath = internalSelfSignedRootPath
 		} else {
 			log.Infof("Use plugged-in cert at %v", signingKeyFile)
-			s.caBundlePath = path.Join(LocalCertDir.Get(), "root-cert.pem")
+			s.caBundlePath = path.Join(localCertDir.Get(), "root-cert.pem")
 		}
 
 	} else {
-		log.Infof("User specified cert provider: %v", features.PilotCertProvider.Get())
-		return nil
+		log.Errorf("Invalid Pilot CA provider: %v", features.PilotCertProvider.Get())
+		err = fmt.Errorf("invalid Pilot CA provider: %v", features.PilotCertProvider.Get())
 	}
 	if err != nil {
 		return err
@@ -204,6 +201,6 @@ func (s *Server) initDNSCerts(hostname, namespace string) error {
 	if err != nil {
 		return err
 	}
-	log.Infoa("DNS certificates created in ", dnsCertDir)
+	log.Infoa("Certificates created in ", dnsCertDir)
 	return nil
 }

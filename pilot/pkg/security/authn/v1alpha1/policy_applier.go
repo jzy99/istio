@@ -26,17 +26,17 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 
 	authn_v1alpha1 "istio.io/api/authentication/v1alpha1"
-	"istio.io/pkg/log"
-
 	"istio.io/istio/pilot/pkg/features"
 	"istio.io/istio/pilot/pkg/model"
-	"istio.io/istio/pilot/pkg/networking"
+	"istio.io/istio/pilot/pkg/networking/plugin"
 	"istio.io/istio/pilot/pkg/networking/util"
 	"istio.io/istio/pilot/pkg/security/authn"
 	authn_utils "istio.io/istio/pilot/pkg/security/authn/utils"
 	authn_model "istio.io/istio/pilot/pkg/security/model"
 	authn_filter_policy "istio.io/istio/security/proto/authentication/v1alpha1"
 	authn_filter "istio.io/istio/security/proto/envoy/config/filter/http/authn/v2alpha1"
+	istio_jwt "istio.io/istio/security/proto/envoy/config/filter/http/jwt_auth/v2alpha1"
+	"istio.io/pkg/log"
 )
 
 const (
@@ -172,14 +172,63 @@ func convertToEnvoyJwtConfig(policyJwts []*authn_v1alpha1.Jwt) *envoy_jwt.JwtAut
 	}
 }
 
+// TODO: Remove after fully migrate to Envoy JWT filter.
+func convertToIstioJwtConfig(policyJwts []*authn_v1alpha1.Jwt) *istio_jwt.JwtAuthentication {
+	ret := &istio_jwt.JwtAuthentication{
+		AllowMissingOrFailed: true,
+	}
+	for _, policyJwt := range policyJwts {
+		jwt := &istio_jwt.JwtRule{
+			Issuer:               policyJwt.Issuer,
+			Audiences:            policyJwt.Audiences,
+			ForwardPayloadHeader: outputLocationForJwtIssuer(policyJwt.Issuer),
+			Forward:              true,
+		}
+
+		for _, location := range policyJwt.JwtHeaders {
+			jwt.FromHeaders = append(jwt.FromHeaders, &istio_jwt.JwtHeader{
+				Name: location,
+			})
+		}
+		jwt.FromParams = policyJwt.JwtParams
+
+		jwtPubKey := policyJwt.Jwks
+		if jwtPubKey == "" {
+			var err error
+			jwtPubKey, err = model.JwtKeyResolver.GetPublicKey(policyJwt.JwksUri)
+			if err != nil {
+				log.Errorf("Failed to fetch jwt public key from %q: %s", policyJwt.JwksUri, err)
+			}
+		}
+
+		// Put empty string in config even if above ResolveJwtPubKey fails.
+		jwt.JwksSourceSpecifier = &istio_jwt.JwtRule_LocalJwks{
+			LocalJwks: &istio_jwt.DataSource{
+				Specifier: &istio_jwt.DataSource_InlineString{
+					InlineString: jwtPubKey,
+				},
+			},
+		}
+
+		ret.Rules = append(ret.Rules, jwt)
+	}
+	return ret
+}
+
 // ConvertPolicyToJwtConfig converts policy into Jwt filter config for envoy.
-// Returns nil if there is no JWT policy, otherwise returns the Envoy JWT filter config.
+// Returns nil if there is no JWT policy. Returns the Istio JWT filter config if USE_ENVOY_JWT_FILTER
+// is false, otherwise returns the Envoy JWT filter config.
 func convertPolicyToJwtConfig(policy *authn_v1alpha1.Policy) (string, proto.Message) {
 	policyJwts := collectJwtSpecs(policy)
 	if len(policyJwts) == 0 {
 		return "", nil
 	}
 
+	if features.UseIstioJWTFilter.Get() {
+		return authn_model.IstioJwtFilterName, convertToIstioJwtConfig(policyJwts)
+	}
+
+	log.Debugf("Envoy JWT filter is used for JWT verification")
 	return authn_model.EnvoyJwtFilterName, convertToEnvoyJwtConfig(policyJwts)
 }
 
@@ -243,28 +292,35 @@ type v1alpha1PolicyApplier struct {
 	policy *authn_v1alpha1.Policy
 }
 
-func (a v1alpha1PolicyApplier) JwtFilter() *http_conn.HttpFilter {
+func (a v1alpha1PolicyApplier) JwtFilter(isXDSMarshalingToAnyEnabled bool) *http_conn.HttpFilter {
 	// v2 api will use inline public key.
 	filterName, filterConfigProto := convertPolicyToJwtConfig(a.policy)
 	if filterConfigProto == nil {
 		return nil
 	}
 	out := &http_conn.HttpFilter{
-		Name:       filterName,
-		ConfigType: &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)},
+		Name: filterName,
 	}
-
+	if isXDSMarshalingToAnyEnabled {
+		out.ConfigType = &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)}
+	} else {
+		out.ConfigType = &http_conn.HttpFilter_Config{Config: util.MessageToStruct(filterConfigProto)}
+	}
 	return out
 }
 
-func (a v1alpha1PolicyApplier) AuthNFilter(proxyType model.NodeType, _ /* port */ uint32) *http_conn.HttpFilter {
+func (a v1alpha1PolicyApplier) AuthNFilter(proxyType model.NodeType, _ /* port */ uint32, isXDSMarshalingToAnyEnabled bool) *http_conn.HttpFilter {
 	filterConfigProto := convertPolicyToAuthNFilterConfig(a.policy, proxyType)
 	if filterConfigProto == nil {
 		return nil
 	}
 	out := &http_conn.HttpFilter{
-		Name:       authn_model.AuthnFilterName,
-		ConfigType: &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)},
+		Name: authn_model.AuthnFilterName,
+	}
+	if isXDSMarshalingToAnyEnabled {
+		out.ConfigType = &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)}
+	} else {
+		out.ConfigType = &http_conn.HttpFilter_Config{Config: util.MessageToStruct(filterConfigProto)}
 	}
 	return out
 }
@@ -276,7 +332,7 @@ func AuthNFilterConfigForBackwarding(alphaApplier authn.PolicyApplier, proxyType
 }
 
 // v1alpha1 applier is already per port, so the endpointPort param is not needed.
-func (a v1alpha1PolicyApplier) InboundFilterChain(_ uint32, sdsUdsPath string, node *model.Proxy) []networking.FilterChain {
+func (a v1alpha1PolicyApplier) InboundFilterChain(_ uint32, sdsUdsPath string, node *model.Proxy) []plugin.FilterChain {
 	if a.policy == nil || len(a.policy.Peers) == 0 {
 		return nil
 	}

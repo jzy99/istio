@@ -47,13 +47,15 @@ type ComponentName string
 const (
 	// IstioComponent names corresponding to the IstioOperator proto component names. Must be the same, since these
 	// are used for struct traversal.
-	IstioBaseComponentName ComponentName = "Base"
-	PilotComponentName     ComponentName = "Pilot"
-	GalleyComponentName    ComponentName = "Galley"
-	PolicyComponentName    ComponentName = "Policy"
-	TelemetryComponentName ComponentName = "Telemetry"
-
-	CNIComponentName ComponentName = "Cni"
+	IstioBaseComponentName       ComponentName = "Base"
+	PilotComponentName           ComponentName = "Pilot"
+	GalleyComponentName          ComponentName = "Galley"
+	SidecarInjectorComponentName ComponentName = "SidecarInjector"
+	PolicyComponentName          ComponentName = "Policy"
+	TelemetryComponentName       ComponentName = "Telemetry"
+	CitadelComponentName         ComponentName = "Citadel"
+	NodeAgentComponentName       ComponentName = "NodeAgent"
+	CNIComponentName             ComponentName = "Cni"
 
 	// Gateway components
 	IngressComponentName ComponentName = "IngressGateways"
@@ -78,10 +80,14 @@ var (
 		IstioBaseComponentName,
 		PilotComponentName,
 		GalleyComponentName,
+		SidecarInjectorComponentName,
 		PolicyComponentName,
 		TelemetryComponentName,
+		CitadelComponentName,
+		NodeAgentComponentName,
 		CNIComponentName,
 	}
+
 	allComponentNamesMap = make(map[ComponentName]bool)
 	// DeprecatedComponentNamesMap defines the names of deprecated istio core components used in old versions,
 	// which would not appear as standalone components in current version. This is used for pruning, and alerting

@@ -1,3 +1,4 @@
+{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -19,9 +20,11 @@ spec:
     name: http-legacy-discovery # direct
   - port: 15014
     name: http-monitoring
+{{- if .Values.global.istiod.enabled }}
   - port: 443
     name: https-webhook # validation and injection
     targetPort: 15017
+{{- end }}
   selector:
     {{- if ne .Values.revision ""}}
     app: istiod
@@ -30,6 +33,7 @@ spec:
     istio: pilot
     {{- end }}
 ---
+{{- if .Values.global.istiod.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -45,8 +49,6 @@ spec:
     - port: 443
       name: https-webhook # validation and injection
       targetPort: 15017
-    - port: 15014
-      name: http-monitoring # prometheus stats
   selector:
     app: istiod
     {{- if ne .Values.revision ""}}
@@ -56,4 +58,6 @@ spec:
     # This avoids default deployment picking the canary
     istio: pilot
     {{- end }}
+{{- end }}
 ---
+{{- end }}

@@ -1,10 +1,8 @@
 // Code generated for package vfs by go-bindata DO NOT EDIT. (@generated)
 // sources:
 // charts/base/Chart.yaml
-// charts/base/NOTES.txt
 // charts/base/files/crd-all.gen.yaml
 // charts/base/files/crd-mixer.yaml
-// charts/base/files/gen-istio-cluster.yaml
 // charts/base/kustomization.yaml
 // charts/base/templates/clusterrole.yaml
 // charts/base/templates/clusterrolebinding.yaml
@@ -13,7 +11,6 @@
 // charts/base/templates/namespaces.yaml
 // charts/base/templates/serviceaccount.yaml
 // charts/base/templates/services.yaml
-// charts/base/templates/validatingwebhookconfiguration.yaml
 // charts/base/values.yaml
 // charts/gateways/istio-egress/Chart.yaml
 // charts/gateways/istio-egress/NOTES.txt
@@ -29,8 +26,12 @@
 // charts/gateways/istio-ingress/Chart.yaml
 // charts/gateways/istio-ingress/NOTES.txt
 // charts/gateways/istio-ingress/templates/_affinity.tpl
+// charts/gateways/istio-ingress/templates/addongateway.yaml
 // charts/gateways/istio-ingress/templates/autoscale.yaml
+// charts/gateways/istio-ingress/templates/certificate.yaml
 // charts/gateways/istio-ingress/templates/deployment.yaml
+// charts/gateways/istio-ingress/templates/gateway.yaml
+// charts/gateways/istio-ingress/templates/hosts.yaml
 // charts/gateways/istio-ingress/templates/meshexpansion.yaml
 // charts/gateways/istio-ingress/templates/poddisruptionbudget.yaml
 // charts/gateways/istio-ingress/templates/preconfigured.yaml
@@ -38,6 +39,7 @@
 // charts/gateways/istio-ingress/templates/rolebindings.yaml
 // charts/gateways/istio-ingress/templates/service.yaml
 // charts/gateways/istio-ingress/templates/serviceaccount.yaml
+// charts/gateways/istio-ingress/templates/sidecar.yaml
 // charts/gateways/istio-ingress/values.yaml
 // charts/istio-cni/Chart.yaml
 // charts/istio-cni/templates/clusterrole.yaml
@@ -46,6 +48,21 @@
 // charts/istio-cni/templates/daemonset.yaml
 // charts/istio-cni/templates/serviceaccount.yaml
 // charts/istio-cni/values.yaml
+// charts/istio-control/istio-autoinject/Chart.yaml
+// charts/istio-control/istio-autoinject/NOTES.txt
+// charts/istio-control/istio-autoinject/files/injection-template.yaml
+// charts/istio-control/istio-autoinject/templates/_affinity.tpl
+// charts/istio-control/istio-autoinject/templates/_helpers.tpl
+// charts/istio-control/istio-autoinject/templates/clusterrole.yaml
+// charts/istio-control/istio-autoinject/templates/clusterrolebinding.yaml
+// charts/istio-control/istio-autoinject/templates/configmap.yaml
+// charts/istio-control/istio-autoinject/templates/deployment.yaml
+// charts/istio-control/istio-autoinject/templates/mutatingwebhook.yaml
+// charts/istio-control/istio-autoinject/templates/poddisruptionbudget.yaml
+// charts/istio-control/istio-autoinject/templates/service.yaml
+// charts/istio-control/istio-autoinject/templates/serviceaccount.yaml
+// charts/istio-control/istio-autoinject/templates/sidecar-injector-configmap.yaml
+// charts/istio-control/istio-autoinject/values.yaml
 // charts/istio-control/istio-config/Chart.yaml
 // charts/istio-control/istio-config/OWNERS
 // charts/istio-control/istio-config/README.md
@@ -60,27 +77,31 @@
 // charts/istio-control/istio-config/templates/poddisruptionbudget.yaml
 // charts/istio-control/istio-config/templates/service.yaml
 // charts/istio-control/istio-config/templates/serviceaccount.yaml
-// charts/istio-control/istio-config/templates/validatingwebhookconfiguration-noop.yaml
+// charts/istio-control/istio-config/templates/validatingwebhookconfiguration.yaml
 // charts/istio-control/istio-config/templates/validatingwebhookconfiguration.yaml.tpl
 // charts/istio-control/istio-config/values.yaml
 // charts/istio-control/istio-discovery/Chart.yaml
 // charts/istio-control/istio-discovery/NOTES.txt
-// charts/istio-control/istio-discovery/files/gen-istio.yaml
 // charts/istio-control/istio-discovery/files/injection-template.yaml
-// charts/istio-control/istio-discovery/kustomization.yaml
 // charts/istio-control/istio-discovery/templates/_affinity.tpl
 // charts/istio-control/istio-discovery/templates/_helpers.tpl
 // charts/istio-control/istio-discovery/templates/autoscale.yaml
+// charts/istio-control/istio-discovery/templates/clusterrole-galley-disable-webhook.yaml
+// charts/istio-control/istio-discovery/templates/clusterrole.yaml
+// charts/istio-control/istio-discovery/templates/clusterrolebinding.yaml
+// charts/istio-control/istio-discovery/templates/configmap-envoy.yaml
 // charts/istio-control/istio-discovery/templates/configmap-jwks.yaml
 // charts/istio-control/istio-discovery/templates/configmap.yaml
 // charts/istio-control/istio-discovery/templates/deployment.yaml
+// charts/istio-control/istio-discovery/templates/enable-mesh-mtls.yaml
 // charts/istio-control/istio-discovery/templates/istiod-injector-configmap.yaml
 // charts/istio-control/istio-discovery/templates/mutatingwebhook.yaml
 // charts/istio-control/istio-discovery/templates/poddisruptionbudget.yaml
 // charts/istio-control/istio-discovery/templates/service.yaml
+// charts/istio-control/istio-discovery/templates/serviceaccount.yaml
 // charts/istio-control/istio-discovery/templates/telemetryv2_1.4.yaml
 // charts/istio-control/istio-discovery/templates/telemetryv2_1.5.yaml
-// charts/istio-control/istio-discovery/templates/telemetryv2_1.6.yaml
+// charts/istio-control/istio-discovery/templates/validatingwebhookconfiguration.yaml
 // charts/istio-control/istio-discovery/values.yaml
 // charts/istio-policy/Chart.yaml
 // charts/istio-policy/templates/_affinity.tpl
@@ -170,7 +191,26 @@
 // charts/istiocoredns/templates/service.yaml
 // charts/istiocoredns/templates/serviceaccount.yaml
 // charts/istiocoredns/values.yaml
+// charts/security/citadel/Chart.yaml
+// charts/security/citadel/templates/NOTES.txt
+// charts/security/citadel/templates/_affinity.tpl
+// charts/security/citadel/templates/_helpers.tpl
+// charts/security/citadel/templates/clusterrole.yaml
+// charts/security/citadel/templates/clusterrolebinding.yaml
+// charts/security/citadel/templates/deployment.yaml
+// charts/security/citadel/templates/poddisruptionbudget.yaml
+// charts/security/citadel/templates/service.yaml
+// charts/security/citadel/templates/serviceaccount.yaml
+// charts/security/citadel/values.yaml
+// charts/security/nodeagent/Chart.yaml
+// charts/security/nodeagent/templates/_affinity.tpl
+// charts/security/nodeagent/templates/clusterrole.yaml
+// charts/security/nodeagent/templates/clusterrolebinding.yaml
+// charts/security/nodeagent/templates/daemonset.yaml
+// charts/security/nodeagent/templates/serviceaccount.yaml
+// charts/security/nodeagent/values.yaml
 // examples/customresource/istio_v1alpha1_istiooperator_cr.yaml
+// examples/googleca/values-istio-google-ca.yaml
 // examples/multicluster/values-istio-multicluster-gateways.yaml
 // examples/multicluster/values-istio-multicluster-primary.yaml
 // examples/user-gateway/ingress-gateway-only.yaml
@@ -188,20 +228,15 @@
 // profiles/demo.yaml
 // profiles/empty.yaml
 // profiles/minimal.yaml
-// profiles/preview.yaml
 // profiles/remote.yaml
 // profiles/separate.yaml
 // translateConfig/names-1.5.yaml
-// translateConfig/names-1.6.yaml
 // translateConfig/reverseTranslateConfig-1.4.yaml
 // translateConfig/reverseTranslateConfig-1.5.yaml
-// translateConfig/reverseTranslateConfig-1.6.yaml
 // translateConfig/translate-ICP-IOP-1.5.yaml
-// translateConfig/translate-ICP-IOP-1.6.yaml
 // translateConfig/translateConfig-1.3.yaml
 // translateConfig/translateConfig-1.4.yaml
 // translateConfig/translateConfig-1.5.yaml
-// translateConfig/translateConfig-1.6.yaml
 // versions.yaml
 package vfs
 
@@ -259,7 +294,7 @@ var _chartsBaseChartYaml = []byte(`apiVersion: v1
 name: base
 version: 1.1.0
 tillerVersion: ">=2.7.2"
-description: Helm chart for deploying Istio cluster resources and CRDs
+description: Helm chart for deploying Istio base components
 keywords:
   - istio
 sources:
@@ -279,24 +314,6 @@ func chartsBaseChartYaml() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "charts/base/Chart.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _chartsBaseNotesTxt = []byte(`Installs Istio cluster resources: CRDs, cluster bindings and associated service accounts.
-`)
-
-func chartsBaseNotesTxtBytes() ([]byte, error) {
-	return _chartsBaseNotesTxt, nil
-}
-
-func chartsBaseNotesTxt() (*asset, error) {
-	bytes, err := chartsBaseNotesTxtBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "charts/base/NOTES.txt", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -406,7 +423,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -437,7 +455,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -468,7 +487,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -499,7 +519,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -535,7 +556,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -566,7 +588,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -597,7 +620,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -628,7 +652,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -646,6 +671,8 @@ spec:
               description: Deprecated.
               type: boolean
             peers:
+              description: List of authentication methods that can be used for peer
+                authentication.
               items:
                 oneOf:
                 - required:
@@ -720,7 +747,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -751,7 +779,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -782,7 +811,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -813,7 +843,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -849,7 +880,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -880,7 +912,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -911,7 +944,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -942,7 +976,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1113,7 +1148,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1144,7 +1180,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1175,7 +1212,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1206,7 +1244,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1242,7 +1281,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1273,7 +1313,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1304,7 +1345,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1335,7 +1377,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1353,6 +1396,8 @@ spec:
               description: Deprecated.
               type: boolean
             peers:
+              description: List of authentication methods that can be used for peer
+                authentication.
               items:
                 oneOf:
                 - required:
@@ -1427,7 +1472,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1458,7 +1504,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1489,7 +1536,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1520,7 +1568,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1556,7 +1605,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1587,7 +1637,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1618,7 +1669,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -1649,7 +1701,8 @@ spec:
                                     format: string
                                     type: string
                                   regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+                                    description: ECMAscript style regex-based match
+                                      as defined by [EDCA-262](http://en.cppreference.com/w/cpp/regex/ecmascript).
                                     format: string
                                     type: string
                                   suffix:
@@ -2075,7 +2128,6 @@ spec:
                                 format: string
                                 type: string
                               regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                                 format: string
                                 type: string
                             type: object
@@ -2333,8 +2385,6 @@ spec:
                                 - httpCookie
                               - required:
                                 - useSourceIp
-                              - required:
-                                - httpQueryParameterName
                           required:
                           - consistentHash
                         properties:
@@ -2357,10 +2407,6 @@ spec:
                                 type: object
                               httpHeaderName:
                                 description: Hash based on a specific HTTP header.
-                                format: string
-                                type: string
-                              httpQueryParameterName:
-                                description: Hash based on a specific HTTP query parameter.
                                 format: string
                                 type: string
                               minimumRingSize:
@@ -2525,8 +2571,6 @@ spec:
                                       - httpCookie
                                     - required:
                                       - useSourceIp
-                                    - required:
-                                      - httpQueryParameterName
                                 required:
                                 - consistentHash
                               properties:
@@ -2549,11 +2593,6 @@ spec:
                                       type: object
                                     httpHeaderName:
                                       description: Hash based on a specific HTTP header.
-                                      format: string
-                                      type: string
-                                    httpQueryParameterName:
-                                      description: Hash based on a specific HTTP query
-                                        parameter.
                                       format: string
                                       type: string
                                     minimumRingSize:
@@ -2789,8 +2828,6 @@ spec:
                           - httpCookie
                         - required:
                           - useSourceIp
-                        - required:
-                          - httpQueryParameterName
                     required:
                     - consistentHash
                   properties:
@@ -2813,10 +2850,6 @@ spec:
                           type: object
                         httpHeaderName:
                           description: Hash based on a specific HTTP header.
-                          format: string
-                          type: string
-                        httpQueryParameterName:
-                          description: Hash based on a specific HTTP query parameter.
                           format: string
                           type: string
                         minimumRingSize:
@@ -2978,8 +3011,6 @@ spec:
                                 - httpCookie
                               - required:
                                 - useSourceIp
-                              - required:
-                                - httpQueryParameterName
                           required:
                           - consistentHash
                         properties:
@@ -3002,10 +3033,6 @@ spec:
                                 type: object
                               httpHeaderName:
                                 description: Hash based on a specific HTTP header.
-                                format: string
-                                type: string
-                              httpQueryParameterName:
-                                description: Hash based on a specific HTTP query parameter.
                                 format: string
                                 type: string
                               minimumRingSize:
@@ -3833,74 +3860,6 @@ spec:
                     type: object
                 type: object
               type: array
-            inboundTls:
-              properties:
-                caCertificates:
-                  description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                  format: string
-                  type: string
-                cipherSuites:
-                  description: 'Optional: If specified, only support the specified
-                    cipher list.'
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                credentialName:
-                  format: string
-                  type: string
-                httpsRedirect:
-                  type: boolean
-                maxProtocolVersion:
-                  description: 'Optional: Maximum TLS protocol version.'
-                  enum:
-                  - TLS_AUTO
-                  - TLSV1_0
-                  - TLSV1_1
-                  - TLSV1_2
-                  - TLSV1_3
-                  type: string
-                minProtocolVersion:
-                  description: 'Optional: Minimum TLS protocol version.'
-                  enum:
-                  - TLS_AUTO
-                  - TLSV1_0
-                  - TLSV1_1
-                  - TLSV1_2
-                  - TLSV1_3
-                  type: string
-                mode:
-                  enum:
-                  - PASSTHROUGH
-                  - SIMPLE
-                  - MUTUAL
-                  - AUTO_PASSTHROUGH
-                  - ISTIO_MUTUAL
-                  type: string
-                privateKey:
-                  description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                  format: string
-                  type: string
-                serverCertificate:
-                  description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                  format: string
-                  type: string
-                subjectAltNames:
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                verifyCertificateHash:
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                verifyCertificateSpki:
-                  items:
-                    format: string
-                    type: string
-                  type: array
-              type: object
             ingress:
               items:
                 properties:
@@ -3917,75 +3876,6 @@ spec:
                   defaultEndpoint:
                     format: string
                     type: string
-                  inboundTls:
-                    description: Overrides Sidecar level `+"`"+`inboundTls`+"`"+` settings.
-                    properties:
-                      caCertificates:
-                        description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      cipherSuites:
-                        description: 'Optional: If specified, only support the specified
-                          cipher list.'
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      credentialName:
-                        format: string
-                        type: string
-                      httpsRedirect:
-                        type: boolean
-                      maxProtocolVersion:
-                        description: 'Optional: Maximum TLS protocol version.'
-                        enum:
-                        - TLS_AUTO
-                        - TLSV1_0
-                        - TLSV1_1
-                        - TLSV1_2
-                        - TLSV1_3
-                        type: string
-                      minProtocolVersion:
-                        description: 'Optional: Minimum TLS protocol version.'
-                        enum:
-                        - TLS_AUTO
-                        - TLSV1_0
-                        - TLSV1_1
-                        - TLSV1_2
-                        - TLSV1_3
-                        type: string
-                      mode:
-                        enum:
-                        - PASSTHROUGH
-                        - SIMPLE
-                        - MUTUAL
-                        - AUTO_PASSTHROUGH
-                        - ISTIO_MUTUAL
-                        type: string
-                      privateKey:
-                        description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      serverCertificate:
-                        description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      subjectAltNames:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      verifyCertificateHash:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      verifyCertificateSpki:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                    type: object
                   port:
                     description: The port associated with the listener.
                     properties:
@@ -4004,25 +3894,8 @@ spec:
                 type: object
               type: array
             outboundTrafficPolicy:
-              description: Configuration for the outbound traffic policy.
+              description: This allows to configure the outbound traffic policy.
               properties:
-                egressProxy:
-                  properties:
-                    host:
-                      description: The name of a service from the service registry.
-                      format: string
-                      type: string
-                    port:
-                      description: Specifies the port on the host that is being addressed.
-                      properties:
-                        number:
-                          type: integer
-                      type: object
-                    subset:
-                      description: The name of a subset within the service.
-                      format: string
-                      type: string
-                  type: object
                 mode:
                   enum:
                   - REGISTRY_ONLY
@@ -4162,7 +4035,6 @@ spec:
                               format: string
                               type: string
                             regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                               format: string
                               type: string
                           type: object
@@ -4297,7 +4169,6 @@ spec:
                               format: string
                               type: string
                             regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                               format: string
                               type: string
                           type: object
@@ -4325,7 +4196,6 @@ spec:
                                 format: string
                                 type: string
                               regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                                 format: string
                                 type: string
                             type: object
@@ -4350,7 +4220,6 @@ spec:
                               format: string
                               type: string
                             regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                               format: string
                               type: string
                           type: object
@@ -4379,7 +4248,6 @@ spec:
                                 format: string
                                 type: string
                               regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                                 format: string
                                 type: string
                             type: object
@@ -4401,7 +4269,6 @@ spec:
                               format: string
                               type: string
                             regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                               format: string
                               type: string
                           type: object
@@ -4410,11 +4277,6 @@ spec:
                             format: string
                             type: string
                           type: object
-                        sourceNamespace:
-                          description: Source namespace constraining the applicability
-                            of a rule to workloads in that namespace.
-                          format: string
-                          type: string
                         uri:
                           oneOf:
                           - required:
@@ -4431,33 +4293,8 @@ spec:
                               format: string
                               type: string
                             regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
                               format: string
                               type: string
-                          type: object
-                        withoutHeaders:
-                          additionalProperties:
-                            oneOf:
-                            - required:
-                              - exact
-                            - required:
-                              - prefix
-                            - required:
-                              - regex
-                            properties:
-                              exact:
-                                format: string
-                                type: string
-                              prefix:
-                                format: string
-                                type: string
-                              regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                format: string
-                                type: string
-                            type: object
-                          description: withoutHeader has the same syntax with the
-                            header, but has opposite meaning.
                           type: object
                       type: object
                     type: array
@@ -4527,10 +4364,6 @@ spec:
                           place.
                         format: string
                         type: string
-                      retryRemoteLocalities:
-                        description: Flag to specify whether the retries should retry
-                          to other localities.
-                        type: boolean
                     type: object
                   rewrite:
                     description: Rewrite HTTP URIs and Authority headers.
@@ -4646,11 +4479,6 @@ spec:
                             format: string
                             type: string
                           type: object
-                        sourceNamespace:
-                          description: Source namespace constraining the applicability
-                            of a rule to workloads in that namespace.
-                          format: string
-                          type: string
                         sourceSubnet:
                           description: IPv4 or IPv6 ip address of source with optional
                             subnet.
@@ -4724,11 +4552,6 @@ spec:
                             format: string
                             type: string
                           type: object
-                        sourceNamespace:
-                          description: Source namespace constraining the applicability
-                            of a rule to workloads in that namespace.
-                          format: string
-                          type: string
                       type: object
                     type: array
                   route:
@@ -5938,8 +5761,6 @@ spec:
     kind: PeerAuthentication
     listKind: PeerAuthenticationList
     plural: peerauthentications
-    shortNames:
-    - pa
     singular: peerauthentication
   scope: Namespaced
   subresources:
@@ -6016,8 +5837,6 @@ spec:
     kind: RequestAuthentication
     listKind: RequestAuthenticationList
     plural: requestauthentications
-    shortNames:
-    - ra
     singular: requestauthentication
   scope: Namespaced
   subresources:
@@ -6196,6188 +6015,12 @@ func chartsBaseFilesCrdMixerYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsBaseFilesGenIstioClusterYaml = []byte(`---
-# Source: base/templates/namespaces.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: istio-system
-  labels:
-    istio-operator-managed: Reconcile
-    istio-injection: disabled
-
----
-# Source: base/templates/serviceaccount.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: istio-reader-service-account
-  namespace: istio-system
-  labels:
-    app: istio-reader
-    release: istio-base
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: istio-pilot-service-account
-  namespace: istio-system
-  labels:
-    app: pilot
-    release: istio-base
----
-
----
-# Source: base/templates/crds.yaml
-# DO NOT EDIT - Generated by Cue OpenAPI generator based on Istio APIs.
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-citadel
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: meshpolicies.authentication.istio.io
-spec:
-  group: authentication.istio.io
-  names:
-    categories:
-    - istio-io
-    - authentication-istio-io
-    kind: MeshPolicy
-    listKind: MeshPolicyList
-    plural: meshpolicies
-    singular: meshpolicy
-  scope: Cluster
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Authentication policy for Istio services. See more details
-            at: https://istio.io/docs/reference/config/security/istio.authentication.v1alpha1.html'
-          properties:
-            originIsOptional:
-              description: Deprecated.
-              type: boolean
-            origins:
-              description: Deprecated.
-              items:
-                properties:
-                  jwt:
-                    description: Jwt params for the method.
-                    properties:
-                      audiences:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      issuer:
-                        description: Identifies the issuer that issued the JWT.
-                        format: string
-                        type: string
-                      jwks:
-                        description: JSON Web Key Set of public keys to validate signature
-                          of the JWT.
-                        format: string
-                        type: string
-                      jwks_uri:
-                        format: string
-                        type: string
-                      jwksUri:
-                        format: string
-                        type: string
-                      jwt_headers:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtHeaders:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtParams:
-                        description: JWT is sent in a query parameter.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      trigger_rules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                      triggerRules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                    type: object
-                type: object
-              type: array
-            peerIsOptional:
-              description: Deprecated.
-              type: boolean
-            peers:
-              items:
-                oneOf:
-                - required:
-                  - mtls
-                - properties:
-                    jwt: {}
-                  required:
-                  - jwt
-                properties:
-                  jwt:
-                    properties:
-                      audiences:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      issuer:
-                        description: Identifies the issuer that issued the JWT.
-                        format: string
-                        type: string
-                      jwks:
-                        description: JSON Web Key Set of public keys to validate signature
-                          of the JWT.
-                        format: string
-                        type: string
-                      jwks_uri:
-                        format: string
-                        type: string
-                      jwksUri:
-                        format: string
-                        type: string
-                      jwt_headers:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtHeaders:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtParams:
-                        description: JWT is sent in a query parameter.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      trigger_rules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                      triggerRules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                    type: object
-                  mtls:
-                    description: Set if mTLS is used.
-                    properties:
-                      allowTls:
-                        description: Deprecated.
-                        type: boolean
-                      mode:
-                        description: Defines the mode of mTLS authentication.
-                        enum:
-                        - STRICT
-                        - PERMISSIVE
-                        type: string
-                    type: object
-                type: object
-              type: array
-            principalBinding:
-              description: Deprecated.
-              enum:
-              - USE_PEER
-              - USE_ORIGIN
-              type: string
-            targets:
-              description: Deprecated.
-              items:
-                properties:
-                  name:
-                    description: The name must be a short name from the service registry.
-                    format: string
-                    type: string
-                  ports:
-                    description: Specifies the ports.
-                    items:
-                      oneOf:
-                      - required:
-                        - number
-                      - required:
-                        - name
-                      properties:
-                        name:
-                          format: string
-                          type: string
-                        number:
-                          type: integer
-                      type: object
-                    type: array
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-citadel
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: policies.authentication.istio.io
-spec:
-  group: authentication.istio.io
-  names:
-    categories:
-    - istio-io
-    - authentication-istio-io
-    kind: Policy
-    listKind: PolicyList
-    plural: policies
-    singular: policy
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Authentication policy for Istio services. See more details
-            at: https://istio.io/docs/reference/config/security/istio.authentication.v1alpha1.html'
-          properties:
-            originIsOptional:
-              description: Deprecated.
-              type: boolean
-            origins:
-              description: Deprecated.
-              items:
-                properties:
-                  jwt:
-                    description: Jwt params for the method.
-                    properties:
-                      audiences:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      issuer:
-                        description: Identifies the issuer that issued the JWT.
-                        format: string
-                        type: string
-                      jwks:
-                        description: JSON Web Key Set of public keys to validate signature
-                          of the JWT.
-                        format: string
-                        type: string
-                      jwks_uri:
-                        format: string
-                        type: string
-                      jwksUri:
-                        format: string
-                        type: string
-                      jwt_headers:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtHeaders:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtParams:
-                        description: JWT is sent in a query parameter.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      trigger_rules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                      triggerRules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                    type: object
-                type: object
-              type: array
-            peerIsOptional:
-              description: Deprecated.
-              type: boolean
-            peers:
-              items:
-                oneOf:
-                - required:
-                  - mtls
-                - properties:
-                    jwt: {}
-                  required:
-                  - jwt
-                properties:
-                  jwt:
-                    properties:
-                      audiences:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      issuer:
-                        description: Identifies the issuer that issued the JWT.
-                        format: string
-                        type: string
-                      jwks:
-                        description: JSON Web Key Set of public keys to validate signature
-                          of the JWT.
-                        format: string
-                        type: string
-                      jwks_uri:
-                        format: string
-                        type: string
-                      jwksUri:
-                        format: string
-                        type: string
-                      jwt_headers:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtHeaders:
-                        description: JWT is sent in a request header.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      jwtParams:
-                        description: JWT is sent in a query parameter.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      trigger_rules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                      triggerRules:
-                        items:
-                          properties:
-                            excluded_paths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            excludedPaths:
-                              description: List of paths to be excluded from the request.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            included_paths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                            includedPaths:
-                              description: List of paths that the request must include.
-                              items:
-                                oneOf:
-                                - required:
-                                  - exact
-                                - required:
-                                  - prefix
-                                - required:
-                                  - suffix
-                                - required:
-                                  - regex
-                                properties:
-                                  exact:
-                                    description: exact string match.
-                                    format: string
-                                    type: string
-                                  prefix:
-                                    description: prefix-based match.
-                                    format: string
-                                    type: string
-                                  regex:
-                                    description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                    format: string
-                                    type: string
-                                  suffix:
-                                    description: suffix-based match.
-                                    format: string
-                                    type: string
-                                type: object
-                              type: array
-                          type: object
-                        type: array
-                    type: object
-                  mtls:
-                    description: Set if mTLS is used.
-                    properties:
-                      allowTls:
-                        description: Deprecated.
-                        type: boolean
-                      mode:
-                        description: Defines the mode of mTLS authentication.
-                        enum:
-                        - STRICT
-                        - PERMISSIVE
-                        type: string
-                    type: object
-                type: object
-              type: array
-            principalBinding:
-              description: Deprecated.
-              enum:
-              - USE_PEER
-              - USE_ORIGIN
-              type: string
-            targets:
-              description: Deprecated.
-              items:
-                properties:
-                  name:
-                    description: The name must be a short name from the service registry.
-                    format: string
-                    type: string
-                  ports:
-                    description: Specifies the ports.
-                    items:
-                      oneOf:
-                      - required:
-                        - number
-                      - required:
-                        - name
-                      properties:
-                        name:
-                          format: string
-                          type: string
-                        number:
-                          type: integer
-                      type: object
-                    type: array
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-mixer
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: httpapispecs.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - apim-istio-io
-    kind: HTTPAPISpec
-    listKind: HTTPAPISpecList
-    plural: httpapispecs
-    singular: httpapispec
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          properties:
-            api_keys:
-              items:
-                oneOf:
-                - required:
-                  - query
-                - required:
-                  - header
-                - required:
-                  - cookie
-                properties:
-                  cookie:
-                    format: string
-                    type: string
-                  header:
-                    description: API key is sent in a request header.
-                    format: string
-                    type: string
-                  query:
-                    description: API Key is sent as a query parameter.
-                    format: string
-                    type: string
-                type: object
-              type: array
-            apiKeys:
-              items:
-                oneOf:
-                - required:
-                  - query
-                - required:
-                  - header
-                - required:
-                  - cookie
-                properties:
-                  cookie:
-                    format: string
-                    type: string
-                  header:
-                    description: API key is sent in a request header.
-                    format: string
-                    type: string
-                  query:
-                    description: API Key is sent as a query parameter.
-                    format: string
-                    type: string
-                type: object
-              type: array
-            attributes:
-              properties:
-                attributes:
-                  additionalProperties:
-                    oneOf:
-                    - required:
-                      - stringValue
-                    - required:
-                      - int64Value
-                    - required:
-                      - doubleValue
-                    - required:
-                      - boolValue
-                    - required:
-                      - bytesValue
-                    - required:
-                      - timestampValue
-                    - required:
-                      - durationValue
-                    - required:
-                      - stringMapValue
-                    properties:
-                      boolValue:
-                        type: boolean
-                      bytesValue:
-                        format: binary
-                        type: string
-                      doubleValue:
-                        format: double
-                        type: number
-                      durationValue:
-                        type: string
-                      int64Value:
-                        format: int64
-                        type: integer
-                      stringMapValue:
-                        properties:
-                          entries:
-                            additionalProperties:
-                              format: string
-                              type: string
-                            description: Holds a set of name/value pairs.
-                            type: object
-                        type: object
-                      stringValue:
-                        format: string
-                        type: string
-                      timestampValue:
-                        format: dateTime
-                        type: string
-                    type: object
-                  description: A map of attribute name to its value.
-                  type: object
-              type: object
-            patterns:
-              description: List of HTTP patterns to match.
-              items:
-                oneOf:
-                - required:
-                  - uriTemplate
-                - required:
-                  - regex
-                properties:
-                  attributes:
-                    properties:
-                      attributes:
-                        additionalProperties:
-                          oneOf:
-                          - required:
-                            - stringValue
-                          - required:
-                            - int64Value
-                          - required:
-                            - doubleValue
-                          - required:
-                            - boolValue
-                          - required:
-                            - bytesValue
-                          - required:
-                            - timestampValue
-                          - required:
-                            - durationValue
-                          - required:
-                            - stringMapValue
-                          properties:
-                            boolValue:
-                              type: boolean
-                            bytesValue:
-                              format: binary
-                              type: string
-                            doubleValue:
-                              format: double
-                              type: number
-                            durationValue:
-                              type: string
-                            int64Value:
-                              format: int64
-                              type: integer
-                            stringMapValue:
-                              properties:
-                                entries:
-                                  additionalProperties:
-                                    format: string
-                                    type: string
-                                  description: Holds a set of name/value pairs.
-                                  type: object
-                              type: object
-                            stringValue:
-                              format: string
-                              type: string
-                            timestampValue:
-                              format: dateTime
-                              type: string
-                          type: object
-                        description: A map of attribute name to its value.
-                        type: object
-                    type: object
-                  httpMethod:
-                    format: string
-                    type: string
-                  regex:
-                    format: string
-                    type: string
-                  uriTemplate:
-                    format: string
-                    type: string
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-mixer
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: httpapispecbindings.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - apim-istio-io
-    kind: HTTPAPISpecBinding
-    listKind: HTTPAPISpecBindingList
-    plural: httpapispecbindings
-    singular: httpapispecbinding
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          properties:
-            api_specs:
-              items:
-                properties:
-                  name:
-                    description: The short name of the HTTPAPISpec.
-                    format: string
-                    type: string
-                  namespace:
-                    description: Optional namespace of the HTTPAPISpec.
-                    format: string
-                    type: string
-                type: object
-              type: array
-            apiSpecs:
-              items:
-                properties:
-                  name:
-                    description: The short name of the HTTPAPISpec.
-                    format: string
-                    type: string
-                  namespace:
-                    description: Optional namespace of the HTTPAPISpec.
-                    format: string
-                    type: string
-                type: object
-              type: array
-            services:
-              description: One or more services to map the listed HTTPAPISpec onto.
-              items:
-                properties:
-                  domain:
-                    description: Domain suffix used to construct the service FQDN
-                      in implementations that support such specification.
-                    format: string
-                    type: string
-                  labels:
-                    additionalProperties:
-                      format: string
-                      type: string
-                    description: Optional one or more labels that uniquely identify
-                      the service version.
-                    type: object
-                  name:
-                    description: The short name of the service such as "foo".
-                    format: string
-                    type: string
-                  namespace:
-                    description: Optional namespace of the service.
-                    format: string
-                    type: string
-                  service:
-                    description: The service FQDN.
-                    format: string
-                    type: string
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-mixer
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: quotaspecs.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - apim-istio-io
-    kind: QuotaSpec
-    listKind: QuotaSpecList
-    plural: quotaspecs
-    singular: quotaspec
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: Determines the quotas used for individual requests.
-          properties:
-            rules:
-              description: A list of Quota rules.
-              items:
-                properties:
-                  match:
-                    description: If empty, match all request.
-                    items:
-                      properties:
-                        clause:
-                          additionalProperties:
-                            oneOf:
-                            - required:
-                              - exact
-                            - required:
-                              - prefix
-                            - required:
-                              - regex
-                            properties:
-                              exact:
-                                format: string
-                                type: string
-                              prefix:
-                                format: string
-                                type: string
-                              regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                format: string
-                                type: string
-                            type: object
-                          description: Map of attribute names to StringMatch type.
-                          type: object
-                      type: object
-                    type: array
-                  quotas:
-                    description: The list of quotas to charge.
-                    items:
-                      properties:
-                        charge:
-                          format: int32
-                          type: integer
-                        quota:
-                          format: string
-                          type: string
-                      type: object
-                    type: array
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-mixer
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: quotaspecbindings.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - apim-istio-io
-    kind: QuotaSpecBinding
-    listKind: QuotaSpecBindingList
-    plural: quotaspecbindings
-    singular: quotaspecbinding
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          properties:
-            quotaSpecs:
-              items:
-                properties:
-                  name:
-                    description: The short name of the QuotaSpec.
-                    format: string
-                    type: string
-                  namespace:
-                    description: Optional namespace of the QuotaSpec.
-                    format: string
-                    type: string
-                type: object
-              type: array
-            services:
-              description: One or more services to map the listed QuotaSpec onto.
-              items:
-                properties:
-                  domain:
-                    description: Domain suffix used to construct the service FQDN
-                      in implementations that support such specification.
-                    format: string
-                    type: string
-                  labels:
-                    additionalProperties:
-                      format: string
-                      type: string
-                    description: Optional one or more labels that uniquely identify
-                      the service version.
-                    type: object
-                  name:
-                    description: The short name of the service such as "foo".
-                    format: string
-                    type: string
-                  namespace:
-                    description: Optional namespace of the service.
-                    format: string
-                    type: string
-                  service:
-                    description: The service FQDN.
-                    format: string
-                    type: string
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: destinationrules.networking.istio.io
-spec:
-  additionalPrinterColumns:
-  - JSONPath: .spec.host
-    description: The name of a service from the service registry
-    name: Host
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: 'CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC. Populated by the system. Read-only. Null for
-      lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-    name: Age
-    type: date
-  group: networking.istio.io
-  names:
-    categories:
-    - istio-io
-    - networking-istio-io
-    kind: DestinationRule
-    listKind: DestinationRuleList
-    plural: destinationrules
-    shortNames:
-    - dr
-    singular: destinationrule
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration affecting load balancing, outlier detection,
-            etc. See more details at: https://istio.io/docs/reference/config/networking/destination-rule.html'
-          properties:
-            exportTo:
-              description: A list of namespaces to which this destination rule is
-                exported.
-              items:
-                format: string
-                type: string
-              type: array
-            host:
-              description: The name of a service from the service registry.
-              format: string
-              type: string
-            subsets:
-              items:
-                properties:
-                  labels:
-                    additionalProperties:
-                      format: string
-                      type: string
-                    type: object
-                  name:
-                    description: Name of the subset.
-                    format: string
-                    type: string
-                  trafficPolicy:
-                    description: Traffic policies that apply to this subset.
-                    properties:
-                      connectionPool:
-                        properties:
-                          http:
-                            description: HTTP connection pool settings.
-                            properties:
-                              h2UpgradePolicy:
-                                description: Specify if http1.1 connection should
-                                  be upgraded to http2 for the associated destination.
-                                enum:
-                                - DEFAULT
-                                - DO_NOT_UPGRADE
-                                - UPGRADE
-                                type: string
-                              http1MaxPendingRequests:
-                                description: Maximum number of pending HTTP requests
-                                  to a destination.
-                                format: int32
-                                type: integer
-                              http2MaxRequests:
-                                description: Maximum number of requests to a backend.
-                                format: int32
-                                type: integer
-                              idleTimeout:
-                                description: The idle timeout for upstream connection
-                                  pool connections.
-                                type: string
-                              maxRequestsPerConnection:
-                                description: Maximum number of requests per connection
-                                  to a backend.
-                                format: int32
-                                type: integer
-                              maxRetries:
-                                format: int32
-                                type: integer
-                            type: object
-                          tcp:
-                            description: Settings common to both HTTP and TCP upstream
-                              connections.
-                            properties:
-                              connectTimeout:
-                                description: TCP connection timeout.
-                                type: string
-                              maxConnections:
-                                description: Maximum number of HTTP1 /TCP connections
-                                  to a destination host.
-                                format: int32
-                                type: integer
-                              tcpKeepalive:
-                                description: If set then set SO_KEEPALIVE on the socket
-                                  to enable TCP Keepalives.
-                                properties:
-                                  interval:
-                                    description: The time duration between keep-alive
-                                      probes.
-                                    type: string
-                                  probes:
-                                    type: integer
-                                  time:
-                                    type: string
-                                type: object
-                            type: object
-                        type: object
-                      loadBalancer:
-                        description: Settings controlling the load balancer algorithms.
-                        oneOf:
-                        - required:
-                          - simple
-                        - properties:
-                            consistentHash:
-                              oneOf:
-                              - required:
-                                - httpHeaderName
-                              - required:
-                                - httpCookie
-                              - required:
-                                - useSourceIp
-                              - required:
-                                - httpQueryParameterName
-                          required:
-                          - consistentHash
-                        properties:
-                          consistentHash:
-                            properties:
-                              httpCookie:
-                                description: Hash based on HTTP cookie.
-                                properties:
-                                  name:
-                                    description: Name of the cookie.
-                                    format: string
-                                    type: string
-                                  path:
-                                    description: Path to set for the cookie.
-                                    format: string
-                                    type: string
-                                  ttl:
-                                    description: Lifetime of the cookie.
-                                    type: string
-                                type: object
-                              httpHeaderName:
-                                description: Hash based on a specific HTTP header.
-                                format: string
-                                type: string
-                              httpQueryParameterName:
-                                description: Hash based on a specific HTTP query parameter.
-                                format: string
-                                type: string
-                              minimumRingSize:
-                                type: integer
-                              useSourceIp:
-                                description: Hash based on the source IP address.
-                                type: boolean
-                            type: object
-                          localityLbSetting:
-                            properties:
-                              distribute:
-                                description: 'Optional: only one of distribute or
-                                  failover can be set.'
-                                items:
-                                  properties:
-                                    from:
-                                      description: Originating locality, '/' separated,
-                                        e.g.
-                                      format: string
-                                      type: string
-                                    to:
-                                      additionalProperties:
-                                        type: integer
-                                      description: Map of upstream localities to traffic
-                                        distribution weights.
-                                      type: object
-                                  type: object
-                                type: array
-                              enabled:
-                                description: enable locality load balancing, this
-                                  is DestinationRule-level and will override mesh
-                                  wide settings in entirety.
-                                type: boolean
-                              failover:
-                                description: 'Optional: only failover or distribute
-                                  can be set.'
-                                items:
-                                  properties:
-                                    from:
-                                      description: Originating region.
-                                      format: string
-                                      type: string
-                                    to:
-                                      format: string
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          simple:
-                            enum:
-                            - ROUND_ROBIN
-                            - LEAST_CONN
-                            - RANDOM
-                            - PASSTHROUGH
-                            type: string
-                        type: object
-                      outlierDetection:
-                        properties:
-                          baseEjectionTime:
-                            description: Minimum ejection duration.
-                            type: string
-                          consecutive5xxErrors:
-                            description: Number of 5xx errors before a host is ejected
-                              from the connection pool.
-                            type: integer
-                          consecutiveErrors:
-                            format: int32
-                            type: integer
-                          consecutiveGatewayErrors:
-                            description: Number of gateway errors before a host is
-                              ejected from the connection pool.
-                            type: integer
-                          interval:
-                            description: Time interval between ejection sweep analysis.
-                            type: string
-                          maxEjectionPercent:
-                            format: int32
-                            type: integer
-                          minHealthPercent:
-                            format: int32
-                            type: integer
-                        type: object
-                      portLevelSettings:
-                        description: Traffic policies specific to individual ports.
-                        items:
-                          properties:
-                            connectionPool:
-                              properties:
-                                http:
-                                  description: HTTP connection pool settings.
-                                  properties:
-                                    h2UpgradePolicy:
-                                      description: Specify if http1.1 connection should
-                                        be upgraded to http2 for the associated destination.
-                                      enum:
-                                      - DEFAULT
-                                      - DO_NOT_UPGRADE
-                                      - UPGRADE
-                                      type: string
-                                    http1MaxPendingRequests:
-                                      description: Maximum number of pending HTTP
-                                        requests to a destination.
-                                      format: int32
-                                      type: integer
-                                    http2MaxRequests:
-                                      description: Maximum number of requests to a
-                                        backend.
-                                      format: int32
-                                      type: integer
-                                    idleTimeout:
-                                      description: The idle timeout for upstream connection
-                                        pool connections.
-                                      type: string
-                                    maxRequestsPerConnection:
-                                      description: Maximum number of requests per
-                                        connection to a backend.
-                                      format: int32
-                                      type: integer
-                                    maxRetries:
-                                      format: int32
-                                      type: integer
-                                  type: object
-                                tcp:
-                                  description: Settings common to both HTTP and TCP
-                                    upstream connections.
-                                  properties:
-                                    connectTimeout:
-                                      description: TCP connection timeout.
-                                      type: string
-                                    maxConnections:
-                                      description: Maximum number of HTTP1 /TCP connections
-                                        to a destination host.
-                                      format: int32
-                                      type: integer
-                                    tcpKeepalive:
-                                      description: If set then set SO_KEEPALIVE on
-                                        the socket to enable TCP Keepalives.
-                                      properties:
-                                        interval:
-                                          description: The time duration between keep-alive
-                                            probes.
-                                          type: string
-                                        probes:
-                                          type: integer
-                                        time:
-                                          type: string
-                                      type: object
-                                  type: object
-                              type: object
-                            loadBalancer:
-                              description: Settings controlling the load balancer
-                                algorithms.
-                              oneOf:
-                              - required:
-                                - simple
-                              - properties:
-                                  consistentHash:
-                                    oneOf:
-                                    - required:
-                                      - httpHeaderName
-                                    - required:
-                                      - httpCookie
-                                    - required:
-                                      - useSourceIp
-                                    - required:
-                                      - httpQueryParameterName
-                                required:
-                                - consistentHash
-                              properties:
-                                consistentHash:
-                                  properties:
-                                    httpCookie:
-                                      description: Hash based on HTTP cookie.
-                                      properties:
-                                        name:
-                                          description: Name of the cookie.
-                                          format: string
-                                          type: string
-                                        path:
-                                          description: Path to set for the cookie.
-                                          format: string
-                                          type: string
-                                        ttl:
-                                          description: Lifetime of the cookie.
-                                          type: string
-                                      type: object
-                                    httpHeaderName:
-                                      description: Hash based on a specific HTTP header.
-                                      format: string
-                                      type: string
-                                    httpQueryParameterName:
-                                      description: Hash based on a specific HTTP query
-                                        parameter.
-                                      format: string
-                                      type: string
-                                    minimumRingSize:
-                                      type: integer
-                                    useSourceIp:
-                                      description: Hash based on the source IP address.
-                                      type: boolean
-                                  type: object
-                                localityLbSetting:
-                                  properties:
-                                    distribute:
-                                      description: 'Optional: only one of distribute
-                                        or failover can be set.'
-                                      items:
-                                        properties:
-                                          from:
-                                            description: Originating locality, '/'
-                                              separated, e.g.
-                                            format: string
-                                            type: string
-                                          to:
-                                            additionalProperties:
-                                              type: integer
-                                            description: Map of upstream localities
-                                              to traffic distribution weights.
-                                            type: object
-                                        type: object
-                                      type: array
-                                    enabled:
-                                      description: enable locality load balancing,
-                                        this is DestinationRule-level and will override
-                                        mesh wide settings in entirety.
-                                      type: boolean
-                                    failover:
-                                      description: 'Optional: only failover or distribute
-                                        can be set.'
-                                      items:
-                                        properties:
-                                          from:
-                                            description: Originating region.
-                                            format: string
-                                            type: string
-                                          to:
-                                            format: string
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                simple:
-                                  enum:
-                                  - ROUND_ROBIN
-                                  - LEAST_CONN
-                                  - RANDOM
-                                  - PASSTHROUGH
-                                  type: string
-                              type: object
-                            outlierDetection:
-                              properties:
-                                baseEjectionTime:
-                                  description: Minimum ejection duration.
-                                  type: string
-                                consecutive5xxErrors:
-                                  description: Number of 5xx errors before a host
-                                    is ejected from the connection pool.
-                                  type: integer
-                                consecutiveErrors:
-                                  format: int32
-                                  type: integer
-                                consecutiveGatewayErrors:
-                                  description: Number of gateway errors before a host
-                                    is ejected from the connection pool.
-                                  type: integer
-                                interval:
-                                  description: Time interval between ejection sweep
-                                    analysis.
-                                  type: string
-                                maxEjectionPercent:
-                                  format: int32
-                                  type: integer
-                                minHealthPercent:
-                                  format: int32
-                                  type: integer
-                              type: object
-                            port:
-                              properties:
-                                number:
-                                  type: integer
-                              type: object
-                            tls:
-                              description: TLS related settings for connections to
-                                the upstream service.
-                              properties:
-                                caCertificates:
-                                  format: string
-                                  type: string
-                                clientCertificate:
-                                  description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                                  format: string
-                                  type: string
-                                mode:
-                                  enum:
-                                  - DISABLE
-                                  - SIMPLE
-                                  - MUTUAL
-                                  - ISTIO_MUTUAL
-                                  type: string
-                                privateKey:
-                                  description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                                  format: string
-                                  type: string
-                                sni:
-                                  description: SNI string to present to the server
-                                    during TLS handshake.
-                                  format: string
-                                  type: string
-                                subjectAltNames:
-                                  items:
-                                    format: string
-                                    type: string
-                                  type: array
-                              type: object
-                          type: object
-                        type: array
-                      tls:
-                        description: TLS related settings for connections to the upstream
-                          service.
-                        properties:
-                          caCertificates:
-                            format: string
-                            type: string
-                          clientCertificate:
-                            description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                            format: string
-                            type: string
-                          mode:
-                            enum:
-                            - DISABLE
-                            - SIMPLE
-                            - MUTUAL
-                            - ISTIO_MUTUAL
-                            type: string
-                          privateKey:
-                            description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                            format: string
-                            type: string
-                          sni:
-                            description: SNI string to present to the server during
-                              TLS handshake.
-                            format: string
-                            type: string
-                          subjectAltNames:
-                            items:
-                              format: string
-                              type: string
-                            type: array
-                        type: object
-                    type: object
-                type: object
-              type: array
-            trafficPolicy:
-              properties:
-                connectionPool:
-                  properties:
-                    http:
-                      description: HTTP connection pool settings.
-                      properties:
-                        h2UpgradePolicy:
-                          description: Specify if http1.1 connection should be upgraded
-                            to http2 for the associated destination.
-                          enum:
-                          - DEFAULT
-                          - DO_NOT_UPGRADE
-                          - UPGRADE
-                          type: string
-                        http1MaxPendingRequests:
-                          description: Maximum number of pending HTTP requests to
-                            a destination.
-                          format: int32
-                          type: integer
-                        http2MaxRequests:
-                          description: Maximum number of requests to a backend.
-                          format: int32
-                          type: integer
-                        idleTimeout:
-                          description: The idle timeout for upstream connection pool
-                            connections.
-                          type: string
-                        maxRequestsPerConnection:
-                          description: Maximum number of requests per connection to
-                            a backend.
-                          format: int32
-                          type: integer
-                        maxRetries:
-                          format: int32
-                          type: integer
-                      type: object
-                    tcp:
-                      description: Settings common to both HTTP and TCP upstream connections.
-                      properties:
-                        connectTimeout:
-                          description: TCP connection timeout.
-                          type: string
-                        maxConnections:
-                          description: Maximum number of HTTP1 /TCP connections to
-                            a destination host.
-                          format: int32
-                          type: integer
-                        tcpKeepalive:
-                          description: If set then set SO_KEEPALIVE on the socket
-                            to enable TCP Keepalives.
-                          properties:
-                            interval:
-                              description: The time duration between keep-alive probes.
-                              type: string
-                            probes:
-                              type: integer
-                            time:
-                              type: string
-                          type: object
-                      type: object
-                  type: object
-                loadBalancer:
-                  description: Settings controlling the load balancer algorithms.
-                  oneOf:
-                  - required:
-                    - simple
-                  - properties:
-                      consistentHash:
-                        oneOf:
-                        - required:
-                          - httpHeaderName
-                        - required:
-                          - httpCookie
-                        - required:
-                          - useSourceIp
-                        - required:
-                          - httpQueryParameterName
-                    required:
-                    - consistentHash
-                  properties:
-                    consistentHash:
-                      properties:
-                        httpCookie:
-                          description: Hash based on HTTP cookie.
-                          properties:
-                            name:
-                              description: Name of the cookie.
-                              format: string
-                              type: string
-                            path:
-                              description: Path to set for the cookie.
-                              format: string
-                              type: string
-                            ttl:
-                              description: Lifetime of the cookie.
-                              type: string
-                          type: object
-                        httpHeaderName:
-                          description: Hash based on a specific HTTP header.
-                          format: string
-                          type: string
-                        httpQueryParameterName:
-                          description: Hash based on a specific HTTP query parameter.
-                          format: string
-                          type: string
-                        minimumRingSize:
-                          type: integer
-                        useSourceIp:
-                          description: Hash based on the source IP address.
-                          type: boolean
-                      type: object
-                    localityLbSetting:
-                      properties:
-                        distribute:
-                          description: 'Optional: only one of distribute or failover
-                            can be set.'
-                          items:
-                            properties:
-                              from:
-                                description: Originating locality, '/' separated,
-                                  e.g.
-                                format: string
-                                type: string
-                              to:
-                                additionalProperties:
-                                  type: integer
-                                description: Map of upstream localities to traffic
-                                  distribution weights.
-                                type: object
-                            type: object
-                          type: array
-                        enabled:
-                          description: enable locality load balancing, this is DestinationRule-level
-                            and will override mesh wide settings in entirety.
-                          type: boolean
-                        failover:
-                          description: 'Optional: only failover or distribute can
-                            be set.'
-                          items:
-                            properties:
-                              from:
-                                description: Originating region.
-                                format: string
-                                type: string
-                              to:
-                                format: string
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    simple:
-                      enum:
-                      - ROUND_ROBIN
-                      - LEAST_CONN
-                      - RANDOM
-                      - PASSTHROUGH
-                      type: string
-                  type: object
-                outlierDetection:
-                  properties:
-                    baseEjectionTime:
-                      description: Minimum ejection duration.
-                      type: string
-                    consecutive5xxErrors:
-                      description: Number of 5xx errors before a host is ejected from
-                        the connection pool.
-                      type: integer
-                    consecutiveErrors:
-                      format: int32
-                      type: integer
-                    consecutiveGatewayErrors:
-                      description: Number of gateway errors before a host is ejected
-                        from the connection pool.
-                      type: integer
-                    interval:
-                      description: Time interval between ejection sweep analysis.
-                      type: string
-                    maxEjectionPercent:
-                      format: int32
-                      type: integer
-                    minHealthPercent:
-                      format: int32
-                      type: integer
-                  type: object
-                portLevelSettings:
-                  description: Traffic policies specific to individual ports.
-                  items:
-                    properties:
-                      connectionPool:
-                        properties:
-                          http:
-                            description: HTTP connection pool settings.
-                            properties:
-                              h2UpgradePolicy:
-                                description: Specify if http1.1 connection should
-                                  be upgraded to http2 for the associated destination.
-                                enum:
-                                - DEFAULT
-                                - DO_NOT_UPGRADE
-                                - UPGRADE
-                                type: string
-                              http1MaxPendingRequests:
-                                description: Maximum number of pending HTTP requests
-                                  to a destination.
-                                format: int32
-                                type: integer
-                              http2MaxRequests:
-                                description: Maximum number of requests to a backend.
-                                format: int32
-                                type: integer
-                              idleTimeout:
-                                description: The idle timeout for upstream connection
-                                  pool connections.
-                                type: string
-                              maxRequestsPerConnection:
-                                description: Maximum number of requests per connection
-                                  to a backend.
-                                format: int32
-                                type: integer
-                              maxRetries:
-                                format: int32
-                                type: integer
-                            type: object
-                          tcp:
-                            description: Settings common to both HTTP and TCP upstream
-                              connections.
-                            properties:
-                              connectTimeout:
-                                description: TCP connection timeout.
-                                type: string
-                              maxConnections:
-                                description: Maximum number of HTTP1 /TCP connections
-                                  to a destination host.
-                                format: int32
-                                type: integer
-                              tcpKeepalive:
-                                description: If set then set SO_KEEPALIVE on the socket
-                                  to enable TCP Keepalives.
-                                properties:
-                                  interval:
-                                    description: The time duration between keep-alive
-                                      probes.
-                                    type: string
-                                  probes:
-                                    type: integer
-                                  time:
-                                    type: string
-                                type: object
-                            type: object
-                        type: object
-                      loadBalancer:
-                        description: Settings controlling the load balancer algorithms.
-                        oneOf:
-                        - required:
-                          - simple
-                        - properties:
-                            consistentHash:
-                              oneOf:
-                              - required:
-                                - httpHeaderName
-                              - required:
-                                - httpCookie
-                              - required:
-                                - useSourceIp
-                              - required:
-                                - httpQueryParameterName
-                          required:
-                          - consistentHash
-                        properties:
-                          consistentHash:
-                            properties:
-                              httpCookie:
-                                description: Hash based on HTTP cookie.
-                                properties:
-                                  name:
-                                    description: Name of the cookie.
-                                    format: string
-                                    type: string
-                                  path:
-                                    description: Path to set for the cookie.
-                                    format: string
-                                    type: string
-                                  ttl:
-                                    description: Lifetime of the cookie.
-                                    type: string
-                                type: object
-                              httpHeaderName:
-                                description: Hash based on a specific HTTP header.
-                                format: string
-                                type: string
-                              httpQueryParameterName:
-                                description: Hash based on a specific HTTP query parameter.
-                                format: string
-                                type: string
-                              minimumRingSize:
-                                type: integer
-                              useSourceIp:
-                                description: Hash based on the source IP address.
-                                type: boolean
-                            type: object
-                          localityLbSetting:
-                            properties:
-                              distribute:
-                                description: 'Optional: only one of distribute or
-                                  failover can be set.'
-                                items:
-                                  properties:
-                                    from:
-                                      description: Originating locality, '/' separated,
-                                        e.g.
-                                      format: string
-                                      type: string
-                                    to:
-                                      additionalProperties:
-                                        type: integer
-                                      description: Map of upstream localities to traffic
-                                        distribution weights.
-                                      type: object
-                                  type: object
-                                type: array
-                              enabled:
-                                description: enable locality load balancing, this
-                                  is DestinationRule-level and will override mesh
-                                  wide settings in entirety.
-                                type: boolean
-                              failover:
-                                description: 'Optional: only failover or distribute
-                                  can be set.'
-                                items:
-                                  properties:
-                                    from:
-                                      description: Originating region.
-                                      format: string
-                                      type: string
-                                    to:
-                                      format: string
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          simple:
-                            enum:
-                            - ROUND_ROBIN
-                            - LEAST_CONN
-                            - RANDOM
-                            - PASSTHROUGH
-                            type: string
-                        type: object
-                      outlierDetection:
-                        properties:
-                          baseEjectionTime:
-                            description: Minimum ejection duration.
-                            type: string
-                          consecutive5xxErrors:
-                            description: Number of 5xx errors before a host is ejected
-                              from the connection pool.
-                            type: integer
-                          consecutiveErrors:
-                            format: int32
-                            type: integer
-                          consecutiveGatewayErrors:
-                            description: Number of gateway errors before a host is
-                              ejected from the connection pool.
-                            type: integer
-                          interval:
-                            description: Time interval between ejection sweep analysis.
-                            type: string
-                          maxEjectionPercent:
-                            format: int32
-                            type: integer
-                          minHealthPercent:
-                            format: int32
-                            type: integer
-                        type: object
-                      port:
-                        properties:
-                          number:
-                            type: integer
-                        type: object
-                      tls:
-                        description: TLS related settings for connections to the upstream
-                          service.
-                        properties:
-                          caCertificates:
-                            format: string
-                            type: string
-                          clientCertificate:
-                            description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                            format: string
-                            type: string
-                          mode:
-                            enum:
-                            - DISABLE
-                            - SIMPLE
-                            - MUTUAL
-                            - ISTIO_MUTUAL
-                            type: string
-                          privateKey:
-                            description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                            format: string
-                            type: string
-                          sni:
-                            description: SNI string to present to the server during
-                              TLS handshake.
-                            format: string
-                            type: string
-                          subjectAltNames:
-                            items:
-                              format: string
-                              type: string
-                            type: array
-                        type: object
-                    type: object
-                  type: array
-                tls:
-                  description: TLS related settings for connections to the upstream
-                    service.
-                  properties:
-                    caCertificates:
-                      format: string
-                      type: string
-                    clientCertificate:
-                      description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                      format: string
-                      type: string
-                    mode:
-                      enum:
-                      - DISABLE
-                      - SIMPLE
-                      - MUTUAL
-                      - ISTIO_MUTUAL
-                      type: string
-                    privateKey:
-                      description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                      format: string
-                      type: string
-                    sni:
-                      description: SNI string to present to the server during TLS
-                        handshake.
-                      format: string
-                      type: string
-                    subjectAltNames:
-                      items:
-                        format: string
-                        type: string
-                      type: array
-                  type: object
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1alpha3
-    served: true
-    storage: true
-  - name: v1beta1
-    served: true
-    storage: false
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: envoyfilters.networking.istio.io
-spec:
-  group: networking.istio.io
-  names:
-    categories:
-    - istio-io
-    - networking-istio-io
-    kind: EnvoyFilter
-    listKind: EnvoyFilterList
-    plural: envoyfilters
-    singular: envoyfilter
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Customizing Envoy configuration generated by Istio. See more
-            details at: https://istio.io/docs/reference/config/networking/envoy-filter.html'
-          properties:
-            configPatches:
-              description: One or more patches with match conditions.
-              items:
-                properties:
-                  applyTo:
-                    enum:
-                    - INVALID
-                    - LISTENER
-                    - FILTER_CHAIN
-                    - NETWORK_FILTER
-                    - HTTP_FILTER
-                    - ROUTE_CONFIGURATION
-                    - VIRTUAL_HOST
-                    - HTTP_ROUTE
-                    - CLUSTER
-                    type: string
-                  match:
-                    description: Match on listener/route configuration/cluster.
-                    oneOf:
-                    - required:
-                      - listener
-                    - required:
-                      - routeConfiguration
-                    - required:
-                      - cluster
-                    properties:
-                      cluster:
-                        description: Match on envoy cluster attributes.
-                        properties:
-                          name:
-                            description: The exact name of the cluster to match.
-                            format: string
-                            type: string
-                          portNumber:
-                            description: The service port for which this cluster was
-                              generated.
-                            type: integer
-                          service:
-                            description: The fully qualified service name for this
-                              cluster.
-                            format: string
-                            type: string
-                          subset:
-                            description: The subset associated with the service.
-                            format: string
-                            type: string
-                        type: object
-                      context:
-                        description: The specific config generation context to match
-                          on.
-                        enum:
-                        - ANY
-                        - SIDECAR_INBOUND
-                        - SIDECAR_OUTBOUND
-                        - GATEWAY
-                        type: string
-                      listener:
-                        description: Match on envoy listener attributes.
-                        properties:
-                          filterChain:
-                            description: Match a specific filter chain in a listener.
-                            properties:
-                              applicationProtocols:
-                                description: Applies only to sidecars.
-                                format: string
-                                type: string
-                              filter:
-                                description: The name of a specific filter to apply
-                                  the patch to.
-                                properties:
-                                  name:
-                                    description: The filter name to match on.
-                                    format: string
-                                    type: string
-                                  subFilter:
-                                    properties:
-                                      name:
-                                        description: The filter name to match on.
-                                        format: string
-                                        type: string
-                                    type: object
-                                type: object
-                              name:
-                                description: The name assigned to the filter chain.
-                                format: string
-                                type: string
-                              sni:
-                                description: The SNI value used by a filter chain's
-                                  match condition.
-                                format: string
-                                type: string
-                              transportProtocol:
-                                description: Applies only to SIDECAR_INBOUND context.
-                                format: string
-                                type: string
-                            type: object
-                          name:
-                            description: Match a specific listener by its name.
-                            format: string
-                            type: string
-                          portName:
-                            format: string
-                            type: string
-                          portNumber:
-                            type: integer
-                        type: object
-                      proxy:
-                        description: Match on properties associated with a proxy.
-                        properties:
-                          metadata:
-                            additionalProperties:
-                              format: string
-                              type: string
-                            type: object
-                          proxyVersion:
-                            format: string
-                            type: string
-                        type: object
-                      routeConfiguration:
-                        description: Match on envoy HTTP route configuration attributes.
-                        properties:
-                          gateway:
-                            format: string
-                            type: string
-                          name:
-                            description: Route configuration name to match on.
-                            format: string
-                            type: string
-                          portName:
-                            description: Applicable only for GATEWAY context.
-                            format: string
-                            type: string
-                          portNumber:
-                            type: integer
-                          vhost:
-                            properties:
-                              name:
-                                format: string
-                                type: string
-                              route:
-                                description: Match a specific route within the virtual
-                                  host.
-                                properties:
-                                  action:
-                                    description: Match a route with specific action
-                                      type.
-                                    enum:
-                                    - ANY
-                                    - ROUTE
-                                    - REDIRECT
-                                    - DIRECT_RESPONSE
-                                    type: string
-                                  name:
-                                    format: string
-                                    type: string
-                                type: object
-                            type: object
-                        type: object
-                    type: object
-                  patch:
-                    description: The patch to apply along with the operation.
-                    properties:
-                      operation:
-                        description: Determines how the patch should be applied.
-                        enum:
-                        - INVALID
-                        - MERGE
-                        - ADD
-                        - REMOVE
-                        - INSERT_BEFORE
-                        - INSERT_AFTER
-                        - INSERT_FIRST
-                        type: string
-                      value:
-                        description: The JSON config of the object being patched.
-                        type: object
-                    type: object
-                type: object
-              type: array
-            filters:
-              items:
-                properties:
-                  filterConfig:
-                    type: object
-                  filterName:
-                    description: The name of the filter to instantiate.
-                    format: string
-                    type: string
-                  filterType:
-                    description: The type of filter to instantiate.
-                    enum:
-                    - INVALID
-                    - HTTP
-                    - NETWORK
-                    type: string
-                  insertPosition:
-                    description: Insert position in the filter chain.
-                    properties:
-                      index:
-                        description: Position of this filter in the filter chain.
-                        enum:
-                        - FIRST
-                        - LAST
-                        - BEFORE
-                        - AFTER
-                        type: string
-                      relativeTo:
-                        format: string
-                        type: string
-                    type: object
-                  listenerMatch:
-                    properties:
-                      address:
-                        description: One or more IP addresses to which the listener
-                          is bound.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      listenerProtocol:
-                        description: Selects a class of listeners for the same protocol.
-                        enum:
-                        - ALL
-                        - HTTP
-                        - TCP
-                        type: string
-                      listenerType:
-                        description: Inbound vs outbound sidecar listener or gateway
-                          listener.
-                        enum:
-                        - ANY
-                        - SIDECAR_INBOUND
-                        - SIDECAR_OUTBOUND
-                        - GATEWAY
-                        type: string
-                      portNamePrefix:
-                        format: string
-                        type: string
-                      portNumber:
-                        type: integer
-                    type: object
-                type: object
-              type: array
-            workloadLabels:
-              additionalProperties:
-                format: string
-                type: string
-              description: Deprecated.
-              type: object
-            workloadSelector:
-              properties:
-                labels:
-                  additionalProperties:
-                    format: string
-                    type: string
-                  type: object
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1alpha3
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: gateways.networking.istio.io
-spec:
-  group: networking.istio.io
-  names:
-    categories:
-    - istio-io
-    - networking-istio-io
-    kind: Gateway
-    listKind: GatewayList
-    plural: gateways
-    shortNames:
-    - gw
-    singular: gateway
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration affecting edge load balancer. See more details
-            at: https://istio.io/docs/reference/config/networking/gateway.html'
-          properties:
-            selector:
-              additionalProperties:
-                format: string
-                type: string
-              type: object
-            servers:
-              description: A list of server specifications.
-              items:
-                properties:
-                  bind:
-                    format: string
-                    type: string
-                  defaultEndpoint:
-                    format: string
-                    type: string
-                  hosts:
-                    description: One or more hosts exposed by this gateway.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  port:
-                    properties:
-                      name:
-                        description: Label assigned to the port.
-                        format: string
-                        type: string
-                      number:
-                        description: A valid non-negative integer port number.
-                        type: integer
-                      protocol:
-                        description: The protocol exposed on the port.
-                        format: string
-                        type: string
-                    type: object
-                  tls:
-                    description: Set of TLS related options that govern the server's
-                      behavior.
-                    properties:
-                      caCertificates:
-                        description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      cipherSuites:
-                        description: 'Optional: If specified, only support the specified
-                          cipher list.'
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      credentialName:
-                        format: string
-                        type: string
-                      httpsRedirect:
-                        type: boolean
-                      maxProtocolVersion:
-                        description: 'Optional: Maximum TLS protocol version.'
-                        enum:
-                        - TLS_AUTO
-                        - TLSV1_0
-                        - TLSV1_1
-                        - TLSV1_2
-                        - TLSV1_3
-                        type: string
-                      minProtocolVersion:
-                        description: 'Optional: Minimum TLS protocol version.'
-                        enum:
-                        - TLS_AUTO
-                        - TLSV1_0
-                        - TLSV1_1
-                        - TLSV1_2
-                        - TLSV1_3
-                        type: string
-                      mode:
-                        enum:
-                        - PASSTHROUGH
-                        - SIMPLE
-                        - MUTUAL
-                        - AUTO_PASSTHROUGH
-                        - ISTIO_MUTUAL
-                        type: string
-                      privateKey:
-                        description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      serverCertificate:
-                        description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      subjectAltNames:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      verifyCertificateHash:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      verifyCertificateSpki:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                    type: object
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha3
-    served: true
-    storage: true
-  - name: v1beta1
-    served: true
-    storage: false
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: serviceentries.networking.istio.io
-spec:
-  additionalPrinterColumns:
-  - JSONPath: .spec.hosts
-    description: The hosts associated with the ServiceEntry
-    name: Hosts
-    type: string
-  - JSONPath: .spec.location
-    description: Whether the service is external to the mesh or part of the mesh (MESH_EXTERNAL
-      or MESH_INTERNAL)
-    name: Location
-    type: string
-  - JSONPath: .spec.resolution
-    description: Service discovery mode for the hosts (NONE, STATIC, or DNS)
-    name: Resolution
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: 'CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC. Populated by the system. Read-only. Null for
-      lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-    name: Age
-    type: date
-  group: networking.istio.io
-  names:
-    categories:
-    - istio-io
-    - networking-istio-io
-    kind: ServiceEntry
-    listKind: ServiceEntryList
-    plural: serviceentries
-    shortNames:
-    - se
-    singular: serviceentry
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration affecting service registry. See more details
-            at: https://istio.io/docs/reference/config/networking/service-entry.html'
-          properties:
-            addresses:
-              description: The virtual IP addresses associated with the service.
-              items:
-                format: string
-                type: string
-              type: array
-            endpoints:
-              description: One or more endpoints associated with the service.
-              items:
-                properties:
-                  address:
-                    format: string
-                    type: string
-                  labels:
-                    additionalProperties:
-                      format: string
-                      type: string
-                    description: One or more labels associated with the endpoint.
-                    type: object
-                  locality:
-                    description: The locality associated with the endpoint.
-                    format: string
-                    type: string
-                  network:
-                    format: string
-                    type: string
-                  ports:
-                    additionalProperties:
-                      type: integer
-                    description: Set of ports associated with the endpoint.
-                    type: object
-                  weight:
-                    description: The load balancing weight associated with the endpoint.
-                    type: integer
-                type: object
-              type: array
-            exportTo:
-              description: A list of namespaces to which this service is exported.
-              items:
-                format: string
-                type: string
-              type: array
-            hosts:
-              description: The hosts associated with the ServiceEntry.
-              items:
-                format: string
-                type: string
-              type: array
-            location:
-              enum:
-              - MESH_EXTERNAL
-              - MESH_INTERNAL
-              type: string
-            ports:
-              description: The ports associated with the external service.
-              items:
-                properties:
-                  name:
-                    description: Label assigned to the port.
-                    format: string
-                    type: string
-                  number:
-                    description: A valid non-negative integer port number.
-                    type: integer
-                  protocol:
-                    description: The protocol exposed on the port.
-                    format: string
-                    type: string
-                type: object
-              type: array
-            resolution:
-              description: Service discovery mode for the hosts.
-              enum:
-              - NONE
-              - STATIC
-              - DNS
-              type: string
-            subjectAltNames:
-              items:
-                format: string
-                type: string
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha3
-    served: true
-    storage: true
-  - name: v1beta1
-    served: true
-    storage: false
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: sidecars.networking.istio.io
-spec:
-  group: networking.istio.io
-  names:
-    categories:
-    - istio-io
-    - networking-istio-io
-    kind: Sidecar
-    listKind: SidecarList
-    plural: sidecars
-    singular: sidecar
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration affecting network reachability of a sidecar.
-            See more details at: https://istio.io/docs/reference/config/networking/sidecar.html'
-          properties:
-            egress:
-              items:
-                properties:
-                  bind:
-                    format: string
-                    type: string
-                  captureMode:
-                    enum:
-                    - DEFAULT
-                    - IPTABLES
-                    - NONE
-                    type: string
-                  hosts:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  port:
-                    description: The port associated with the listener.
-                    properties:
-                      name:
-                        description: Label assigned to the port.
-                        format: string
-                        type: string
-                      number:
-                        description: A valid non-negative integer port number.
-                        type: integer
-                      protocol:
-                        description: The protocol exposed on the port.
-                        format: string
-                        type: string
-                    type: object
-                type: object
-              type: array
-            inboundTls:
-              properties:
-                caCertificates:
-                  description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                  format: string
-                  type: string
-                cipherSuites:
-                  description: 'Optional: If specified, only support the specified
-                    cipher list.'
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                credentialName:
-                  format: string
-                  type: string
-                httpsRedirect:
-                  type: boolean
-                maxProtocolVersion:
-                  description: 'Optional: Maximum TLS protocol version.'
-                  enum:
-                  - TLS_AUTO
-                  - TLSV1_0
-                  - TLSV1_1
-                  - TLSV1_2
-                  - TLSV1_3
-                  type: string
-                minProtocolVersion:
-                  description: 'Optional: Minimum TLS protocol version.'
-                  enum:
-                  - TLS_AUTO
-                  - TLSV1_0
-                  - TLSV1_1
-                  - TLSV1_2
-                  - TLSV1_3
-                  type: string
-                mode:
-                  enum:
-                  - PASSTHROUGH
-                  - SIMPLE
-                  - MUTUAL
-                  - AUTO_PASSTHROUGH
-                  - ISTIO_MUTUAL
-                  type: string
-                privateKey:
-                  description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                  format: string
-                  type: string
-                serverCertificate:
-                  description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                  format: string
-                  type: string
-                subjectAltNames:
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                verifyCertificateHash:
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                verifyCertificateSpki:
-                  items:
-                    format: string
-                    type: string
-                  type: array
-              type: object
-            ingress:
-              items:
-                properties:
-                  bind:
-                    description: The IP to which the listener should be bound.
-                    format: string
-                    type: string
-                  captureMode:
-                    enum:
-                    - DEFAULT
-                    - IPTABLES
-                    - NONE
-                    type: string
-                  defaultEndpoint:
-                    format: string
-                    type: string
-                  inboundTls:
-                    description: Overrides Sidecar level `+"`"+`inboundTls`+"`"+` settings.
-                    properties:
-                      caCertificates:
-                        description: REQUIRED if mode is `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      cipherSuites:
-                        description: 'Optional: If specified, only support the specified
-                          cipher list.'
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      credentialName:
-                        format: string
-                        type: string
-                      httpsRedirect:
-                        type: boolean
-                      maxProtocolVersion:
-                        description: 'Optional: Maximum TLS protocol version.'
-                        enum:
-                        - TLS_AUTO
-                        - TLSV1_0
-                        - TLSV1_1
-                        - TLSV1_2
-                        - TLSV1_3
-                        type: string
-                      minProtocolVersion:
-                        description: 'Optional: Minimum TLS protocol version.'
-                        enum:
-                        - TLS_AUTO
-                        - TLSV1_0
-                        - TLSV1_1
-                        - TLSV1_2
-                        - TLSV1_3
-                        type: string
-                      mode:
-                        enum:
-                        - PASSTHROUGH
-                        - SIMPLE
-                        - MUTUAL
-                        - AUTO_PASSTHROUGH
-                        - ISTIO_MUTUAL
-                        type: string
-                      privateKey:
-                        description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      serverCertificate:
-                        description: REQUIRED if mode is `+"`"+`SIMPLE`+"`"+` or `+"`"+`MUTUAL`+"`"+`.
-                        format: string
-                        type: string
-                      subjectAltNames:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      verifyCertificateHash:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      verifyCertificateSpki:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                    type: object
-                  port:
-                    description: The port associated with the listener.
-                    properties:
-                      name:
-                        description: Label assigned to the port.
-                        format: string
-                        type: string
-                      number:
-                        description: A valid non-negative integer port number.
-                        type: integer
-                      protocol:
-                        description: The protocol exposed on the port.
-                        format: string
-                        type: string
-                    type: object
-                type: object
-              type: array
-            outboundTrafficPolicy:
-              description: Configuration for the outbound traffic policy.
-              properties:
-                egressProxy:
-                  properties:
-                    host:
-                      description: The name of a service from the service registry.
-                      format: string
-                      type: string
-                    port:
-                      description: Specifies the port on the host that is being addressed.
-                      properties:
-                        number:
-                          type: integer
-                      type: object
-                    subset:
-                      description: The name of a subset within the service.
-                      format: string
-                      type: string
-                  type: object
-                mode:
-                  enum:
-                  - REGISTRY_ONLY
-                  - ALLOW_ANY
-                  type: string
-              type: object
-            workloadSelector:
-              properties:
-                labels:
-                  additionalProperties:
-                    format: string
-                    type: string
-                  type: object
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1alpha3
-    served: true
-    storage: true
-  - name: v1beta1
-    served: true
-    storage: false
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    release: istio
-  name: virtualservices.networking.istio.io
-spec:
-  additionalPrinterColumns:
-  - JSONPath: .spec.gateways
-    description: The names of gateways and sidecars that should apply these routes
-    name: Gateways
-    type: string
-  - JSONPath: .spec.hosts
-    description: The destination hosts to which traffic is being sent
-    name: Hosts
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: 'CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC. Populated by the system. Read-only. Null for
-      lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-    name: Age
-    type: date
-  group: networking.istio.io
-  names:
-    categories:
-    - istio-io
-    - networking-istio-io
-    kind: VirtualService
-    listKind: VirtualServiceList
-    plural: virtualservices
-    shortNames:
-    - vs
-    singular: virtualservice
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration affecting label/content routing, sni routing,
-            etc. See more details at: https://istio.io/docs/reference/config/networking/virtual-service.html'
-          properties:
-            exportTo:
-              description: A list of namespaces to which this virtual service is exported.
-              items:
-                format: string
-                type: string
-              type: array
-            gateways:
-              description: The names of gateways and sidecars that should apply these
-                routes.
-              items:
-                format: string
-                type: string
-              type: array
-            hosts:
-              description: The destination hosts to which traffic is being sent.
-              items:
-                format: string
-                type: string
-              type: array
-            http:
-              description: An ordered list of route rules for HTTP traffic.
-              items:
-                properties:
-                  corsPolicy:
-                    description: Cross-Origin Resource Sharing policy (CORS).
-                    properties:
-                      allowCredentials:
-                        type: boolean
-                      allowHeaders:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      allowMethods:
-                        description: List of HTTP methods allowed to access the resource.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      allowOrigin:
-                        description: The list of origins that are allowed to perform
-                          CORS requests.
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      allowOrigins:
-                        description: String patterns that match allowed origins.
-                        items:
-                          oneOf:
-                          - required:
-                            - exact
-                          - required:
-                            - prefix
-                          - required:
-                            - regex
-                          properties:
-                            exact:
-                              format: string
-                              type: string
-                            prefix:
-                              format: string
-                              type: string
-                            regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                              format: string
-                              type: string
-                          type: object
-                        type: array
-                      exposeHeaders:
-                        items:
-                          format: string
-                          type: string
-                        type: array
-                      maxAge:
-                        type: string
-                    type: object
-                  fault:
-                    description: Fault injection policy to apply on HTTP traffic at
-                      the client side.
-                    properties:
-                      abort:
-                        oneOf:
-                        - required:
-                          - httpStatus
-                        - required:
-                          - grpcStatus
-                        - required:
-                          - http2Error
-                        properties:
-                          grpcStatus:
-                            format: string
-                            type: string
-                          http2Error:
-                            format: string
-                            type: string
-                          httpStatus:
-                            description: HTTP status code to use to abort the Http
-                              request.
-                            format: int32
-                            type: integer
-                          percentage:
-                            description: Percentage of requests to be aborted with
-                              the error code provided.
-                            properties:
-                              value:
-                                format: double
-                                type: number
-                            type: object
-                        type: object
-                      delay:
-                        oneOf:
-                        - properties:
-                            percent: {}
-                          required:
-                          - fixedDelay
-                        - properties:
-                            percent: {}
-                          required:
-                          - exponentialDelay
-                        properties:
-                          exponentialDelay:
-                            type: string
-                          fixedDelay:
-                            description: Add a fixed delay before forwarding the request.
-                            type: string
-                          percent:
-                            description: Percentage of requests on which the delay
-                              will be injected (0-100).
-                            format: int32
-                            type: integer
-                          percentage:
-                            description: Percentage of requests on which the delay
-                              will be injected.
-                            properties:
-                              value:
-                                format: double
-                                type: number
-                            type: object
-                        type: object
-                    type: object
-                  headers:
-                    properties:
-                      request:
-                        properties:
-                          add:
-                            additionalProperties:
-                              format: string
-                              type: string
-                            type: object
-                          remove:
-                            items:
-                              format: string
-                              type: string
-                            type: array
-                          set:
-                            additionalProperties:
-                              format: string
-                              type: string
-                            type: object
-                        type: object
-                      response:
-                        properties:
-                          add:
-                            additionalProperties:
-                              format: string
-                              type: string
-                            type: object
-                          remove:
-                            items:
-                              format: string
-                              type: string
-                            type: array
-                          set:
-                            additionalProperties:
-                              format: string
-                              type: string
-                            type: object
-                        type: object
-                    type: object
-                  match:
-                    items:
-                      properties:
-                        authority:
-                          oneOf:
-                          - required:
-                            - exact
-                          - required:
-                            - prefix
-                          - required:
-                            - regex
-                          properties:
-                            exact:
-                              format: string
-                              type: string
-                            prefix:
-                              format: string
-                              type: string
-                            regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                              format: string
-                              type: string
-                          type: object
-                        gateways:
-                          description: Names of gateways where the rule should be
-                            applied.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                        headers:
-                          additionalProperties:
-                            oneOf:
-                            - required:
-                              - exact
-                            - required:
-                              - prefix
-                            - required:
-                              - regex
-                            properties:
-                              exact:
-                                format: string
-                                type: string
-                              prefix:
-                                format: string
-                                type: string
-                              regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                format: string
-                                type: string
-                            type: object
-                          type: object
-                        ignoreUriCase:
-                          description: Flag to specify whether the URI matching should
-                            be case-insensitive.
-                          type: boolean
-                        method:
-                          oneOf:
-                          - required:
-                            - exact
-                          - required:
-                            - prefix
-                          - required:
-                            - regex
-                          properties:
-                            exact:
-                              format: string
-                              type: string
-                            prefix:
-                              format: string
-                              type: string
-                            regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                              format: string
-                              type: string
-                          type: object
-                        name:
-                          description: The name assigned to a match.
-                          format: string
-                          type: string
-                        port:
-                          description: Specifies the ports on the host that is being
-                            addressed.
-                          type: integer
-                        queryParams:
-                          additionalProperties:
-                            oneOf:
-                            - required:
-                              - exact
-                            - required:
-                              - prefix
-                            - required:
-                              - regex
-                            properties:
-                              exact:
-                                format: string
-                                type: string
-                              prefix:
-                                format: string
-                                type: string
-                              regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                format: string
-                                type: string
-                            type: object
-                          description: Query parameters for matching.
-                          type: object
-                        scheme:
-                          oneOf:
-                          - required:
-                            - exact
-                          - required:
-                            - prefix
-                          - required:
-                            - regex
-                          properties:
-                            exact:
-                              format: string
-                              type: string
-                            prefix:
-                              format: string
-                              type: string
-                            regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                              format: string
-                              type: string
-                          type: object
-                        sourceLabels:
-                          additionalProperties:
-                            format: string
-                            type: string
-                          type: object
-                        sourceNamespace:
-                          description: Source namespace constraining the applicability
-                            of a rule to workloads in that namespace.
-                          format: string
-                          type: string
-                        uri:
-                          oneOf:
-                          - required:
-                            - exact
-                          - required:
-                            - prefix
-                          - required:
-                            - regex
-                          properties:
-                            exact:
-                              format: string
-                              type: string
-                            prefix:
-                              format: string
-                              type: string
-                            regex:
-                              description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                              format: string
-                              type: string
-                          type: object
-                        withoutHeaders:
-                          additionalProperties:
-                            oneOf:
-                            - required:
-                              - exact
-                            - required:
-                              - prefix
-                            - required:
-                              - regex
-                            properties:
-                              exact:
-                                format: string
-                                type: string
-                              prefix:
-                                format: string
-                                type: string
-                              regex:
-                                description: RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
-                                format: string
-                                type: string
-                            type: object
-                          description: withoutHeader has the same syntax with the
-                            header, but has opposite meaning.
-                          type: object
-                      type: object
-                    type: array
-                  mirror:
-                    properties:
-                      host:
-                        description: The name of a service from the service registry.
-                        format: string
-                        type: string
-                      port:
-                        description: Specifies the port on the host that is being
-                          addressed.
-                        properties:
-                          number:
-                            type: integer
-                        type: object
-                      subset:
-                        description: The name of a subset within the service.
-                        format: string
-                        type: string
-                    type: object
-                  mirror_percent:
-                    description: Percentage of the traffic to be mirrored by the `+"`"+`mirror`+"`"+`
-                      field.
-                    type: integer
-                  mirrorPercent:
-                    description: Percentage of the traffic to be mirrored by the `+"`"+`mirror`+"`"+`
-                      field.
-                    type: integer
-                  mirrorPercentage:
-                    description: Percentage of the traffic to be mirrored by the `+"`"+`mirror`+"`"+`
-                      field.
-                    properties:
-                      value:
-                        format: double
-                        type: number
-                    type: object
-                  name:
-                    description: The name assigned to the route for debugging purposes.
-                    format: string
-                    type: string
-                  redirect:
-                    description: A HTTP rule can either redirect or forward (default)
-                      traffic.
-                    properties:
-                      authority:
-                        format: string
-                        type: string
-                      redirectCode:
-                        type: integer
-                      uri:
-                        format: string
-                        type: string
-                    type: object
-                  retries:
-                    description: Retry policy for HTTP requests.
-                    properties:
-                      attempts:
-                        description: Number of retries for a given request.
-                        format: int32
-                        type: integer
-                      perTryTimeout:
-                        description: Timeout per retry attempt for a given request.
-                        type: string
-                      retryOn:
-                        description: Specifies the conditions under which retry takes
-                          place.
-                        format: string
-                        type: string
-                      retryRemoteLocalities:
-                        description: Flag to specify whether the retries should retry
-                          to other localities.
-                        type: boolean
-                    type: object
-                  rewrite:
-                    description: Rewrite HTTP URIs and Authority headers.
-                    properties:
-                      authority:
-                        description: rewrite the Authority/Host header with this value.
-                        format: string
-                        type: string
-                      uri:
-                        format: string
-                        type: string
-                    type: object
-                  route:
-                    description: A HTTP rule can either redirect or forward (default)
-                      traffic.
-                    items:
-                      properties:
-                        destination:
-                          properties:
-                            host:
-                              description: The name of a service from the service
-                                registry.
-                              format: string
-                              type: string
-                            port:
-                              description: Specifies the port on the host that is
-                                being addressed.
-                              properties:
-                                number:
-                                  type: integer
-                              type: object
-                            subset:
-                              description: The name of a subset within the service.
-                              format: string
-                              type: string
-                          type: object
-                        headers:
-                          properties:
-                            request:
-                              properties:
-                                add:
-                                  additionalProperties:
-                                    format: string
-                                    type: string
-                                  type: object
-                                remove:
-                                  items:
-                                    format: string
-                                    type: string
-                                  type: array
-                                set:
-                                  additionalProperties:
-                                    format: string
-                                    type: string
-                                  type: object
-                              type: object
-                            response:
-                              properties:
-                                add:
-                                  additionalProperties:
-                                    format: string
-                                    type: string
-                                  type: object
-                                remove:
-                                  items:
-                                    format: string
-                                    type: string
-                                  type: array
-                                set:
-                                  additionalProperties:
-                                    format: string
-                                    type: string
-                                  type: object
-                              type: object
-                          type: object
-                        weight:
-                          format: int32
-                          type: integer
-                      type: object
-                    type: array
-                  timeout:
-                    description: Timeout for HTTP requests.
-                    type: string
-                type: object
-              type: array
-            tcp:
-              description: An ordered list of route rules for opaque TCP traffic.
-              items:
-                properties:
-                  match:
-                    items:
-                      properties:
-                        destinationSubnets:
-                          description: IPv4 or IPv6 ip addresses of destination with
-                            optional subnet.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                        gateways:
-                          description: Names of gateways where the rule should be
-                            applied.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                        port:
-                          description: Specifies the port on the host that is being
-                            addressed.
-                          type: integer
-                        sourceLabels:
-                          additionalProperties:
-                            format: string
-                            type: string
-                          type: object
-                        sourceNamespace:
-                          description: Source namespace constraining the applicability
-                            of a rule to workloads in that namespace.
-                          format: string
-                          type: string
-                        sourceSubnet:
-                          description: IPv4 or IPv6 ip address of source with optional
-                            subnet.
-                          format: string
-                          type: string
-                      type: object
-                    type: array
-                  route:
-                    description: The destination to which the connection should be
-                      forwarded to.
-                    items:
-                      properties:
-                        destination:
-                          properties:
-                            host:
-                              description: The name of a service from the service
-                                registry.
-                              format: string
-                              type: string
-                            port:
-                              description: Specifies the port on the host that is
-                                being addressed.
-                              properties:
-                                number:
-                                  type: integer
-                              type: object
-                            subset:
-                              description: The name of a subset within the service.
-                              format: string
-                              type: string
-                          type: object
-                        weight:
-                          format: int32
-                          type: integer
-                      type: object
-                    type: array
-                type: object
-              type: array
-            tls:
-              items:
-                properties:
-                  match:
-                    items:
-                      properties:
-                        destinationSubnets:
-                          description: IPv4 or IPv6 ip addresses of destination with
-                            optional subnet.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                        gateways:
-                          description: Names of gateways where the rule should be
-                            applied.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                        port:
-                          description: Specifies the port on the host that is being
-                            addressed.
-                          type: integer
-                        sniHosts:
-                          description: SNI (server name indicator) to match on.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                        sourceLabels:
-                          additionalProperties:
-                            format: string
-                            type: string
-                          type: object
-                        sourceNamespace:
-                          description: Source namespace constraining the applicability
-                            of a rule to workloads in that namespace.
-                          format: string
-                          type: string
-                      type: object
-                    type: array
-                  route:
-                    description: The destination to which the connection should be
-                      forwarded to.
-                    items:
-                      properties:
-                        destination:
-                          properties:
-                            host:
-                              description: The name of a service from the service
-                                registry.
-                              format: string
-                              type: string
-                            port:
-                              description: Specifies the port on the host that is
-                                being addressed.
-                              properties:
-                                number:
-                                  type: integer
-                              type: object
-                            subset:
-                              description: The name of a subset within the service.
-                              format: string
-                              type: string
-                          type: object
-                        weight:
-                          format: int32
-                          type: integer
-                      type: object
-                    type: array
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha3
-    served: true
-    storage: true
-  - name: v1beta1
-    served: true
-    storage: false
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: mixer
-    chart: istio
-    heritage: Tiller
-    istio: core
-    package: istio.io.mixer
-    release: istio
-  name: attributemanifests.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - policy-istio-io
-    kind: attributemanifest
-    listKind: attributemanifestList
-    plural: attributemanifests
-    singular: attributemanifest
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Describes the rules used to configure Mixer''s policy and
-            telemetry features. See more details at: https://istio.io/docs/reference/config/policy-and-telemetry/istio.policy.v1beta1.html'
-          properties:
-            attributes:
-              additionalProperties:
-                properties:
-                  description:
-                    description: A human-readable description of the attribute's purpose.
-                    format: string
-                    type: string
-                  valueType:
-                    description: The type of data carried by this attribute.
-                    enum:
-                    - VALUE_TYPE_UNSPECIFIED
-                    - STRING
-                    - INT64
-                    - DOUBLE
-                    - BOOL
-                    - TIMESTAMP
-                    - IP_ADDRESS
-                    - EMAIL_ADDRESS
-                    - URI
-                    - DNS_NAME
-                    - DURATION
-                    - STRING_MAP
-                    type: string
-                type: object
-              description: The set of attributes this Istio component will be responsible
-                for producing at runtime.
-              type: object
-            name:
-              description: Name of the component producing these attributes.
-              format: string
-              type: string
-            revision:
-              description: The revision of this document.
-              format: string
-              type: string
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: mixer
-    chart: istio
-    heritage: Tiller
-    istio: mixer-handler
-    package: handler
-    release: istio
-  name: handlers.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - policy-istio-io
-    kind: handler
-    listKind: handlerList
-    plural: handlers
-    singular: handler
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: Handler allows the operator to configure a specific adapter
-            implementation.
-          properties:
-            adapter:
-              description: The name of a specific adapter implementation.
-              format: string
-              type: string
-            compiledAdapter:
-              description: The name of the compiled in adapter this handler instantiates.
-              format: string
-              type: string
-            connection:
-              description: Information on how to connect to the out-of-process adapter.
-              properties:
-                address:
-                  description: The address of the backend.
-                  format: string
-                  type: string
-                authentication:
-                  description: Auth config for the connection to the backend.
-                  oneOf:
-                  - properties:
-                      tls:
-                        allOf:
-                        - oneOf:
-                          - required:
-                            - tokenPath
-                          - required:
-                            - oauth
-                        - oneOf:
-                          - required:
-                            - authHeader
-                          - required:
-                            - customHeader
-                    required:
-                    - tls
-                  - required:
-                    - mutual
-                  properties:
-                    mutual:
-                      properties:
-                        caCertificates:
-                          format: string
-                          type: string
-                        clientCertificate:
-                          description: The path to the file holding client certificate
-                            for mutual TLS.
-                          format: string
-                          type: string
-                        privateKey:
-                          description: The path to the file holding the private key
-                            for mutual TLS.
-                          format: string
-                          type: string
-                        serverName:
-                          description: Used to configure mixer mutual TLS client to
-                            supply server name for SNI.
-                          format: string
-                          type: string
-                      type: object
-                    tls:
-                      properties:
-                        authHeader:
-                          description: Access token is passed as authorization header.
-                          enum:
-                          - PLAIN
-                          - BEARER
-                          type: string
-                        caCertificates:
-                          format: string
-                          type: string
-                        customHeader:
-                          description: Customized header key to hold access token,
-                            e.g.
-                          format: string
-                          type: string
-                        oauth:
-                          description: Oauth config to fetch access token from auth
-                            provider.
-                          properties:
-                            clientId:
-                              description: OAuth client id for mixer.
-                              format: string
-                              type: string
-                            clientSecret:
-                              description: The path to the file holding the client
-                                secret for oauth.
-                              format: string
-                              type: string
-                            endpointParams:
-                              additionalProperties:
-                                format: string
-                                type: string
-                              description: Additional parameters for requests to the
-                                token endpoint.
-                              type: object
-                            scopes:
-                              description: List of requested permissions.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            tokenUrl:
-                              description: The Resource server's token endpoint URL.
-                              format: string
-                              type: string
-                          type: object
-                        serverName:
-                          format: string
-                          type: string
-                        tokenPath:
-                          format: string
-                          type: string
-                      type: object
-                  type: object
-                timeout:
-                  description: Timeout for remote calls to the backend.
-                  type: string
-              type: object
-            name:
-              description: Must be unique in the entire Mixer configuration.
-              format: string
-              type: string
-            params:
-              description: Depends on adapter implementation.
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: mixer
-    chart: istio
-    heritage: Tiller
-    istio: mixer-instance
-    package: instance
-    release: istio
-  name: instances.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - policy-istio-io
-    kind: instance
-    listKind: instanceList
-    plural: instances
-    singular: instance
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: An Instance tells Mixer how to create instances for particular
-            template.
-          properties:
-            attributeBindings:
-              additionalProperties:
-                format: string
-                type: string
-              type: object
-            compiledTemplate:
-              description: The name of the compiled in template this instance creates
-                instances for.
-              format: string
-              type: string
-            name:
-              format: string
-              type: string
-            params:
-              description: Depends on referenced template.
-              type: object
-            template:
-              description: The name of the template this instance creates instances
-                for.
-              format: string
-              type: string
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: mixer
-    chart: istio
-    heritage: Tiller
-    istio: core
-    package: istio.io.mixer
-    release: istio
-  name: rules.config.istio.io
-spec:
-  group: config.istio.io
-  names:
-    categories:
-    - istio-io
-    - policy-istio-io
-    kind: rule
-    listKind: ruleList
-    plural: rules
-    singular: rule
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Describes the rules used to configure Mixer''s policy and
-            telemetry features. See more details at: https://istio.io/docs/reference/config/policy-and-telemetry/istio.policy.v1beta1.html'
-          properties:
-            actions:
-              description: The actions that will be executed when match evaluates
-                to `+"`"+`true`+"`"+`.
-              items:
-                properties:
-                  handler:
-                    description: Fully qualified name of the handler to invoke.
-                    format: string
-                    type: string
-                  instances:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  name:
-                    description: A handle to refer to the results of the action.
-                    format: string
-                    type: string
-                type: object
-              type: array
-            match:
-              description: Match is an attribute based predicate.
-              format: string
-              type: string
-            requestHeaderOperations:
-              items:
-                properties:
-                  name:
-                    description: Header name literal value.
-                    format: string
-                    type: string
-                  operation:
-                    description: Header operation type.
-                    enum:
-                    - REPLACE
-                    - REMOVE
-                    - APPEND
-                    type: string
-                  values:
-                    description: Header value expressions.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                type: object
-              type: array
-            responseHeaderOperations:
-              items:
-                properties:
-                  name:
-                    description: Header name literal value.
-                    format: string
-                    type: string
-                  operation:
-                    description: Header operation type.
-                    enum:
-                    - REPLACE
-                    - REMOVE
-                    - APPEND
-                    type: string
-                  values:
-                    description: Header value expressions.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                type: object
-              type: array
-            sampling:
-              properties:
-                random:
-                  description: Provides filtering of actions based on random selection
-                    per request.
-                  properties:
-                    attributeExpression:
-                      description: Specifies an attribute expression to use to override
-                        the numerator in the `+"`"+`percent_sampled`+"`"+` field.
-                      format: string
-                      type: string
-                    percentSampled:
-                      description: The default sampling rate, expressed as a percentage.
-                      properties:
-                        denominator:
-                          description: Specifies the denominator.
-                          enum:
-                          - HUNDRED
-                          - TEN_THOUSAND
-                          type: string
-                        numerator:
-                          description: Specifies the numerator.
-                          type: integer
-                      type: object
-                    useIndependentRandomness:
-                      description: By default sampling will be based on the value
-                        of the request header `+"`"+`x-request-id`+"`"+`.
-                      type: boolean
-                  type: object
-                rateLimit:
-                  properties:
-                    maxUnsampledEntries:
-                      description: Number of entries to allow during the `+"`"+`sampling_duration`+"`"+`
-                        before sampling is enforced.
-                      format: int64
-                      type: integer
-                    samplingDuration:
-                      description: Window in which to enforce the sampling rate.
-                      type: string
-                    samplingRate:
-                      description: The rate at which to sample entries once the unsampled
-                        limit has been reached.
-                      format: int64
-                      type: integer
-                  type: object
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    istio: rbac
-    release: istio
-  name: clusterrbacconfigs.rbac.istio.io
-spec:
-  group: rbac.istio.io
-  names:
-    categories:
-    - istio-io
-    - rbac-istio-io
-    kind: ClusterRbacConfig
-    listKind: ClusterRbacConfigList
-    plural: clusterrbacconfigs
-    singular: clusterrbacconfig
-  scope: Cluster
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration for Role Based Access Control. See more details
-            at: https://istio.io/docs/reference/config/security/istio.rbac.v1alpha1.html'
-          properties:
-            enforcementMode:
-              enum:
-              - ENFORCED
-              - PERMISSIVE
-              type: string
-            exclusion:
-              description: A list of services or namespaces that should not be enforced
-                by Istio RBAC policies.
-              properties:
-                namespaces:
-                  description: A list of namespaces.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                services:
-                  description: A list of services.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-              type: object
-            inclusion:
-              description: A list of services or namespaces that should be enforced
-                by Istio RBAC policies.
-              properties:
-                namespaces:
-                  description: A list of namespaces.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                services:
-                  description: A list of services.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-              type: object
-            mode:
-              description: Istio RBAC mode.
-              enum:
-              - "OFF"
-              - "ON"
-              - ON_WITH_INCLUSION
-              - ON_WITH_EXCLUSION
-              type: string
-          type: object
-      type: object
-  versions:
-  - name: v1alpha1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: mixer
-    chart: istio
-    heritage: Tiller
-    istio: rbac
-    package: istio.io.mixer
-    release: istio
-  name: rbacconfigs.rbac.istio.io
-spec:
-  group: rbac.istio.io
-  names:
-    categories:
-    - istio-io
-    - rbac-istio-io
-    kind: RbacConfig
-    listKind: RbacConfigList
-    plural: rbacconfigs
-    singular: rbacconfig
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration for Role Based Access Control. See more details
-            at: https://istio.io/docs/reference/config/security/istio.rbac.v1alpha1.html'
-          properties:
-            enforcementMode:
-              enum:
-              - ENFORCED
-              - PERMISSIVE
-              type: string
-            exclusion:
-              description: A list of services or namespaces that should not be enforced
-                by Istio RBAC policies.
-              properties:
-                namespaces:
-                  description: A list of namespaces.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                services:
-                  description: A list of services.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-              type: object
-            inclusion:
-              description: A list of services or namespaces that should be enforced
-                by Istio RBAC policies.
-              properties:
-                namespaces:
-                  description: A list of namespaces.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-                services:
-                  description: A list of services.
-                  items:
-                    format: string
-                    type: string
-                  type: array
-              type: object
-            mode:
-              description: Istio RBAC mode.
-              enum:
-              - "OFF"
-              - "ON"
-              - ON_WITH_INCLUSION
-              - ON_WITH_EXCLUSION
-              type: string
-          type: object
-      type: object
-  versions:
-  - name: v1alpha1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: mixer
-    chart: istio
-    heritage: Tiller
-    istio: rbac
-    package: istio.io.mixer
-    release: istio
-  name: serviceroles.rbac.istio.io
-spec:
-  group: rbac.istio.io
-  names:
-    categories:
-    - istio-io
-    - rbac-istio-io
-    kind: ServiceRole
-    listKind: ServiceRoleList
-    plural: serviceroles
-    singular: servicerole
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration for Role Based Access Control. See more details
-            at: https://istio.io/docs/reference/config/security/istio.rbac.v1alpha1.html'
-          properties:
-            rules:
-              description: The set of access rules (permissions) that the role has.
-              items:
-                properties:
-                  constraints:
-                    description: Optional.
-                    items:
-                      properties:
-                        key:
-                          description: Key of the constraint.
-                          format: string
-                          type: string
-                        values:
-                          description: List of valid values for the constraint.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  hosts:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  methods:
-                    description: Optional.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notHosts:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notMethods:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notPaths:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notPorts:
-                    items:
-                      format: int32
-                      type: integer
-                    type: array
-                  paths:
-                    description: Optional.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  ports:
-                    items:
-                      format: int32
-                      type: integer
-                    type: array
-                  services:
-                    description: A list of service names.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: mixer
-    chart: istio
-    heritage: Tiller
-    istio: rbac
-    package: istio.io.mixer
-    release: istio
-  name: servicerolebindings.rbac.istio.io
-spec:
-  additionalPrinterColumns:
-  - JSONPath: .spec.roleRef.name
-    description: The name of the ServiceRole object being referenced
-    name: Reference
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: 'CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC. Populated by the system. Read-only. Null for
-      lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-    name: Age
-    type: date
-  group: rbac.istio.io
-  names:
-    categories:
-    - istio-io
-    - rbac-istio-io
-    kind: ServiceRoleBinding
-    listKind: ServiceRoleBindingList
-    plural: servicerolebindings
-    singular: servicerolebinding
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration for Role Based Access Control. See more details
-            at: https://istio.io/docs/reference/config/security/istio.rbac.v1alpha1.html'
-          properties:
-            actions:
-              items:
-                properties:
-                  constraints:
-                    description: Optional.
-                    items:
-                      properties:
-                        key:
-                          description: Key of the constraint.
-                          format: string
-                          type: string
-                        values:
-                          description: List of valid values for the constraint.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  hosts:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  methods:
-                    description: Optional.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notHosts:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notMethods:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notPaths:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notPorts:
-                    items:
-                      format: int32
-                      type: integer
-                    type: array
-                  paths:
-                    description: Optional.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  ports:
-                    items:
-                      format: int32
-                      type: integer
-                    type: array
-                  services:
-                    description: A list of service names.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                type: object
-              type: array
-            mode:
-              enum:
-              - ENFORCED
-              - PERMISSIVE
-              type: string
-            role:
-              format: string
-              type: string
-            roleRef:
-              description: Reference to the ServiceRole object.
-              properties:
-                kind:
-                  description: The type of the role being referenced.
-                  format: string
-                  type: string
-                name:
-                  description: The name of the ServiceRole object being referenced.
-                  format: string
-                  type: string
-              type: object
-            subjects:
-              description: List of subjects that are assigned the ServiceRole object.
-              items:
-                properties:
-                  group:
-                    format: string
-                    type: string
-                  groups:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  ips:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  names:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  namespaces:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notGroups:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notIps:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notNames:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  notNamespaces:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  properties:
-                    additionalProperties:
-                      format: string
-                      type: string
-                    description: Optional.
-                    type: object
-                  user:
-                    description: Optional.
-                    format: string
-                    type: string
-                type: object
-              type: array
-          type: object
-      type: object
-  versions:
-  - name: v1alpha1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    istio: security
-    release: istio
-  name: authorizationpolicies.security.istio.io
-spec:
-  group: security.istio.io
-  names:
-    categories:
-    - istio-io
-    - security-istio-io
-    kind: AuthorizationPolicy
-    listKind: AuthorizationPolicyList
-    plural: authorizationpolicies
-    singular: authorizationpolicy
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: 'Configuration for access control on workloads. See more details
-            at: https://istio.io/docs/reference/config/security/authorization-policy.html'
-          properties:
-            action:
-              description: Optional.
-              enum:
-              - ALLOW
-              - DENY
-              type: string
-            rules:
-              description: Optional.
-              items:
-                properties:
-                  from:
-                    description: Optional.
-                    items:
-                      properties:
-                        source:
-                          description: Source specifies the source of a request.
-                          properties:
-                            ipBlocks:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            namespaces:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notIpBlocks:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notNamespaces:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notPrincipals:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notRequestPrincipals:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            principals:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            requestPrincipals:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                          type: object
-                      type: object
-                    type: array
-                  to:
-                    description: Optional.
-                    items:
-                      properties:
-                        operation:
-                          description: Operation specifies the operation of a request.
-                          properties:
-                            hosts:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            methods:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notHosts:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notMethods:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notPaths:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            notPorts:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            paths:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                            ports:
-                              description: Optional.
-                              items:
-                                format: string
-                                type: string
-                              type: array
-                          type: object
-                      type: object
-                    type: array
-                  when:
-                    description: Optional.
-                    items:
-                      properties:
-                        key:
-                          description: The name of an Istio attribute.
-                          format: string
-                          type: string
-                        notValues:
-                          description: Optional.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                        values:
-                          description: Optional.
-                          items:
-                            format: string
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                type: object
-              type: array
-            selector:
-              description: Optional.
-              properties:
-                matchLabels:
-                  additionalProperties:
-                    format: string
-                    type: string
-                  type: object
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1beta1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    istio: security
-    release: istio
-  name: peerauthentications.security.istio.io
-spec:
-  group: security.istio.io
-  names:
-    categories:
-    - istio-io
-    - security-istio-io
-    kind: PeerAuthentication
-    listKind: PeerAuthenticationList
-    plural: peerauthentications
-    shortNames:
-    - pa
-    singular: peerauthentication
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: PeerAuthentication defines how traffic will be tunneled (or
-            not) to the sidecar.
-          properties:
-            mtls:
-              description: Mutual TLS settings for workload.
-              properties:
-                mode:
-                  description: Defines the mTLS mode used for peer authentication.
-                  enum:
-                  - UNSET
-                  - DISABLE
-                  - PERMISSIVE
-                  - STRICT
-                  type: string
-              type: object
-            portLevelMtls:
-              additionalProperties:
-                properties:
-                  mode:
-                    description: Defines the mTLS mode used for peer authentication.
-                    enum:
-                    - UNSET
-                    - DISABLE
-                    - PERMISSIVE
-                    - STRICT
-                    type: string
-                type: object
-              description: Port specific mutual TLS settings.
-              type: object
-            selector:
-              description: The selector determines the workloads to apply the ChannelAuthentication
-                on.
-              properties:
-                matchLabels:
-                  additionalProperties:
-                    format: string
-                    type: string
-                  type: object
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1beta1
-    served: true
-    storage: true
-
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  annotations:
-    "helm.sh/resource-policy": keep
-  labels:
-    app: istio-pilot
-    chart: istio
-    heritage: Tiller
-    istio: security
-    release: istio
-  name: requestauthentications.security.istio.io
-spec:
-  group: security.istio.io
-  names:
-    categories:
-    - istio-io
-    - security-istio-io
-    kind: RequestAuthentication
-    listKind: RequestAuthenticationList
-    plural: requestauthentications
-    shortNames:
-    - ra
-    singular: requestauthentication
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          description: RequestAuthentication defines what request authentication methods
-            are supported by a workload.
-          properties:
-            jwtRules:
-              description: Define the list of JWTs that can be validated at the selected
-                workloads' proxy.
-              items:
-                properties:
-                  audiences:
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  forwardOriginalToken:
-                    description: If set to true, the orginal token will be kept for
-                      the ustream request.
-                    type: boolean
-                  fromHeaders:
-                    description: List of header locations from which JWT is expected.
-                    items:
-                      properties:
-                        name:
-                          description: The HTTP header name.
-                          format: string
-                          type: string
-                        prefix:
-                          description: The prefix that should be stripped before decoding
-                            the token.
-                          format: string
-                          type: string
-                      type: object
-                    type: array
-                  fromParams:
-                    description: List of query parameters from which JWT is expected.
-                    items:
-                      format: string
-                      type: string
-                    type: array
-                  issuer:
-                    description: Identifies the issuer that issued the JWT.
-                    format: string
-                    type: string
-                  jwks:
-                    description: JSON Web Key Set of public keys to validate signature
-                      of the JWT.
-                    format: string
-                    type: string
-                  jwks_uri:
-                    format: string
-                    type: string
-                  jwksUri:
-                    format: string
-                    type: string
-                  outputPayloadToHeader:
-                    format: string
-                    type: string
-                type: object
-              type: array
-            selector:
-              description: The selector determines the workloads to apply the RequestAuthentication
-                on.
-              properties:
-                matchLabels:
-                  additionalProperties:
-                    format: string
-                    type: string
-                  type: object
-              type: object
-          type: object
-      type: object
-  versions:
-  - name: v1beta1
-    served: true
-    storage: true
-
----
-
-kind: CustomResourceDefinition
-apiVersion: apiextensions.k8s.io/v1beta1
-metadata:
-  name: adapters.config.istio.io
-  labels:
-    app: mixer
-    package: adapter
-    istio: mixer-adapter
-    chart: istio
-    heritage: Tiller
-    release: istio
-  annotations:
-    "helm.sh/resource-policy": keep
-spec:
-  group: config.istio.io
-  names:
-    kind: adapter
-    plural: adapters
-    singular: adapter
-    categories:
-    - istio-io
-    - policy-istio-io
-  scope: Namespaced
-  subresources:
-    status: {}
-  versions:
-    - name: v1alpha2
-      served: true
-      storage: true
----
-kind: CustomResourceDefinition
-apiVersion: apiextensions.k8s.io/v1beta1
-metadata:
-  name: templates.config.istio.io
-  labels:
-    app: mixer
-    package: template
-    istio: mixer-template
-    chart: istio
-    heritage: Tiller
-    release: istio
-  annotations:
-    "helm.sh/resource-policy": keep
-spec:
-  group: config.istio.io
-  names:
-    kind: template
-    plural: templates
-    singular: template
-    categories:
-    - istio-io
-    - policy-istio-io
-  scope: Namespaced
-  subresources:
-    status: {}
-  versions:
-    - name: v1alpha2
-      served: true
-      storage: true
----
-
-
----
-# Source: base/templates/clusterrole.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: istio-pilot-istio-system
-  labels:
-    app: pilot
-    release: istio-base
-rules:
-- apiGroups: ["config.istio.io", "rbac.istio.io", "security.istio.io", "networking.istio.io", "authentication.istio.io"]
-  verbs: ["get", "watch", "list"]
-  resources: ["*"]
-- apiGroups: ["apiextensions.k8s.io"]
-  resources: ["customresourcedefinitions"]
-  verbs: ["get", "watch", "list"]
-- apiGroups: ["extensions"]
-  resources: ["ingresses"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["extensions"]
-  resources: ["ingresses/status"]
-  verbs: ["*"]
-  # TODO: remove, too broad permission, should be namespace only
-- apiGroups: [""]
-  resources: ["configmaps"]
-  # Create and update needed for ingress election
-  verbs: ["get", "list", "watch", "create", "update"]
-- apiGroups: [""]
-  resources: ["endpoints", "pods", "services", "namespaces", "nodes", "secrets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["create", "get", "watch", "list", "update", "delete"]
-- apiGroups: ["discovery.k8s.io"]
-  resources: ["endpointslices"]
-  verbs: ["get", "list", "watch"]
----
-# Dedicated cluster role - istiod will use fewer dangerous permissions ( secret access in particular ).
-# TODO: separate cluster role with the minimal set of permissions needed for a 'tenant' Istiod
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: istiod-istio-system
-  labels:
-    app: istiod
-    release: istio-base
-rules:
-  # sidecar injection controller
-  - apiGroups: ["admissionregistration.k8s.io"]
-    resources: ["mutatingwebhookconfigurations"]
-    verbs: ["get", "list", "watch", "patch"]
-
-  # configuration validation webhook controller
-  - apiGroups: ["admissionregistration.k8s.io"]
-    resources: ["validatingwebhookconfigurations"]
-    verbs: ["get", "list", "watch", "update"]
-
-  # permissions to verify the webhook is ready and rejecting
-  # invalid config. We use --server-dry-run so no config is persisted.
-  - apiGroups: ["networking.istio.io"]
-    verbs: ["create"]
-    resources: ["gateways"]
-
-  # istio configuration
-  - apiGroups: ["config.istio.io", "rbac.istio.io", "security.istio.io", "networking.istio.io", "authentication.istio.io"]
-    verbs: ["get", "watch", "list"]
-    resources: ["*"]
-
-  # auto-detect installed CRD definitions
-  - apiGroups: ["apiextensions.k8s.io"]
-    resources: ["customresourcedefinitions"]
-    verbs: ["get", "list", "watch"]
-
-  # discovery and routing
-  - apiGroups: ["extensions","apps"]
-    resources: ["deployments"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [""]
-    resources: ["pods", "nodes", "services", "namespaces", "endpoints"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["discovery.k8s.io"]
-    resources: ["endpointslices"]
-    verbs: ["get", "list", "watch"]
-
-  # ingress controller
-  - apiGroups: ["extensions"]
-    resources: ["ingresses"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["extensions"]
-    resources: ["ingresses/status"]
-    verbs: ["*"]
-
-  # required for CA's namespace controller
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["create", "get", "list", "watch", "update"]
-
-  # Istiod and bootstrap.
-  - apiGroups: ["certificates.k8s.io"]
-    resources:
-      - "certificatesigningrequests"
-      - "certificatesigningrequests/approval"
-      - "certificatesigningrequests/status"
-    verbs: ["update", "create", "get", "delete", "watch"]
-  - apiGroups: ["certificates.k8s.io"]
-    resources:
-      - "signers"
-    resourceNames:
-    - "kubernetes.io/legacy-unknown"
-    verbs: ["approve"]
-
-  # Used by Istiod to verify the JWT tokens
-  - apiGroups: ["authentication.k8s.io"]
-    resources: ["tokenreviews"]
-    verbs: ["create"]
-
-  # TODO: remove, no longer needed at cluster
-  - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["create", "get", "watch", "list", "update", "delete"]
-  - apiGroups: [""]
-    resources: ["serviceaccounts"]
-    verbs: ["get", "watch", "list"]
-
-  # Use for Kubernetes Service APIs
-  - apiGroups: ["networking.x.k8s.io"]
-    resources: ["*"]
-    verbs: ["get", "watch", "list"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: istio-reader-istio-system
-  labels:
-    app: istio-reader
-    release: istio-base
-rules:
-  - apiGroups:
-      - "config.istio.io"
-      - "rbac.istio.io"
-      - "security.istio.io"
-      - "networking.istio.io"
-      - "authentication.istio.io"
-    resources: ["*"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [""]
-    resources: ["endpoints", "pods", "services", "nodes", "replicationcontrollers"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["apps"]
-    resources: ["replicasets"]
-    verbs: ["get", "list", "watch"]
----
-
-
----
-# Source: base/templates/clusterrolebinding.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: istio-reader-istio-system
-  labels:
-    app: istio-reader
-    release: istio-base
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: istio-reader-istio-system
-subjects:
-  - kind: ServiceAccount
-    name: istio-reader-service-account
-    namespace: istio-system
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: istio-pilot-istio-system
-  labels:
-    app: pilot
-    release: istio-base
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: istio-pilot-istio-system
-subjects:
-  - kind: ServiceAccount
-    name: istio-pilot-service-account
-    namespace: istio-system
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: istiod-pilot-istio-system
-  labels:
-    app: pilot
-    release: istio-base
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: istiod-istio-system
-subjects:
-  - kind: ServiceAccount
-    name: istio-pilot-service-account
-    namespace: istio-system
----
-
----
-# Source: base/templates/endpoints.yaml
-
-
----
-# Source: base/templates/services.yaml
-
-
----
-# Source: base/templates/validatingwebhookconfiguration.yaml
-apiVersion: admissionregistration.k8s.io/v1beta1
-kind: ValidatingWebhookConfiguration
-metadata:
-  name: istiod-istio-system
-  labels:
-    app: istiod
-    release: istio-base
-    istio: istiod
-webhooks:
-  - name: validation.istio.io
-    clientConfig:
-      service:
-        name: istiod
-        namespace: istio-system
-        path: "/validate"
-      caBundle: "" # patched at runtime when the webhook is ready.
-    rules:
-      - operations:
-        - CREATE
-        - UPDATE
-        apiGroups:
-        - config.istio.io
-        - rbac.istio.io
-        - security.istio.io
-        - authentication.istio.io
-        - networking.istio.io
-        apiVersions:
-        - "*"
-        resources:
-        - "*"
-    # Fail open until the validation webhook is ready. The webhook controller
-    # will update this to `+"`"+`Fail`+"`"+` and patch in the `+"`"+`caBundle`+"`"+` when the webhook
-    # endpoint is ready.
-    failurePolicy: Ignore
-    sideEffects: None
----
-
-apiVersion: admissionregistration.k8s.io/v1beta1
-kind: ValidatingWebhookConfiguration
-metadata:
-  name: istio-galley
-  labels:
-    app: galley
-    release: istio-base
-    istio: galley
-webhooks:
----
-
-`)
-
-func chartsBaseFilesGenIstioClusterYamlBytes() ([]byte, error) {
-	return _chartsBaseFilesGenIstioClusterYaml, nil
-}
-
-func chartsBaseFilesGenIstioClusterYaml() (*asset, error) {
-	bytes, err := chartsBaseFilesGenIstioClusterYamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "charts/base/files/gen-istio-cluster.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
 var _chartsBaseKustomizationYaml = []byte(`apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - files/gen-istio-cluster.yaml
+  - files/crd-all.gen.yaml
+  - files/crd-mixer.yaml
 `)
 
 func chartsBaseKustomizationYamlBytes() ([]byte, error) {
@@ -12395,158 +6038,31 @@ func chartsBaseKustomizationYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsBaseTemplatesClusterroleYaml = []byte(`apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: istio-pilot-{{ .Values.global.istioNamespace }}
-  labels:
-    app: pilot
-    release: {{ .Release.Name }}
-rules:
-- apiGroups: ["config.istio.io", "rbac.istio.io", "security.istio.io", "networking.istio.io", "authentication.istio.io"]
-  verbs: ["get", "watch", "list"]
-  resources: ["*"]
-- apiGroups: ["apiextensions.k8s.io"]
-  resources: ["customresourcedefinitions"]
-  verbs: ["get", "watch", "list"]
-- apiGroups: ["extensions"]
-  resources: ["ingresses"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["extensions"]
-  resources: ["ingresses/status"]
-  verbs: ["*"]
-  # TODO: remove, too broad permission, should be namespace only
-- apiGroups: [""]
-  resources: ["configmaps"]
-  # Create and update needed for ingress election
-  verbs: ["get", "list", "watch", "create", "update"]
-- apiGroups: [""]
-  resources: ["endpoints", "pods", "services", "namespaces", "nodes", "secrets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["create", "get", "watch", "list", "update", "delete"]
-- apiGroups: ["discovery.k8s.io"]
-  resources: ["endpointslices"]
-  verbs: ["get", "list", "watch"]
----
-# Dedicated cluster role - istiod will use fewer dangerous permissions ( secret access in particular ).
-# TODO: separate cluster role with the minimal set of permissions needed for a 'tenant' Istiod
+var _chartsBaseTemplatesClusterroleYaml = []byte(`{{ if .Values.clusterResources }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: istiod-{{ .Values.global.istioNamespace }}
-  labels:
-    app: istiod
-    release: {{ .Release.Name }}
-rules:
-  # sidecar injection controller
-  - apiGroups: ["admissionregistration.k8s.io"]
-    resources: ["mutatingwebhookconfigurations"]
-    verbs: ["get", "list", "watch", "patch"]
-
-  # configuration validation webhook controller
-  - apiGroups: ["admissionregistration.k8s.io"]
-    resources: ["validatingwebhookconfigurations"]
-    verbs: ["get", "list", "watch", "update"]
-
-  # permissions to verify the webhook is ready and rejecting
-  # invalid config. We use --server-dry-run so no config is persisted.
-  - apiGroups: ["networking.istio.io"]
-    verbs: ["create"]
-    resources: ["gateways"]
-
-  # istio configuration
-  - apiGroups: ["config.istio.io", "rbac.istio.io", "security.istio.io", "networking.istio.io", "authentication.istio.io"]
-    verbs: ["get", "watch", "list"]
-    resources: ["*"]
-
-  # auto-detect installed CRD definitions
-  - apiGroups: ["apiextensions.k8s.io"]
-    resources: ["customresourcedefinitions"]
-    verbs: ["get", "list", "watch"]
-
-  # discovery and routing
-  - apiGroups: ["extensions","apps"]
-    resources: ["deployments"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [""]
-    resources: ["pods", "nodes", "services", "namespaces", "endpoints"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["discovery.k8s.io"]
-    resources: ["endpointslices"]
-    verbs: ["get", "list", "watch"]
-
-  # ingress controller
-  - apiGroups: ["extensions"]
-    resources: ["ingresses"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["extensions"]
-    resources: ["ingresses/status"]
-    verbs: ["*"]
-
-  # required for CA's namespace controller
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["create", "get", "list", "watch", "update"]
-
-  # Istiod and bootstrap.
-  - apiGroups: ["certificates.k8s.io"]
-    resources:
-      - "certificatesigningrequests"
-      - "certificatesigningrequests/approval"
-      - "certificatesigningrequests/status"
-    verbs: ["update", "create", "get", "delete", "watch"]
-  - apiGroups: ["certificates.k8s.io"]
-    resources:
-      - "signers"
-    resourceNames:
-    - "kubernetes.io/legacy-unknown"
-    verbs: ["approve"]
-
-  # Used by Istiod to verify the JWT tokens
-  - apiGroups: ["authentication.k8s.io"]
-    resources: ["tokenreviews"]
-    verbs: ["create"]
-
-  # TODO: remove, no longer needed at cluster
-  - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["create", "get", "watch", "list", "update", "delete"]
-  - apiGroups: [""]
-    resources: ["serviceaccounts"]
-    verbs: ["get", "watch", "list"]
-
-  # Use for Kubernetes Service APIs
-  - apiGroups: ["networking.x.k8s.io"]
-    resources: ["*"]
-    verbs: ["get", "watch", "list"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: istio-reader-{{ .Values.global.istioNamespace }}
+  name: istio-reader-{{ .Release.Namespace }}
   labels:
     app: istio-reader
     release: {{ .Release.Name }}
 rules:
-  - apiGroups:
-      - "config.istio.io"
-      - "rbac.istio.io"
-      - "security.istio.io"
-      - "networking.istio.io"
-      - "authentication.istio.io"
-    resources: ["*"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [""]
-    resources: ["endpoints", "pods", "services", "nodes", "replicationcontrollers"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["apps"]
-    resources: ["replicasets"]
-    verbs: ["get", "list", "watch"]
+- apiGroups:
+  - "config.istio.io"
+  - "rbac.istio.io"
+  - "security.istio.io"
+  - "networking.istio.io"
+  - "authentication.istio.io"
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["endpoints", "pods", "services", "nodes", "replicationcontrollers"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["replicasets"]
+  verbs: ["get", "list", "watch"]
 ---
-
-`)
+{{ end }}`)
 
 func chartsBaseTemplatesClusterroleYamlBytes() ([]byte, error) {
 	return _chartsBaseTemplatesClusterroleYaml, nil
@@ -12563,54 +6079,24 @@ func chartsBaseTemplatesClusterroleYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsBaseTemplatesClusterrolebindingYaml = []byte(`apiVersion: rbac.authorization.k8s.io/v1
+var _chartsBaseTemplatesClusterrolebindingYaml = []byte(`{{ if .Values.clusterResources }}
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: istio-reader-{{ .Values.global.istioNamespace }}
+  name: istio-reader-{{ .Release.Namespace }}
   labels:
     app: istio-reader
     release: {{ .Release.Name }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: istio-reader-{{ .Values.global.istioNamespace }}
+  name: istio-reader-{{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount
     name: istio-reader-service-account
-    namespace: {{ .Values.global.istioNamespace }}
+    namespace: {{ .Release.Namespace }}
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: istio-pilot-{{ .Values.global.istioNamespace }}
-  labels:
-    app: pilot
-    release: {{ .Release.Name }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: istio-pilot-{{ .Values.global.istioNamespace }}
-subjects:
-  - kind: ServiceAccount
-    name: istio-pilot-service-account
-    namespace: {{ .Values.global.istioNamespace }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: istiod-pilot-{{ .Values.global.istioNamespace }}
-  labels:
-    app: pilot
-    release: {{ .Release.Name }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: istiod-{{ .Values.global.istioNamespace }}
-subjects:
-  - kind: ServiceAccount
-    name: istio-pilot-service-account
-    namespace: {{ .Values.global.istioNamespace }}
----
+{{ end }}
 `)
 
 func chartsBaseTemplatesClusterrolebindingYamlBytes() ([]byte, error) {
@@ -12653,7 +6139,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: istio-pilot
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 subsets:
 - addresses:
   - ip: {{ .Values.global.remotePilotAddress }}
@@ -12662,6 +6148,12 @@ subsets:
     name: grpc-xds # direct
   - port: 15011
     name: https-xds # mTLS or non-mTLS depending on auth setting
+  - port: 8080
+    name: http-legacy-discovery # direct
+  - port: 15012
+    name: tcp-istiod
+  - port: 15014
+    name: http-monitoring
   {{- else }}
 apiVersion: v1
 kind: Endpoints
@@ -12682,7 +6174,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: istio-policy
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 subsets:
 - addresses:
   - ip: {{ .Values.global.remotePolicyAddress }}
@@ -12700,7 +6192,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: istio-telemetry
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 subsets:
 - addresses:
   - ip: {{ .Values.global.remoteTelemetryAddress }}
@@ -12731,13 +6223,70 @@ func chartsBaseTemplatesEndpointsYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsBaseTemplatesNamespacesYaml = []byte(`apiVersion: v1
+var _chartsBaseTemplatesNamespacesYaml = []byte(`# To prevent accidental injection into istio control plane namespaces.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Release.Namespace }}
+  labels:
+    istio-operator-managed: Reconcile
+    istio-injection: disabled
+---
+
+{{- if ne .Values.global.istioNamespace .Release.Namespace }}
+apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ .Values.global.istioNamespace }}
   labels:
     istio-operator-managed: Reconcile
     istio-injection: disabled
+---
+{{- end }}
+
+{{- if and (ne .Values.global.configNamespace .Release.Namespace) (ne .Values.global.configNamespace .Values.global.istioNamespace) }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.global.configNamespace }}
+  labels:
+    istio-operator-managed: Reconcile
+    istio-injection: disabled
+---
+{{- end }}
+
+{{- if ne .Values.global.telemetryNamespace .Release.Namespace }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.global.telemetryNamespace }}
+  labels:
+    istio-operator-managed: Reconcile
+    istio-injection: disabled
+---
+{{- end }}
+
+{{- if and (ne .Values.global.prometheusNamespace .Release.Namespace) (ne .Values.global.prometheusNamespace .Values.global.telemetryNamespace) }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.global.prometheusNamespace }}
+  labels:
+    istio-operator-managed: Reconcile
+    istio-injection: disabled
+---
+{{- end }}
+
+{{- if ne .Values.global.policyNamespace .Release.Namespace }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.global.policyNamespace }}
+  labels:
+    istio-operator-managed: Reconcile
+    istio-injection: disabled
+---
+{{- end }}
 `)
 
 func chartsBaseTemplatesNamespacesYamlBytes() ([]byte, error) {
@@ -12755,7 +6304,8 @@ func chartsBaseTemplatesNamespacesYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsBaseTemplatesServiceaccountYaml = []byte(`apiVersion: v1
+var _chartsBaseTemplatesServiceaccountYaml = []byte(`{{ if .Values.clusterResources }}
+apiVersion: v1
 kind: ServiceAccount
 {{- if .Values.global.imagePullSecrets }}
 imagePullSecrets:
@@ -12765,26 +6315,12 @@ imagePullSecrets:
 {{- end }}
 metadata:
   name: istio-reader-service-account
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: istio-reader
     release: {{ .Release.Name }}
 ---
-apiVersion: v1
-kind: ServiceAccount
-  {{- if .Values.global.imagePullSecrets }}
-imagePullSecrets:
-  {{- range .Values.global.imagePullSecrets }}
-  - name: {{ . }}
-  {{- end }}
-  {{- end }}
-metadata:
-  name: istio-pilot-service-account
-  namespace: {{ .Values.global.istioNamespace }}
-  labels:
-    app: pilot
-    release: {{ .Release.Name }}
----
+{{ end }}
 `)
 
 func chartsBaseTemplatesServiceaccountYamlBytes() ([]byte, error) {
@@ -12808,13 +6344,19 @@ apiVersion: v1
 kind: Service
 metadata:
   name: istio-pilot
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - port: 15010
     name: grpc-xds # direct
   - port: 15011
     name: https-xds # mTLS or non-mTLS depending on auth setting
+  - port: 8080
+    name: http-legacy-discovery # direct
+  - port: 15012
+    name: tcp-istiod
+  - port: 15014
+    name: http-monitoring
   clusterIP: None
   {{- else }}
 apiVersion: v1
@@ -12835,7 +6377,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: istio-policy
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - name: grpc-mixer
@@ -12852,7 +6394,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: istio-telemetry
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - name: grpc-mixer
@@ -12883,84 +6425,7 @@ func chartsBaseTemplatesServicesYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsBaseTemplatesValidatingwebhookconfigurationYaml = []byte(`apiVersion: admissionregistration.k8s.io/v1beta1
-kind: ValidatingWebhookConfiguration
-metadata:
-  name: istiod-{{ .Values.global.istioNamespace }}
-  labels:
-    app: istiod
-    release: {{ .Release.Name }}
-    istio: istiod
-webhooks:
-  - name: validation.istio.io
-    clientConfig:
-      service:
-        name: istiod
-        namespace: {{ .Values.global.istioNamespace }}
-        path: "/validate"
-      caBundle: "" # patched at runtime when the webhook is ready.
-    rules:
-      - operations:
-        - CREATE
-        - UPDATE
-        apiGroups:
-        - config.istio.io
-        - rbac.istio.io
-        - security.istio.io
-        - authentication.istio.io
-        - networking.istio.io
-        apiVersions:
-        - "*"
-        resources:
-        - "*"
-    # Fail open until the validation webhook is ready. The webhook controller
-    # will update this to `+"`"+`Fail`+"`"+` and patch in the `+"`"+`caBundle`+"`"+` when the webhook
-    # endpoint is ready.
-    failurePolicy: Ignore
-    sideEffects: None
----
-{{/* Create a NOP config for Galley's webhook to stop it from blocking config */}}
-apiVersion: admissionregistration.k8s.io/v1beta1
-kind: ValidatingWebhookConfiguration
-metadata:
-  name: istio-galley
-  labels:
-    app: galley
-    release: {{ .Release.Name }}
-    istio: galley
-webhooks:
----
-`)
-
-func chartsBaseTemplatesValidatingwebhookconfigurationYamlBytes() ([]byte, error) {
-	return _chartsBaseTemplatesValidatingwebhookconfigurationYaml, nil
-}
-
-func chartsBaseTemplatesValidatingwebhookconfigurationYaml() (*asset, error) {
-	bytes, err := chartsBaseTemplatesValidatingwebhookconfigurationYamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "charts/base/templates/validatingwebhookconfiguration.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _chartsBaseValuesYaml = []byte(`global:
-
-  # ImagePullSecrets for control plane ServiceAccount, list of secrets in the same namespace
-  # to use for pulling any images in pods that reference this ServiceAccount.
-  # Must be set for any clustser configured with private docker registry.
-  imagePullSecrets: []
-
-  # Used to locate istio-pilot.
-  # Default is to install pilot in a dedicated namespace, istio-pilot11. You can use multiple namespaces, but
-  # for each 'profile' you need to match the control plane namespace and the value of istioNamespace
-  # It is assumed that istio-system is running either 1.0 or an upgraded version of 1.1, but only security components are
-  # used (citadel generating the secrets).
-  istioNamespace: istio-system
-`)
+var _chartsBaseValuesYaml = []byte(``)
 
 func chartsBaseValuesYamlBytes() ([]byte, error) {
 	return _chartsBaseValuesYaml, nil
@@ -13303,11 +6768,7 @@ spec:
         chart: gateways
 {{- end }}
         service.istio.io/canonical-name: {{ $gateway.name | default "istio-egressgateway" }}
-{{- if not (eq .Values.revision "") }}
-        service.istio.io/canonical-revision: {{ .Values.revision }}
-{{- else}}
-        service.istio.io/canonical-revision: latest
-{{- end }}
+        service.istio.io/canonical-revision: "1.5"
       annotations:
         sidecar.istio.io/inject: "false"
 {{- if $gateway.podAnnotations }}
@@ -13321,14 +6782,12 @@ spec:
 {{- if .Values.global.proxy.enableCoreDump }}
       initContainers:
         - name: enable-core-dump
-{{- if contains "/" .Values.global.proxy.image }}
-          image: "{{ .Values.global.proxy.image }}"
+{{- if contains "/" .Values.global.proxy_init.image }}
+          image: "{{ .Values.global.proxy_init.image }}"
 {{- else }}
-          image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image | default "proxyv2" }}:{{ .Values.global.tag }}"
+          image: "{{ .Values.global.hub }}/{{ .Values.global.proxy_init.image | default "proxy_init" }}:{{ .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           command:
             - /bin/sh
           args:
@@ -13344,9 +6803,7 @@ spec:
 {{- else }}
           image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           ports:
             {{- range $key, $val := $gateway.ports }}
             - containerPort: {{ $val.port }}
@@ -13371,23 +6828,59 @@ spec:
         {{- if .Values.global.logAsJson }}
           - --log_as_json
         {{- end }}
+          - --drainDuration
+          - '45s' #drainDuration
+          - --parentShutdownDuration
+          - '1m0s' #parentShutdownDuration
+          - --connectTimeout
+          - '10s' #connectTimeout
           - --serviceCluster
           - {{ $gateway.name | default "istio-egressgateway" }}
+          - --zipkinAddress
+        {{- if .Values.global.tracer.zipkin.address }}
+          - {{ .Values.global.tracer.zipkin.address }}
+        {{- else if .Values.global.telemetryNamespace }}
+          - zipkin.{{ .Values.global.telemetryNamespace }}:9411
+        {{- else }}
+          - zipkin:9411
+        {{- end }}
           - --proxyAdminPort
           - "15000"
+          - --statusPort
+          - "15020"
         {{- if .Values.global.sts.servicePort }}
           - --stsPort={{ .Values.global.sts.servicePort }}
         {{- end }}
+        {{- if .Values.global.istiod.enabled }}
           - --controlPlaneAuthPolicy
           - NONE
           - --discoveryAddress
-        {{- $namespace := .Values.global.configNamespace | default "istio-system" }}
-        {{- if .Values.global.remotePilotAddress }}
-        # Use the DNS hostname instead of the IP address. The discovery address needs to match the
-        # SAN in istiod's cert. The istiod-remote.<namespace>.svc will resolve to the remotePilotAddress.
+          {{- $namespace := .Values.global.configNamespace | default "istio-system" }}
+          {{- if .Values.global.remotePilotAddress }}
+          # Use the DNS hostname instead of the IP address. The discovery address needs to match the
+          # SAN in istiod's cert. The istiod-remote.<namespace>.svc will resolve to the remotePilotAddress.
           - istiod-remote.{{ $namespace }}.svc:15012
-        {{- else }}
+          {{- else }}
           - istio-pilot.{{ $namespace }}.svc:15012
+          {{- end }}
+        {{- else if .Values.global.controlPlaneSecurityEnabled }}
+          - --controlPlaneAuthPolicy
+          - MUTUAL_TLS
+          - --discoveryAddress
+          {{- if .Values.global.configNamespace }}
+          - istio-pilot.{{ .Values.global.configNamespace }}:15011
+          {{- else }}
+          - istio-pilot:15011
+          {{- end }}
+        {{- else }}
+          - --controlPlaneAuthPolicy
+          - NONE
+          - --discoveryAddress
+          {{- if .Values.global.configNamespace }}
+          - istio-pilot.{{ .Values.global.configNamespace }}:15010
+          {{- else }}
+          - istio-pilot:15010
+          {{- end }}
         {{- end }}
         {{- if .Values.global.trustDomain }}
           - --trust-domain={{ .Values.global.trustDomain }}
@@ -13480,19 +6973,18 @@ spec:
           - name: ISTIO_META_CLUSTER_ID
             value: "{{ $.Values.global.multiCluster.clusterName | default `+"`"+`Kubernetes`+"`"+` }}"
           volumeMounts:
-          - name: config-volume
-            mountPath: /etc/istio/config
           {{- if eq .Values.global.pilotCertProvider "istiod" }}
           - mountPath: /var/run/secrets/istio
             name: istiod-ca-cert
           {{- end }}
+          {{- if .Values.global.istiod.enabled }}
           {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
           - name: istio-token
             mountPath: /var/run/secrets/tokens
             readOnly: true
           {{- end }}
+          {{- end }}
           {{- if .Values.global.mountMtlsCerts }}
-          # Use the key and cert mounted to /etc/certs/ for the in-cluster mTLS communications.
           - name: istio-certs
             mountPath: /etc/certs
             readOnly: true
@@ -13522,6 +7014,7 @@ spec:
             - path: "annotations"
               fieldRef:
                 fieldPath: metadata.annotations
+{{- if .Values.global.istiod.enabled }}
 {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
       - name: istio-token
         projected:
@@ -13531,17 +7024,13 @@ spec:
               expirationSeconds: 43200
               audience: {{ .Values.global.sds.token.aud }}
 {{- end }}
+{{- end }}
       {{- if .Values.global.mountMtlsCerts }}
-      # Use the key and cert mounted to /etc/certs/ for the in-cluster mTLS communications.
       - name: istio-certs
         secret:
           secretName: istio.default
           optional: true
       {{- end }}
-      - name: config-volume
-        configMap:
-          name: istio{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
-          optional: true
       {{- range $gateway.secretVolumes }}
       - name: {{ .name }}
         secret:
@@ -13892,9 +7381,6 @@ gateways:
     # "security" and value "S1".
     podAntiAffinityLabelSelector: []
     podAntiAffinityTermLabelSelector: []
-
-# Revision is set as 'version' label and part of the resource names when installing multiple control planes.
-revision: ""
 `)
 
 func chartsGatewaysIstioEgressValuesYamlBytes() ([]byte, error) {
@@ -14112,6 +7598,88 @@ func chartsGatewaysIstioIngressTemplates_affinityTpl() (*asset, error) {
 	return a, nil
 }
 
+var _chartsGatewaysIstioIngressTemplatesAddongatewayYaml = []byte(`# Template for telemetry addon gateways
+{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+{{ range $addon := $gateway.telemetry_addon_gateways }}
+{{ if $addon.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-{{ $addon.name }}-gateway
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ $addon.name }}
+    release: {{ $.Release.Name }}
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: {{ $addon.port }}
+        name: https-{{ $addon.name }}
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+        privateKey: /etc/istio/ingressgateway-certs/tls.key
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ $addon.name }}-virtual-service
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ $addon.name }}
+    release: {{ $.Release.Name }}
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - istio-{{ $addon.name }}-gateway
+  http:
+    - match:
+        - port: {{ $addon.port }}
+      route:
+        - destination:
+            host: {{ $addon.name }}.{{ $.Release.Namespace }}.svc.{{ $.Values.global.proxy.clusterDomain }}
+            port:
+              number: {{ $addon.desPort }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ $addon.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ $addon.name }}
+    release: {{ $.Release.Name }}
+spec:
+  host: {{ $addon.name }}.{{ $.Release.Namespace }}.svc.{{ $.Values.global.proxy.clusterDomain }}
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+{{- end }}
+{{- end }}
+`)
+
+func chartsGatewaysIstioIngressTemplatesAddongatewayYamlBytes() ([]byte, error) {
+	return _chartsGatewaysIstioIngressTemplatesAddongatewayYaml, nil
+}
+
+func chartsGatewaysIstioIngressTemplatesAddongatewayYaml() (*asset, error) {
+	bytes, err := chartsGatewaysIstioIngressTemplatesAddongatewayYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/gateways/istio-ingress/templates/addongateway.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _chartsGatewaysIstioIngressTemplatesAutoscaleYaml = []byte(`{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
 {{- if and $gateway.autoscaleEnabled $gateway.autoscaleMin $gateway.autoscaleMax }}
 apiVersion: autoscaling/v2beta1
@@ -14153,6 +7721,68 @@ func chartsGatewaysIstioIngressTemplatesAutoscaleYaml() (*asset, error) {
 	return a, nil
 }
 
+var _chartsGatewaysIstioIngressTemplatesCertificateYaml = []byte(`{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+{{ if $gateway.certificates }}
+---
+# Auto-generate Certmanager Issuer and certificate requests.
+# Requires 'email' to be set, for Let's Encrypt use.
+
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+metadata:
+  name: letsencrypt
+  namespace: {{ .Release.Namespace }}
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: {{ $gateway.email }}
+    privateKeySecretRef:
+      name: letsencrypt
+    http01: {}
+---
+
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: istio-ingressgateway-certs
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: istio-ingressgateway-certs
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: {{ $gateway.commonName }}
+  dnsNames:
+{{- range $key := $gateway.certificates }}
+  - {{ $key }}
+{{- end }}
+  acme:
+    config:
+    - http01:
+        ingressClass: istio
+      domains:
+{{- range $key := $gateway.certificates }}
+      - {{ $key }}
+{{- end }}
+{{- end }}
+
+`)
+
+func chartsGatewaysIstioIngressTemplatesCertificateYamlBytes() ([]byte, error) {
+	return _chartsGatewaysIstioIngressTemplatesCertificateYaml, nil
+}
+
+func chartsGatewaysIstioIngressTemplatesCertificateYaml() (*asset, error) {
+	bytes, err := chartsGatewaysIstioIngressTemplatesCertificateYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/gateways/istio-ingress/templates/certificate.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _chartsGatewaysIstioIngressTemplatesDeploymentYaml = []byte(`{{- $gateway := index .Values "gateways" "istio-ingressgateway" }}
 apiVersion: apps/v1
 kind: Deployment
@@ -14185,11 +7815,7 @@ spec:
         chart: gateways
 {{- end }}
         service.istio.io/canonical-name: {{ $gateway.name | default "istio-ingressgateway" }}
-        {{- if not (eq .Values.revision "") }}
-        service.istio.io/canonical-revision: {{ .Values.revision }}
-        {{- else}}
-        service.istio.io/canonical-revision: latest
-        {{- end }}
+        service.istio.io/canonical-revision: "1.5"
       annotations:
         sidecar.istio.io/inject: "false"
 {{- if $gateway.podAnnotations }}
@@ -14208,9 +7834,7 @@ spec:
 {{- else }}
           image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image | default "proxyv2" }}:{{ .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           command:
             - /bin/sh
           args:
@@ -14220,18 +7844,44 @@ spec:
             privileged: true
 {{- end }}
       containers:
+{{- if and $gateway.sds.enabled (not .Values.global.istiod.enabled) }}
+        - name: ingress-sds
+{{- if contains "/" $gateway.sds.image }}
+          image: "{{ $gateway.sds.image }}"
+{{- else }}
+          image: "{{ .Values.global.hub }}/{{ $gateway.sds.image }}:{{ .Values.global.tag }}"
+{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
+          resources:
+{{- if $gateway.sds.resources }}
+{{ toYaml $gateway.sds.resources | indent 12 }}
+{{- else }}
+{{ toYaml .Values.global.defaultResources | indent 12 }}
+{{- end }}
+          env:
+          - name: "ENABLE_WORKLOAD_SDS"
+            value: "false"
+          - name: "ENABLE_INGRESS_GATEWAY_SDS"
+            value: "true"
+          - name: "INGRESS_GATEWAY_NAMESPACE"
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          volumeMounts:
+          - name: ingressgatewaysdsudspath
+            mountPath: /var/run/ingress_gateway
+{{- end }}
         - name: istio-proxy
 {{- if contains "/" .Values.global.proxy.image }}
           image: "{{ .Values.global.proxy.image }}"
 {{- else }}
           image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image | default "proxyv2" }}:{{ .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           ports:
             {{- range $key, $val := $gateway.ports }}
-            - containerPort: {{ $val.targetPort | default $val.port }}
+            - containerPort: {{ $val.port }}
             {{- end }}
             {{- range $key, $val := $gateway.meshExpansionPorts }}
             - containerPort: {{ $val.port }}
@@ -14256,13 +7906,42 @@ spec:
         {{- if .Values.global.logAsJson }}
           - --log_as_json
         {{- end }}
+          - --drainDuration
+          - '45s' #drainDuration
+          - --parentShutdownDuration
+          - '1m0s' #parentShutdownDuration
+          - --connectTimeout
+          - '10s' #connectTimeout
           - --serviceCluster
           - {{ $gateway.name | default "istio-ingressgateway" }}
+          - --zipkinAddress
+        {{- if .Values.global.tracer.zipkin.address }}
+          - {{ .Values.global.tracer.zipkin.address }}
+        {{- else if .Values.global.telemetryNamespace }}
+          - zipkin.{{ .Values.global.telemetryNamespace }}:9411
+        {{- else }}
+          - zipkin:9411
+        {{- end }}
+        {{- if $.Values.global.proxy.envoyMetricsService.enabled }}
+          - --envoyMetricsService
+          {{- with  $.Values.global.proxy.envoyMetricsService }}
+          - '{"address":"{{ .host }}:{{.port }}"{{ if .tlsSettings }},"tlsSettings":{{ .tlsSettings | toJson }}{{- end }}{{ if .tcpKeepalive }},"tcpKeepalive":{{ .tcpKeepalive | toJson }}{{- end }}}'
+          {{- end }}
+        {{- end}}
+        {{- if $.Values.global.proxy.envoyAccessLogService.enabled }}
+          - --envoyAccessLogService
+          {{- with  $.Values.global.proxy.envoyAccessLogService }}
+          - '{"address":"{{ .host }}:{{.port }}"{{ if .tlsSettings }},"tlsSettings":{{ .tlsSettings | toJson }}{{- end }}{{ if .tcpKeepalive }},"tcpKeepalive":{{ .tcpKeepalive | toJson }}{{- end }}}'
+          {{- end }}
+        {{- end }}
           - --proxyAdminPort
           - "15000"
+          - --statusPort
+          - "15020"
         {{- if .Values.global.sts.servicePort }}
           - --stsPort={{ .Values.global.sts.servicePort }}
         {{- end }}
+          {{- if .Values.global.istiod.enabled }}
           - --controlPlaneAuthPolicy
           - NONE
           - --discoveryAddress
@@ -14274,6 +7953,25 @@ spec:
           {{- else }}
           - istio-pilot.{{ $namespace }}.svc:15012
           {{- end }}
+          {{- else if .Values.global.controlPlaneSecurityEnabled }}
+          - --controlPlaneAuthPolicy
+          - MUTUAL_TLS
+          - --discoveryAddress
+          {{- if .Values.global.configNamespace }}
+          - istio-pilot.{{ .Values.global.configNamespace }}:15011
+          {{- else }}
+          - istio-pilot:15011
+          {{- end }}
+        {{- else }}
+          - --controlPlaneAuthPolicy
+          - NONE
+          - --discoveryAddress
+          {{- if .Values.global.configNamespace }}
+          - istio-pilot.{{ .Values.global.configNamespace }}:15010
+          {{- else }}
+          - istio-pilot:15010
+          {{- end }}
+        {{- end }}
         {{- if .Values.global.trustDomain }}
           - --trust-domain={{ .Values.global.trustDomain }}
         {{- end }}
@@ -14298,16 +7996,20 @@ spec:
             value: {{ .Values.global.jwtPolicy }}
           - name: PILOT_CERT_PROVIDER
             value: {{ .Values.global.pilotCertProvider }}
+{{- if or .Values.global.istiod.enabled $gateway.sds.enabled }}
           - name: "ISTIO_META_USER_SDS"
             value: "true"
+{{- if .Values.global.istiod.enabled }}
           - name: CA_ADDR
           {{- if .Values.global.caAddress }}
             value: {{ .Values.global.caAddress }}
           {{- else if .Values.global.configNamespace }}
-            value: istiod.{{ .Values.global.configNamespace }}.svc:15012
+            value: istio-pilot.{{ .Values.global.configNamespace }}.svc:15012
           {{- else }}
-            value: istiod.istio-system.svc:15012
+            value: istio-pilot.istio-system.svc:15012
           {{- end }}
+{{- end }}
+{{- end }}
           - name: NODE_NAME
             valueFrom:
               fieldRef:
@@ -14378,12 +8080,11 @@ spec:
           - name: ISTIO_META_CLUSTER_ID
             value: "{{ $.Values.global.multiCluster.clusterName | default `+"`"+`Kubernetes`+"`"+` }}"
           volumeMounts:
-          - name: config-volume
-            mountPath: /etc/istio/config
 {{- if eq .Values.global.pilotCertProvider "istiod" }}
           - mountPath: /var/run/secrets/istio
             name: istiod-ca-cert
 {{- end }}
+{{- if .Values.global.istiod.enabled }}
 {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
           - name: istio-token
             mountPath: /var/run/secrets/tokens
@@ -14391,6 +8092,12 @@ spec:
 {{- end }}
           - name: ingressgatewaysdsudspath
             mountPath: /var/run/ingress_gateway
+{{ else }}
+          {{- if $gateway.sds.enabled }}
+          - name: ingressgatewaysdsudspath
+            mountPath: /var/run/ingress_gateway
+          {{- end }}
+{{- end }}
           {{- if .Values.global.mountMtlsCerts }}
           # Use the key and cert mounted to /etc/certs/ for the in-cluster mTLS communications.
           - name: istio-certs
@@ -14416,12 +8123,13 @@ spec:
       - name: podinfo
         downwardAPI:
           items:
-            - path: "labels"
-              fieldRef:
-                fieldPath: metadata.labels
-            - path: "annotations"
-              fieldRef:
-                fieldPath: metadata.annotations
+          - path: "labels"
+            fieldRef:
+              fieldPath: metadata.labels
+          - path: "annotations"
+            fieldRef:
+              fieldPath: metadata.annotations
+{{- if .Values.global.istiod.enabled }}
       - name: ingressgatewaysdsudspath
         emptyDir: {}
 {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
@@ -14433,6 +8141,12 @@ spec:
               expirationSeconds: 43200
               audience: {{ .Values.global.sds.token.aud }}
 {{- end }}
+{{- else }}
+      {{- if $gateway.sds.enabled }}
+      - name: ingressgatewaysdsudspath
+        emptyDir: {}
+      {{- end }}
+{{- end }}
       {{- if .Values.global.mountMtlsCerts }}
       # Use the key and cert mounted to /etc/certs/ for the in-cluster mTLS communications.
       - name: istio-certs
@@ -14440,10 +8154,6 @@ spec:
           secretName: istio.istio-ingressgateway-service-account
           optional: true
       {{- end }}
-      - name: config-volume
-        configMap:
-          name: istio{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
-          optional: true
       {{- range $gateway.secretVolumes }}
       - name: {{ .name }}
         secret:
@@ -14483,7 +8193,132 @@ func chartsGatewaysIstioIngressTemplatesDeploymentYaml() (*asset, error) {
 	return a, nil
 }
 
+var _chartsGatewaysIstioIngressTemplatesGatewayYaml = []byte(`{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+# Main Gateway. Apps must bind to NAMESPACE/ingressgateway
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: ingressgateway
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+{{- if $gateway.tls }}
+  - port:
+      number: 443
+      name: https-default
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      privateKey: /etc/istio/ingressgateway-certs/tls.key
+    hosts:
+      - "*"
+  {{- end }}
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+      - "*"
+    # Additional ports in gateaway for the ingressPorts - apps using dedicated port instead of hostname
+{{ range $app := $gateway.ingressPorts }}
+  - port:
+      number: {{ $app.port }}
+      name: {{ $app.name }}
+      protocol: HTTP2
+    hosts:
+    - "*"
+{{- end }}
+`)
+
+func chartsGatewaysIstioIngressTemplatesGatewayYamlBytes() ([]byte, error) {
+	return _chartsGatewaysIstioIngressTemplatesGatewayYaml, nil
+}
+
+func chartsGatewaysIstioIngressTemplatesGatewayYaml() (*asset, error) {
+	bytes, err := chartsGatewaysIstioIngressTemplatesGatewayYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/gateways/istio-ingress/templates/gateway.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsGatewaysIstioIngressTemplatesHostsYaml = []byte(`{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+
+# TODO: range TCP ports, add ports
+# {{ $gateway.domain }}
+{{ range $app := $gateway.hosts }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ $app.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    release: {{ $.Release.Name }}
+spec:
+  hosts:
+  - "{{ $app.name }}.{{ $gateway.domain }}"
+  gateways:
+  - ingressgateway
+  http:
+  - route:
+    - destination:
+        host: {{ $app.dest }}
+        port:
+          number: {{ $app.destPort }}
+{{- end }}
+
+{{ range $app := $gateway.ingressPorts }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ $app.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    release: {{ $.Release.Name }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - ingressgateway
+  http:
+  -
+    match:
+    - port: {{ $app.port }}
+    route:
+    - destination:
+        host: {{ $app.dest }}
+        port:
+          number: {{ $app.destPort }}
+{{- end }}
+`)
+
+func chartsGatewaysIstioIngressTemplatesHostsYamlBytes() ([]byte, error) {
+	return _chartsGatewaysIstioIngressTemplatesHostsYaml, nil
+}
+
+func chartsGatewaysIstioIngressTemplatesHostsYaml() (*asset, error) {
+	bytes, err := chartsGatewaysIstioIngressTemplatesHostsYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/gateways/istio-ingress/templates/hosts.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _chartsGatewaysIstioIngressTemplatesMeshexpansionYaml = []byte(`{{- if .Values.global.meshExpansion.enabled }}
+  {{- if .Values.global.istiod.enabled }}
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
@@ -14523,7 +8358,6 @@ spec:
         port:
           number: 15012
 ---
-
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
@@ -14539,7 +8373,71 @@ spec:
         number: 15012
       tls:
         mode: DISABLE
-
+---
+  {{- else }}
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: meshexpansion-gateway
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 15011
+        protocol: TCP
+        name: tcp-pilot
+      hosts:
+        - "*"
+    - port:
+        number: 15004
+        name: tls-mixer
+        protocol: TLS
+      tls:
+        mode: AUTO_PASSTHROUGH
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: meshexpansion-vs-pilot
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  hosts:
+    - istio-pilot.{{ .Values.global.istioNamespace }}.svc.{{ .Values.global.proxy.clusterDomain }}
+  gateways:
+    - meshexpansion-gateway
+  tcp:
+    - match:
+        - port: 15011
+      route:
+        - destination:
+            host: istio-pilot.{{ .Values.global.istioNamespace }}.svc.{{ .Values.global.proxy.clusterDomain }}
+            port:
+              number: 15011
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: meshexpansion-dr-pilot
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  host: pilot.{{ .Release.Namespace }}.svc.{{ .Values.global.proxy.clusterDomain }}
+  trafficPolicy:
+    portLevelSettings:
+      - port:
+          number: 15011
+        tls:
+          mode: DISABLE
+  {{- end }}
 {{- end }}
 
 `)
@@ -14594,6 +8492,41 @@ func chartsGatewaysIstioIngressTemplatesPoddisruptionbudgetYaml() (*asset, error
 }
 
 var _chartsGatewaysIstioIngressTemplatesPreconfiguredYaml = []byte(`{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+{{- if .Values.global.k8sIngress.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-autogenerated-k8s-ingress
+  namespace: {{ .Release.Namespace }}
+  labels:
+{{ $gateway.labels | toYaml | indent 4 }}
+    release: {{ .Release.Name }}
+spec:
+  selector:
+    istio: {{ .Values.global.k8sIngress.gatewayName }}
+  servers:
+  - port:
+      number: 80
+      protocol: HTTP
+      name: http
+    hosts:
+    - "*"
+{{ if .Values.global.k8sIngress.enableHttps }}
+  - port:
+      number: 443
+      protocol: HTTPS
+      name: https-default
+    tls:
+      mode: SIMPLE
+      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      privateKey: /etc/istio/ingressgateway-certs/tls.key
+    hosts:
+    - "*"
+{{ end }}
+---
+{{ end }}
+
+
 {{- if .Values.global.multiCluster.enabled }}
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -14683,6 +8616,7 @@ func chartsGatewaysIstioIngressTemplatesPreconfiguredYaml() (*asset, error) {
 }
 
 var _chartsGatewaysIstioIngressTemplatesRoleYaml = []byte(`{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+{{- if or $gateway.sds.enabled .Values.global.istiod.enabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -14695,6 +8629,7 @@ rules:
   resources: ["secrets"]
   verbs: ["get", "watch", "list"]
 ---
+{{- end }}
 `)
 
 func chartsGatewaysIstioIngressTemplatesRoleYamlBytes() ([]byte, error) {
@@ -14713,6 +8648,7 @@ func chartsGatewaysIstioIngressTemplatesRoleYaml() (*asset, error) {
 }
 
 var _chartsGatewaysIstioIngressTemplatesRolebindingsYaml = []byte(`{{ $gateway := index .Values "gateways" "istio-ingressgateway" }}
+{{- if or $gateway.sds.enabled .Values.global.istiod.enabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -14728,6 +8664,7 @@ subjects:
 - kind: ServiceAccount
   name: istio-ingressgateway-service-account
 ---
+{{- end }}
 `)
 
 func chartsGatewaysIstioIngressTemplatesRolebindingsYamlBytes() ([]byte, error) {
@@ -14846,12 +8783,56 @@ func chartsGatewaysIstioIngressTemplatesServiceaccountYaml() (*asset, error) {
 	return a, nil
 }
 
+var _chartsGatewaysIstioIngressTemplatesSidecarYaml = []byte(`apiVersion: networking.istio.io/v1alpha3
+kind: Sidecar
+metadata:
+  name: default
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  egress:
+    - hosts:
+        - "*/*"
+`)
+
+func chartsGatewaysIstioIngressTemplatesSidecarYamlBytes() ([]byte, error) {
+	return _chartsGatewaysIstioIngressTemplatesSidecarYaml, nil
+}
+
+func chartsGatewaysIstioIngressTemplatesSidecarYaml() (*asset, error) {
+	bytes, err := chartsGatewaysIstioIngressTemplatesSidecarYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/gateways/istio-ingress/templates/sidecar.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _chartsGatewaysIstioIngressValuesYaml = []byte(`# A-la-carte istio ingress gateway.
 # Must be installed in a separate namespace, to minimize access to secrets.
 
 gateways:
   istio-ingressgateway:
     name: istio-ingressgateway
+    #
+    # Secret Discovery Service (SDS) configuration for ingress gateway.
+    #
+    sds:
+      # If true, ingress gateway fetches credentials from SDS server to handle TLS connections.
+      enabled: false
+      # SDS server that watches kubernetes secrets and provisions credentials to ingress gateway.
+      # This server runs in the same pod as ingress gateway.
+      image: node-agent-k8s
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 2000m
+          memory: 1024Mi
     labels:
       app: istio-ingressgateway
       istio: ingressgateway
@@ -14864,10 +8845,9 @@ gateways:
       targetPort: 15020
       name: status-port
     - port: 80
-      targetPort: 8080
+      targetPort: 80
       name: http2
     - port: 443
-      targetPort: 8443
       name: https
     - port: 15029
       targetPort: 15029
@@ -15029,9 +9009,6 @@ gateways:
     # "security" and value "S1".
     podAntiAffinityLabelSelector: []
     podAntiAffinityTermLabelSelector: []
-
-# Revision is set as 'version' label and part of the resource names when installing multiple control planes.
-revision: ""
 `)
 
 func chartsGatewaysIstioIngressValuesYamlBytes() ([]byte, error) {
@@ -15289,9 +9266,7 @@ spec:
 {{- else }}
           image: "{{ .Values.cni.hub | default .Values.global.hub }}/{{ .Values.cni.image | default "install-cni" }}:{{ .Values.cni.tag | default .Values.global.tag }}"
 {{- end }}
-{{- if or .Values.cni.pullPolicy .Values.global.imagePullPolicy }}
           imagePullPolicy: {{ .Values.cni.pullPolicy | default .Values.global.imagePullPolicy }}
-{{- end }}
           command: ["/install-cni.sh"]
           env:
 {{- if .Values.cni.cniConfFileName }}
@@ -15464,6 +9439,1391 @@ func chartsIstioCniValuesYaml() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "charts/istio-cni/values.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectChartYaml = []byte(`apiVersion: v1
+name: istio-autoinject
+version: 1.1.0
+appVersion: 1.1.0
+tillerVersion: ">=2.7.2"
+description: Helm chart for sidecar injector webhook deployment
+keywords:
+  - istio
+  - sidecarInjectorWebhook
+  - autoinject
+sources:
+  - http://github.com/istio/istio
+engine: gotpl
+icon: https://istio.io/favicons/android-192x192.png
+`)
+
+func chartsIstioControlIstioAutoinjectChartYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectChartYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectChartYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectChartYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/Chart.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectNotesTxt = []byte(`Sidecar injector (optional): if disabled, manual injection or other tools need to be used.
+
+Sidecar injection in each profile can be selected by labeling the namespace with the appropriate profile.
+
+The new label is 'istio-env' and the value is the namespace where the injector is installed.
+
+Note that it is possible to install a profile with only the injector app - using remote Pilot and MCP.
+
+`+"`"+``+"`"+``+"`"+`
+    # New style, using the istio-pilot11 profile
+    kubectl create ns fortio
+    kubectl label ns fortio istio-env=istio-control
+
+    # Second pilot profile
+    kubectl create ns fortio-test
+    kubectl label ns fortio istio-env=istio-master
+
+    # Old-style, using istio-system and Istio 1.0 or 1.1 default installations.
+    kubectl create ns fortio-istio-system
+    kubectl label ns fortio istio-injection=enabled
+`+"`"+``+"`"+``+"`"+`
+
+# Uninstall
+
+After uninstalling, you should cleanup the global CRD using:
+
+`+"`"+``+"`"+``+"`"+`bash
+
+  kubectl delete MutatingWebhookConfiguration istio-sidecar-injector-istio-control
+
+`+"`"+``+"`"+``+"`"+`
+
+Any app using the uninstalled istio-env label will no longer be auto-injected once the config is deleted.
+`)
+
+func chartsIstioControlIstioAutoinjectNotesTxtBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectNotesTxt, nil
+}
+
+func chartsIstioControlIstioAutoinjectNotesTxt() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectNotesTxtBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/NOTES.txt", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectFilesInjectionTemplateYaml = []byte(`template: |
+  rewriteAppHTTPProbe: {{ valueOrDefault .Values.sidecarInjectorWebhook.rewriteAppHTTPProbe false }}
+  initContainers:
+  {{ if ne (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`NONE`+"`"+` }}
+  {{ if .Values.istio_cni.enabled -}}
+  - name: istio-validation
+  {{ else -}}
+  - name: istio-init
+  {{ end -}}
+  {{- if contains "/" .Values.global.proxy_init.image }}
+    image: "{{ .Values.global.proxy_init.image }}"
+  {{- else }}
+    image: "{{ .Values.global.hub }}/{{ .Values.global.proxy_init.image }}:{{ .Values.global.tag }}"
+  {{- end }}
+    command:
+    - istio-iptables
+    - "-p"
+    - 15001
+    - "-z"
+    - "15006"
+    - "-u"
+    - 1337
+    - "-m"
+    - "{{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode }}"
+    - "-i"
+    - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/includeOutboundIPRanges`+"`"+` .Values.global.proxy.includeIPRanges }}"
+    - "-x"
+    - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeOutboundIPRanges`+"`"+` .Values.global.proxy.excludeIPRanges }}"
+    - "-b"
+    - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/includeInboundPorts`+"`"+` `+"`"+`*`+"`"+` }}"
+    - "-d"
+    - "{{ excludeInboundPort (annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort) (annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeInboundPorts`+"`"+` .Values.global.proxy.excludeInboundPorts) }}"
+    {{ if or (isset .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/excludeOutboundPorts`+"`"+`) (ne (valueOrDefault .Values.global.proxy.excludeOutboundPorts "") "") -}}
+    - "-o"
+    - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeOutboundPorts`+"`"+` .Values.global.proxy.excludeOutboundPorts }}"
+    {{ end -}}
+    {{ if (isset .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/kubevirtInterfaces`+"`"+`) -}}
+    - "-k"
+    - "{{ index .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/kubevirtInterfaces`+"`"+` }}"
+    {{ end -}}
+    {{ if .Values.istio_cni.enabled -}}
+    - "--run-validation"
+    - "--skip-rule-apply"
+    {{ end -}}
+    imagePullPolicy: "{{ valueOrDefault .Values.global.imagePullPolicy `+"`"+`Always`+"`"+` }}"
+  {{- if .Values.global.proxy_init.resources }}
+    resources:
+      {{ toYaml .Values.global.proxy_init.resources | indent 4 }}
+  {{- else }}
+    resources: {}
+  {{- end }}
+    securityContext:
+      allowPrivilegeEscalation: {{ .Values.global.proxy.privileged }}
+      privileged: {{ .Values.global.proxy.privileged }}
+      capabilities:
+    {{- if not .Values.istio_cni.enabled }}
+        add:
+        - NET_ADMIN
+        - NET_RAW
+    {{- end }}
+        drop:
+        - ALL
+      readOnlyRootFilesystem: false
+    {{- if not .Values.istio_cni.enabled }}
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+    {{- else }}
+      runAsGroup: 1337
+      runAsUser: 1337
+      runAsNonRoot: true
+    {{- end }}
+    restartPolicy: Always
+  {{ end -}}
+  {{- if eq .Values.global.proxy.enableCoreDump true }}
+  - name: enable-core-dump
+    args:
+    - -c
+    - sysctl -w kernel.core_pattern=/var/lib/istio/core.proxy && ulimit -c unlimited
+    command:
+      - /bin/sh
+  {{- if contains "/" .Values.global.proxy_init.image }}
+    image: "{{ .Values.global.proxy_init.image }}"
+  {{- else }}
+    image: "{{ .Values.global.hub }}/{{ .Values.global.proxy_init.image }}:{{ .Values.global.tag }}"
+  {{- end }}
+    imagePullPolicy: "{{ valueOrDefault .Values.global.imagePullPolicy `+"`"+`Always`+"`"+` }}"
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        add:
+        - SYS_ADMIN
+        drop:
+        - ALL
+      privileged: true
+      readOnlyRootFilesystem: false
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+  {{ end }}
+  containers:
+  - name: istio-proxy
+  {{- if contains "/" (annotation .ObjectMeta `+"`"+`sidecar.istio.io/proxyImage`+"`"+` .Values.global.proxy.image) }}
+    image: "{{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/proxyImage`+"`"+` .Values.global.proxy.image }}"
+  {{- else }}
+    image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
+  {{- end }}
+    ports:
+    - containerPort: 15090
+      protocol: TCP
+      name: http-envoy-prom
+    args:
+    - proxy
+    - sidecar
+    - --domain
+    - $(POD_NAMESPACE).svc.{{ .Values.global.proxy.clusterDomain }}
+    - --configPath
+    - "/etc/istio/proxy"
+    - --binaryPath
+    - "/usr/local/bin/envoy"
+    - --serviceCluster
+    {{ if ne "" (index .ObjectMeta.Labels "app") -}}
+    - "{{ index .ObjectMeta.Labels `+"`"+`app`+"`"+` }}.$(POD_NAMESPACE)"
+    {{ else -}}
+    - "{{ valueOrDefault .DeploymentMeta.Name `+"`"+`istio-proxy`+"`"+` }}.{{ valueOrDefault .DeploymentMeta.Namespace `+"`"+`default`+"`"+` }}"
+    {{ end -}}
+    - --drainDuration
+    - "{{ formatDuration .ProxyConfig.DrainDuration }}"
+    - --parentShutdownDuration
+    - "{{ formatDuration .ProxyConfig.ParentShutdownDuration }}"
+    - --discoveryAddress
+    - "{{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/discoveryAddress`+"`"+` .ProxyConfig.DiscoveryAddress }}"
+  {{- if eq .Values.global.proxy.tracer "lightstep" }}
+    - --lightstepAddress
+    - "{{ .ProxyConfig.GetTracing.GetLightstep.GetAddress }}"
+    - --lightstepAccessToken
+    - "{{ .ProxyConfig.GetTracing.GetLightstep.GetAccessToken }}"
+    - --lightstepSecure={{ .ProxyConfig.GetTracing.GetLightstep.GetSecure }}
+    - --lightstepCacertPath
+    - "{{ .ProxyConfig.GetTracing.GetLightstep.GetCacertPath }}"
+  {{- else if eq .Values.global.proxy.tracer "zipkin" }}
+    - --zipkinAddress
+    - "{{ .ProxyConfig.GetTracing.GetZipkin.GetAddress }}"
+  {{- else if eq .Values.global.proxy.tracer "datadog" }}
+    - --datadogAgentAddress
+    - "{{ .ProxyConfig.GetTracing.GetDatadog.GetAddress }}"
+  {{- end }}
+    - --proxyLogLevel={{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/logLevel`+"`"+` .Values.global.proxy.logLevel}}
+    - --proxyComponentLogLevel={{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/componentLogLevel`+"`"+` .Values.global.proxy.componentLogLevel}}
+    - --connectTimeout
+    - "{{ formatDuration .ProxyConfig.ConnectTimeout }}"
+  {{- if .Values.global.proxy.envoyStatsd.enabled }}
+    - --statsdUdpAddress
+    - "{{ .ProxyConfig.StatsdUdpAddress }}"
+  {{- end }}
+  {{- if .Values.global.proxy.envoyMetricsService.enabled }}
+    - --envoyMetricsService
+    - '{{ protoToJSON .ProxyConfig.EnvoyMetricsService }}'
+  {{- end }}
+  {{- if .Values.global.proxy.envoyAccessLogService.enabled }}
+    - --envoyAccessLogService
+    - '{{ protoToJSON .ProxyConfig.EnvoyAccessLogService }}'
+  {{- end }}
+    - --proxyAdminPort
+    - "{{ .ProxyConfig.ProxyAdminPort }}"
+    {{ if gt .ProxyConfig.Concurrency 0 -}}
+    - --concurrency
+    - "{{ .ProxyConfig.Concurrency }}"
+    {{ end -}}
+    {{- if .Values.global.controlPlaneSecurityEnabled }}
+    - --controlPlaneAuthPolicy
+    - MUTUAL_TLS
+    {{- else }}
+    - --controlPlaneAuthPolicy
+    - NONE
+    {{- end }}
+    - --dnsRefreshRate
+    - {{ valueOrDefault .Values.global.proxy.dnsRefreshRate "300s" }}
+  {{- if (ne (annotation .ObjectMeta "status.sidecar.istio.io/port" .Values.global.proxy.statusPort) "0") }}
+    - --statusPort
+    - "{{ annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort }}"
+  {{- end }}
+  {{- if .Values.global.trustDomain }}
+    - --trust-domain={{ .Values.global.trustDomain }}
+  {{- end }}
+  {{- if .Values.global.logAsJson }}
+    - --log_as_json
+  {{- end }}
+  {{- if .Values.global.proxy.lifecycle }}
+    lifecycle:
+      {{ toYaml .Values.global.proxy.lifecycle | indent 4 }}
+    {{- end }}
+    env:
+    - name: JWT_POLICY
+      value: {{ .Values.global.jwtPolicy }}
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+    - name: INSTANCE_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    - name: SERVICE_ACCOUNT
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.serviceAccountName
+    - name: HOST_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+  {{- if eq .Values.global.proxy.tracer "datadog" }}
+  {{- if isset .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+` }}
+  {{- range $key, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
+    - name: {{ $key }}
+      value: "{{ $value }}"
+  {{- end }}
+  {{- end }}
+  {{- end }}
+    - name: ISTIO_META_POD_PORTS
+      value: |-
+        [
+        {{- $first := true }}
+        {{- range $index1, $c := .Spec.Containers }}
+          {{- range $index2, $p := $c.Ports }}
+            {{- if (structToJSON $p) }}
+            {{if not $first}},{{end}}{{ structToJSON $p }}
+            {{- $first = false }}
+            {{- end }}
+          {{- end}}
+        {{- end}}
+        ]
+    - name: ISTIO_META_CLUSTER_ID
+      value: "{{ valueOrDefault .Values.global.multiCluster.clusterName `+"`"+`Kubernetes`+"`"+` }}"
+    - name: ISTIO_META_POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    - name: ISTIO_META_CONFIG_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+    - name: ISTIO_META_INTERCEPTION_MODE
+      value: "{{ or (index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/interceptionMode`+"`"+`) .ProxyConfig.InterceptionMode.String }}"
+    {{- if .Values.global.network }}
+    - name: ISTIO_META_NETWORK
+      value: "{{ .Values.global.network }}"
+    {{- end }}
+    {{ if .ObjectMeta.Annotations }}
+    - name: ISTIO_METAJSON_ANNOTATIONS
+      value: |
+             {{ toJSON .ObjectMeta.Annotations }}
+    {{ end }}
+    {{ if .ObjectMeta.Labels }}
+    - name: ISTIO_METAJSON_LABELS
+      value: |
+             {{ toJSON .ObjectMeta.Labels }}
+    {{ end }}
+    {{- if .DeploymentMeta.Name }}
+    - name: ISTIO_META_WORKLOAD_NAME
+      value: {{ .DeploymentMeta.Name }}
+    {{ end }}
+    {{- if and .TypeMeta.APIVersion .DeploymentMeta.Name }}
+    - name: ISTIO_META_OWNER
+      value: kubernetes://apis/{{ .TypeMeta.APIVersion }}/namespaces/{{ valueOrDefault .DeploymentMeta.Namespace `+"`"+`default`+"`"+` }}/{{ toLower .TypeMeta.Kind}}s/{{ .DeploymentMeta.Name }}
+    {{- end}}
+    {{- if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+`) }}
+    - name: ISTIO_BOOTSTRAP_OVERRIDE
+      value: "/etc/istio/custom-bootstrap/custom_bootstrap.json"
+    {{- end }}
+    {{- if .Values.global.sds.customTokenDirectory }}
+    - name: ISTIO_META_SDS_TOKEN_PATH
+      value: "{{ .Values.global.sds.customTokenDirectory -}}/sdstoken"
+    {{- end }}
+    {{- if .Values.global.meshID }}
+    - name: ISTIO_META_MESH_ID
+      value: "{{ .Values.global.meshID }}"
+    {{- else if .Values.global.trustDomain }}
+    - name: ISTIO_META_MESH_ID
+      value: "{{ .Values.global.trustDomain }}"
+    {{- end }}
+    {{- if eq .Values.global.proxy.tracer "stackdriver" }}
+    - name: STACKDRIVER_TRACING_ENABLED
+      value: "true"
+    - name: STACKDRIVER_TRACING_DEBUG
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetDebug }}"
+    - name: STACKDRIVER_TRACING_MAX_NUMBER_OF_ANNOTATIONS
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetMaxNumberOfAnnotations }}"
+    - name: STACKDRIVER_TRACING_MAX_NUMBER_OF_ATTRIBUTES
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetMaxNumberOfAttributes }}"
+    - name: STACKDRIVER_TRACING_MAX_NUMBER_OF_MESSAGE_EVENTS
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetMaxNumberOfMessageEvents }}"
+    {{- end }}
+    {{- if and (eq .Values.global.proxy.tracer "datadog") (isset .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
+    {{- range $key, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
+      - name: {{ $key }}
+        value: "{{ $value }}"
+    {{- end }}
+    {{- end }}
+    {{- range $key, $value := .ProxyConfig.ProxyMetadata }}
+    - name: {{ $key }}
+      value: "{{ $value }}"
+    {{- end }}
+    imagePullPolicy: "{{ valueOrDefault .Values.global.imagePullPolicy `+"`"+`Always`+"`"+` }}"
+    {{ if ne (annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort) `+"`"+`0`+"`"+` }}
+    readinessProbe:
+      httpGet:
+        path: /healthz/ready
+        port: {{ annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort }}
+      initialDelaySeconds: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/initialDelaySeconds`+"`"+` .Values.global.proxy.readinessInitialDelaySeconds }}
+      periodSeconds: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/periodSeconds`+"`"+` .Values.global.proxy.readinessPeriodSeconds }}
+      failureThreshold: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/failureThreshold`+"`"+` .Values.global.proxy.readinessFailureThreshold }}
+    {{ end -}}
+    securityContext:
+      allowPrivilegeEscalation: {{ .Values.global.proxy.privileged }}
+      capabilities:
+        {{ if or (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`TPROXY`+"`"+`) (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/capNetBindService`+"`"+` .Values.global.proxy.capNetBindService) `+"`"+`true`+"`"+`) -}}
+        add:
+        {{ if eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`TPROXY`+"`"+` -}}
+        - NET_ADMIN
+        {{- end }}
+        {{ if eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/capNetBindService`+"`"+` .Values.global.proxy.capNetBindService) `+"`"+`true`+"`"+` -}}
+        - NET_BIND_SERVICE
+        {{- end }}
+        {{- end }}
+        drop:
+        - ALL
+      privileged: {{ .Values.global.proxy.privileged }}
+      readOnlyRootFilesystem: {{ not .Values.global.proxy.enableCoreDump }}
+      runAsGroup: 1337
+      {{ if or (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`TPROXY`+"`"+`) (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/capNetBindService`+"`"+` .Values.global.proxy.capNetBindService) `+"`"+`true`+"`"+`) -}}
+      runAsNonRoot: false
+      runAsUser: 0
+      {{- else -}}
+      runAsNonRoot: true
+      runAsUser: 1337
+      {{- end }}
+    resources:
+      {{ if or (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyCPU`+"`"+`) (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyMemory`+"`"+`) -}}
+      requests:
+        {{ if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyCPU`+"`"+`) -}}
+        cpu: "{{ index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyCPU`+"`"+` }}"
+        {{ end}}
+        {{ if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyMemory`+"`"+`) -}}
+        memory: "{{ index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyMemory`+"`"+` }}"
+        {{ end }}
+    {{ else -}}
+  {{- if .Values.global.proxy.resources }}
+      {{ toYaml .Values.global.proxy.resources | indent 4 }}
+  {{- end }}
+    {{  end -}}
+    volumeMounts:
+    {{ if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+`) }}
+    - mountPath: /etc/istio/custom-bootstrap
+      name: custom-bootstrap-volume
+    {{- end }}
+    - mountPath: /etc/istio/proxy
+      name: istio-envoy
+    - mountPath: /etc/certs/
+      name: istio-certs
+      readOnly: true
+    {{- if and (eq .Values.global.proxy.tracer "lightstep") .Values.global.tracer.lightstep.cacertPath }}
+    - mountPath: {{ directory .ProxyConfig.GetTracing.GetLightstep.GetCacertPath }}
+      name: lightstep-certs
+      readOnly: true
+    {{- end }}
+      {{- if isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolumeMount`+"`"+` }}
+      {{ range $index, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolumeMount`+"`"+`) }}
+    - name: "{{  $index }}"
+      {{ toYaml $value | indent 4 }}
+      {{ end }}
+      {{- end }}
+  volumes:
+  {{- if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+`) }}
+  - name: custom-bootstrap-volume
+    configMap:
+      name: {{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+` "" }}
+  {{- end }}
+  - emptyDir:
+      medium: Memory
+    name: istio-envoy
+  - name: istio-certs
+    secret:
+      optional: true
+      {{ if eq .Spec.ServiceAccountName "" }}
+      secretName: istio.default
+      {{ else -}}
+      secretName: {{  printf "istio.%s" .Spec.ServiceAccountName }}
+      {{  end -}}
+    {{- if isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolume`+"`"+` }}
+    {{range $index, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolume`+"`"+`) }}
+  - name: "{{ $index }}"
+    {{ toYaml $value | indent 2 }}
+    {{ end }}
+    {{ end }}
+  {{- if and (eq .Values.global.proxy.tracer "lightstep") .Values.global.tracer.lightstep.cacertPath }}
+  - name: lightstep-certs
+    secret:
+      optional: true
+      secretName: lightstep.cacert
+  {{- end }}
+  {{- if .Values.global.podDNSSearchNamespaces }}
+  dnsConfig:
+    searches:
+      {{- range .Values.global.podDNSSearchNamespaces }}
+      - {{ render . }}
+      {{- end }}
+  {{- end }}
+`)
+
+func chartsIstioControlIstioAutoinjectFilesInjectionTemplateYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectFilesInjectionTemplateYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectFilesInjectionTemplateYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectFilesInjectionTemplateYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/files/injection-template.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplates_affinityTpl = []byte(`{{/* affinity - https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ */}}
+
+{{- define "nodeaffinity" }}
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    {{- include "nodeAffinityRequiredDuringScheduling" . }}
+    preferredDuringSchedulingIgnoredDuringExecution:
+    {{- include "nodeAffinityPreferredDuringScheduling" . }}
+{{- end }}
+
+{{- define "nodeAffinityRequiredDuringScheduling" }}
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: beta.kubernetes.io/arch
+          operator: In
+          values:
+        {{- range $key, $val := .Values.global.arch }}
+          {{- if gt ($val | int) 0 }}
+          - {{ $key | quote }}
+          {{- end }}
+        {{- end }}
+        {{- $nodeSelector := default .Values.global.defaultNodeSelector .Values.sidecarInjectorWebhook.nodeSelector -}}
+        {{- range $key, $val := $nodeSelector }}
+        - key: {{ $key }}
+          operator: In
+          values:
+          - {{ $val | quote }}
+        {{- end }}
+{{- end }}
+
+{{- define "nodeAffinityPreferredDuringScheduling" }}
+  {{- range $key, $val := .Values.global.arch }}
+    {{- if gt ($val | int) 0 }}
+    - weight: {{ $val | int }}
+      preference:
+        matchExpressions:
+        - key: beta.kubernetes.io/arch
+          operator: In
+          values:
+          - {{ $key | quote }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- define "podAntiAffinity" }}
+{{- if or .Values.sidecarInjectorWebhook.podAntiAffinityLabelSelector .Values.sidecarInjectorWebhook.podAntiAffinityTermLabelSelector}}
+  podAntiAffinity:
+    {{- if .Values.sidecarInjectorWebhook.podAntiAffinityLabelSelector }}
+    requiredDuringSchedulingIgnoredDuringExecution:
+    {{- include "podAntiAffinityRequiredDuringScheduling" . }}
+    {{- end }}
+    {{- if .Values.sidecarInjectorWebhook.podAntiAffinityTermLabelSelector }}
+    preferredDuringSchedulingIgnoredDuringExecution:
+    {{- include "podAntiAffinityPreferredDuringScheduling" . }}
+    {{- end }}
+{{- end }}
+{{- end }}
+
+{{- define "podAntiAffinityRequiredDuringScheduling" }}
+    {{- range $index, $item := .Values.sidecarInjectorWebhook.podAntiAffinityLabelSelector }}
+    - labelSelector:
+        matchExpressions:
+        - key: {{ $item.key }}
+          operator: {{ $item.operator }}
+          {{- if $item.values }}
+          values:
+          {{- $vals := split "," $item.values }}
+          {{- range $i, $v := $vals }}
+          - {{ $v | quote }}
+          {{- end }}
+          {{- end }}
+      topologyKey: {{ $item.topologyKey }}
+    {{- end }}
+{{- end }}
+
+{{- define "podAntiAffinityPreferredDuringScheduling" }}
+    {{- range $index, $item := .Values.sidecarInjectorWebhook.podAntiAffinityTermLabelSelector }}
+    - podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: {{ $item.key }}
+            operator: {{ $item.operator }}
+            {{- if $item.values }}
+            values:
+            {{- $vals := split "," $item.values }}
+            {{- range $i, $v := $vals }}
+            - {{ $v | quote }}
+            {{- end }}
+            {{- end }}
+        topologyKey: {{ $item.topologyKey }}
+      weight: 100
+    {{- end }}
+{{- end }}
+`)
+
+func chartsIstioControlIstioAutoinjectTemplates_affinityTplBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplates_affinityTpl, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplates_affinityTpl() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplates_affinityTplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/_affinity.tpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplates_helpersTpl = []byte(`{{/* vim: set filetype=mustache: */}}
+{{/*
+Expand the name of the chart.
+*/}}
+{{- define "sidecar-injector.name" -}}
+{{- default .Chart.Name .Values.sidecarInjectorWebhook.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If release name contains chart name it will be used as a full name.
+*/}}
+{{- define "sidecar-injector.fullname" -}}
+{{- if .Values.sidecarInjectorWebhook.fullnameOverride -}}
+{{- .Values.sidecarInjectorWebhook.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.sidecarInjectorWebhook.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "sidecar-injector.chart" -}}
+{{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+`)
+
+func chartsIstioControlIstioAutoinjectTemplates_helpersTplBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplates_helpersTpl, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplates_helpersTpl() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplates_helpersTplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/_helpers.tpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesClusterroleYaml = []byte(`apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: istio-sidecar-injector-{{ .Release.Namespace }}
+  labels:
+    app: sidecar-injector
+    release: {{ .Release.Name }}
+    istio: sidecar-injector
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  resourceNames: ["istio-sidecar-injector"]
+  verbs: ["get", "list", "watch"]
+{{- if not .Values.global.operatorManageWebhooks }}
+- apiGroups: ["admissionregistration.k8s.io"]
+  resources: ["mutatingwebhookconfigurations"]
+  resourceNames: ["istio-sidecar-injector", "istio-sidecar-injector-{{.Release.Namespace}}"]
+  verbs: ["get", "list", "watch", "patch"]
+{{- end }}`)
+
+func chartsIstioControlIstioAutoinjectTemplatesClusterroleYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesClusterroleYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesClusterroleYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesClusterroleYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/clusterrole.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesClusterrolebindingYaml = []byte(`apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: istio-sidecar-injector-admin-role-binding-{{ .Release.Namespace }}
+  labels:
+    app: sidecar-injector
+    release: {{ .Release.Name }}
+    istio: sidecar-injector
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: istio-sidecar-injector-{{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: istio-sidecar-injector-service-account
+    namespace: {{ .Release.Namespace }}
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesClusterrolebindingYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesClusterrolebindingYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesClusterrolebindingYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesClusterrolebindingYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/clusterrolebinding.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesConfigmapYaml = []byte(`apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: injector-mesh
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+data:
+  # This is the 'mesh' config, loaded by the sidecar injector.
+  # It is a different configmap from pilot to allow a-la-carte install of the injector and follow the model
+  # of reducing blast-radius of config changes and avoiding globals.
+
+  # Note that injector uses a subset of the mesh config only - for clarity this is only generating the
+  # required config, i.e. the defaultConfig section. See injection-template .ProxyConfig settings.
+
+
+  mesh: |-
+    # Unix Domain Socket through which envoy communicates with NodeAgent SDS to get
+    # key/cert for mTLS. Use secret-mount files instead of SDS if set to empty.
+    sdsUdsPath: {{ .Values.global.sds.udsPath | quote }}
+
+    defaultConfig:
+      #
+      # TCP connection timeout between Envoy & the application, and between Envoys.
+      connectTimeout: 10s
+      #
+      ### ADVANCED SETTINGS #############
+      # Where should envoy's configuration be stored in the istio-proxy container
+      configPath: "/etc/istio/proxy"
+      # The pseudo service name used for Envoy.
+      serviceCluster: istio-proxy
+      # These settings that determine how long an old Envoy
+      # process should be kept alive after an occasional reload.
+      drainDuration: 45s
+      parentShutdownDuration: 1m0s
+      #
+      # Port where Envoy listens (on local host) for admin commands
+      # You can exec into the istio-proxy container in a pod and
+      # curl the admin port (curl http://localhost:15000/) to obtain
+      # diagnostic information from Envoy. See
+      # https://lyft.github.io/envoy/docs/operations/admin.html
+      # for more details
+      proxyAdminPort: 15000
+      #
+      # Set concurrency to a specific number to control the number of Proxy worker threads.
+      # If set to 0 (default), then start worker thread for each CPU thread/core.
+      concurrency: {{ .Values.global.proxy.concurrency }}
+      #
+      {{- if eq .Values.global.proxy.tracer "lightstep" }}
+      tracing:
+        lightstep:
+          # Address of the LightStep Satellite pool
+          address: {{ .Values.global.tracer.lightstep.address }}
+          # Access Token used to communicate with the Satellite pool
+          accessToken: {{ .Values.global.tracer.lightstep.accessToken }}
+          # Whether communication with the Satellite pool should be secure
+          secure: {{ .Values.global.tracer.lightstep.secure }}
+          # Path to the file containing the cacert to use when verifying TLS
+          cacertPath: {{ .Values.global.tracer.lightstep.cacertPath }}
+      {{- else if eq .Values.global.proxy.tracer "zipkin" }}
+      tracing:
+        zipkin:
+          # Address of the Zipkin collector
+        {{- if .Values.global.tracer.zipkin.address }}
+          address: {{ .Values.global.tracer.zipkin.address }}
+        {{- else }}
+          address: zipkin.{{ .Values.global.telemetryNamespace }}:9411
+        {{- end }}
+      {{- else if eq .Values.global.proxy.tracer "datadog" }}
+      tracing:
+        datadog:
+          # Address of the DataDog Agent
+          address: {{ .Values.global.tracer.datadog.address }}
+      {{- else if eq .Values.global.proxy.tracer "stackdriver" }}
+      tracing:
+        stackdriver:
+          # enables trace output to stdout.
+          debug: {{ $.Values.global.tracer.stackdriver.debug }}
+        {{- if $.Values.global.tracer.stackdriver.maxNumberOfAttributes }}
+          # The global default max number of attributes per span.
+          maxNumberOfAttributes: {{ $.Values.global.tracer.stackdriver.maxNumberOfAttributes }}
+        {{- end }}
+        {{- if $.Values.global.tracer.stackdriver.maxNumberOfAnnotations }}
+          # The global default max number of annotation events per span.
+          maxNumberOfAnnotations: {{ $.Values.global.tracer.stackdriver.maxNumberOfAnnotations }}
+        {{- end }}
+        {{- if $.Values.global.tracer.stackdriver.maxNumberOfMessageEvents }}
+          # The global default max number of message events per span.
+          maxNumberOfMessageEvents: {{ $.Values.global.tracer.stackdriver.maxNumberOfMessageEvents }}
+        {{- end }}
+      {{- end }}
+
+    {{- $defPilotHostname := printf "istio-pilot%s.%s" .Values.version .Values.global.configNamespace }}
+    {{- $pilotAddress := .Values.global.remotePilotAddress | default $defPilotHostname }}
+
+    {{- if .Values.global.controlPlaneSecurityEnabled }}
+      #
+      # Mutual TLS authentication between sidecars and istio control plane.
+      controlPlaneAuthPolicy: MUTUAL_TLS
+      #
+      # Address where istio Pilot service is running
+      {{- if .Values.global.remotePilotAddress }}
+      discoveryAddress: {{ $defPilotHostname }}:15011
+      {{- else }}
+      discoveryAddress: {{ $pilotAddress }}:15011
+      {{- end }}
+    {{- else }}
+      #
+      # Mutual TLS authentication between sidecars and istio control plane.
+      controlPlaneAuthPolicy: NONE
+      #
+      # Address where istio Pilot service is running
+      {{- if .Values.global.remotePilotAddress }}
+      discoveryAddress: {{ $defPilotHostname }}:15010
+      {{- else }}
+      discoveryAddress: {{ $pilotAddress }}:15010
+      {{- end }}
+    {{- end }}
+---
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesConfigmapYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesConfigmapYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesConfigmapYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesConfigmapYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/configmap.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesDeploymentYaml = []byte(`apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-sidecar-injector
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: sidecarInjectorWebhook
+    release: {{ .Release.Name }}
+    istio: sidecar-injector
+spec:
+{{- if .Values.sidecarInjectorWebhook.replicaCount }}
+  replicas: {{ .Values.sidecarInjectorWebhook.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      istio: sidecar-injector
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.sidecarInjectorWebhook.rollingMaxSurge }}
+      maxUnavailable: {{ .Values.sidecarInjectorWebhook.rollingMaxUnavailable }}
+  template:
+    metadata:
+      labels:
+        app: sidecarInjectorWebhook
+        istio: sidecar-injector
+{{- if eq .Release.Namespace "istio-system"}}
+        heritage: Tiller
+        release: istio
+        chart: sidecarInjectorWebhook
+{{- end }}
+      annotations:
+        sidecar.istio.io/inject: "false"
+        {{- if .Values.sidecarInjectorWebhook.podAnnotations }}
+{{ toYaml .Values.sidecarInjectorWebhook.podAnnotations | indent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: istio-sidecar-injector-service-account
+{{- if .Values.global.priorityClassName }}
+      priorityClassName: "{{ .Values.global.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: sidecar-injector-webhook
+{{- if contains "/" .Values.sidecarInjectorWebhook.image }}
+          image: "{{ .Values.sidecarInjectorWebhook.image }}"
+{{- else }}
+          image: "{{ .Values.sidecarInjectorWebhook.hub | default .Values.global.hub }}/{{ .Values.sidecarInjectorWebhook.image | default "sidecar_injector" }}:{{ .Values.sidecarInjectorWebhook.tag | default .Values.global.tag }}"
+{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
+          args:
+            - --caCertFile=/etc/istio/certs/root-cert.pem
+            - --tlsCertFile=/etc/istio/certs/cert-chain.pem
+            - --tlsKeyFile=/etc/istio/certs/key.pem
+            - --injectConfig=/etc/istio/inject/config
+            - --meshConfig=/etc/istio/config/mesh
+            - --port=9443
+            - --healthCheckInterval=2s
+            - --healthCheckFile=/tmp/health
+{{- if or .Values.global.operatorManageWebhooks .Values.global.istiod.enabled}}
+            - --reconcileWebhookConfig=false
+{{- else }}
+            - --reconcileWebhookConfig=true
+{{- end }}
+                  {{- if eq .Release.Namespace "istio-system"}}
+            - --webhookConfigName=istio-sidecar-injector
+                  {{ else }}
+            - --webhookConfigName=istio-sidecar-injector-{{ .Release.Namespace }}
+                  {{- end }}
+            - --log_output_level=debug
+          {{- if .Values.global.logAsJson }}
+            - --log_as_json
+          {{- end }}
+          securityContext:
+            runAsUser: 1337
+            runAsGroup: 1337
+            runAsNonRoot: true
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/istio/config
+            readOnly: true
+          - name: certs
+            mountPath: /etc/istio/certs
+            readOnly: true
+          - name: inject-config
+            mountPath: /etc/istio/inject
+            readOnly: true
+          livenessProbe:
+            exec:
+              command:
+                - /usr/local/bin/sidecar-injector
+                - probe
+                - --probe-path=/tmp/health
+                - --interval=4s
+            initialDelaySeconds: 4
+            periodSeconds: 4
+          readinessProbe:
+            exec:
+              command:
+                - /usr/local/bin/sidecar-injector
+                - probe
+                - --probe-path=/tmp/health
+                - --interval=4s
+            initialDelaySeconds: 4
+            periodSeconds: 4
+          resources:
+{{- if .Values.sidecarInjectorWebhook.resources }}
+{{ toYaml .Values.sidecarInjectorWebhook.resources | indent 12 }}
+{{- else }}
+{{ toYaml .Values.global.defaultResources | indent 12 }}
+{{- end }}
+      securityContext:
+        fsGroup: 1337
+      volumes:
+      - name: config-volume
+        configMap:
+          name: injector-mesh
+      - name: certs
+        secret:
+{{- if .Values.sidecarInjectorWebhook.selfSigned }}
+          secretName: istio-sidecar-injector-self-signed
+{{- else if .Values.global.certificates }}
+          secretName: dns.istio-sidecar-injector-service-account
+{{- else }}
+          secretName: istio.istio-sidecar-injector-service-account
+{{- end }}
+      - name: inject-config
+        configMap:
+          name: istio-sidecar-injector
+          items:
+          - key: config
+            path: config
+          - key: values
+            path: values
+      affinity:
+      {{- include "nodeaffinity" . | indent 6 }}
+      {{- include "podAntiAffinity" . | indent 6 }}
+{{- if .Values.sidecarInjectorWebhook.tolerations }}
+      tolerations:
+{{ toYaml .Values.sidecarInjectorWebhook.tolerations | indent 6 }}
+{{- else if .Values.global.defaultTolerations }}
+      tolerations:
+{{ toYaml .Values.global.defaultTolerations | indent 6 }}
+{{- end }}
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesDeploymentYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesDeploymentYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesDeploymentYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesDeploymentYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/deployment.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesMutatingwebhookYaml = []byte(`{{- $ca := genCA "istio-sidecar-injector-ca-{{ .Release.Namespace }}" 3650 }}
+{{- if not .Values.global.operatorManageWebhooks }}
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+        {{- if eq .Release.Namespace "istio-system"}}
+  name: istio-sidecar-injector
+        {{ else }}
+  name: istio-sidecar-injector-{{ .Release.Namespace }}
+        {{- end }}
+  labels:
+    app: sidecar-injector
+    release: {{ .Release.Name }}
+webhooks:
+  - name: sidecar-injector.istio.io
+    clientConfig:
+      service:
+        name: istio-sidecar-injector
+        namespace: {{ .Release.Namespace }}
+        path: "/inject"
+{{- if .Values.sidecarInjectorWebhook.selfSigned }}
+      caBundle: {{ $ca.Cert | b64enc }}
+{{- else }}
+      caBundle: ""
+{{- end }}
+    rules:
+      - operations: [ "CREATE" ]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    failurePolicy: Fail
+    namespaceSelector:
+{{- if .Values.sidecarInjectorWebhook.enableNamespacesByDefault }}
+      matchExpressions:
+      - key: name
+        operator: NotIn
+        values:
+        - {{ .Release.Namespace }}
+      - key: istio-injection
+        operator: NotIn
+        values:
+        - disabled
+      - key: istio-env
+        operator: DoesNotExist
+{{- else if eq .Values.sidecarInjectorWebhook.injectLabel "istio-injection" }}
+      matchLabels:
+        istio-injection: enabled
+{{- else }}
+      matchLabels:
+        istio-env: {{ .Release.Namespace }}
+{{- end }}
+{{- if .Values.sidecarInjectorWebhook.objectSelector.enabled }}
+    objectSelector:
+{{- if .Values.sidecarInjectorWebhook.objectSelector.autoInject }}
+      matchExpressions:
+      - key: "sidecar.istio.io/inject"
+        operator: NotIn
+        values:
+        - "false"
+{{- else }}
+      matchLabels:
+        "sidecar.istio.io/inject": "true"
+{{- end }}
+{{- end }}
+{{- end }}
+---
+{{- if .Values.sidecarInjectorWebhook.selfSigned }}
+  {{- $cn := "istio-sidecar-injector" }}
+  {{- $altName1 := printf "%s.%s" $cn .Release.Namespace }}
+  {{- $altName2 := printf "%s.%s.svc" $cn .Release.Namespace }}
+  {{- $altNames := (list $altName1 $altName2) }}
+  {{- $cert := genSignedCert $cn nil $altNames 3650 $ca }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: istio-sidecar-injector-self-signed
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: sidecar-injector
+    release: {{ .Release.Name }}
+type: Opaque
+data:
+  root-cert.pem: {{ $ca.Cert | b64enc }}
+  cert-chain.pem: {{ $cert.Cert | b64enc }}
+  key.pem: {{ $cert.Key | b64enc }}
+{{- end }}
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesMutatingwebhookYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesMutatingwebhookYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesMutatingwebhookYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesMutatingwebhookYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/mutatingwebhook.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesPoddisruptionbudgetYaml = []byte(`{{- if .Values.global.defaultPodDisruptionBudget.enabled }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: istio-sidecar-injector
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: sidecar-injector
+    release: {{ .Release.Name }}
+    istio: sidecar-injector
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: sidecar-injector
+      release: {{ .Release.Name }}
+      istio: sidecar-injector
+{{- end }}
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesPoddisruptionbudgetYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesPoddisruptionbudgetYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesPoddisruptionbudgetYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesPoddisruptionbudgetYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/poddisruptionbudget.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesServiceYaml = []byte(`apiVersion: v1
+kind: Service
+metadata:
+  name: istio-sidecar-injector
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: sidecarInjectorWebhook
+    release: {{ .Release.Name }}
+    istio: sidecar-injector
+spec:
+  ports:
+  - port: 443
+    targetPort: 9443
+  selector:
+    istio: sidecar-injector
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesServiceYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesServiceYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesServiceYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesServiceYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/service.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesServiceaccountYaml = []byte(`apiVersion: v1
+kind: ServiceAccount
+{{- if .Values.global.imagePullSecrets }}
+imagePullSecrets:
+{{- range .Values.global.imagePullSecrets }}
+  - name: {{ . }}
+{{- end }}
+{{- end }}
+metadata:
+  name: istio-sidecar-injector-service-account
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: sidecarInjectorWebhook
+    release: {{ .Release.Name }}
+    istio: sidecar-injector
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesServiceaccountYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesServiceaccountYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesServiceaccountYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesServiceaccountYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/serviceaccount.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectTemplatesSidecarInjectorConfigmapYaml = []byte(`{{- if not .Values.global.omitSidecarInjectorConfigMap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio-sidecar-injector
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+    app: sidecar-injector
+    istio: sidecar-injector
+data:
+  values: |-
+    {{ .Values | toJson }}
+
+  config: |-
+    policy: {{ .Values.global.proxy.autoInject }}
+    alwaysInjectSelector:
+{{ toYaml .Values.sidecarInjectorWebhook.alwaysInjectSelector | trim | indent 6 }}
+    neverInjectSelector:
+{{ toYaml .Values.sidecarInjectorWebhook.neverInjectSelector | trim | indent 6 }}
+{{ .Files.Get "files/injection-template.yaml" | trim | indent 4 }}
+    injectedAnnotations:
+    {{- range $key, $val := .Values.sidecarInjectorWebhook.injectedAnnotations }}
+      "{{ $key }}": "{{ $val }}"
+    {{- end }}
+
+{{- end }}
+`)
+
+func chartsIstioControlIstioAutoinjectTemplatesSidecarInjectorConfigmapYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectTemplatesSidecarInjectorConfigmapYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectTemplatesSidecarInjectorConfigmapYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectTemplatesSidecarInjectorConfigmapYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/templates/sidecar-injector-configmap.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioAutoinjectValuesYaml = []byte(`sidecarInjectorWebhook:
+  # sidecar-injector webhook configuration.
+  # If down, new pods will fail to start or restart for a short time, but they will
+  # retry.
+  replicaCount: 1
+  rollingMaxSurge: 100%
+  rollingMaxUnavailable: 25%
+
+  hub: ""
+  tag: ""
+  image: sidecar_injector
+
+  # This enables injection of sidecar in all namespaces,
+  # with the exception of namespaces with "istio-injection:disabled" annotation
+  # Only one environment should have this enabled.
+  enableNamespacesByDefault: false
+
+  # If true, webhook or istioctl injector will rewrite PodSpec for liveness
+  # health check to redirect request to sidecar. This makes liveness check work
+  # even when mTLS is enabled.
+  rewriteAppHTTPProbe: false
+
+  # If true, a self-signed CA will created in order to issue a certificate that
+  # will be used to authenticate the workload respondible for handling
+  # the sidecar-injector webhook.
+  selfSigned: false
+
+  nodeSelector: {}
+  tolerations: []
+  podAnnotations: {}
+
+  # injectedAnnotations are additional annotations that will be added to the pod spec after injection
+  # This is primarily to support PSP annotations. For example, if you defined a PSP with the annotations:
+  #
+  # annotations:
+  #   apparmor.security.beta.kubernetes.io/allowedProfileNames: runtime/default
+  #   apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+  #
+  # The PSP controller would add corresponding annotations to the pod spec for each container. However, this happens before
+  # the inject adds additional containers, so we must specify them explicitly here. With the above example, we could specify:
+  # injectedAnnotations:
+  #   container.apparmor.security.beta.kubernetes.io/istio-init: runtime/default
+  #   container.apparmor.security.beta.kubernetes.io/istio-proxy: runtime/default
+  injectedAnnotations: {}
+  lifecycle: {}
+
+  # If set, will use the value as injection label. The value must match the 'release' label of the injector,
+  # except when 1.2 istio-injection label is used, which must be set to "enabled".
+  injectLabel: istio-injection
+
+  # Specify the pod anti-affinity that allows you to constrain which nodes
+  # your pod is eligible to be scheduled based on labels on pods that are
+  # already running on the node rather than based on labels on nodes.
+  # There are currently two types of anti-affinity:
+  #    "requiredDuringSchedulingIgnoredDuringExecution"
+  #    "preferredDuringSchedulingIgnoredDuringExecution"
+  # which denote "hard" vs. "soft" requirements, you can define your values
+  # in "podAntiAffinityLabelSelector" and "podAntiAffinityTermLabelSelector"
+  # correspondingly.
+  # For example:
+  # podAntiAffinityLabelSelector:
+  # - key: security
+  #   operator: In
+  #   values: S1,S2
+  #   topologyKey: "kubernetes.io/hostname"
+  # This pod anti-affinity rule says that the pod requires not to be scheduled
+  # onto a node if that node is already running a pod with label having key
+  # "security" and value "S1".
+  podAntiAffinityLabelSelector: []
+  podAntiAffinityTermLabelSelector: []
+
+  # You can use the field called alwaysInjectSelector and neverInjectSelector which will always inject the sidecar or
+  # always skip the injection on pods that match that label selector, regardless of the global policy.
+  # See https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#more-control-adding-exceptions
+  neverInjectSelector: []
+  alwaysInjectSelector: []
+
+  resources: {}
+
+  # Enable objectSelector to filter out pods with no need for sidecar before calling istio-sidecar-injector.
+  # It is disabled by default since this function will only work after k8s v1.15.
+  objectSelector:
+    enabled: false
+    autoInject: true
+
+# If set, no iptable init will be added. It assumes CNI is installed.
+# TODO: rename to 'enableIptables' or add 'interceptionMode: CNI'
+istio_cni:
+  enabled: false
+`)
+
+func chartsIstioControlIstioAutoinjectValuesYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioAutoinjectValuesYaml, nil
+}
+
+func chartsIstioControlIstioAutoinjectValuesYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioAutoinjectValuesYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-autoinject/values.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -15752,6 +11112,17 @@ rules:
     "security.istio.io"]
     resources: ["*/status"]
     verbs: ["update"]
+    # Remove galley's permissions to reconcile the validation config when istiod is present.
+{{- if not (or .Values.global.operatorManageWebhooks .Values.global.istiod.enabled) }}
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations"]
+    verbs: ["*"]
+  # permissions to verify the webhook is ready and rejecting
+  # invalid config. We use --server-dry-run so no config is persisted.
+  - apiGroups: ["networking.istio.io"]
+    verbs: ["create"]
+    resources: ["gateways"]
+{{- end }}
   - apiGroups: ["extensions","apps"]
     resources: ["deployments"]
     resourceNames: ["istio-galley"]
@@ -15860,15 +11231,6 @@ data:
             max_requests: 100000
             max_retries: 3
 
-      - name: sds-grpc
-        type: STATIC
-        http2_protocol_options: {}
-        connect_timeout: 0.250s
-        lb_policy: ROUND_ROBIN
-        hosts:
-        - pipe:
-            path: "/etc/istio/proxy/SDS"
-
       listeners:
       - name: "15019"
         address:
@@ -15910,22 +11272,16 @@ data:
                       timeout: 0.000s
           tls_context:
             common_tls_context:
-              tls_certificate_sds_secret_configs:
-              - name: default
-                sds_config:
-                  api_config_source:
-                    api_type: GRPC
-                    grpc_services:
-                    - envoy_grpc:
-                        cluster_name: sds-grpc
-              validation_context_sds_secret_config:
-                name: ROOTCA
-                sds_config:
-                  api_config_source:
-                    api_type: GRPC
-                    grpc_services:
-                    - envoy_grpc:
-                        cluster_name: sds-grpc
+              alpn_protocols:
+              - h2
+              tls_certificates:
+              - certificate_chain:
+                  filename: /etc/certs/cert-chain.pem
+                private_key:
+                  filename: /etc/certs/key.pem
+              validation_context:
+                trusted_ca:
+                  filename: /etc/certs/root-cert.pem
             require_client_certificate: true
 {{- end }}
 ---
@@ -16049,9 +11405,7 @@ spec:
 {{- else }}
           image: "{{ .Values.galley.hub | default .Values.global.hub }}/{{ .Values.galley.image | default "galley" }}:{{ .Values.galley.tag | default .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           ports:
           - containerPort: 9443
           - containerPort: 15014
@@ -16066,8 +11420,16 @@ spec:
           - --readinessProbePath=/tmp/healthready
           - --readinessProbeInterval=1s
           - --insecure=true
+  {{- if and .Values.global.configValidation (not .Values.global.istiod.enabled) }}
+          - --enable-validation=true
+  {{- else }}
           - --enable-validation=false
+  {{- end }}
+  {{- if or .Values.global.operatorManageWebhooks .Values.global.istiod.enabled  }}
           - --enable-reconcileWebhookConfiguration=false
+  {{- else }}
+          - --enable-reconcileWebhookConfiguration=true
+  {{- end }}
   {{- if .Values.galley.enableServiceDiscovery }}
           - --enableServiceDiscovery=true
   {{- end }}
@@ -16081,6 +11443,11 @@ spec:
 {{- if $.Values.global.logging.level }}
           - --log_output_level={{ $.Values.global.logging.level }}
 {{- end}}
+{{- if .Values.global.certificates }}
+          - --validation.tls.clientCertificate=/etc/dnscerts/cert-chain.pem
+          - --validation.tls.privateKey=/etc/dnscerts/key.pem
+          - --validation.tls.caCertificates=/etc/dnscerts/root-cert.pem
+{{- end }}
           securityContext:
             runAsUser: 1337
             runAsGroup: 1337
@@ -16089,6 +11456,19 @@ spec:
               drop:
               - ALL
           volumeMounts:
+  {{- if and .Values.global.configValidation (not .Values.global.istiod.enabled) }}
+          - name: istio-certs
+            mountPath: /etc/certs
+            readOnly: true
+  {{- end }}
+  {{- if .Values.global.certificates }}
+          - name: dnscerts
+            mountPath: /etc/dnscerts
+            readOnly: true
+  {{- end }}
+          - name: config
+            mountPath: /etc/config
+            readOnly: true
           - name: mesh-config
             mountPath: /etc/mesh-config
             readOnly: true
@@ -16124,9 +11504,7 @@ spec:
 {{- else }}
           image: "{{ .Values.global.hub | default "gcr.io/istio-release" }}/{{ .Values.global.proxy.image | default "proxyv2" }}:{{ .Values.global.tag | default "release-1.1-latest-daily" }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           ports:
           - containerPort: 9902
           args:
@@ -16159,20 +11537,6 @@ spec:
               fieldRef:
                 apiVersion: v1
                 fieldPath: status.podIP
-          - name: JWT_POLICY
-            value: {{ .Values.global.jwtPolicy }}
-          - name: PILOT_CERT_PROVIDER
-            value: {{ .Values.global.pilotCertProvider }}
-          - name: "ISTIO_META_USER_SDS"
-            value: "true"
-          - name: CA_ADDR
-            {{- if .Values.global.caAddress }}
-            value: {{ .Values.global.caAddress }}
-            {{- else if .Values.global.configNamespace }}
-            value: istiod.{{ .Values.global.configNamespace }}.svc:15012
-            {{- else }}
-            value: istiod.istio-system.svc:15012
-            {{- end }}
           resources:
 {{- if .Values.global.proxy.resources }}
 {{ toYaml .Values.global.proxy.resources | indent 12 }}
@@ -16180,40 +11544,34 @@ spec:
 {{ toYaml .Values.global.defaultResources | indent 12 }}
 {{- end }}
           volumeMounts:
-          {{- if eq .Values.global.pilotCertProvider "istiod" }}
-          - mountPath: /var/run/secrets/istio
-            name: istiod-ca-cert
-          {{- end }}
-          {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-          - name: istio-token
-            mountPath: /var/run/secrets/tokens
+          - name: istio-certs
+            mountPath: /etc/certs
             readOnly: true
-          {{- end }}
           - name: envoy-config
             mountPath: /var/lib/istio/galley/envoy
 {{- end }}
       securityContext:
         fsGroup: 1337
       volumes:
+  {{- if or .Values.global.controlPlaneSecurityEnabled (and .Values.global.configValidation (not .Values.global.istiod.enabled)) }}
+      - name: istio-certs
+        secret:
+          secretName: istio.istio-galley-service-account
+  {{- end }}
+  {{- if .Values.global.certificates }}
+      - name: dnscerts
+        secret:
+          secretName: dns.istio-galley-service-account
+  {{- end }}
   {{- if .Values.global.controlPlaneSecurityEnabled }}
       - name: envoy-config
         configMap:
           name: galley-envoy-config
-      {{- if eq .Values.global.pilotCertProvider "istiod" }}
-      - name: istiod-ca-cert
-        configMap:
-          name: istio-ca-root-cert
-      {{- end }}
-      {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-      - name: istio-token
-        projected:
-          sources:
-          - serviceAccountToken:
-              path: istio-token
-              expirationSeconds: 43200
-              audience: {{ .Values.global.sds.token.aud }}
-      {{- end }}
   {{- end }}
+      # galley expects /etc/config to exist even though it doesn't include any files.
+      - name: config
+        emptyDir:
+          medium: Memory
       # Different config map from pilot, to allow independent config and rollout.
       # Both are derived from values.yaml.
       - name: mesh-config
@@ -16357,33 +11715,11 @@ func chartsIstioControlIstioConfigTemplatesServiceaccountYaml() (*asset, error) 
 	return a, nil
 }
 
-var _chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationNoopYaml = []byte(`apiVersion: admissionregistration.k8s.io/v1beta1
-kind: ValidatingWebhookConfiguration
-metadata:
-  name: istio-galley
-  labels:
-    app: galley
-    release: {{ .Release.Name }}
-    istio: galley
-webhooks:
-`)
-
-func chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationNoopYamlBytes() ([]byte, error) {
-	return _chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationNoopYaml, nil
-}
-
-func chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationNoopYaml() (*asset, error) {
-	bytes, err := chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationNoopYamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "charts/istio-control/istio-config/templates/validatingwebhookconfiguration-noop.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlTpl = []byte(`{{ define "validatingwebhookconfiguration.yaml.tpl" }}
+var _chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYaml = []byte(`{{/*
+This version of the validatingwebhookconfiguration is applied directly by
+istio/operator. Galley only patches the caBundle and failurePolicy.
+*/}}
+{{- if .Values.global.istiod.enabled }}
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
@@ -16393,6 +11729,190 @@ metadata:
     release: {{ .Release.Name }}
     istio: galley
 webhooks:
+{{- else }}
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: istio-galley
+  labels:
+    app: galley
+    release: {{ .Release.Name }}
+    istio: galley
+webhooks:
+  - name: pilot.validation.istio.io
+    clientConfig:
+      service:
+        name: istio-galley
+        namespace: {{ .Release.Namespace }}
+        path: "/admitpilot"
+      caBundle: ""
+    rules:
+      - operations:
+        - CREATE
+        - UPDATE
+        apiGroups:
+        - config.istio.io
+        apiVersions:
+        - v1alpha2
+        resources:
+        - httpapispecs
+        - httpapispecbindings
+        - quotaspecs
+        - quotaspecbindings
+      - operations:
+        - CREATE
+        - UPDATE
+        apiGroups:
+        - rbac.istio.io
+        - security.istio.io
+        - authentication.istio.io
+        - networking.istio.io
+        apiVersions:
+        - "*"
+        resources:
+        - "*"
+    # Fail open until the validation webhook is ready. The webhook controller
+    # will update this to `+"`"+`Fail`+"`"+` and patch in the `+"`"+`caBundle`+"`"+` when the webhook
+    # endpoint is ready.
+    failurePolicy: Ignore
+    sideEffects: None
+  - name: mixer.validation.istio.io
+    clientConfig:
+      service:
+        name: istio-galley
+        namespace: {{ .Release.Namespace }}
+        path: "/admitmixer"
+      caBundle: ""
+    rules:
+      - operations:
+        - CREATE
+        - UPDATE
+        apiGroups:
+        - config.istio.io
+        apiVersions:
+        - v1alpha2
+        resources:
+        - rules
+        - attributemanifests
+        - adapters
+        - handlers
+        - instances
+        - templates
+    # Fail open until the validation webhook is ready. The webhook controller
+    # will update this to `+"`"+`Fail`+"`"+` and patch in the `+"`"+`caBundle`+"`"+` when the webhook
+    # endpoint is ready.
+    failurePolicy: Ignore
+    sideEffects: None
+{{- end }}
+---
+`)
+
+func chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYaml, nil
+}
+
+func chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-config/templates/validatingwebhookconfiguration.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlTpl = []byte(`{{/*
+This version of the validatingwebhookconfiguration is applied indirectly
+by galley. This exists to support a smoother upgrade path from istio
+Rversions < 1.4
+*/}}
+{{ define "validatingwebhookconfiguration.yaml.tpl" }}
+{{- if .Values.global.istiod.enabled }}
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: istio-galley
+  labels:
+    app: galley
+    release: {{ .Release.Name }}
+    istio: galley
+webhooks:
+{{- else }}
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: istio-galley
+  labels:
+    app: galley
+    release: {{ .Release.Name }}
+    istio: galley
+webhooks:
+  - name: pilot.validation.istio.io
+    clientConfig:
+      service:
+        name: istio-galley
+        namespace: {{ .Release.Namespace }}
+        path: "/admitpilot"
+      caBundle: ""
+    rules:
+      - operations:
+        - CREATE
+        - UPDATE
+        apiGroups:
+        - config.istio.io
+        apiVersions:
+        - v1alpha2
+        resources:
+        - httpapispecs
+        - httpapispecbindings
+        - quotaspecs
+        - quotaspecbindings
+      - operations:
+        - CREATE
+        - UPDATE
+        apiGroups:
+        - rbac.istio.io
+        - security.istio.io
+        - authentication.istio.io
+        - networking.istio.io
+        apiVersions:
+        - "*"
+        resources:
+        - "*"
+    # Fail open until the validation webhook is ready. The webhook controller
+    # will update this to `+"`"+`Fail`+"`"+` and patch in the `+"`"+`caBundle`+"`"+` when the webhook
+    # endpoint is ready.
+    failurePolicy: Ignore
+    sideEffects: None
+  - name: mixer.validation.istio.io
+    clientConfig:
+      service:
+        name: istio-galley
+        namespace: {{ .Release.Namespace }}
+        path: "/admitmixer"
+      caBundle: ""
+    rules:
+      - operations:
+        - CREATE
+        - UPDATE
+        apiGroups:
+        - config.istio.io
+        apiVersions:
+        - v1alpha2
+        resources:
+        - rules
+        - attributemanifests
+        - adapters
+        - handlers
+        - instances
+        - templates
+    # Fail open until the validation webhook is ready. The webhook controller
+    # will update this to `+"`"+`Fail`+"`"+` and patch in the `+"`"+`caBundle`+"`"+` when the webhook
+    # endpoint is ready.
+    failurePolicy: Ignore
+    sideEffects: None
+{{- end }}
 {{- end }}
 ---
 `)
@@ -16528,1859 +12048,6 @@ func chartsIstioControlIstioDiscoveryNotesTxt() (*asset, error) {
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryFilesGenIstioYaml = []byte(`---
-# Source: istio-discovery/templates/poddisruptionbudget.yaml
-
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: istiod
-  namespace: istio-system
-  labels:
-    app: istiod
-    release: istio-base
-    istio: pilot
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: istiod
-      istio: pilot
----
-
----
-# Source: istio-discovery/templates/configmap.yaml
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: istio
-  namespace: istio-system
-  labels:
-    release: istio-base
-data:
-
-  # Configuration file for the mesh networks to be used by the Split Horizon EDS.
-  meshNetworks: |-
-    networks: {}
-
-  values.yaml: |-
-    appNamespaces: []
-    autoscaleEnabled: true
-    autoscaleMax: 5
-    autoscaleMin: 1
-    configMap: true
-    configNamespace: istio-config
-    configSource:
-      subscribedResources: []
-    cpu:
-      targetAverageUtilization: 80
-    deploymentLabels: {}
-    enableProtocolSniffingForInbound: false
-    enableProtocolSniffingForOutbound: true
-    env: {}
-    hub: ""
-    image: pilot
-    ingress:
-      ingressClass: istio
-      ingressControllerMode: STRICT
-      ingressService: istio-ingressgateway
-    jwksResolverExtraRootCA: ""
-    keepaliveMaxServerConnectionAge: 30m
-    nodeSelector: {}
-    plugins: []
-    podAnnotations: {}
-    podAntiAffinityLabelSelector: []
-    podAntiAffinityTermLabelSelector: []
-    policy:
-      enabled: false
-    replicaCount: 1
-    resources:
-      requests:
-        cpu: 500m
-        memory: 2048Mi
-    rollingMaxSurge: 100%
-    rollingMaxUnavailable: 25%
-    tag: ""
-    tolerations: []
-    traceSampling: 1
-
-  mesh: |-
-    # Set enableTracing to false to disable request tracing.
-    enableTracing: true
-
-    # Set accessLogFile to empty string to disable access log.
-    accessLogFile: ""
-
-    accessLogFormat: ""
-
-    accessLogEncoding: 'TEXT'
-
-    enableEnvoyAccessLogService: false
-    # reportBatchMaxEntries is the number of requests that are batched before telemetry data is sent to the mixer server
-    reportBatchMaxEntries: 100
-    # reportBatchMaxTime is the max waiting time before the telemetry data of a request is sent to the mixer server
-    reportBatchMaxTime: 1s
-    disableMixerHttpReports: true
-
-    # Set the following variable to true to disable policy checks by the Mixer.
-    # Note that metrics will still be reported to the Mixer.
-    disablePolicyChecks: true
-
-    # Automatic protocol detection uses a set of heuristics to
-    # determine whether the connection is using TLS or not (on the
-    # server side), as well as the application protocol being used
-    # (e.g., http vs tcp). These heuristics rely on the client sending
-    # the first bits of data. For server first protocols like MySQL,
-    # MongoDB, etc., Envoy will timeout on the protocol detection after
-    # the specified period, defaulting to non mTLS plain TCP
-    # traffic. Set this field to tweak the period that Envoy will wait
-    # for the client to send the first bits of data. (MUST BE >=1ms)
-    protocolDetectionTimeout: 100ms
-
-    # This is the k8s ingress service name, update if you used a different name
-    ingressService: "istio-ingressgateway"
-    ingressControllerMode: "STRICT"
-    ingressClass: "istio"
-
-    # The trust domain corresponds to the trust root of a system.
-    # Refer to https://github.com/spiffe/spiffe/blob/master/standards/SPIFFE-ID.md#21-trust-domain
-    trustDomain: "cluster.local"
-
-    #  The trust domain aliases represent the aliases of trust_domain.
-    #  For example, if we have
-    #  trustDomain: td1
-    #  trustDomainAliases: [“td2”, "td3"]
-    #  Any service with the identity "td1/ns/foo/sa/a-service-account", "td2/ns/foo/sa/a-service-account",
-    #  or "td3/ns/foo/sa/a-service-account" will be treated the same in the Istio mesh.
-    trustDomainAliases:
-
-    # Used by pilot-agent
-    sdsUdsPath: "unix:/etc/istio/proxy/SDS"
-
-    # If true, automatically configure client side mTLS settings to match the corresponding service's
-    # server side mTLS authentication policy, when destination rule for that service does not specify
-    # TLS settings.
-    enableAutoMtls: true
-
-    outboundTrafficPolicy:
-      mode: ALLOW_ANY
-    localityLbSetting:
-      enabled: true
-
-    # Configures DNS certificates provisioned through Chiron linked into Pilot.
-    # The DNS certificate provisioning is enabled by default now so it get tested.
-    # TODO (lei-tang): we'll decide whether enable it by default or not before Istio 1.4 Release.
-    certificates:
-      []
-
-    defaultConfig:
-      #
-      # TCP connection timeout between Envoy & the application, and between Envoys.
-      connectTimeout: 10s
-      #
-      ### ADVANCED SETTINGS #############
-      # Where should envoy's configuration be stored in the istio-proxy container
-      configPath: "/etc/istio/proxy"
-      # The pseudo service name used for Envoy.
-      serviceCluster: istio-proxy
-      # These settings that determine how long an old Envoy
-      # process should be kept alive after an occasional reload.
-      drainDuration: 45s
-      parentShutdownDuration: 1m0s
-      #
-      # Port where Envoy listens (on local host) for admin commands
-      # You can exec into the istio-proxy container in a pod and
-      # curl the admin port (curl http://localhost:15000/) to obtain
-      # diagnostic information from Envoy. See
-      # https://lyft.github.io/envoy/docs/operations/admin.html
-      # for more details
-      proxyAdminPort: 15000
-      #
-      # Set concurrency to a specific number to control the number of Proxy worker threads.
-      # If set to 0 (default), then start worker thread for each CPU thread/core.
-      concurrency: 2
-      #
-      tracing:
-        zipkin:
-          # Address of the Zipkin collector
-          address: zipkin.istio-system:9411
-
-      # controlPlaneAuthPolicy is for mounted secrets, will wait for the files.
-      controlPlaneAuthPolicy: NONE
-      discoveryAddress: istiod.istio-system.svc:15012
-
----
-
----
-# Source: istio-discovery/templates/istiod-injector-configmap.yaml
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: istio-sidecar-injector
-  namespace: istio-system
-  labels:
-    release: istio-base
-data:
-
-  values: |-
-    {
-      "global": {
-        "arch": {
-          "amd64": 2,
-          "ppc64le": 2,
-          "s390x": 2
-        },
-        "caAddress": "",
-        "certificates": [],
-        "configNamespace": "istio-system",
-        "configRootNamespace": "istio-system",
-        "configValidation": true,
-        "controlPlaneSecurityEnabled": true,
-        "createRemoteSvcEndpoints": false,
-        "defaultConfigVisibilitySettings": [],
-        "defaultNodeSelector": {},
-        "defaultPodDisruptionBudget": {
-          "enabled": true
-        },
-        "defaultResources": {
-          "requests": {
-            "cpu": "10m"
-          }
-        },
-        "defaultTolerations": [],
-        "disablePolicyChecks": true,
-        "enableHelmTest": false,
-        "enableTracing": true,
-        "hub": "gcr.io/istio-testing",
-        "imagePullPolicy": "",
-        "imagePullSecrets": [],
-        "istioNamespace": "istio-system",
-        "istiod": {
-          "enabled": true
-        },
-        "jwtPolicy": "third-party-jwt",
-        "k8sIngress": {
-          "enableHttps": false,
-          "enabled": false,
-          "gatewayName": "ingressgateway"
-        },
-        "localityLbSetting": {
-          "enabled": true
-        },
-        "logAsJson": false,
-        "logging": {
-          "level": "default:info"
-        },
-        "meshExpansion": {
-          "enabled": false,
-          "useILB": false
-        },
-        "meshID": "",
-        "meshNetworks": {},
-        "mountMtlsCerts": false,
-        "mtls": {
-          "auto": true,
-          "enabled": false
-        },
-        "multiCluster": {
-          "clusterName": "",
-          "enabled": false
-        },
-        "network": "",
-        "omitSidecarInjectorConfigMap": false,
-        "oneNamespace": false,
-        "operatorManageWebhooks": false,
-        "outboundTrafficPolicy": {
-          "mode": "ALLOW_ANY"
-        },
-        "pilotCertProvider": "istiod",
-        "policyCheckFailOpen": false,
-        "policyNamespace": "istio-system",
-        "priorityClassName": "",
-        "prometheusNamespace": "istio-system",
-        "proxy": {
-          "accessLogEncoding": "TEXT",
-          "accessLogFile": "",
-          "accessLogFormat": "",
-          "autoInject": "enabled",
-          "clusterDomain": "cluster.local",
-          "componentLogLevel": "misc:error",
-          "concurrency": 2,
-          "dnsRefreshRate": "300s",
-          "enableCoreDump": false,
-          "envoyAccessLogService": {
-            "enabled": false,
-            "host": null,
-            "port": null,
-            "tcpKeepalive": {
-              "interval": "10s",
-              "probes": 3,
-              "time": "10s"
-            },
-            "tlsSettings": {
-              "caCertificates": null,
-              "clientCertificate": null,
-              "mode": "DISABLE",
-              "privateKey": null,
-              "sni": null,
-              "subjectAltNames": []
-            }
-          },
-          "envoyMetricsService": {
-            "enabled": false,
-            "host": null,
-            "port": null,
-            "tcpKeepalive": {
-              "interval": "10s",
-              "probes": 3,
-              "time": "10s"
-            },
-            "tlsSettings": {
-              "caCertificates": null,
-              "clientCertificate": null,
-              "mode": "DISABLE",
-              "privateKey": null,
-              "sni": null,
-              "subjectAltNames": []
-            }
-          },
-          "envoyStatsd": {
-            "enabled": false,
-            "host": null,
-            "port": null
-          },
-          "excludeIPRanges": "",
-          "excludeInboundPorts": "",
-          "excludeOutboundPorts": "",
-          "image": "proxyv2",
-          "includeIPRanges": "*",
-          "includeInboundPorts": "*",
-          "kubevirtInterfaces": "",
-          "logLevel": "warning",
-          "privileged": false,
-          "protocolDetectionTimeout": "100ms",
-          "readinessFailureThreshold": 30,
-          "readinessInitialDelaySeconds": 1,
-          "readinessPeriodSeconds": 2,
-          "resources": {
-            "limits": {
-              "cpu": "2000m",
-              "memory": "1024Mi"
-            },
-            "requests": {
-              "cpu": "100m",
-              "memory": "128Mi"
-            }
-          },
-          "statusPort": 15020,
-          "tracer": "zipkin"
-        },
-        "proxy_init": {
-          "image": "proxyv2",
-          "resources": {
-            "limits": {
-              "cpu": "100m",
-              "memory": "50Mi"
-            },
-            "requests": {
-              "cpu": "10m",
-              "memory": "10Mi"
-            }
-          }
-        },
-        "remotePilotAddress": "",
-        "remotePolicyAddress": "",
-        "remoteTelemetryAddress": "",
-        "sds": {
-          "enabled": false,
-          "token": {
-            "aud": "istio-ca"
-          },
-          "udsPath": ""
-        },
-        "sts": {
-          "servicePort": 0
-        },
-        "tag": "latest",
-        "telemetryNamespace": "istio-system",
-        "tracer": {
-          "datadog": {
-            "address": "$(HOST_IP):8126"
-          },
-          "lightstep": {
-            "accessToken": "",
-            "address": "",
-            "cacertPath": "",
-            "secure": true
-          },
-          "stackdriver": {
-            "debug": false,
-            "maxNumberOfAnnotations": 200,
-            "maxNumberOfAttributes": 200,
-            "maxNumberOfMessageEvents": 200
-          },
-          "zipkin": {
-            "address": ""
-          }
-        },
-        "trustDomain": "cluster.local",
-        "trustDomainAliases": [],
-        "useMCP": false
-      },
-      "sidecarInjectorWebhook": {
-        "alwaysInjectSelector": [],
-        "enableNamespacesByDefault": false,
-        "injectLabel": "istio-injection",
-        "injectedAnnotations": {},
-        "neverInjectSelector": [],
-        "objectSelector": {
-          "autoInject": true,
-          "enabled": false
-        }
-      }
-    }
-
-  # To disable injection: use omitSidecarInjectorConfigMap, which disables the webhook patching
-  # and istiod webhook functionality.
-  #
-  # New fields should not use Values - it is a 'primary' config object, users should be able
-  # to fine tune it or use it with kube-inject.
-  config: |-
-    policy: enabled
-    alwaysInjectSelector:
-            []
-    neverInjectSelector:
-            []
-    injectedAnnotations:
-
-    # Configmap optimized for Istiod. Please DO NOT MERGE all changes from istio - in particular those dependent on
-    # Values.yaml, which should not be used by istiod.
-    
-    # Istiod only uses SDS based config ( files will mapped/handled by SDS).
-    
-    template: |
-      rewriteAppHTTPProbe: {{ valueOrDefault .Values.sidecarInjectorWebhook.rewriteAppHTTPProbe false }}
-      initContainers:
-      {{ if ne (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`NONE`+"`"+` }}
-      {{ if .Values.istio_cni.enabled -}}
-      - name: istio-validation
-      {{ else -}}
-      - name: istio-init
-      {{ end -}}
-      {{- if contains "/" .Values.global.proxy_init.image }}
-        image: "{{ .Values.global.proxy_init.image }}"
-      {{- else }}
-        image: "{{ .Values.global.hub }}/{{ .Values.global.proxy_init.image }}:{{ .Values.global.tag }}"
-      {{- end }}
-        args:
-        - istio-iptables
-        - "-p"
-        - 15001
-        - "-z"
-        - "15006"
-        - "-u"
-        - 1337
-        - "-m"
-        - "{{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode }}"
-        - "-i"
-        - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/includeOutboundIPRanges`+"`"+` .Values.global.proxy.includeIPRanges }}"
-        - "-x"
-        - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeOutboundIPRanges`+"`"+` .Values.global.proxy.excludeIPRanges }}"
-        - "-b"
-        - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/includeInboundPorts`+"`"+` `+"`"+`*`+"`"+` }}"
-        - "-d"
-        - "15090,{{ excludeInboundPort (annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort) (annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeInboundPorts`+"`"+` .Values.global.proxy.excludeInboundPorts) }}"
-        {{ if or (isset .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/excludeOutboundPorts`+"`"+`) (ne (valueOrDefault .Values.global.proxy.excludeOutboundPorts "") "") -}}
-        - "-o"
-        - "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeOutboundPorts`+"`"+` .Values.global.proxy.excludeOutboundPorts }}"
-        {{ end -}}
-        {{ if (isset .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/kubevirtInterfaces`+"`"+`) -}}
-        - "-k"
-        - "{{ index .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/kubevirtInterfaces`+"`"+` }}"
-        {{ end -}}
-        {{ if .Values.istio_cni.enabled -}}
-        - "--run-validation"
-        - "--skip-rule-apply"
-        {{ end -}}
-        imagePullPolicy: "{{ valueOrDefault .Values.global.imagePullPolicy `+"`"+`Always`+"`"+` }}"
-      {{- if .Values.global.proxy_init.resources }}
-        resources:
-          {{ toYaml .Values.global.proxy_init.resources | indent 4 }}
-      {{- else }}
-        resources: {}
-      {{- end }}
-        securityContext:
-          allowPrivilegeEscalation: {{ .Values.global.proxy.privileged }}
-          privileged: {{ .Values.global.proxy.privileged }}
-          capabilities:
-        {{- if not .Values.istio_cni.enabled }}
-            add:
-            - NET_ADMIN
-            - NET_RAW
-        {{- end }}
-            drop:
-            - ALL
-          readOnlyRootFilesystem: false
-        {{- if not .Values.istio_cni.enabled }}
-          runAsGroup: 0
-          runAsNonRoot: false
-          runAsUser: 0
-        {{- else }}
-          runAsGroup: 1337
-          runAsUser: 1337
-          runAsNonRoot: true
-        {{- end }}
-        restartPolicy: Always
-      {{ end -}}
-      {{- if eq .Values.global.proxy.enableCoreDump true }}
-      - name: enable-core-dump
-        args:
-        - -c
-        - sysctl -w kernel.core_pattern=/var/lib/istio/core.proxy && ulimit -c unlimited
-        command:
-          - /bin/sh
-      {{- if contains "/" .Values.global.proxy_init.image }}
-        image: "{{ .Values.global.proxy_init.image }}"
-      {{- else }}
-        image: "{{ .Values.global.hub }}/{{ .Values.global.proxy_init.image }}:{{ .Values.global.tag }}"
-      {{- end }}
-        imagePullPolicy: "{{ valueOrDefault .Values.global.imagePullPolicy `+"`"+`Always`+"`"+` }}"
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: true
-          capabilities:
-            add:
-            - SYS_ADMIN
-            drop:
-            - ALL
-          privileged: true
-          readOnlyRootFilesystem: false
-          runAsGroup: 0
-          runAsNonRoot: false
-          runAsUser: 0
-      {{ end }}
-      containers:
-      - name: istio-proxy
-      {{- if contains "/" (annotation .ObjectMeta `+"`"+`sidecar.istio.io/proxyImage`+"`"+` .Values.global.proxy.image) }}
-        image: "{{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/proxyImage`+"`"+` .Values.global.proxy.image }}"
-      {{- else }}
-        image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
-      {{- end }}
-        ports:
-        - containerPort: 15090
-          protocol: TCP
-          name: http-envoy-prom
-        args:
-        - proxy
-        - sidecar
-        - --domain
-        - $(POD_NAMESPACE).svc.{{ .Values.global.proxy.clusterDomain }}
-        - --serviceCluster
-        {{ if ne "" (index .ObjectMeta.Labels "app") -}}
-        - "{{ index .ObjectMeta.Labels `+"`"+`app`+"`"+` }}.$(POD_NAMESPACE)"
-        {{ else -}}
-        - "{{ valueOrDefault .DeploymentMeta.Name `+"`"+`istio-proxy`+"`"+` }}.{{ valueOrDefault .DeploymentMeta.Namespace `+"`"+`default`+"`"+` }}"
-        {{ end -}}
-        - --proxyLogLevel={{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/logLevel`+"`"+` .Values.global.proxy.logLevel}}
-        - --proxyComponentLogLevel={{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/componentLogLevel`+"`"+` .Values.global.proxy.componentLogLevel}}
-      {{- if .Values.global.sts.servicePort }}
-        - --stsPort={{ .Values.global.sts.servicePort }}
-      {{- end }}
-      {{- if .Values.global.trustDomain }}
-        - --trust-domain={{ .Values.global.trustDomain }}
-      {{- end }}
-      {{- if .Values.global.logAsJson }}
-        - --log_as_json
-      {{- end }}
-        - --controlPlaneBootstrap=false
-      {{- if .Values.global.proxy.lifecycle }}
-        lifecycle:
-          {{ toYaml .Values.global.proxy.lifecycle | indent 4 }}
-        {{- end }}
-        env:
-        - name: JWT_POLICY
-          value: {{ .Values.global.jwtPolicy }}
-        - name: PILOT_CERT_PROVIDER
-          value: {{ .Values.global.pilotCertProvider }}
-        # Temp, pending PR to make it default or based on the istiodAddr env
-        - name: CA_ADDR
-        {{- if .Values.global.caAddress }}
-          value: {{ .Values.global.caAddress }}
-        {{- else if .Values.global.configNamespace }}
-          value: istiod.{{ .Values.global.configNamespace }}.svc:15012
-        {{- else }}
-          value: istiod.istio-system.svc:15012
-        {{- end }}
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: INSTANCE_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
-        - name: SERVICE_ACCOUNT
-          valueFrom:
-            fieldRef:
-              fieldPath: spec.serviceAccountName
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-        - name: MESH_CONFIG
-          value: |
-                 {{ protoToJSON .MeshConfig }}
-        - name: ISTIO_META_POD_PORTS
-          value: |-
-            [
-            {{- $first := true }}
-            {{- range $index1, $c := .Spec.Containers }}
-              {{- range $index2, $p := $c.Ports }}
-                {{- if (structToJSON $p) }}
-                {{if not $first}},{{end}}{{ structToJSON $p }}
-                {{- $first = false }}
-                {{- end }}
-              {{- end}}
-            {{- end}}
-            ]
-        - name: ISTIO_META_CLUSTER_ID
-          value: "{{ valueOrDefault .Values.global.multiCluster.clusterName `+"`"+`Kubernetes`+"`"+` }}"
-        - name: ISTIO_META_POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: ISTIO_META_CONFIG_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: ISTIO_META_INTERCEPTION_MODE
-          value: "{{ or (index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/interceptionMode`+"`"+`) .ProxyConfig.InterceptionMode.String }}"
-        {{- if .Values.global.network }}
-        - name: ISTIO_META_NETWORK
-          value: "{{ .Values.global.network }}"
-        {{- end }}
-        {{ if .ObjectMeta.Annotations }}
-        - name: ISTIO_METAJSON_ANNOTATIONS
-          value: |
-                 {{ toJSON .ObjectMeta.Annotations }}
-        {{ end }}
-        {{- if .DeploymentMeta.Name }}
-        - name: ISTIO_META_WORKLOAD_NAME
-          value: {{ .DeploymentMeta.Name }}
-        {{ end }}
-        {{- if and .TypeMeta.APIVersion .DeploymentMeta.Name }}
-        - name: ISTIO_META_OWNER
-          value: kubernetes://apis/{{ .TypeMeta.APIVersion }}/namespaces/{{ valueOrDefault .DeploymentMeta.Namespace `+"`"+`default`+"`"+` }}/{{ toLower .TypeMeta.Kind}}s/{{ .DeploymentMeta.Name }}
-        {{- end}}
-        {{- if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+`) }}
-        - name: ISTIO_BOOTSTRAP_OVERRIDE
-          value: "/etc/istio/custom-bootstrap/custom_bootstrap.json"
-        {{- end }}
-        {{- if .Values.global.meshID }}
-        - name: ISTIO_META_MESH_ID
-          value: "{{ .Values.global.meshID }}"
-        {{- else if .Values.global.trustDomain }}
-        - name: ISTIO_META_MESH_ID
-          value: "{{ .Values.global.trustDomain }}"
-        {{- end }}
-        {{- if and (eq .Values.global.proxy.tracer "datadog") (isset .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
-        {{- range $key, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
-        - name: {{ $key }}
-          value: "{{ $value }}"
-        {{- end }}
-        {{- end }}
-        {{- range $key, $value := .ProxyConfig.ProxyMetadata }}
-        - name: {{ $key }}
-          value: "{{ $value }}"
-        {{- end }}
-        imagePullPolicy: "{{ valueOrDefault .Values.global.imagePullPolicy `+"`"+`Always`+"`"+` }}"
-        {{ if ne (annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort) `+"`"+`0`+"`"+` }}
-        readinessProbe:
-          httpGet:
-            path: /healthz/ready
-            port: 15090
-          initialDelaySeconds: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/initialDelaySeconds`+"`"+` .Values.global.proxy.readinessInitialDelaySeconds }}
-          periodSeconds: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/periodSeconds`+"`"+` .Values.global.proxy.readinessPeriodSeconds }}
-          failureThreshold: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/failureThreshold`+"`"+` .Values.global.proxy.readinessFailureThreshold }}
-        {{ end -}}
-        securityContext:
-          allowPrivilegeEscalation: {{ .Values.global.proxy.privileged }}
-          capabilities:
-            {{ if or (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`TPROXY`+"`"+`) (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/capNetBindService`+"`"+` .Values.global.proxy.capNetBindService) `+"`"+`true`+"`"+`) -}}
-            add:
-            {{ if eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`TPROXY`+"`"+` -}}
-            - NET_ADMIN
-            {{- end }}
-            {{ if eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/capNetBindService`+"`"+` .Values.global.proxy.capNetBindService) `+"`"+`true`+"`"+` -}}
-            - NET_BIND_SERVICE
-            {{- end }}
-            {{- end }}
-            drop:
-            - ALL
-          privileged: {{ .Values.global.proxy.privileged }}
-          readOnlyRootFilesystem: {{ not .Values.global.proxy.enableCoreDump }}
-          runAsGroup: 1337
-          fsGroup: 1337
-          {{ if or (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode) `+"`"+`TPROXY`+"`"+`) (eq (annotation .ObjectMeta `+"`"+`sidecar.istio.io/capNetBindService`+"`"+` .Values.global.proxy.capNetBindService) `+"`"+`true`+"`"+`) -}}
-          runAsNonRoot: false
-          runAsUser: 0
-          {{- else -}}
-          runAsNonRoot: true
-          runAsUser: 1337
-          {{- end }}
-        resources:
-          {{ if or (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyCPU`+"`"+`) (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyMemory`+"`"+`) -}}
-          requests:
-            {{ if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyCPU`+"`"+`) -}}
-            cpu: "{{ index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyCPU`+"`"+` }}"
-            {{ end}}
-            {{ if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyMemory`+"`"+`) -}}
-            memory: "{{ index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/proxyMemory`+"`"+` }}"
-            {{ end }}
-        {{ else -}}
-      {{- if .Values.global.proxy.resources }}
-          {{ toYaml .Values.global.proxy.resources | indent 4 }}
-      {{- end }}
-        {{  end -}}
-        volumeMounts:
-        {{- if eq .Values.global.pilotCertProvider "istiod" }}
-        - mountPath: /var/run/secrets/istio
-          name: istiod-ca-cert
-        {{- end }}
-        {{ if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+`) }}
-        - mountPath: /etc/istio/custom-bootstrap
-          name: custom-bootstrap-volume
-        {{- end }}
-        # SDS channel between istioagent and Envoy
-        - mountPath: /etc/istio/proxy
-          name: istio-envoy
-        {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-        - mountPath: /var/run/secrets/tokens
-          name: istio-token
-        {{- end }}
-        {{- if .Values.global.mountMtlsCerts }}
-        # Use the key and cert mounted to /etc/certs/ for the in-cluster mTLS communications.
-        - mountPath: /etc/certs/
-          name: istio-certs
-          readOnly: true
-        {{- end }}
-        - name: istio-podinfo
-          mountPath: /etc/istio/pod
-        {{- if and (eq .Values.global.proxy.tracer "lightstep") .Values.global.tracer.lightstep.cacertPath }}
-        - mountPath: {{ directory .ProxyConfig.GetTracing.GetLightstep.GetCacertPath }}
-          name: lightstep-certs
-          readOnly: true
-        {{- end }}
-          {{- if isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolumeMount`+"`"+` }}
-          {{ range $index, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolumeMount`+"`"+`) }}
-        - name: "{{  $index }}"
-          {{ toYaml $value | indent 4 }}
-          {{ end }}
-          {{- end }}
-      volumes:
-      {{- if (isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+`) }}
-      - name: custom-bootstrap-volume
-        configMap:
-          name: {{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/bootstrapOverride`+"`"+` "" }}
-      {{- end }}
-      # SDS channel between istioagent and Envoy
-      - emptyDir:
-          medium: Memory
-        name: istio-envoy
-      - name: istio-podinfo
-        downwardAPI:
-          items:
-            - path: "labels"
-              fieldRef:
-                fieldPath: metadata.labels
-            - path: "annotations"
-              fieldRef:
-                fieldPath: metadata.annotations
-      {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-      - name: istio-token
-        projected:
-          sources:
-          - serviceAccountToken:
-              path: istio-token
-              expirationSeconds: 43200
-              audience: {{ .Values.global.sds.token.aud }}
-      {{- end }}
-      {{- if eq .Values.global.pilotCertProvider "istiod" }}
-      - name: istiod-ca-cert
-        configMap:
-          name: istio-ca-root-cert
-      {{- end }}
-      {{- if .Values.global.mountMtlsCerts }}
-      # Use the key and cert mounted to /etc/certs/ for the in-cluster mTLS communications.
-      - name: istio-certs
-        secret:
-          optional: true
-          {{ if eq .Spec.ServiceAccountName "" }}
-          secretName: istio.default
-          {{ else -}}
-          secretName: {{  printf "istio.%s" .Spec.ServiceAccountName }}
-          {{  end -}}
-      {{- end }}
-        {{- if isset .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolume`+"`"+` }}
-        {{range $index, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`sidecar.istio.io/userVolume`+"`"+`) }}
-      - name: "{{ $index }}"
-        {{ toYaml $value | indent 2 }}
-        {{ end }}
-        {{ end }}
-      {{- if and (eq .Values.global.proxy.tracer "lightstep") .Values.global.tracer.lightstep.cacertPath }}
-      - name: lightstep-certs
-        secret:
-          optional: true
-          secretName: lightstep.cacert
-      {{- end }}
-      {{- if .Values.global.podDNSSearchNamespaces }}
-      dnsConfig:
-        searches:
-          {{- range .Values.global.podDNSSearchNamespaces }}
-          - {{ render . }}
-          {{- end }}
-      {{- end }}
-      podRedirectAnnot:
-        sidecar.istio.io/interceptionMode: "{{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/interceptionMode`+"`"+` .ProxyConfig.InterceptionMode }}"
-        traffic.sidecar.istio.io/includeOutboundIPRanges: "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/includeOutboundIPRanges`+"`"+` .Values.global.proxy.includeIPRanges }}"
-        traffic.sidecar.istio.io/excludeOutboundIPRanges: "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeOutboundIPRanges`+"`"+` .Values.global.proxy.excludeIPRanges }}"
-        traffic.sidecar.istio.io/includeInboundPorts: "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/includeInboundPorts`+"`"+` (includeInboundPorts .Spec.Containers) }}"
-        traffic.sidecar.istio.io/excludeInboundPorts: "{{ excludeInboundPort (annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort) (annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeInboundPorts`+"`"+` .Values.global.proxy.excludeInboundPorts) }}"
-      {{ if or (isset .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/excludeOutboundPorts`+"`"+`) (ne .Values.global.proxy.excludeOutboundPorts "") }}
-        traffic.sidecar.istio.io/excludeOutboundPorts: "{{ annotation .ObjectMeta `+"`"+`traffic.sidecar.istio.io/excludeOutboundPorts`+"`"+` .Values.global.proxy.excludeOutboundPorts }}"
-      {{- end }}
-        traffic.sidecar.istio.io/kubevirtInterfaces: "{{ index .ObjectMeta.Annotations `+"`"+`traffic.sidecar.istio.io/kubevirtInterfaces`+"`"+` }}"
-
----
-# Source: istio-discovery/templates/service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: istio-pilot
-  namespace: istio-system
-  labels:
-    app: pilot
-    release: istio-base
-    istio: pilot
-spec:
-  ports:
-  - port: 15010
-    name: grpc-xds # direct
-  - port: 15011
-    name: https-xds # mTLS
-  - port: 15012
-    name: https-dns # mTLS with k8s-signed cert
-  - port: 8080
-    name: http-legacy-discovery # direct
-  - port: 15014
-    name: http-monitoring
-  - port: 443
-    name: https-webhook # validation and injection
-    targetPort: 15017
-  selector:
-    istio: pilot
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: istiod
-  namespace: istio-system
-  labels:
-    app: istiod
-    release: istio-base
-spec:
-  ports:
-    - port: 15012
-      name: https-dns # mTLS with k8s-signed cert
-    - port: 443
-      name: https-webhook # validation and injection
-      targetPort: 15017
-    - port: 15014
-      name: http-monitoring # prometheus stats
-  selector:
-    app: istiod
-    # Label used by the 'default' service. For versioned deployments we match with app and version.
-    # This avoids default deployment picking the canary
-    istio: pilot
----
-
----
-# Source: istio-discovery/templates/deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: istiod
-  namespace: istio-system
-  labels:
-    app: istiod
-    istio: pilot
-    release: istio-base
-spec:
-  strategy:
-    rollingUpdate:
-      maxSurge: 100%
-      maxUnavailable: 25%
-  selector:
-    matchLabels:
-      app: istiod
-      istio: pilot
-  template:
-    metadata:
-      labels:
-        app: istiod
-        # Label used by the 'default' service. For versioned deployments we match with app and version.
-        # This avoids default deployment picking the canary
-        istio: pilot
-      annotations:
-        sidecar.istio.io/inject: "false"
-    spec:
-      serviceAccountName: istio-pilot-service-account
-      securityContext:
-        fsGroup: 1337
-      containers:
-        - name: discovery
-          image: "gcr.io/istio-testing/pilot:latest"
-          args:
-          - "discovery"
-          - --monitoringAddr=:15014
-          - --log_output_level=default:info
-          - --domain
-          - cluster.local
-          - --secureGrpcAddr=:15011
-          - --trust-domain=cluster.local
-          - --keepaliveMaxServerConnectionAge
-          - "30m"
-          # TODO: make default
-          - --disable-install-crds=true
-          ports:
-          - containerPort: 8080
-          - containerPort: 15010
-          - containerPort: 15017
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 5
-          envFrom:
-          # Allow an istiod configmap injecting user-specified env.
-          - configMapRef:
-              name: istiod
-              optional: true
-          env:
-          - name: JWT_POLICY
-            value: third-party-jwt
-          - name: PILOT_CERT_PROVIDER
-            value: istiod
-          - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                apiVersion: v1
-                fieldPath: metadata.name
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                apiVersion: v1
-                fieldPath: metadata.namespace
-          - name: SERVICE_ACCOUNT
-            valueFrom:
-              fieldRef:
-                apiVersion: v1
-                fieldPath: spec.serviceAccountName
-          - name: PILOT_TRACE_SAMPLING
-            value: "1"
-          - name: CONFIG_NAMESPACE
-            value: istio-config
-          - name: PILOT_ENABLE_PROTOCOL_SNIFFING_FOR_OUTBOUND
-            value: "true"
-          - name: PILOT_ENABLE_PROTOCOL_SNIFFING_FOR_INBOUND
-            value: "false"
-          - name: INJECTION_WEBHOOK_CONFIG_NAME
-            value: istio-sidecar-injector
-          - name: ISTIOD_ADDR
-            value: istiod.istio-system.svc:15012
-          - name: PILOT_EXTERNAL_GALLEY
-            value: "false"
-          - name: CLUSTER_ID
-            value: "Kubernetes"
-          resources:
-            requests:
-              cpu: 500m
-              memory: 2048Mi
-          securityContext:
-            runAsUser: 1337
-            runAsGroup: 1337
-            runAsNonRoot: true
-            capabilities:
-              drop:
-              - ALL
-          volumeMounts:
-          - name: config-volume
-            mountPath: /etc/istio/config
-          - name: istio-token
-            mountPath: /var/run/secrets/tokens
-            readOnly: true
-          - name: local-certs
-            mountPath: /var/run/secrets/istio-dns
-          - name: cacerts
-            mountPath: /etc/cacerts
-            readOnly: true
-          - name: inject
-            mountPath: /var/lib/istio/inject
-            readOnly: true
-          - name: istiod
-            mountPath: /var/lib/istio/local
-            readOnly: true
-      volumes:
-      # Technically not needed on this pod - but it helps debugging/testing SDS
-      # Should be removed after everything works.
-      - emptyDir:
-          medium: Memory
-        name: local-certs
-      - name: istio-token
-        projected:
-          sources:
-            - serviceAccountToken:
-                audience: istio-ca
-                expirationSeconds: 43200
-                path: istio-token
-      - name: istiod
-        configMap:
-          name: istiod
-          optional: true
-      # Optional: user-generated root
-      - name: cacerts
-        secret:
-          secretName: cacerts
-          optional: true
-      # Optional - image should have
-      - name: inject
-        configMap:
-          name: istio-sidecar-injector
-          optional: true
-      - name: config-volume
-        configMap:
-          name: istio
-      affinity:      
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: beta.kubernetes.io/arch
-                operator: In
-                values:
-                - "amd64"
-                - "ppc64le"
-                - "s390x"
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 2
-            preference:
-              matchExpressions:
-              - key: beta.kubernetes.io/arch
-                operator: In
-                values:
-                - "amd64"
-          - weight: 2
-            preference:
-              matchExpressions:
-              - key: beta.kubernetes.io/arch
-                operator: In
-                values:
-                - "ppc64le"
-          - weight: 2
-            preference:
-              matchExpressions:
-              - key: beta.kubernetes.io/arch
-                operator: In
-                values:
-                - "s390x"      
----
-
----
-# Source: istio-discovery/templates/autoscale.yaml
-
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: istiod
-  namespace: istio-system
-  labels:
-    app: istiod
-    release: istio-base
-spec:
-  maxReplicas: 5
-  minReplicas: 1
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: istiod
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      targetAverageUtilization: 80
----
----
-# Source: istio-discovery/templates/telemetryv2_1.4.yaml
-
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: metadata-exchange-1.4
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: ANY # inbound, outbound, and gateway
-        proxy:
-          proxyVersion: '^1\.4.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          config:
-            config:
-              configuration: envoy.wasm.metadata_exchange
-              vm_config:
-                runtime: envoy.wasm.runtime.null
-                code:
-                  inline_string: envoy.wasm.metadata_exchange
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: stats-filter-1.4
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.4.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          config:
-            config:
-              root_id: stats_outbound
-              configuration: |
-                {
-                  "debug": "false",
-                  "stat_prefix": "istio",
-                }
-              vm_config:
-                vm_id: stats_outbound
-                runtime: envoy.wasm.runtime.null
-                code:
-                  inline_string: envoy.wasm.stats
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.4.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          config:
-            config:
-              root_id: stats_inbound
-              configuration: |
-                {
-                  "debug": "false",
-                  "stat_prefix": "istio",
-                }
-              vm_config:
-                vm_id: stats_inbound
-                runtime: envoy.wasm.runtime.null
-                code:
-                  inline_string: envoy.wasm.stats
-    - applyTo: HTTP_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.4.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          config:
-            config:
-              root_id: stats_outbound
-              configuration: |
-                {
-                  "debug": "false",
-                  "stat_prefix": "istio",
-                }
-              vm_config:
-                vm_id: stats_outbound
-                runtime: envoy.wasm.runtime.null
-                code:
-                  inline_string: envoy.wasm.stats
----
-
----
-# Source: istio-discovery/templates/telemetryv2_1.5.yaml
-
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: metadata-exchange-1.5
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: ANY # inbound, outbound, and gateway
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                configuration: envoy.wasm.metadata_exchange
-                vm_config:
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.metadata_exchange
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: tcp-metadata-exchange-1.5
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener: {}
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.metadata_exchange
-          config:
-            protocol: istio-peer-exchange
-    - applyTo: CLUSTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.5.*'
-        cluster: {}
-      patch:
-        operation: MERGE
-        value:
-          filters:
-          - name: envoy.filters.network.upstream.metadata_exchange
-            typed_config:
-              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-              type_url: type.googleapis.com/envoy.tcp.metadataexchange.config.MetadataExchange
-              value:
-                protocol: istio-peer-exchange
-    - applyTo: CLUSTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.5.*'
-        cluster: {}
-      patch:
-        operation: MERGE
-        value:
-          filters:
-          - name: envoy.filters.network.upstream.metadata_exchange
-            typed_config:
-              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-              type_url: type.googleapis.com/envoy.tcp.metadataexchange.config.MetadataExchange
-              value:
-                protocol: istio-peer-exchange
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: stats-filter-1.5
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_inbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_inbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
-    - applyTo: HTTP_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: tcp-stats-filter-1.5
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_inbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_inbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
-    - applyTo: NETWORK_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.5.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
----
-
----
-# Source: istio-discovery/templates/telemetryv2_1.6.yaml
-
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: metadata-exchange-1.6
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: ANY # inbound, outbound, and gateway
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                configuration: envoy.wasm.metadata_exchange
-                vm_config:
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.metadata_exchange
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: tcp-metadata-exchange-1.6
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener: {}
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.metadata_exchange
-          config:
-            protocol: istio-peer-exchange
-    - applyTo: CLUSTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        cluster: {}
-      patch:
-        operation: MERGE
-        value:
-          filters:
-          - name: envoy.filters.network.upstream.metadata_exchange
-            typed_config:
-              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-              type_url: type.googleapis.com/envoy.tcp.metadataexchange.config.MetadataExchange
-              value:
-                protocol: istio-peer-exchange
-    - applyTo: CLUSTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.6.*'
-        cluster: {}
-      patch:
-        operation: MERGE
-        value:
-          filters:
-          - name: envoy.filters.network.upstream.metadata_exchange
-            typed_config:
-              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-              type_url: type.googleapis.com/envoy.tcp.metadataexchange.config.MetadataExchange
-              value:
-                protocol: istio-peer-exchange
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: stats-filter-1.6
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_inbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_inbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
-    - applyTo: HTTP_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: tcp-stats-filter-1.6
-  namespace: istio-system
-spec:
-  configPatches:
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_inbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_inbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
-    - applyTo: NETWORK_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
----
-
----
-# Source: istio-discovery/templates/mutatingwebhook.yaml
-# Installed for each revision - not installed for cluster resources ( cluster roles, bindings, crds)
-apiVersion: admissionregistration.k8s.io/v1beta1
-kind: MutatingWebhookConfiguration
-metadata:
-  name: istio-sidecar-injector
-
-  labels:
-    app: sidecar-injector
-    release: istio-base
-webhooks:
-  - name: sidecar-injector.istio.io
-    clientConfig:
-      service:
-        name: istiod
-        namespace: istio-system
-        path: "/inject"
-      caBundle: ""
-    rules:
-      - operations: [ "CREATE" ]
-        apiGroups: [""]
-        apiVersions: ["v1"]
-        resources: ["pods"]
-    failurePolicy: Fail
-    namespaceSelector:
-      matchLabels:
-        istio-injection: enabled
-
----
-# Source: istio-discovery/templates/configmap-jwks.yaml
-
-
-`)
-
-func chartsIstioControlIstioDiscoveryFilesGenIstioYamlBytes() ([]byte, error) {
-	return _chartsIstioControlIstioDiscoveryFilesGenIstioYaml, nil
-}
-
-func chartsIstioControlIstioDiscoveryFilesGenIstioYaml() (*asset, error) {
-	bytes, err := chartsIstioControlIstioDiscoveryFilesGenIstioYamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/files/gen-istio.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
 var _chartsIstioControlIstioDiscoveryFilesInjectionTemplateYaml = []byte(`# Configmap optimized for Istiod. Please DO NOT MERGE all changes from istio - in particular those dependent on
 # Values.yaml, which should not be used by istiod.
 
@@ -18400,7 +12067,7 @@ template: |
   {{- else }}
     image: "{{ .Values.global.hub }}/{{ .Values.global.proxy_init.image }}:{{ .Values.global.tag }}"
   {{- end }}
-    args:
+    command:
     - istio-iptables
     - "-p"
     - 15001
@@ -18503,14 +12170,75 @@ template: |
     - sidecar
     - --domain
     - $(POD_NAMESPACE).svc.{{ .Values.global.proxy.clusterDomain }}
+    - --configPath
+    - "/etc/istio/proxy"
+    - --binaryPath
+    - "/usr/local/bin/envoy"
     - --serviceCluster
     {{ if ne "" (index .ObjectMeta.Labels "app") -}}
     - "{{ index .ObjectMeta.Labels `+"`"+`app`+"`"+` }}.$(POD_NAMESPACE)"
     {{ else -}}
     - "{{ valueOrDefault .DeploymentMeta.Name `+"`"+`istio-proxy`+"`"+` }}.{{ valueOrDefault .DeploymentMeta.Namespace `+"`"+`default`+"`"+` }}"
     {{ end -}}
+    - --drainDuration
+    - "{{ formatDuration .ProxyConfig.DrainDuration }}"
+    - --parentShutdownDuration
+    - "{{ formatDuration .ProxyConfig.ParentShutdownDuration }}"
+    - --discoveryAddress
+    - "{{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/discoveryAddress`+"`"+` .ProxyConfig.DiscoveryAddress }}"
+  {{- if eq .Values.global.proxy.tracer "lightstep" }}
+    - --lightstepAddress
+    - "{{ .ProxyConfig.GetTracing.GetLightstep.GetAddress }}"
+    - --lightstepAccessToken
+    - "{{ .ProxyConfig.GetTracing.GetLightstep.GetAccessToken }}"
+    - --lightstepSecure={{ .ProxyConfig.GetTracing.GetLightstep.GetSecure }}
+    - --lightstepCacertPath
+    - "{{ .ProxyConfig.GetTracing.GetLightstep.GetCacertPath }}"
+  {{- else if eq .Values.global.proxy.tracer "zipkin" }}
+    - --zipkinAddress
+    - "{{ .ProxyConfig.GetTracing.GetZipkin.GetAddress }}"
+  {{- else if eq .Values.global.proxy.tracer "datadog" }}
+    - --datadogAgentAddress
+    - "{{ .ProxyConfig.GetTracing.GetDatadog.GetAddress }}"
+  {{- end }}
     - --proxyLogLevel={{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/logLevel`+"`"+` .Values.global.proxy.logLevel}}
     - --proxyComponentLogLevel={{ annotation .ObjectMeta `+"`"+`sidecar.istio.io/componentLogLevel`+"`"+` .Values.global.proxy.componentLogLevel}}
+    - --connectTimeout
+    - "{{ formatDuration .ProxyConfig.ConnectTimeout }}"
+  {{- if .Values.global.proxy.envoyStatsd.enabled }}
+    - --statsdUdpAddress
+    - "{{ .ProxyConfig.StatsdUdpAddress }}"
+  {{- end }}
+  {{- if .Values.global.proxy.envoyMetricsService.enabled }}
+    - --envoyMetricsService
+    - '{{ protoToJSON .ProxyConfig.EnvoyMetricsService }}'
+  {{- end }}
+  {{- if .Values.global.proxy.envoyAccessLogService.enabled }}
+    - --envoyAccessLogService
+    - '{{ protoToJSON .ProxyConfig.EnvoyAccessLogService }}'
+  {{- end }}
+    - --proxyAdminPort
+    - "{{ .ProxyConfig.ProxyAdminPort }}"
+    {{ if gt .ProxyConfig.Concurrency 0 -}}
+    - --concurrency
+    - "{{ .ProxyConfig.Concurrency }}"
+    {{ end -}}
+    {{- if .Values.global.istiod.enabled }}
+    - --controlPlaneAuthPolicy
+    - NONE
+    {{- else if .Values.global.controlPlaneSecurityEnabled }}
+    - --controlPlaneAuthPolicy
+    - MUTUAL_TLS
+    {{- else }}
+    - --controlPlaneAuthPolicy
+    - NONE
+    {{- end }}
+    - --dnsRefreshRate
+    - {{ valueOrDefault .Values.global.proxy.dnsRefreshRate "300s" }}
+  {{- if (ne (annotation .ObjectMeta "status.sidecar.istio.io/port" .Values.global.proxy.statusPort) "0") }}
+    - --statusPort
+    - "{{ annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort }}"
+  {{- end }}
   {{- if .Values.global.sts.servicePort }}
     - --stsPort={{ .Values.global.sts.servicePort }}
   {{- end }}
@@ -18535,9 +12263,9 @@ template: |
     {{- if .Values.global.caAddress }}
       value: {{ .Values.global.caAddress }}
     {{- else if .Values.global.configNamespace }}
-      value: istiod.{{ .Values.global.configNamespace }}.svc:15012
+      value: istio-pilot.{{ .Values.global.configNamespace }}.svc:15012
     {{- else }}
-      value: istiod.istio-system.svc:15012
+      value: istio-pilot.istio-system.svc:15012
     {{- end }}
     - name: POD_NAME
       valueFrom:
@@ -18559,9 +12287,14 @@ template: |
       valueFrom:
         fieldRef:
           fieldPath: status.hostIP
-    - name: MESH_CONFIG
-      value: |
-             {{ protoToJSON .MeshConfig }}
+  {{- if eq .Values.global.proxy.tracer "datadog" }}
+  {{- if isset .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+` }}
+  {{- range $key, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
+    - name: {{ $key }}
+      value: "{{ $value }}"
+  {{- end }}
+  {{- end }}
+  {{- end }}
     - name: ISTIO_META_POD_PORTS
       value: |-
         [
@@ -18615,10 +12348,22 @@ template: |
     - name: ISTIO_META_MESH_ID
       value: "{{ .Values.global.trustDomain }}"
     {{- end }}
+    {{- if eq .Values.global.proxy.tracer "stackdriver" }}
+    - name: STACKDRIVER_TRACING_ENABLED
+      value: "true"
+    - name: STACKDRIVER_TRACING_DEBUG
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetDebug }}"
+    - name: STACKDRIVER_TRACING_MAX_NUMBER_OF_ANNOTATIONS
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetMaxNumberOfAnnotations.Value }}"
+    - name: STACKDRIVER_TRACING_MAX_NUMBER_OF_ATTRIBUTES
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetMaxNumberOfAttributes.Value }}"
+    - name: STACKDRIVER_TRACING_MAX_NUMBER_OF_MESSAGE_EVENTS
+      value: "{{ .ProxyConfig.GetTracing.GetStackdriver.GetMaxNumberOfMessageEvents.Value }}"
+    {{- end }}
     {{- if and (eq .Values.global.proxy.tracer "datadog") (isset .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
     {{- range $key, $value := fromJSON (index .ObjectMeta.Annotations `+"`"+`apm.datadoghq.com/env`+"`"+`) }}
-    - name: {{ $key }}
-      value: "{{ $value }}"
+      - name: {{ $key }}
+        value: "{{ $value }}"
     {{- end }}
     {{- end }}
     {{- range $key, $value := .ProxyConfig.ProxyMetadata }}
@@ -18630,7 +12375,7 @@ template: |
     readinessProbe:
       httpGet:
         path: /healthz/ready
-        port: 15090
+        port: {{ annotation .ObjectMeta `+"`"+`status.sidecar.istio.io/port`+"`"+` .Values.global.proxy.statusPort }}
       initialDelaySeconds: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/initialDelaySeconds`+"`"+` .Values.global.proxy.readinessInitialDelaySeconds }}
       periodSeconds: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/periodSeconds`+"`"+` .Values.global.proxy.readinessPeriodSeconds }}
       failureThreshold: {{ annotation .ObjectMeta `+"`"+`readiness.status.sidecar.istio.io/failureThreshold`+"`"+` .Values.global.proxy.readinessFailureThreshold }}
@@ -18696,7 +12441,7 @@ template: |
       name: istio-certs
       readOnly: true
     {{- end }}
-    - name: istio-podinfo
+    - name: podinfo
       mountPath: /etc/istio/pod
     {{- if and (eq .Values.global.proxy.tracer "lightstep") .Values.global.tracer.lightstep.cacertPath }}
     - mountPath: {{ directory .ProxyConfig.GetTracing.GetLightstep.GetCacertPath }}
@@ -18719,7 +12464,7 @@ template: |
   - emptyDir:
       medium: Memory
     name: istio-envoy
-  - name: istio-podinfo
+  - name: podinfo
     downwardAPI:
       items:
         - path: "labels"
@@ -18795,28 +12540,6 @@ func chartsIstioControlIstioDiscoveryFilesInjectionTemplateYaml() (*asset, error
 	}
 
 	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/files/injection-template.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _chartsIstioControlIstioDiscoveryKustomizationYaml = []byte(`apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-resources:
-  - files/gen-istio.yaml
-`)
-
-func chartsIstioControlIstioDiscoveryKustomizationYamlBytes() ([]byte, error) {
-	return _chartsIstioControlIstioDiscoveryKustomizationYaml, nil
-}
-
-func chartsIstioControlIstioDiscoveryKustomizationYaml() (*asset, error) {
-	bytes, err := chartsIstioControlIstioDiscoveryKustomizationYamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/kustomization.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -18948,7 +12671,8 @@ func chartsIstioControlIstioDiscoveryTemplates_helpersTpl() (*asset, error) {
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml = []byte(`{{- if and .Values.pilot.autoscaleEnabled .Values.pilot.autoscaleMin .Values.pilot.autoscaleMax }}
+var _chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+{{- if and .Values.pilot.autoscaleEnabled .Values.pilot.autoscaleMin .Values.pilot.autoscaleMax }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -18970,7 +12694,9 @@ spec:
       name: cpu
       targetAverageUtilization: {{ .Values.pilot.cpu.targetAverageUtilization }}
 ---
-{{- end }}`)
+{{- end }}
+{{- end }}
+`)
 
 func chartsIstioControlIstioDiscoveryTemplatesAutoscaleYamlBytes() ([]byte, error) {
 	return _chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml, nil
@@ -18987,7 +12713,470 @@ func chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesConfigmapJwksYaml = []byte(`{{- if .Values.pilot.jwksResolverExtraRootCA }}
+var _chartsIstioControlIstioDiscoveryTemplatesClusterroleGalleyDisableWebhookYaml = []byte(`{{ if .Values.clusterResources }}
+{{/* If we have Istiod enabled and Galley disabled, we may run into issues during upgrade. */}}
+{{/* The old Galley will continuely try to patch its webhook, when we actually want to remove it. */}}
+{{/* This will disable Galley's permission to do so, if galley is disabled. */}}
+{{- if and .Values.global.istiod.enabled (not .Values.galley.enabled) }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: istio-galley-{{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+rules:
+  # For reading Istio resources
+  - apiGroups: [
+    "authentication.istio.io",
+    "config.istio.io",
+    "networking.istio.io",
+    "rbac.istio.io",
+    "security.istio.io"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+    # For updating Istio resource statuses
+  - apiGroups: [
+    "authentication.istio.io",
+    "config.istio.io",
+    "networking.istio.io",
+    "rbac.istio.io",
+    "security.istio.io"]
+    resources: ["*/status"]
+    verbs: ["update"]
+
+    # Remove galley's permissions to reconcile the validation config when istiod is present.
+    # Notably missing here is the permission to modify webhooks.
+
+  - apiGroups: ["extensions","apps"]
+    resources: ["deployments"]
+    resourceNames: ["istio-galley"]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["pods", "nodes", "services", "endpoints", "namespaces"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["extensions"]
+    resources: ["deployments/finalizers"]
+    resourceNames: ["istio-galley"]
+    verbs: ["update"]
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["clusterroles"]
+    verbs: ["get", "list", "watch"]
+---
+{{- end }}
+{{- end }}
+`)
+
+func chartsIstioControlIstioDiscoveryTemplatesClusterroleGalleyDisableWebhookYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioDiscoveryTemplatesClusterroleGalleyDisableWebhookYaml, nil
+}
+
+func chartsIstioControlIstioDiscoveryTemplatesClusterroleGalleyDisableWebhookYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioDiscoveryTemplatesClusterroleGalleyDisableWebhookYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/clusterrole-galley-disable-webhook.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioDiscoveryTemplatesClusterroleYaml = []byte(`{{ if .Values.clusterResources }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: istio-pilot-{{ .Release.Namespace }}
+  labels:
+    app: pilot
+    release: {{ .Release.Name }}
+rules:
+- apiGroups: ["config.istio.io", "rbac.istio.io", "security.istio.io", "networking.istio.io", "authentication.istio.io"]
+  verbs: ["get", "watch", "list"]
+  resources: ["*"]
+- apiGroups: ["apiextensions.k8s.io"]
+  resources: ["customresourcedefinitions"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["extensions"]
+  resources: ["ingresses"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["extensions"]
+  resources: ["ingresses/status"]
+  verbs: ["*"]
+  # TODO: remove, too broad permission, should be namespace only
+- apiGroups: [""]
+  resources: ["configmaps"]
+  # Create and update needed for ingress election
+  verbs: ["get", "list", "watch", "create", "update"]
+- apiGroups: [""]
+  resources: ["endpoints", "pods", "services", "namespaces", "nodes", "secrets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "get", "watch", "list", "update", "delete"]
+- apiGroups: ["certificates.k8s.io"]
+  resources:
+    - "certificatesigningrequests"
+    - "certificatesigningrequests/approval"
+    - "certificatesigningrequests/status"
+  verbs: ["update", "create", "get", "delete", "watch"]
+- apiGroups: ["discovery.k8s.io"]
+  resources: ["endpointslices"]
+  verbs: ["get", "list", "watch"]
+---
+# Dedicated cluster role - istiod will use fewer dangerous permissions ( secret access in particular ).
+# TODO: separate cluster role with the minimal set of permissions needed for a 'tenant' Istiod
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: istiod-{{ .Release.Namespace }}
+  labels:
+    app: istiod
+    release: {{ .Release.Name }}
+rules:
+{{- if .Values.global.istiod.enabled }}
+  # Remove permissions to reconcile webhook configuration. This address the downgrade case
+  # where istiod will be uninstalled. Removing the permissions reduces
+  # the likelihood that istiod will reconcile something it shouldn't.
+
+  # sidecar injection controller
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["mutatingwebhookconfigurations"]
+    verbs: ["get", "list", "watch", "patch"]
+
+  # configuration validation webhook controller
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations"]
+    verbs: ["get", "list", "watch", "update"]
+{{ end }}
+
+  # permissions to verify the webhook is ready and rejecting
+  # invalid config. We use --server-dry-run so no config is persisted.
+  - apiGroups: ["networking.istio.io"]
+    verbs: ["create"]
+    resources: ["gateways"]
+
+  # istio configuration
+  - apiGroups: ["config.istio.io", "rbac.istio.io", "security.istio.io", "networking.istio.io", "authentication.istio.io"]
+    verbs: ["get", "watch", "list"]
+    resources: ["*"]
+
+  # auto-detect installed CRD definitions
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["get", "list", "watch"]
+
+  # discovery and routing
+  - apiGroups: ["extensions","apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods", "nodes", "services", "namespaces", "endpoints"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["discovery.k8s.io"]
+    resources: ["endpointslices"]
+    verbs: ["get", "list", "watch"]
+
+  # ingress controller
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses/status"]
+    verbs: ["*"]
+
+  # required for CA's namespace controller
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["create", "get", "list", "watch", "update"]
+
+  # Istiod and bootstrap.
+  - apiGroups: ["certificates.k8s.io"]
+    resources:
+      - "certificatesigningrequests"
+      - "certificatesigningrequests/approval"
+      - "certificatesigningrequests/status"
+    verbs: ["update", "create", "get", "delete", "watch"]
+  # Used by Istiod to verify the JWT tokens
+  - apiGroups: ["authentication.k8s.io"]
+    resources: ["tokenreviews"]
+    verbs: ["create"]
+
+  # TODO: remove, no longer needed at cluster
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create", "get", "watch", "list", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["serviceaccounts"]
+    verbs: ["get", "watch", "list"]
+{{ end }}`)
+
+func chartsIstioControlIstioDiscoveryTemplatesClusterroleYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioDiscoveryTemplatesClusterroleYaml, nil
+}
+
+func chartsIstioControlIstioDiscoveryTemplatesClusterroleYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioDiscoveryTemplatesClusterroleYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/clusterrole.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioDiscoveryTemplatesClusterrolebindingYaml = []byte(`{{ if .Values.clusterResources }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: istio-pilot-{{ .Release.Namespace }}
+  labels:
+    app: pilot
+    release: {{ .Release.Name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: istio-pilot-{{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: istiod-service-account
+    namespace: {{ .Release.Namespace }}
+---
+{{ if .Values.global.istiod.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: istiod-{{ .Release.Namespace }}
+  labels:
+    app: istiod
+    release: {{ .Release.Name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: istiod-{{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: istiod-service-account
+    namespace: {{ .Release.Namespace }}
+
+---
+{{ end }}
+{{ end }}
+`)
+
+func chartsIstioControlIstioDiscoveryTemplatesClusterrolebindingYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioDiscoveryTemplatesClusterrolebindingYaml, nil
+}
+
+func chartsIstioControlIstioDiscoveryTemplatesClusterrolebindingYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioDiscoveryTemplatesClusterrolebindingYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/clusterrolebinding.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioDiscoveryTemplatesConfigmapEnvoyYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: pilot-envoy-config{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
+  labels:
+    release: {{ .Release.Name }}
+data:
+  envoy.yaml.tmpl: |-
+    admin:
+      access_log_path: /dev/null
+      address:
+        socket_address:
+          address: 127.0.0.1
+          port_value: 15000
+
+    static_resources:
+      clusters:
+      - name: in.15010
+        http2_protocol_options: {}
+        connect_timeout: 1.000s
+
+        hosts:
+        - socket_address:
+            address: 127.0.0.1
+            port_value: 15010
+
+        circuit_breakers:
+          thresholds:
+          - max_connections: 100000
+            max_pending_requests: 100000
+            max_requests: 100000
+            max_retries: 3
+
+    # TODO: telemetry using EDS
+    # TODO: other pilots using EDS, load balancing
+    # TODO: galley using EDS
+
+      - name: out.galley.15019
+        http2_protocol_options: {}
+        connect_timeout: 1.000s
+        type: STRICT_DNS
+
+        circuit_breakers:
+          thresholds:
+            - max_connections: 100000
+              max_pending_requests: 100000
+              max_requests: 100000
+              max_retries: 3
+
+        tls_context:
+          common_tls_context:
+            tls_certificates:
+            - certificate_chain:
+                filename: /etc/certs/cert-chain.pem
+              private_key:
+                filename: /etc/certs/key.pem
+            validation_context:
+              trusted_ca:
+                filename: /etc/certs/root-cert.pem
+              verify_subject_alt_name:
+              - spiffe://{{ .Values.global.trustDomain }}/ns/{{ .Values.global.configNamespace }}/sa/istio-galley-service-account
+
+        hosts:
+          - socket_address:
+              address: istio-galley.{{ .Values.global.configNamespace }}
+              port_value: 15019
+
+
+      listeners:
+      - name: "in.15011"
+        address:
+          socket_address:
+            address: 0.0.0.0
+            port_value: 15011
+        filter_chains:
+        - filters:
+          - name: envoy.http_connection_manager
+            #typed_config
+            #"@type": "type.googleapis.com/",
+            config:
+              codec_type: HTTP2
+              stat_prefix: "15011"
+              stream_idle_timeout: 0s
+              http2_protocol_options:
+                max_concurrent_streams: 1073741824
+
+              access_log:
+              - name: envoy.file_access_log
+                config:
+                  path: /dev/stdout
+
+              http_filters:
+              - name: envoy.router
+
+              route_config:
+                name: "15011"
+
+                virtual_hosts:
+                - name: istio-pilot
+
+                  domains:
+                  - '*'
+
+                  routes:
+                  - match:
+                      prefix: /
+                    route:
+                      cluster: in.15010
+                      timeout: 0.000s
+                    decorator:
+                      operation: xDS
+
+          tls_context:
+            require_client_certificate: true
+            common_tls_context:
+              validation_context:
+                trusted_ca:
+                  filename: /etc/certs/root-cert.pem
+
+              alpn_protocols:
+              - h2
+
+              tls_certificates:
+              - certificate_chain:
+                  filename: /etc/certs/cert-chain.pem
+                private_key:
+                  filename: /etc/certs/key.pem
+
+
+      # Manual 'whitebox' mode
+      - name: "local.15019"
+        address:
+          socket_address:
+            address: 127.0.0.1
+            port_value: 15019
+        filter_chains:
+          - filters:
+              - name: envoy.http_connection_manager
+                config:
+                  codec_type: HTTP2
+                  stat_prefix: "15019"
+                  stream_idle_timeout: 0s
+                  http2_protocol_options:
+                    max_concurrent_streams: 1073741824
+
+                  access_log:
+                    - name: envoy.file_access_log
+                      config:
+                        path: /dev/stdout
+
+                  http_filters:
+                    - name: envoy.router
+
+                  route_config:
+                    name: "15019"
+
+                    virtual_hosts:
+                      - name: istio-galley
+
+                        domains:
+                          - '*'
+
+                        routes:
+                          - match:
+                              prefix: /
+                            route:
+                              cluster: out.galley.15019
+                              timeout: 0.000s
+
+---
+{{- end }}
+`)
+
+func chartsIstioControlIstioDiscoveryTemplatesConfigmapEnvoyYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioDiscoveryTemplatesConfigmapEnvoyYaml, nil
+}
+
+func chartsIstioControlIstioDiscoveryTemplatesConfigmapEnvoyYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioDiscoveryTemplatesConfigmapEnvoyYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/configmap-envoy.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioDiscoveryTemplatesConfigmapJwksYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+{{- if .Values.pilot.jwksResolverExtraRootCA }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -18997,6 +13186,7 @@ metadata:
     release: {{ .Release.Name }}
 data:
   extra.pem: {{ .Values.pilot.jwksResolverExtraRootCA | quote }}
+{{- end }}
 {{- end }}
 `)
 
@@ -19015,7 +13205,8 @@ func chartsIstioControlIstioDiscoveryTemplatesConfigmapJwksYaml() (*asset, error
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesConfigmapYaml = []byte(`{{- if .Values.pilot.configMap }}
+var _chartsIstioControlIstioDiscoveryTemplatesConfigmapYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+{{- if .Values.pilot.configMap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19156,8 +13347,32 @@ data:
       - {{ . | quote }}
       {{- end }}
 
+    {{- if .Values.global.istiod.enabled }}
+
     # Used by pilot-agent
     sdsUdsPath: "unix:/etc/istio/proxy/SDS"
+
+    {{- else }}
+
+    # Set expected values when SDS is disabled
+    # Unix Domain Socket through which envoy communicates with NodeAgent SDS to get
+    # key/cert for mTLS. Use secret-mount files instead of SDS if set to empty.
+    sdsUdsPath: ""
+
+    # This flag is used by secret discovery service(SDS).
+    # If set to true(prerequisite: https://kubernetes.io/docs/concepts/storage/volumes/#projected), Istio will inject volumes mount
+    # for k8s service account JWT, so that K8s API server mounts k8s service account JWT to envoy container, which
+    # will be used to generate key/cert eventually. This isn't supported for non-k8s case.
+    enableSdsTokenMount: false
+
+    # This flag is used by secret discovery service(SDS).
+    # If set to true, envoy will fetch normal k8s service account JWT from '/var/run/secrets/kubernetes.io/serviceaccount/token'
+    # (https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod)
+    # and pass to sds server, which will be used to request key/cert eventually.
+    # this flag is ignored if enableSdsTokenMount is set.
+    # This isn't supported for non-k8s case.
+    sdsUseK8sSaJwt: false
+    {{- end }}
 
     # If true, automatically configure client side mTLS settings to match the corresponding service's
     # server side mTLS authentication policy, when destination rule for that service does not specify
@@ -19266,6 +13481,10 @@ data:
         {{- end }}
       {{- end }}
 
+    {{- $defPilotHostname := printf "istio-pilot.%s" .Release.Namespace }}
+    {{- $pilotAddress := .Values.global.remotePilotAddress | default $defPilotHostname }}
+    {{- if .Values.global.istiod.enabled }}
+      # If port is 15012, will use SDS.
       # controlPlaneAuthPolicy is for mounted secrets, will wait for the files.
       controlPlaneAuthPolicy: NONE
       {{- if .Values.global.remotePilotAddress }}
@@ -19273,6 +13492,30 @@ data:
       {{- else }}
       discoveryAddress: istiod{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}.{{.Release.Namespace}}.svc:15012
       {{- end }}
+
+    {{- else if .Values.global.controlPlaneSecurityEnabled }}
+      #
+      # Mutual TLS authentication between sidecars and istio control plane.
+      controlPlaneAuthPolicy: MUTUAL_TLS
+      #
+      # Address where istio Pilot service is running
+      {{- if .Values.global.remotePilotAddress }}
+      discoveryAddress: istio-pilot.{{ .Release.Namespace }}:15011
+      {{- else }}
+      discoveryAddress: {{ $pilotAddress }}:15011
+      {{- end }}
+    {{- else }}
+      #
+      # Mutual TLS authentication between sidecars and istio control plane.
+      controlPlaneAuthPolicy: NONE
+      #
+      # Address where istio Pilot service is running
+      {{- if .Values.global.remotePilotAddress }}
+      discoveryAddress: istio-pilot.{{ .Release.Namespace }}:15010
+      {{- else }}
+      discoveryAddress: {{ $pilotAddress }}:15010
+      {{- end }}
+    {{- end }}
 
     {{- if .Values.global.proxy.envoyMetricsService.enabled }}
       #
@@ -19307,6 +13550,7 @@ data:
 
 ---
 {{- end }}
+{{- end }}
 `)
 
 func chartsIstioControlIstioDiscoveryTemplatesConfigmapYamlBytes() ([]byte, error) {
@@ -19324,18 +13568,19 @@ func chartsIstioControlIstioDiscoveryTemplatesConfigmapYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesDeploymentYaml = []byte(`apiVersion: apps/v1
+var _chartsIstioControlIstioDiscoveryTemplatesDeploymentYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: istiod{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
   namespace: {{ .Release.Namespace }}
   labels:
     app: istiod
+    istio: pilot
+    release: {{ .Release.Name }}
     {{- if ne .Values.revision ""}}
     version: {{ .Values.revision }}
     {{- end }}
-    istio: pilot
-    release: {{ .Release.Name }}
 {{- range $key, $val := .Values.pilot.deploymentLabels }}
     {{ $key }}: "{{ $val }}"
 {{- end }}
@@ -19351,30 +13596,28 @@ spec:
       maxUnavailable: {{ .Values.pilot.rollingMaxUnavailable }}
   selector:
     matchLabels:
-      app: istiod
       {{- if ne .Values.revision ""}}
+      app: istiod
       version: {{ .Values.revision }}
-      {{- else }}
-      istio: pilot
       {{- end }}
+      istio: pilot
   template:
     metadata:
       labels:
         app: istiod
         {{- if ne .Values.revision ""}}
         version: {{ .Values.revision }}
-        {{- else }}
+        {{- end }}
         # Label used by the 'default' service. For versioned deployments we match with app and version.
         # This avoids default deployment picking the canary
         istio: pilot
-        {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"
         {{- if .Values.pilot.podAnnotations }}
 {{ toYaml .Values.pilot.podAnnotations | indent 8 }}
         {{- end }}
     spec:
-      serviceAccountName: istio-pilot-service-account
+      serviceAccountName: istiod-service-account
 {{- if .Values.global.priorityClassName }}
       priorityClassName: "{{ .Values.global.priorityClassName }}"
 {{- end }}
@@ -19387,9 +13630,7 @@ spec:
 {{- else }}
           image: "{{ .Values.pilot.hub | default .Values.global.hub }}/{{ .Values.pilot.image | default "pilot" }}:{{ .Values.pilot.tag | default .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           args:
           - "discovery"
           - --monitoringAddr=:15014
@@ -19406,7 +13647,7 @@ spec:
           - {{ .Release.Namespace }}
 {{- end }}
 
-{{- if and .Values.global.controlPlaneSecurityEnabled }}
+{{- if and .Values.global.controlPlaneSecurityEnabled .Values.global.istiod.enabled }}
           - --secureGrpcAddr=:15011
 {{- else }}
           - --secureGrpcAddr=
@@ -19477,12 +13718,14 @@ spec:
             value: "{{ .Values.pilot.enableProtocolSniffingForOutbound }}"
           - name: PILOT_ENABLE_PROTOCOL_SNIFFING_FOR_INBOUND
             value: "{{ .Values.pilot.enableProtocolSniffingForInbound }}"
+{{- if .Values.global.istiod.enabled }}
           - name: INJECTION_WEBHOOK_CONFIG_NAME
             value: istio-sidecar-injector{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
           - name: ISTIOD_ADDR
             value: istiod{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}.{{ .Release.Namespace }}.svc:15012
           - name: PILOT_EXTERNAL_GALLEY
             value: "false"
+{{- end }}
           - name: CLUSTER_ID
             value: "{{ $.Values.global.multiCluster.clusterName | default `+"`"+`Kubernetes`+"`"+` }}"
           resources:
@@ -19501,6 +13744,7 @@ spec:
           volumeMounts:
           - name: config-volume
             mountPath: /etc/istio/config
+          {{- if .Values.global.istiod.enabled }}
           {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
           - name: istio-token
             mountPath: /var/run/secrets/tokens
@@ -19517,7 +13761,79 @@ spec:
           - name: istiod
             mountPath: /var/lib/istio/local
             readOnly: true
+          {{- end }}
+{{- if and .Values.global.controlPlaneSecurityEnabled (not .Values.global.istiod.enabled) }}
+        - name: istio-proxy
+{{- if contains "/" .Values.global.proxy.image }}
+          image: "{{ .Values.global.proxy.image }}"
+{{- else }}
+          image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
+{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
+          ports:
+          - containerPort: 15011
+          args:
+          - proxy
+          - --domain
+          - $(POD_NAMESPACE).svc.{{ .Values.global.proxy.clusterDomain }}
+          - --serviceCluster
+          - istio-pilot
+          - --templateFile
+          - /var/lib/envoy/envoy.yaml.tmpl
+        {{- if .Values.global.controlPlaneSecurityEnabled}}
+          - --controlPlaneAuthPolicy
+          - MUTUAL_TLS
+        {{- else }}
+          - --controlPlaneAuthPolicy
+          - NONE
+        {{- end }}
+        {{- if .Values.global.trustDomain }}
+          - --trust-domain={{ .Values.global.trustDomain }}
+        {{- end }}
+        {{- if .Values.global.logAsJson }}
+          - --log_as_json
+        {{- end }}
+          env:
+          - name: JWT_POLICY
+            value: {{ .Values.global.jwtPolicy }}
+          - name: PILOT_CERT_PROVIDER
+            value: {{ .Values.global.pilotCertProvider }}
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: INSTANCE_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          resources:
+{{- if .Values.global.proxy.resources }}
+{{ toYaml .Values.global.proxy.resources | trim | indent 12 }}
+{{- else }}
+{{ toYaml .Values.global.defaultResources | trim | indent 12 }}
+{{- end }}
+          volumeMounts:
+{{- if and .Values.global.controlPlaneSecurityEnabled .Values.global.mountMtlsCerts }}
+          - name: istio-certs
+            mountPath: /etc/certs
+            readOnly: true
+{{- end }}
+{{- if .Values.pilot.jwksResolverExtraRootCA }}
+          - name: extracacerts
+            mountPath: /cacerts
+{{- end }}
+          - name: pilot-envoy-config
+            mountPath: /var/lib/envoy
+{{- end }}
       volumes:
+      {{- if .Values.global.istiod.enabled }}
       # Technically not needed on this pod - but it helps debugging/testing SDS
       # Should be removed after everything works.
       - emptyDir:
@@ -19546,9 +13862,20 @@ spec:
         configMap:
           name: istio-sidecar-injector
           optional: true
+      {{- end }}
+
       - name: config-volume
         configMap:
           name: istio{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
+      - name: pilot-envoy-config
+        configMap:
+          name: pilot-envoy-config{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
+  {{- if and .Values.global.controlPlaneSecurityEnabled .Values.global.mountMtlsCerts }}
+      - name: istio-certs
+        secret:
+          secretName: istio.istio-pilot-service-account
+          optional: true
+  {{- end }}
   {{- if .Values.pilot.jwksResolverExtraRootCA }}
       - name: extracacerts
         configMap:
@@ -19565,6 +13892,7 @@ spec:
 {{ toYaml .Values.global.defaultTolerations | indent 6 }}
 {{- end }}
 ---
+{{- end }}
 `)
 
 func chartsIstioControlIstioDiscoveryTemplatesDeploymentYamlBytes() ([]byte, error) {
@@ -19582,7 +13910,76 @@ func chartsIstioControlIstioDiscoveryTemplatesDeploymentYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYaml = []byte(`{{- if not .Values.global.omitSidecarInjectorConfigMap }}
+var _chartsIstioControlIstioDiscoveryTemplatesEnableMeshMtlsYaml = []byte(`{{- /*
+
+TODO(https://github.com/istio/istio/issues/18199) remove this configuration from charts once the operator starts managing it
+
+*/ -}}
+
+{{ if .Values.clusterResources }}
+{{- if .Values.global.mtls.enabled }}
+
+# Authentication policy to enable mutual TLS for all services (that have sidecar) in the mesh.
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "MeshPolicy"
+metadata:
+  name: "default"
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  peers:
+  - mtls: {}
+---
+{{- if not .Values.global.mtls.auto }}
+# We only need explicit destination rule with ISITO_MUTUAL when auto mTLS is not enabled.
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: "default"
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  host: "*.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+{{ end }}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: "api-server"
+  namespace: {{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  host: "kubernetes.default.svc.{{ .Values.global.proxy.clusterDomain }}"
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+{{ end }}
+{{ end }}
+`)
+
+func chartsIstioControlIstioDiscoveryTemplatesEnableMeshMtlsYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioDiscoveryTemplatesEnableMeshMtlsYaml, nil
+}
+
+func chartsIstioControlIstioDiscoveryTemplatesEnableMeshMtlsYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioDiscoveryTemplatesEnableMeshMtlsYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/enable-mesh-mtls.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+{{- if and (not .Values.global.omitSidecarInjectorConfigMap) .Values.global.istiod.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19614,6 +14011,7 @@ data:
 {{ .Files.Get "files/injection-template.yaml" | trim | indent 4 }}
 
 {{- end }}
+{{- end }}
 `)
 
 func chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYamlBytes() ([]byte, error) {
@@ -19632,7 +14030,8 @@ func chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYaml() (*as
 }
 
 var _chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYaml = []byte(`# Installed for each revision - not installed for cluster resources ( cluster roles, bindings, crds)
-{{- if not .Values.global.operatorManageWebhooks }}
+{{- if .Values.global.istiod.enabled }}
+{{- if and (not .Values.global.operatorManageWebhooks) .Values.global.istiod.enabled }}
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
@@ -19704,7 +14103,7 @@ webhooks:
 {{- end }}
 {{- end }}
 {{- end }}
-`)
+{{- end }}`)
 
 func chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYamlBytes() ([]byte, error) {
 	return _chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYaml, nil
@@ -19721,7 +14120,8 @@ func chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYaml() (*asset, err
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesPoddisruptionbudgetYaml = []byte(`{{- if .Values.global.defaultPodDisruptionBudget.enabled }}
+var _chartsIstioControlIstioDiscoveryTemplatesPoddisruptionbudgetYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+{{- if .Values.global.defaultPodDisruptionBudget.enabled }}
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
@@ -19739,8 +14139,10 @@ spec:
       {{- if ne .Values.revision ""}}
       version: {{ .Values.revision }}
       {{- end }}
+      release: {{ .Release.Name }}
       istio: pilot
 ---
+{{- end }}
 {{- end }}
 `)
 
@@ -19759,7 +14161,8 @@ func chartsIstioControlIstioDiscoveryTemplatesPoddisruptionbudgetYaml() (*asset,
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesServiceYaml = []byte(`apiVersion: v1
+var _chartsIstioControlIstioDiscoveryTemplatesServiceYaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+apiVersion: v1
 kind: Service
 metadata:
   name: istio-pilot{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
@@ -19780,9 +14183,11 @@ spec:
     name: http-legacy-discovery # direct
   - port: 15014
     name: http-monitoring
+{{- if .Values.global.istiod.enabled }}
   - port: 443
     name: https-webhook # validation and injection
     targetPort: 15017
+{{- end }}
   selector:
     {{- if ne .Values.revision ""}}
     app: istiod
@@ -19791,6 +14196,7 @@ spec:
     istio: pilot
     {{- end }}
 ---
+{{- if .Values.global.istiod.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -19806,8 +14212,6 @@ spec:
     - port: 443
       name: https-webhook # validation and injection
       targetPort: 15017
-    - port: 15014
-      name: http-monitoring # prometheus stats
   selector:
     app: istiod
     {{- if ne .Values.revision ""}}
@@ -19817,7 +14221,9 @@ spec:
     # This avoids default deployment picking the canary
     istio: pilot
     {{- end }}
+{{- end }}
 ---
+{{- end }}
 `)
 
 func chartsIstioControlIstioDiscoveryTemplatesServiceYamlBytes() ([]byte, error) {
@@ -19835,7 +14241,42 @@ func chartsIstioControlIstioDiscoveryTemplatesServiceYaml() (*asset, error) {
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14Yaml = []byte(`{{- if and .Values.telemetry.enabled .Values.telemetry.v2.enabled }}
+var _chartsIstioControlIstioDiscoveryTemplatesServiceaccountYaml = []byte(`{{ if .Values.clusterResources }}
+apiVersion: v1
+kind: ServiceAccount
+{{- if .Values.global.imagePullSecrets }}
+imagePullSecrets:
+{{- range .Values.global.imagePullSecrets }}
+  - name: {{ . }}
+{{- end }}
+{{- end }}
+metadata:
+  name: istiod-service-account
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: istiod
+    release: {{ .Release.Name }}
+---
+{{ end }}
+`)
+
+func chartsIstioControlIstioDiscoveryTemplatesServiceaccountYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioDiscoveryTemplatesServiceaccountYaml, nil
+}
+
+func chartsIstioControlIstioDiscoveryTemplatesServiceaccountYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioDiscoveryTemplatesServiceaccountYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/serviceaccount.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14Yaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+{{- if and .Values.telemetry.enabled .Values.telemetry.v2.enabled }}
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
@@ -20068,6 +14509,7 @@ spec:
 ---
 {{- end}}
 {{- end}}
+{{- end }}
 `)
 
 func chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14YamlBytes() ([]byte, error) {
@@ -20085,7 +14527,8 @@ func chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14Yaml() (*asset, erro
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15Yaml = []byte(`{{- if and .Values.telemetry.enabled .Values.telemetry.v2.enabled }}
+var _chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15Yaml = []byte(`{{ if or (eq .Values.revision "") (not .Values.clusterResources) }}
+{{- if and .Values.telemetry.enabled .Values.telemetry.v2.enabled }}
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
@@ -20551,6 +14994,7 @@ spec:
 ---
 {{- end}}
 {{- end}}
+{{- end }}
 `)
 
 func chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15YamlBytes() ([]byte, error) {
@@ -20568,486 +15012,79 @@ func chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15Yaml() (*asset, erro
 	return a, nil
 }
 
-var _chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_16Yaml = []byte(`{{- if and .Values.telemetry.enabled .Values.telemetry.v2.enabled }}
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
+var _chartsIstioControlIstioDiscoveryTemplatesValidatingwebhookconfigurationYaml = []byte(`{{- if .Values.clusterResources }}
+{{- if .Values.global.istiod.enabled }}
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
 metadata:
-  name: metadata-exchange-1.6
-  {{- if .Values.global.configRootNamespace }}
-  namespace: {{ .Values.global.configRootNamespace }}
-  {{- else }}
-  namespace: {{ .Release.Namespace }}
-  {{- end }}
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: ANY # inbound, outbound, and gateway
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                configuration: envoy.wasm.metadata_exchange
-                vm_config:
-                  {{- if .Values.telemetry.v2.metadataExchange.wasmEnabled }}
-                  runtime: envoy.wasm.runtime.v8
-                  code:
-                    local:
-                      filename: /etc/istio/extensions/metadata-exchange-filter.wasm
-                  {{- else }}
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.metadata_exchange
-                  {{- end }}
+  name: istiod-{{ .Release.Namespace }}
+  labels:
+    app: istiod
+    release: {{ .Release.Name }}
+    istio: istiod
+webhooks:
+  - name: validation.istio.io
+    clientConfig:
+      service:
+        name: istiod
+        namespace: {{ .Release.Namespace }}
+        path: "/validate"
+      caBundle: "" # patched at runtime when the webhook is ready.
+    rules:
+      - operations:
+        - CREATE
+        - UPDATE
+        apiGroups:
+        - config.istio.io
+        - rbac.istio.io
+        - security.istio.io
+        - authentication.istio.io
+        - networking.istio.io
+        apiVersions:
+        - "*"
+        resources:
+        - "*"
+    # Fail open until the validation webhook is ready. The webhook controller
+    # will update this to `+"`"+`Fail`+"`"+` and patch in the `+"`"+`caBundle`+"`"+` when the webhook
+    # endpoint is ready.
+    failurePolicy: Ignore
+    sideEffects: None
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
 metadata:
-  name: tcp-metadata-exchange-1.6
-  {{- if .Values.global.configRootNamespace }}
-  namespace: {{ .Values.global.configRootNamespace }}
-  {{- else }}
-  namespace: {{ .Release.Namespace }}
-  {{- end }}
-spec:
-  configPatches:
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener: {}
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.metadata_exchange
-          config:
-            protocol: istio-peer-exchange
-    - applyTo: CLUSTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        cluster: {}
-      patch:
-        operation: MERGE
-        value:
-          filters:
-          - name: envoy.filters.network.upstream.metadata_exchange
-            typed_config:
-              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-              type_url: type.googleapis.com/envoy.tcp.metadataexchange.config.MetadataExchange
-              value:
-                protocol: istio-peer-exchange
-    - applyTo: CLUSTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.6.*'
-        cluster: {}
-      patch:
-        operation: MERGE
-        value:
-          filters:
-          - name: envoy.filters.network.upstream.metadata_exchange
-            typed_config:
-              "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-              type_url: type.googleapis.com/envoy.tcp.metadataexchange.config.MetadataExchange
-              value:
-                protocol: istio-peer-exchange
+  name: istio-galley
+  labels:
+    app: galley
+    release: {{ .Release.Name }}
+    istio: galley
+webhooks:
 ---
-{{- if .Values.telemetry.v2.prometheus.enabled }}
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
+{{- else }}
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
 metadata:
-  name: stats-filter-1.6
-  {{- if .Values.global.configRootNamespace }}
-  namespace: {{ .Values.global.configRootNamespace }}
-  {{- else }}
-  namespace: {{ .Release.Namespace }}
-  {{- end }}
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  {{- if .Values.telemetry.v2.prometheus.wasmEnabled }}
-                  runtime: envoy.wasm.runtime.v8
-                  code:
-                    local:
-                      filename: /etc/istio/extensions/stats-filter.wasm
-                  {{- else }}
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
-                  {{- end }}
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_inbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_inbound
-                  {{- if .Values.telemetry.v2.prometheus.wasmEnabled }}
-                  runtime: envoy.wasm.runtime.v8
-                  code:
-                    local:
-                      filename: /etc/istio/extensions/stats-filter.wasm
-                  {{- else }}
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
-                  {{- end }}
-    - applyTo: HTTP_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  {{- if .Values.telemetry.v2.prometheus.wasmEnabled }}
-                  runtime: envoy.wasm.runtime.v8
-                  code:
-                    local:
-                      filename: /etc/istio/extensions/stats-filter.wasm
-                  {{- else }}
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: envoy.wasm.stats
-                  {{- end }}
----
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: tcp-stats-filter-1.6
-  {{- if .Values.global.configRootNamespace }}
-  namespace: {{ .Values.global.configRootNamespace }}
-  {{- else }}
-  namespace: {{ .Release.Namespace }}
-  {{- end }}
-spec:
-  configPatches:
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_inbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_inbound
-                  {{- if .Values.telemetry.v2.prometheus.wasmEnabled }}
-                  runtime: envoy.wasm.runtime.v8
-                  code:
-                    local:
-                      filename: /etc/istio/extensions/stats-filter.wasm
-                  {{- else }}
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
-                  {{- end }}
-    - applyTo: NETWORK_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  {{- if .Values.telemetry.v2.prometheus.wasmEnabled }}
-                  runtime: envoy.wasm.runtime.v8
-                  code:
-                    local:
-                      filename: /etc/istio/extensions/stats-filter.wasm
-                  {{- else }}
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
-                  {{- end }}
-    - applyTo: NETWORK_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.tcp_proxy"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.network.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.network.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stats_outbound
-                configuration: |
-                  {
-                    "debug": "false",
-                    "stat_prefix": "istio",
-                  }
-                vm_config:
-                  vm_id: stats_outbound
-                  {{- if .Values.telemetry.v2.prometheus.wasmEnabled }}
-                  runtime: envoy.wasm.runtime.v8
-                  code:
-                    local:
-                      filename: /etc/istio/extensions/stats-filter.wasm
-                  {{- else }}
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local:
-                      inline_string: "envoy.wasm.stats"
-                  {{- end }}
----
-
+  name: istiod-{{ .Release.Namespace }}
+  labels:
+    app: istiod
+    release: {{ .Release.Name }}
+    istio: istiod
+webhooks:
 {{- end }}
-
-{{- if .Values.telemetry.v2.stackdriver.enabled }}
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: stackdriver-filter-1.6
-  {{- if .Values.global.configRootNamespace }}
-  namespace: {{ .Values.global.configRootNamespace }}
-  {{- else }}
-  namespace: {{ .Release.Namespace }}
-  {{- end }}
-spec:
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_OUTBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stackdriver_outbound
-                configuration: |
-                  {{- if not .Values.telemetry.v2.stackdriver.configOverride }}
-                  {"enable_mesh_edges_reporting": {{ .Values.telemetry.v2.stackdriver.topology }}, "disable_server_access_logging": {{ not .Values.telemetry.v2.stackdriver.logging }}, "meshEdgesReportingDuration": "600s"}
-                  {{- else }}
-                  {{ toJson .Values.telemetry.v2.stackdriver.configOverride | indent 18 }}
-                  {{- end }}
-                vm_config:
-                  vm_id: stackdriver_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local: { inline_string: envoy.wasm.null.stackdriver }
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stackdriver_inbound
-                configuration: |
-                  {{- if not .Values.telemetry.v2.stackdriver.configOverride }}
-                  {"enable_mesh_edges_reporting": {{ .Values.telemetry.v2.stackdriver.topology }}, "disable_server_access_logging": {{ not .Values.telemetry.v2.stackdriver.logging }}, "meshEdgesReportingDuration": "600s"}
-                  {{- else }}
-                  {{ toJson .Values.telemetry.v2.stackdriver.configOverride | indent 18 }}
-                  {{- end }}
-                vm_config:
-                  vm_id: stackdriver_inbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local: { inline_string: envoy.wasm.null.stackdriver }
-    - applyTo: HTTP_FILTER
-      match:
-        context: GATEWAY
-        proxy:
-          proxyVersion: '^1\.6.*'
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.router"
-      patch:
-        operation: INSERT_BEFORE
-        value:
-          name: envoy.filters.http.wasm
-          typed_config:
-            "@type": type.googleapis.com/udpa.type.v1.TypedStruct
-            type_url: type.googleapis.com/envoy.config.filter.http.wasm.v2.Wasm
-            value:
-              config:
-                root_id: stackdriver_outbound
-                configuration: |
-                  {{- if not .Values.telemetry.v2.stackdriver.configOverride }}
-                  {"enable_mesh_edges_reporting": {{ .Values.telemetry.v2.stackdriver.topology }}, "disable_server_access_logging": {{ not .Values.telemetry.v2.stackdriver.logging }}, "meshEdgesReportingDuration": "600s", "disable_host_header_fallback": true}
-                  {{- else }}
-                  {{ toJson .Values.telemetry.v2.stackdriver.configOverride | indent 18 }}
-                  {{- end }}
-                vm_config:
-                  vm_id: stackdriver_outbound
-                  runtime: envoy.wasm.runtime.null
-                  code:
-                    local: { inline_string: envoy.wasm.null.stackdriver }
----
-{{- end}}
-{{- end}}
+{{- end }}
 `)
 
-func chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_16YamlBytes() ([]byte, error) {
-	return _chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_16Yaml, nil
+func chartsIstioControlIstioDiscoveryTemplatesValidatingwebhookconfigurationYamlBytes() ([]byte, error) {
+	return _chartsIstioControlIstioDiscoveryTemplatesValidatingwebhookconfigurationYaml, nil
 }
 
-func chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_16Yaml() (*asset, error) {
-	bytes, err := chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_16YamlBytes()
+func chartsIstioControlIstioDiscoveryTemplatesValidatingwebhookconfigurationYaml() (*asset, error) {
+	bytes, err := chartsIstioControlIstioDiscoveryTemplatesValidatingwebhookconfigurationYamlBytes()
 	if err != nil {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/telemetryv2_1.6.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	info := bindataFileInfo{name: "charts/istio-control/istio-discovery/templates/validatingwebhookconfiguration.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -21103,7 +15140,8 @@ pilot:
 
   # This is used to set the source of configuration for
   # the associated address in configSource, if nothing is specificed
-  # the default MCP is assumed.
+  # the default MCP is assumed. The alternative option is SERVICE_REGISTRY
+  # which describes the source is only forwarding synthetic service entries
   configSource:
     subscribedResources: []
 
@@ -21786,7 +15824,7 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   compiledAdapter: kubernetesenv
-  params: {}
+  params:
     # when running from mixer root, use the following config after adding a
     # symbolic link to a kubernetes config file via:
     #
@@ -21959,26 +15997,6 @@ spec:
       securityContext:
         fsGroup: 1337
       volumes:
-{{- if .Values.global.controlPlaneSecurityEnabled }}
-      - name: config-volume
-        configMap:
-          name: istio{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
-          optional: true
-      {{- if eq .Values.global.pilotCertProvider "istiod" }}
-      - name: istiod-ca-cert
-        configMap:
-          name: istio-ca-root-cert
-      {{- end }}
-      {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-      - name: istio-token
-        projected:
-          sources:
-          - serviceAccountToken:
-              path: istio-token
-              expirationSeconds: 43200
-              audience: {{ .Values.global.sds.token.aud }}
-      {{- end }}
-{{- end }}
       - name: istio-certs
         secret:
           secretName: istio.istio-policy-service-account
@@ -22006,9 +16024,7 @@ spec:
 {{- else }}
         image: "{{ .Values.mixer.policy.hub | default .Values.global.hub }}/{{ .Values.mixer.policy.image }}:{{ .Values.mixer.policy.tag | default .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         ports:
         - containerPort: 9091
         - containerPort: 15014
@@ -22097,9 +16113,7 @@ spec:
 {{- else }}
         image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         ports:
         - containerPort: 15004
         - containerPort: 15090
@@ -22142,20 +16156,6 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: status.podIP
-        - name: JWT_POLICY
-          value: {{ .Values.global.jwtPolicy }}
-        - name: PILOT_CERT_PROVIDER
-          value: {{ .Values.global.pilotCertProvider }}
-        - name: "ISTIO_META_USER_SDS"
-          value: "true"
-        - name: CA_ADDR
-        {{- if .Values.global.caAddress }}
-          value: {{ .Values.global.caAddress }}
-        {{- else if .Values.global.configNamespace }}
-          value: istiod.{{ .Values.global.configNamespace }}.svc:15012
-        {{- else }}
-          value: istiod.istio-system.svc:15012
-        {{- end }}
         resources:
 {{- if .Values.global.proxy.resources }}
 {{ toYaml .Values.global.proxy.resources | indent 10 }}
@@ -22163,17 +16163,9 @@ spec:
 {{ toYaml .Values.global.defaultResources | indent 10 }}
 {{- end }}
         volumeMounts:
-        - name: config-volume
-          mountPath: /etc/istio/config
-        {{- if eq .Values.global.pilotCertProvider "istiod" }}
-        - mountPath: /var/run/secrets/istio
-          name: istiod-ca-cert
-        {{- end }}
-        {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-        - name: istio-token
-          mountPath: /var/run/secrets/tokens
+        - name: istio-certs
+          mountPath: /etc/certs
           readOnly: true
-        {{- end }}
         - name: uds-socket
           mountPath: /sock
 {{- end }}
@@ -22354,8 +16346,7 @@ var _chartsIstioPolicyValuesYaml = []byte(`mixer:
     # "security" and value "S1".
     podAntiAffinityLabelSelector: []
     podAntiAffinityTermLabelSelector: []
-
-revision: ""`)
+`)
 
 func chartsIstioPolicyValuesYamlBytes() ([]byte, error) {
 	return _chartsIstioPolicyValuesYaml, nil
@@ -22433,7 +16424,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "CPU usage across Citadel instances.",
       "fill": 1,
       "gridPos": {
@@ -22528,7 +16518,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "Citadel process memory statistics.",
       "fill": 1,
       "gridPos": {
@@ -22642,7 +16631,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 6,
@@ -22740,7 +16728,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "Total number of CSR requests made to Citadel.",
       "fill": 1,
       "gridPos": {
@@ -22826,7 +16813,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "The number of certificates issuances that have succeeded.",
       "fill": 1,
       "gridPos": {
@@ -22925,7 +16911,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "The number of errors occurred when creating the CSR.",
       "fill": 1,
       "gridPos": {
@@ -23013,7 +16998,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -23098,7 +17082,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "The number of authentication failures.",
       "fill": 1,
       "gridPos": {
@@ -23197,7 +17180,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "The number of certificates created due to service account creation.",
       "fill": 1,
       "gridPos": {
@@ -23284,7 +17266,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "The number of certificates deleted due to service account deletion.",
       "fill": 1,
       "gridPos": {
@@ -23371,7 +17352,6 @@ var _chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "The number of certificates recreated due to secret deletion (service account still exists).",
       "fill": 1,
       "gridPos": {
@@ -25633,7 +19613,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioMeshDashboardJson = []byte(`{
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -25715,7 +19694,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioMeshDashboardJson = []byte(`{
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -25797,7 +19775,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioMeshDashboardJson = []byte(`{
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -25879,7 +19856,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioMeshDashboardJson = []byte(`{
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -26525,6 +20501,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
   "editable": false,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 9,
   "links": [],
   "panels": [
     {
@@ -26576,7 +20553,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -26608,7 +20584,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(container_cpu_usage_seconds_total{pod=~\"istio-telemetry-.*\",container=~\"mixer|istio-proxy\"}[1m]))/ (round(sum(irate(istio_requests_total[1m])), 0.001)/1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
+          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",pod=~\"istio-telemetry-.*\",container=~\"mixer|istio-proxy\"}[1m]))/ (round(sum(irate(istio_requests_total[1m])), 0.001)/1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -26616,7 +20592,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "refId": "A"
         },
         {
-          "expr": "(sum(irate(container_cpu_usage_seconds_total{pod=~\"istio-ingressgateway-.*\",container=\"istio-proxy\"}[1m])) / (round(sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\", reporter=\"source\"}[1m])), 0.001)/1000))",
+          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",pod=~\"istio-ingressgateway-.*\",container=\"istio-proxy\"}[1m])) / (round(sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\", reporter=\"source\"}[1m])), 0.001)/1000))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -26624,14 +20600,14 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "refId": "B"
         },
         {
-          "expr": "(sum(irate(container_cpu_usage_seconds_total{namespace!=\"istio-system\",container=\"istio-proxy\"}[1m]))/ (round(sum(irate(istio_requests_total[1m])), 0.001)/1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
+          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",namespace!=\"istio-system\",container=\"istio-proxy\"}[1m]))/ (round(sum(irate(istio_requests_total[1m])), 0.001)/1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-proxy",
           "refId": "C"
         },
         {
-          "expr": "(sum(irate(container_cpu_usage_seconds_total{pod=~\"istio-policy-.*\",container=~\"mixer|istio-proxy\"}[1m]))/ (round(sum(irate(istio_requests_total[1m])), 0.001)/1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
+          "expr": "(sum(irate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",pod=~\"istio-policy-.*\",container=~\"mixer|istio-proxy\"}[1m]))/ (round(sum(irate(istio_requests_total[1m])), 0.001)/1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-policy",
@@ -26684,7 +20660,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -26716,28 +20691,28 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"istio-telemetry-.*\",container=~\"mixer|istio-proxy\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",pod=~\"istio-telemetry-.*\",container=~\"mixer|istio-proxy\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-telemetry",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"istio-ingressgateway-.*\",container=\"istio-proxy\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",pod=~\"istio-ingressgateway-.*\",container=\"istio-proxy\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-ingressgateway",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{namespace!=\"istio-system\",container=\"istio-proxy\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",namespace!=\"istio-system\",container=\"istio-proxy\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-proxy",
           "refId": "C"
         },
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{pod=~\"istio-policy-.*\",container=~\"mixer|istio-proxy\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",pod=~\"istio-policy-.*\",container=~\"mixer|istio-proxy\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-policy",
@@ -26803,7 +20778,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -26835,28 +20809,28 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(container_memory_usage_bytes{pod=~\"istio-telemetry-.*\"}) / (sum(irate(istio_requests_total[1m])) / 1000)) / (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
+          "expr": "(sum(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",pod=~\"istio-telemetry-.*\"}) / (sum(irate(istio_requests_total[1m])) / 1000)) / (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-telemetry / 1k rps",
           "refId": "A"
         },
         {
-          "expr": "sum(container_memory_usage_bytes{pod=~\"istio-ingressgateway-.*\"}) / count(container_memory_usage_bytes{pod=~\"istio-ingressgateway-.*\",container!=\"POD\"})",
+          "expr": "sum(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",pod=~\"istio-ingressgateway-.*\"}) / count(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",pod=~\"istio-ingressgateway-.*\",container!=\"POD\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "per istio-ingressgateway",
           "refId": "B"
         },
         {
-          "expr": "sum(container_memory_usage_bytes{namespace!=\"istio-system\",container=\"istio-proxy\"}) / count(container_memory_usage_bytes{namespace!=\"istio-system\",container=\"istio-proxy\"})",
+          "expr": "sum(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",namespace!=\"istio-system\",container=\"istio-proxy\"}) / count(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",namespace!=\"istio-system\",container=\"istio-proxy\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "per istio proxy",
           "refId": "C"
         },
         {
-          "expr": "(sum(container_memory_usage_bytes{pod=~\"istio-policy-.*\"}) / (sum(irate(istio_requests_total[1m])) / 1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
+          "expr": "(sum(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",pod=~\"istio-policy-.*\"}) / (sum(irate(istio_requests_total[1m])) / 1000))/ (sum(irate(istio_requests_total{source_workload=\"istio-ingressgateway\"}[1m])) >bool 10)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "istio-policy / 1k rps",
@@ -26909,7 +20883,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -27028,7 +21001,6 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -27158,7 +21130,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(container_memory_usage_bytes{container=\"istio-proxy\"})",
+          "expr": "sum(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",container=\"istio-proxy\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27245,7 +21217,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container=\"istio-proxy\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",container=\"istio-proxy\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27332,7 +21304,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(container_fs_usage_bytes{ container=\"istio-proxy\"})",
+          "expr": "sum(container_fs_usage_bytes{job=\"kubernetes-cadvisor\", container=\"istio-proxy\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ container }}",
@@ -27432,7 +21404,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_virtual_memory_bytes{app=\"istiod\"}",
+          "expr": "process_virtual_memory_bytes{job=\"pilot\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
@@ -27441,7 +21413,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "process_resident_memory_bytes{app=\"istiod\"}",
+          "expr": "process_resident_memory_bytes{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Resident Memory",
@@ -27449,7 +21421,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "go_memstats_heap_sys_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_heap_sys_bytes{job=\"pilot\"}",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
@@ -27457,7 +21429,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "refId": "A"
         },
         {
-          "expr": "go_memstats_heap_alloc_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=\"pilot\"}",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
@@ -27465,7 +21437,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "refId": "D"
         },
         {
-          "expr": "go_memstats_alloc_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_alloc_bytes{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Alloc",
@@ -27473,7 +21445,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "go_memstats_heap_inuse_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_heap_inuse_bytes{job=\"pilot\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27482,7 +21454,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "go_memstats_stack_inuse_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_stack_inuse_bytes{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Stack in-use",
@@ -27490,7 +21462,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "sum(container_memory_usage_bytes{container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"})",
+          "expr": "sum(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27499,7 +21471,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "container_memory_usage_bytes{container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}",
+          "expr": "container_memory_usage_bytes{job=\"kubernetes-cadvisor\",container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27586,7 +21558,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27595,7 +21567,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}[1m])) by (container)",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}[1m])) by (container)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27604,7 +21576,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "irate(process_cpu_seconds_total{app=\"istiod\"}[1m])",
+          "expr": "irate(process_cpu_seconds_total{job=\"pilot\"}[1m])",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27691,7 +21663,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_open_fds{app=\"istiod\"}",
+          "expr": "process_open_fds{job=\"pilot\"}",
           "format": "time_series",
           "hide": true,
           "instant": false,
@@ -27701,7 +21673,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "refId": "A"
         },
         {
-          "expr": "container_fs_usage_bytes{ container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}",
+          "expr": "container_fs_usage_bytes{job=\"kubernetes-cadvisor\", container=~\"discovery|istio-proxy\", pod=~\"istiod-.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ container }}",
@@ -27788,7 +21760,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{app=\"istiod\"}",
+          "expr": "go_goroutines{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Number of Goroutines",
@@ -27945,7 +21917,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "sum(container_memory_usage_bytes{container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"})",
+          "expr": "sum(container_memory_usage_bytes{job=\"kubernetes-cadvisor\",container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -27954,7 +21926,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "container_memory_usage_bytes{container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}",
+          "expr": "container_memory_usage_bytes{job=\"kubernetes-cadvisor\",container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -28041,7 +22013,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -28050,7 +22022,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "step": 2
         },
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}[1m])) by (container)",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}[1m])) by (container)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -28156,7 +22128,7 @@ var _chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson = []byte
           "refId": "A"
         },
         {
-          "expr": "container_fs_usage_bytes{container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}",
+          "expr": "container_fs_usage_bytes{job=\"kubernetes-cadvisor\", container=~\"mixer|istio-proxy\", pod=~\"istio-telemetry-.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ container }}",
@@ -35131,6 +29103,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
   "editable": false,
   "gnetId": null,
   "graphTooltip": 1,
+  "id": 11,
   "links": [],
   "panels": [
     {
@@ -35281,7 +29254,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_virtual_memory_bytes{app=\"istiod\"}",
+          "expr": "process_virtual_memory_bytes{job=\"pilot\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
@@ -35290,7 +29263,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "process_resident_memory_bytes{app=\"istiod\"}",
+          "expr": "process_resident_memory_bytes{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Resident Memory",
@@ -35298,7 +29271,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "go_memstats_heap_sys_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_heap_sys_bytes{job=\"pilot\"}",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
@@ -35306,7 +29279,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "A"
         },
         {
-          "expr": "go_memstats_heap_alloc_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=\"pilot\"}",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
@@ -35314,7 +29287,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "D"
         },
         {
-          "expr": "go_memstats_alloc_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_alloc_bytes{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Alloc",
@@ -35322,7 +29295,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "go_memstats_heap_inuse_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_heap_inuse_bytes{job=\"pilot\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -35331,7 +29304,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "go_memstats_stack_inuse_bytes{app=\"istiod\"}",
+          "expr": "go_memstats_stack_inuse_bytes{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Stack in-use",
@@ -35339,7 +29312,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "container_memory_usage_bytes{container=~\"discovery\", pod=~\"istiod-.*|istio-pilot-.*\"}",
+          "expr": "container_memory_usage_bytes{job=\"kubernetes-cadvisor\", container=~\"discovery\", pod=~\"istiod-.*|istio-pilot-.*\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -35348,7 +29321,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "container_memory_usage_bytes{container=~\"istio-proxy\", pod=~\"istiod-.*|istio-pilot-.*\"}",
+          "expr": "container_memory_usage_bytes{job=\"kubernetes-cadvisor\", container=~\"istio-proxy\", pod=~\"istiod-.*|istio-pilot-.*\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Sidecar (container)",
@@ -35433,14 +29406,14 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(container_cpu_usage_seconds_total{container=\"discovery\", pod=~\"istiod-.*|istio-pilot-.*\"}[1m]))",
+          "expr": "sum(irate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",container=\"discovery\", pod=~\"istiod-.*|istio-pilot-.*\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Discovery (container)",
           "refId": "A"
         },
         {
-          "expr": "irate(process_cpu_seconds_total{app=\"istiod\"}[1m])",
+          "expr": "irate(process_cpu_seconds_total{job=\"pilot\"}[1m])",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -35449,7 +29422,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "sum(irate(container_cpu_usage_seconds_total{container=\"istio-proxy\", pod=~\"istiod-.*|istio-pilot-.*\"}[1m]))",
+          "expr": "sum(irate(container_cpu_usage_seconds_total{job=\"kubernetes-cadvisor\",container=\"istio-proxy\", pod=~\"istiod-.*|istio-pilot-.*\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -35536,7 +29509,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "steppedLine": false,
       "targets": [
         {
-          "expr": "container_fs_usage_bytes{container=\"discovery\", pod=~\"istiod-.*|istio-pilot-.*\"}",
+          "expr": "container_fs_usage_bytes{job=\"kubernetes-cadvisor\", container=\"discovery\", pod=~\"istiod-.*|istio-pilot-.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Discovery",
@@ -35544,7 +29517,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "step": 2
         },
         {
-          "expr": "container_fs_usage_bytes{container=\"istio-proxy\", pod=~\"istiod-.*|istio-pilot-.*\"}",
+          "expr": "container_fs_usage_bytes{job=\"kubernetes-cadvisor\", container=\"istio-proxy\", pod=~\"istiod-.*|istio-pilot-.*\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Sidecar",
@@ -35630,7 +29603,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{app=\"istiod\"}",
+          "expr": "go_goroutines{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Number of Goroutines",
@@ -35697,7 +29670,6 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "Shows the rate of pilot pushes",
       "fill": 1,
       "gridPos": {
@@ -35842,7 +29814,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(pilot_xds_cds_reject{app=\"istiod\"}) or (absent(pilot_xds_cds_reject{app=\"istiod\"}) - 1)",
+          "expr": "sum(pilot_xds_cds_reject{job=\"pilot\"}) or (absent(pilot_xds_cds_reject{job=\"pilot\"}) - 1)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35850,7 +29822,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "C"
         },
         {
-          "expr": "sum(pilot_xds_eds_reject{app=\"istiod\"}) or (absent(pilot_xds_eds_reject{app=\"istiod\"}) - 1)",
+          "expr": "sum(pilot_xds_eds_reject{job=\"pilot\"}) or (absent(pilot_xds_eds_reject{job=\"pilot\"}) - 1)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35858,7 +29830,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "D"
         },
         {
-          "expr": "sum(pilot_xds_rds_reject{app=\"istiod\"}) or (absent(pilot_xds_rds_reject{app=\"istiod\"}) - 1)",
+          "expr": "sum(pilot_xds_rds_reject{job=\"pilot\"}) or (absent(pilot_xds_rds_reject{job=\"pilot\"}) - 1)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35866,7 +29838,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "A"
         },
         {
-          "expr": "sum(pilot_xds_lds_reject{app=\"istiod\"}) or (absent(pilot_xds_lds_reject{app=\"istiod\"}) - 1)",
+          "expr": "sum(pilot_xds_lds_reject{job=\"pilot\"}) or (absent(pilot_xds_lds_reject{job=\"pilot\"}) - 1)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35874,14 +29846,14 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "B"
         },
         {
-          "expr": "sum(rate(pilot_xds_write_timeout{app=\"istiod\"}[1m]))",
+          "expr": "sum(rate(pilot_xds_write_timeout{job=\"pilot\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Write Timeouts",
           "refId": "F"
         },
         {
-          "expr": "sum(rate(pilot_total_xds_internal_errors{app=\"istiod\"}[1m]))",
+          "expr": "sum(rate(pilot_total_xds_internal_errors{job=\"pilot\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35889,7 +29861,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "H"
         },
         {
-          "expr": "sum(rate(pilot_total_xds_rejects{app=\"istiod\"}[1m]))",
+          "expr": "sum(rate(pilot_total_xds_rejects{job=\"pilot\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35897,7 +29869,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "E"
         },
         {
-          "expr": "sum(rate(pilot_xds_push_context_errors{app=\"istiod\"}[1m]))",
+          "expr": "sum(rate(pilot_xds_push_context_errors{job=\"pilot\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35912,7 +29884,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "L"
         },
         {
-          "expr": "sum(rate(pilot_xds_push_errors{app=\"istiod\"}[1m])) by (type)",
+          "expr": "sum(rate(pilot_xds_push_errors{job=\"pilot\"}[1m])) by (type)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -35920,14 +29892,14 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "I"
         },
         {
-          "expr": "sum(rate(pilot_xds_push_timeout{app=\"istiod\"}[1m]))",
+          "expr": "sum(rate(pilot_xds_push_timeout{job=\"pilot\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Push Timeouts",
           "refId": "G"
         },
         {
-          "expr": "sum(rate(pilot_xds_push_timeout_failures{app=\"istiod\"}[1m]))",
+          "expr": "sum(rate(pilot_xds_push_timeout_failures{job=\"pilot\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Push Timeouts Failures",
@@ -35980,7 +29952,6 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
       "description": "Shows the total time it takes to push a config update to a proxy",
       "fill": 1,
       "gridPos": {
@@ -36121,7 +30092,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pilot_conflict_inbound_listener{app=\"istiod\"}",
+          "expr": "pilot_conflict_inbound_listener{job=\"pilot\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -36129,7 +30100,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "B"
         },
         {
-          "expr": "pilot_conflict_outbound_listener_http_over_current_tcp{app=\"istiod\"}",
+          "expr": "pilot_conflict_outbound_listener_http_over_current_tcp{job=\"pilot\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -36137,7 +30108,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "A"
         },
         {
-          "expr": "pilot_conflict_outbound_listener_tcp_over_current_tcp{app=\"istiod\"}",
+          "expr": "pilot_conflict_outbound_listener_tcp_over_current_tcp{job=\"pilot\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -36145,7 +30116,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
           "refId": "C"
         },
         {
-          "expr": "pilot_conflict_outbound_listener_tcp_over_current_http{app=\"istiod\"}",
+          "expr": "pilot_conflict_outbound_listener_tcp_over_current_http{job=\"pilot\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -36231,21 +30202,21 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pilot_virt_services{app=\"istiod\"}",
+          "expr": "pilot_virt_services{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Virtual Services",
           "refId": "A"
         },
         {
-          "expr": "pilot_services{app=\"istiod\"}",
+          "expr": "pilot_services{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Services",
           "refId": "B"
         },
         {
-          "expr": "pilot_xds{app=\"istiod\"}",
+          "expr": "pilot_xds{job=\"pilot\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Connected Endpoints",
@@ -36337,7 +30308,7 @@ var _chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson = []byte(`{
       ],
       "targets": [
         {
-          "expr": "sum(pilot_xds_eds_instances{app=\"istiod\", cluster=~\".+\\\\|.+\"}) by (cluster) < 1",
+          "expr": "sum(pilot_xds_eds_instances{job=\"pilot\", cluster=~\".+\\\\|.+\"}) by (cluster) < 1",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -36993,9 +30964,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.grafana.image.repository }}:{{ .Values.grafana.image.tag }}"
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           ports:
           - containerPort: 3000
           readinessProbe:
@@ -37871,9 +31840,7 @@ spec:
 {{- end }}
       containers:
       - image: "{{ .Values.kiali.hub }}/{{ .Values.kiali.image }}:{{ .Values.kiali.tag }}"
-{{- if .Values.global.imagePullPolicy }}
-      imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         name: kiali
         command:
         - "/opt/kiali/kiali"
@@ -39428,15 +33395,6 @@ data:
             address: 127.0.0.1
             port_value: 15000
 
-      - name: sds-grpc
-        type: STATIC
-        http2_protocol_options: {}
-        connect_timeout: 0.250s
-        lb_policy: ROUND_ROBIN
-        hosts:
-        - pipe:
-            path: "/etc/istio/proxy/SDS"
-
       - name: inbound_9092
         circuit_breakers:
           thresholds:
@@ -39464,26 +33422,17 @@ data:
 
         tls_context:
           common_tls_context:
-            tls_certificate_sds_secret_configs:
-            - name: default
-              sds_config:
-                api_config_source:
-                  api_type: GRPC
-                  grpc_services:
-                  - envoy_grpc:
-                      cluster_name: sds-grpc
-            combined_validation_context:
-              default_validation_context:
-                verify_subject_alt_name:
-                - spiffe://{{ .Values.global.trustDomain }}/ns/{{ .Values.global.configNamespace }}/sa/istio-galley-service-account
-              validation_context_sds_secret_config:
-                name: ROOTCA
-                sds_config:
-                  api_config_source:
-                    api_type: GRPC
-                    grpc_services:
-                    - envoy_grpc:
-                        cluster_name: sds-grpc
+            tls_certificates:
+            - certificate_chain:
+                filename: /etc/certs/cert-chain.pem
+              private_key:
+                filename: /etc/certs/key.pem
+            validation_context:
+              trusted_ca:
+                filename: /etc/certs/root-cert.pem
+              verify_subject_alt_name:
+              - spiffe://{{ .Values.global.trustDomain }}/ns/{{ .Values.global.configNamespace }}/sa/istio-galley-service-account
+
         hosts:
           - socket_address:
               address: istio-galley.{{ .Values.global.configNamespace }}
@@ -39582,26 +33531,18 @@ data:
             name: envoy.http_connection_manager
     {{- if .Values.global.controlPlaneSecurityEnabled }}
           tls_context:
-            require_client_certificate: true
             common_tls_context:
               alpn_protocols:
               - h2
-              tls_certificate_sds_secret_configs:
-              - name: default
-                sds_config:
-                  api_config_source:
-                    api_type: GRPC
-                    grpc_services:
-                    - envoy_grpc:
-                        cluster_name: sds-grpc
-              validation_context_sds_secret_config:
-                name: ROOTCA
-                sds_config:
-                  api_config_source:
-                    api_type: GRPC
-                    grpc_services:
-                    - envoy_grpc:
-                        cluster_name: sds-grpc
+              tls_certificates:
+              - certificate_chain:
+                  filename: /etc/certs/cert-chain.pem
+                private_key:
+                  filename: /etc/certs/key.pem
+              validation_context:
+                trusted_ca:
+                  filename: /etc/certs/root-cert.pem
+            require_client_certificate: true
     {{- end }}
 
       - name: "9091"
@@ -39763,26 +33704,6 @@ spec:
       securityContext:
         fsGroup: 1337
       volumes:
-{{- if .Values.global.controlPlaneSecurityEnabled }}
-      - name: config-volume
-        configMap:
-          name: istio{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
-          optional: true
-{{- if eq .Values.global.pilotCertProvider "istiod" }}
-      - name: istiod-ca-cert
-        configMap:
-          name: istio-ca-root-cert
-{{- end }}
-{{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-      - name: istio-token
-        projected:
-          sources:
-          - serviceAccountToken:
-              path: istio-token
-              expirationSeconds: 43200
-              audience: {{ .Values.global.sds.token.aud }}
-{{- end }}
-{{- end }}
       - name: istio-certs
         secret:
           secretName: istio.istio-mixer-service-account
@@ -39813,9 +33734,7 @@ spec:
 {{- else }}
         image: "{{ .Values.mixer.telemetry.hub | default .Values.global.hub }}/{{ .Values.mixer.telemetry.image }}:{{ .Values.mixer.telemetry.tag | default .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         ports:
         - containerPort: 9091
         - containerPort: 15014
@@ -39904,9 +33823,7 @@ spec:
 {{- else }}
         image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         ports:
         - containerPort: 15004
         - containerPort: 15090
@@ -39949,20 +33866,6 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: status.podIP
-        - name: JWT_POLICY
-          value: {{ .Values.global.jwtPolicy }}
-        - name: PILOT_CERT_PROVIDER
-          value: {{ .Values.global.pilotCertProvider }}
-        - name: "ISTIO_META_USER_SDS"
-          value: "true"
-        - name: CA_ADDR
-          {{- if .Values.global.caAddress }}
-          value: {{ .Values.global.caAddress }}
-          {{- else if .Values.global.configNamespace }}
-          value: istiod.{{ .Values.global.configNamespace }}.svc:15012
-          {{- else }}
-          value: istiod.istio-system.svc:15012
-      {{- end }}
         resources:
 {{- if .Values.global.proxy.resources }}
 {{ toYaml .Values.global.proxy.resources | indent 10 }}
@@ -39970,19 +33873,11 @@ spec:
 {{ toYaml .Values.global.defaultResources | indent 10 }}
 {{- end }}
         volumeMounts:
-        - name: config-volume
-          mountPath: /etc/istio/config
-        {{- if eq .Values.global.pilotCertProvider "istiod" }}
-        - mountPath: /var/run/secrets/istio
-          name: istiod-ca-cert
-        {{- end }}
-        {{- if eq .Values.global.jwtPolicy "third-party-jwt" }}
-        - name: istio-token
-          mountPath: /var/run/secrets/tokens
-          readOnly: true
-        {{- end }}
         - name: telemetry-envoy-config
           mountPath: /var/lib/envoy
+        - name: istio-certs
+          mountPath: /etc/certs
+          readOnly: true
         - name: uds-socket
           mountPath: /sock
 {{- end }}
@@ -41200,8 +35095,7 @@ var _chartsIstioTelemetryMixerTelemetryValuesYaml = []byte(`mixer:
     # "security" and value "S1".
     podAntiAffinityLabelSelector: []
     podAntiAffinityTermLabelSelector: []
-
-revision: ""`)
+`)
 
 func chartsIstioTelemetryMixerTelemetryValuesYamlBytes() ([]byte, error) {
 	return _chartsIstioTelemetryMixerTelemetryValuesYaml, nil
@@ -41508,9 +35402,8 @@ data:
       relabel_configs:
       - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
         action: keep
-        regex: istiod;http-monitoring
-      - source_labels: [__meta_kubernetes_service_label_app]
-        target_label: app
+        regex: istio-pilot;http-monitoring
+
     - job_name: 'galley'
       kubernetes_sd_configs:
       - role: endpoints
@@ -41763,9 +35656,7 @@ spec:
       containers:
         - name: prometheus
           image: "{{ .Values.prometheus.hub }}/{{ .Values.prometheus.image }}:{{ .Values.prometheus.tag }}"
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           args:
             - '--storage.tsdb.retention={{ .Values.prometheus.retention }}'
             - '--config.file=/etc/prometheus/prometheus.yml'
@@ -41791,8 +35682,7 @@ spec:
             mountPath: /etc/prometheus
           - mountPath: /etc/istio-certs
             name: istio-certs
-
-{{- if .Values.prometheus.provisionPrometheusCert }}
+{{- if and .Values.prometheus.provisionPrometheusCert .Values.global.istiod.enabled }}
         - name: istio-proxy
           image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
           ports:
@@ -41810,12 +35700,43 @@ spec:
             - "/usr/local/bin/envoy"
             - --serviceCluster
             - "istio-proxy-prometheus"
+            - --drainDuration
+            - "45s"
+            - --parentShutdownDuration
+            - "1m0s"
+            - --discoveryAddress
+            {{- $namespace := .Values.global.configNamespace | default "istio-system" }}
+            {{- if .Values.global.remotePilotAddress }}
+            # Use the DNS hostname instead of the IP address. The discovery address needs to match the
+            # SAN in istiod's cert. The istiod-remote.<namespace>.svc will resolve to the remotePilotAddress.
+            - istiod-remote.{{ $namespace }}.svc:15012
+            {{- else }}
+            - istio-pilot.{{ $namespace }}.svc:15012
+            {{- end }}
             {{- if .Values.global.proxy.logLevel }}
             - --proxyLogLevel={{ .Values.global.proxy.logLevel }}
             {{- end}}
             {{- if .Values.global.proxy.componentLogLevel }}
             - --proxyComponentLogLevel={{ .Values.global.proxy.componentLogLevel }}
             {{- end}}
+            - --connectTimeout
+            - "10s"
+              {{- if .Values.global.proxy.envoyStatsd.enabled }}
+            - --statsdUdpAddress
+            - "{{ .ProxyConfig.StatsdUdpAddress }}"
+              {{- end }}
+            {{- if $.Values.global.proxy.envoyMetricsService.enabled }}
+            - --envoyMetricsService
+            {{- with  $.Values.global.proxy.envoyMetricsService }}
+            - '{"address":"{{ .host }}:{{.port }}"{{ if .tlsSettings }},"tlsSettings":{{ .tlsSettings | toJson }}{{- end }}{{ if .tcpKeepalive }},"tcpKeepalive":{{ .tcpKeepalive | toJson }}{{- end }}}'
+            {{- end }}
+            {{- end}}
+            {{- if $.Values.global.proxy.envoyAccessLogService.enabled }}
+            - --envoyAccessLogService
+            {{- with  $.Values.global.proxy.envoyAccessLogService }}
+            - '{"address":"{{ .host }}:{{.port }}"{{ if .tlsSettings }},"tlsSettings":{{ .tlsSettings | toJson }}{{- end }}{{ if .tcpKeepalive }},"tcpKeepalive":{{ .tcpKeepalive | toJson }}{{- end }}}'
+            {{- end }}
+            {{- end }}
             - --proxyAdminPort
             - "15000"
               {{- if .Values.global.istiod.enabled }}
@@ -41828,6 +35749,10 @@ spec:
             - --controlPlaneAuthPolicy
             - NONE
               {{- end }}
+            - --dnsRefreshRate
+            - "300s"
+            - --statusPort
+            - "15020"
               {{- if .Values.global.trustDomain }}
             - --trust-domain={{ .Values.global.trustDomain }}
               {{- end }}
@@ -41844,12 +35769,12 @@ spec:
               value: {{ .Values.global.pilotCertProvider }}
             # Temp, pending PR to make it default or based on the istiodAddr env
             - name: CA_ADDR
-              {{- if .Values.global.caAddress }}
+            {{- if .Values.global.caAddress }}
               value: {{ .Values.global.caAddress }}
-              {{- else if .Values.global.configNamespace }}
-              value: istiod.{{ .Values.global.configNamespace }}.svc:15012
-              {{- else }}
-              value: istiod.istio-system.svc:15012
+            {{- else if .Values.global.configNamespace }}
+              value: istio-pilot.{{ .Values.global.configNamespace }}.svc:15012
+            {{- else }}
+              value: istio-pilot.istio-system.svc:15012
               {{- end }}
             - name: POD_NAME
               valueFrom:
@@ -41916,15 +35841,9 @@ spec:
               {{- end }}
             - mountPath: /etc/istio-certs/
               name: istio-certs
-            - name: istio-config-volume
-              mountPath: /etc/istio/config
 {{- end }}
 
       volumes:
-      - name: istio-config-volume
-        configMap:
-          name: istio{{- if not (eq .Values.revision "") }}-{{ .Values.revision }}{{- end }}
-          optional: true
       - name: config-volume
         configMap:
           name: prometheus
@@ -42259,10 +36178,7 @@ var _chartsIstioTelemetryPrometheusValuesYaml = []byte(`prometheus:
 
 # Indicate if Citadel is enabled, i.e., whether its generated certificates are available
 security:
-  enabled: true
-
-revision: ""
-`)
+  enabled: true`)
 
 func chartsIstioTelemetryPrometheusValuesYamlBytes() ([]byte, error) {
 	return _chartsIstioTelemetryPrometheusValuesYaml, nil
@@ -43137,9 +37053,7 @@ spec:
       containers:
         - name: jaeger
           image: "{{ .Values.tracing.jaeger.hub }}/{{ .Values.tracing.jaeger.image }}:{{ .Values.tracing.jaeger.tag }}"
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           ports:
             - containerPort: 9411
             - containerPort: 16686
@@ -43292,9 +37206,7 @@ spec:
       containers:
       - name: oc-collector
         image: "{{ .Values.tracing.opencensus.hub }}/opencensus-collector:{{ .Values.tracing.opencensus.tag }}"
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         command:
           - "/occollector_linux"
           - "--config=/conf/oc-collector-config.yaml"
@@ -43393,13 +37305,11 @@ spec:
       containers:
         - name: zipkin
           image: "{{ .Values.tracing.zipkin.hub }}/{{ .Values.tracing.zipkin.image }}:{{ .Values.tracing.zipkin.tag }}"
-{{- if .Values.global.imagePullPolicy }}
-          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
           ports:
             - containerPort: {{ .Values.tracing.zipkin.queryPort }}
           livenessProbe:
-            initialDelaySeconds: {{ .Values.tracing.zipkin.livenessProbeStartupDelay }}
+            initialDelaySeconds: {{ .Values.tracing.zipkin.probeStartupDelay }}
             tcpSocket:
               port: {{ .Values.tracing.zipkin.queryPort }}
           readinessProbe:
@@ -43715,15 +37625,14 @@ tracing:
 
   zipkin:
     hub: docker.io/openzipkin
-    image: zipkin-slim
-    tag: 2.20.0
-    probeStartupDelay: 10
-    livenessProbeStartupDelay: 200
+    image: zipkin
+    tag: 2.14.2
+    probeStartupDelay: 200
     queryPort: 9411
     resources:
       limits:
-        cpu: 1000m
-        memory: 2048Mi
+        cpu: 300m
+        memory: 900Mi
       requests:
         cpu: 150m
         memory: 900Mi
@@ -44065,9 +37974,7 @@ spec:
       containers:
       - name: coredns
         image: {{ .Values.istiocoredns.coreDNSImage }}:{{ .Values.istiocoredns.coreDNSTag }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         args: [ "-conf", "/etc/coredns/Corefile" ]
         volumeMounts:
         - name: config-volume
@@ -44101,9 +38008,7 @@ spec:
         command:
         - /usr/local/bin/plugin
         image: {{ .Values.istiocoredns.coreDNSPluginImage }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         ports:
         - containerPort: 8053
           name: dns-grpc
@@ -44270,6 +38175,1065 @@ func chartsIstiocorednsValuesYaml() (*asset, error) {
 	return a, nil
 }
 
+var _chartsSecurityCitadelChartYaml = []byte(`apiVersion: v1
+name: citadel
+version: 1.1.0
+appVersion: 1.1.0
+tillerVersion: ">=2.7.2"
+description: Helm chart for istio authentication
+keywords:
+  - istio
+  - security
+sources:
+  - http://github.com/istio/istio
+engine: gotpl
+icon: https://istio.io/favicons/android-192x192.png
+`)
+
+func chartsSecurityCitadelChartYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelChartYaml, nil
+}
+
+func chartsSecurityCitadelChartYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelChartYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/Chart.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplatesNotesTxt = []byte(`This template contains the 'singleton' part of Istio.
+
+All other components support multiple instances (profiles) running in parallel.
+
+For upgrade purpose, this component should run in istio-system - where the existing mesh certificates are stored.
+Will install a new deployment of Citadel, using 1.1 - it can run in parallel with the old-style install of either 1.0
+or 1.1.
+`)
+
+func chartsSecurityCitadelTemplatesNotesTxtBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplatesNotesTxt, nil
+}
+
+func chartsSecurityCitadelTemplatesNotesTxt() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplatesNotesTxtBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/NOTES.txt", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplates_affinityTpl = []byte(`{{/* affinity - https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ */}}
+
+{{- define "nodeaffinity" }}
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    {{- include "nodeAffinityRequiredDuringScheduling" . }}
+    preferredDuringSchedulingIgnoredDuringExecution:
+    {{- include "nodeAffinityPreferredDuringScheduling" . }}
+{{- end }}
+
+{{- define "nodeAffinityRequiredDuringScheduling" }}
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: beta.kubernetes.io/arch
+          operator: In
+          values:
+        {{- range $key, $val := .Values.global.arch }}
+          {{- if gt ($val | int) 0 }}
+          - {{ $key | quote }}
+          {{- end }}
+        {{- end }}
+        {{- $nodeSelector := default .Values.global.defaultNodeSelector .Values.security.nodeSelector -}}
+        {{- range $key, $val := $nodeSelector }}
+        - key: {{ $key }}
+          operator: In
+          values:
+          - {{ $val | quote }}
+        {{- end }}
+{{- end }}
+
+{{- define "nodeAffinityPreferredDuringScheduling" }}
+  {{- range $key, $val := .Values.global.arch }}
+    {{- if gt ($val | int) 0 }}
+    - weight: {{ $val | int }}
+      preference:
+        matchExpressions:
+        - key: beta.kubernetes.io/arch
+          operator: In
+          values:
+          - {{ $key | quote }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- define "podAntiAffinity" }}
+{{- if or .Values.security.podAntiAffinityLabelSelector .Values.security.podAntiAffinityTermLabelSelector}}
+  podAntiAffinity:
+    {{- if .Values.security.podAntiAffinityLabelSelector }}
+    requiredDuringSchedulingIgnoredDuringExecution:
+    {{- include "podAntiAffinityRequiredDuringScheduling" . }}
+    {{- end }}
+    {{- if .Values.security.podAntiAffinityTermLabelSelector }}
+    preferredDuringSchedulingIgnoredDuringExecution:
+    {{- include "podAntiAffinityPreferredDuringScheduling" . }}
+    {{- end }}
+{{- end }}
+{{- end }}
+
+{{- define "podAntiAffinityRequiredDuringScheduling" }}
+    {{- range $index, $item := .Values.security.podAntiAffinityLabelSelector }}
+    - labelSelector:
+        matchExpressions:
+        - key: {{ $item.key }}
+          operator: {{ $item.operator }}
+          {{- if $item.values }}
+          values:
+          {{- $vals := split "," $item.values }}
+          {{- range $i, $v := $vals }}
+          - {{ $v | quote }}
+          {{- end }}
+          {{- end }}
+      topologyKey: {{ $item.topologyKey }}
+    {{- end }}
+{{- end }}
+
+{{- define "podAntiAffinityPreferredDuringScheduling" }}
+    {{- range $index, $item := .Values.security.podAntiAffinityTermLabelSelector }}
+    - podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: {{ $item.key }}
+            operator: {{ $item.operator }}
+            {{- if $item.values }}
+            values:
+            {{- $vals := split "," $item.values }}
+            {{- range $i, $v := $vals }}
+            - {{ $v | quote }}
+            {{- end }}
+            {{- end }}
+        topologyKey: {{ $item.topologyKey }}
+      weight: 100
+    {{- end }}
+{{- end }}
+`)
+
+func chartsSecurityCitadelTemplates_affinityTplBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplates_affinityTpl, nil
+}
+
+func chartsSecurityCitadelTemplates_affinityTpl() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplates_affinityTplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/_affinity.tpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplates_helpersTpl = []byte(`{{/* vim: set filetype=mustache: */}}
+{{/*
+Expand the name of the chart.
+*/}}
+{{- define "istio.name" -}}
+{{- default .Chart.Name .Values.security.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If release name contains chart name it will be used as a full name.
+*/}}
+{{- define "istio.fullname" -}}
+{{- if .Values.security.fullnameOverride -}}
+{{- .Values.security.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.security.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "istio.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a fully qualified configmap name.
+*/}}
+{{- define "istio.configmap.fullname" -}}
+{{- printf "%s-%s" .Release.Name "istio-mesh-config" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Configmap checksum.
+*/}}
+{{- define "istio.configmap.checksum" -}}
+{{- print $.Template.BasePath "/configmap.yaml" | sha256sum -}}
+{{- end -}}
+{{/*
+Expand the name of the chart.
+*/}}
+{{- define "security.name" -}}
+{{- default .Chart.Name .Values.security.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If release name contains chart name it will be used as a full name.
+*/}}
+{{- define "security.fullname" -}}
+{{- if .Values.security.fullnameOverride -}}
+{{- .Values.security.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.security.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "security.chart" -}}
+{{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+`)
+
+func chartsSecurityCitadelTemplates_helpersTplBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplates_helpersTpl, nil
+}
+
+func chartsSecurityCitadelTemplates_helpersTpl() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplates_helpersTplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/_helpers.tpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplatesClusterroleYaml = []byte(`{{ if .Values.clusterResources }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: istio-citadel-{{ .Release.Namespace }}
+  labels:
+    app: citadel
+    release: {{ .Release.Name }}
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["create", "get", "update"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "get", "watch", "list", "update", "delete"]
+- apiGroups: [""]
+  resources: ["serviceaccounts", "services", "namespaces"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["authentication.k8s.io"]
+  resources: ["tokenreviews"]
+  verbs: ["create"]
+
+---
+{{ end }}
+`)
+
+func chartsSecurityCitadelTemplatesClusterroleYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplatesClusterroleYaml, nil
+}
+
+func chartsSecurityCitadelTemplatesClusterroleYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplatesClusterroleYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/clusterrole.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplatesClusterrolebindingYaml = []byte(`{{ if .Values.clusterResources }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: istio-citadel-{{ .Release.Namespace }}
+  labels:
+    release: {{ .Release.Name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: istio-citadel-{{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: istio-citadel-service-account
+    namespace: {{ .Release.Namespace }}
+---
+{{- end}}
+`)
+
+func chartsSecurityCitadelTemplatesClusterrolebindingYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplatesClusterrolebindingYaml, nil
+}
+
+func chartsSecurityCitadelTemplatesClusterrolebindingYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplatesClusterrolebindingYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/clusterrolebinding.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplatesDeploymentYaml = []byte(`# istio CA watching all namespaces
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-citadel
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: security
+    istio: citadel
+    release: {{ .Release.Name }}
+
+spec:
+  selector:
+    matchLabels:
+      istio: citadel
+  replicas: {{ .Values.security.replicaCount }}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.security.rollingMaxSurge }}
+      maxUnavailable: {{ .Values.security.rollingMaxUnavailable }}
+  template:
+    metadata:
+      labels:
+        app: citadel
+        istio: citadel
+      annotations:
+        sidecar.istio.io/inject: "false"
+        {{- if .Values.security.podAnnotations }}
+{{ toYaml .Values.security.podAnnotations | indent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: istio-citadel-service-account
+{{- if .Values.global.priorityClassName }}
+      priorityClassName: "{{ .Values.global.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: citadel
+          image: "{{ .Values.global.hub }}/{{ .Values.security.image }}:{{ .Values.global.tag }}"
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
+          args:
+            {{- if .Values.global.sds.enabled }}
+            - --sds-enabled=true
+            {{- end }}
+            - --append-dns-names=true
+            - --grpc-port=8060
+            - --citadel-storage-namespace={{ .Release.Namespace }}
+          {{- if .Values.kustomize }}
+            - --custom-dns-names=$(CITADEL_DNS)
+          {{- else }}
+            - --custom-dns-names={{ range $k,$v := .Values.security.dnsCerts }}{{ $k }}:{{ $v }},{{ end }}
+          {{- end }}
+          {{- if .Values.security.selfSigned }}
+            - --self-signed-ca=true
+          {{- else }}
+            - --self-signed-ca=false
+            - --signing-cert=/etc/cacerts/ca-cert.pem
+            - --signing-key=/etc/cacerts/ca-key.pem
+            - --root-cert=/etc/cacerts/root-cert.pem
+            - --cert-chain=/etc/cacerts/cert-chain.pem
+          {{- end }}
+          {{- if .Values.global.trustDomain }}
+            - --trust-domain={{ .Values.global.trustDomain }}
+          {{- end }}
+          {{- if .Values.security.workloadCertTtl }}
+            - --workload-cert-ttl={{ .Values.security.workloadCertTtl }}
+          {{- end }}
+          {{- if .Values.security.citadelHealthCheck }}
+            - --liveness-probe-path=/tmp/ca.liveness # path to the liveness health check status file
+            - --liveness-probe-interval=60s # interval for health check file update
+            - --probe-check-interval=15s    # interval for health status check
+          {{- end }}
+          {{- if .Values.global.logAsJson }}
+            - --log_as_json
+          {{- end }}
+          env:
+          - name: CITADEL_ENABLE_NAMESPACES_BY_DEFAULT
+            value: "{{ .Values.security.enableNamespacesByDefault }}"
+          {{- if .Values.security.env }}
+          {{- range $key, $val := .Values.security.env }}
+          - name: {{ $key }}
+            value: {{ $val | quote }}
+          {{- end }}
+          {{- end }}
+          livenessProbe:
+          {{- if .Values.security.citadelHealthCheck }}
+            exec:
+              command:
+              - /usr/local/bin/istio_ca
+              - probe
+              - --probe-path=/tmp/ca.liveness # path to the liveness health check status file
+              - --interval=125s # the maximum time gap allowed between the file mtime and the current sys clock
+            initialDelaySeconds: 60
+            periodSeconds: 60
+          {{- else }}
+            httpGet:
+              path: /version
+              port: 15014
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          {{- end }}
+          resources:
+{{- if .Values.security.resources }}
+{{ toYaml .Values.security.resources | indent 12 }}
+{{- else }}
+{{ toYaml .Values.global.defaultResources | indent 12 }}
+{{- end }}
+          securityContext:
+            runAsUser: 1337
+            runAsGroup: 1337
+            runAsNonRoot: true
+            capabilities:
+              drop:
+              - ALL
+{{- if not .Values.security.selfSigned }}
+          volumeMounts:
+          - name: cacerts
+            mountPath: /etc/cacerts
+            readOnly: true
+      securityContext:
+        fsGroup: 1337
+      volumes:
+      - name: cacerts
+        secret:
+         secretName: cacerts
+         optional: true
+{{- end }}
+      affinity:
+      {{- include "nodeaffinity" . | indent 6 }}
+      {{- include "podAntiAffinity" . | indent 6 }}
+{{- if .Values.security.tolerations }}
+      tolerations:
+{{ toYaml .Values.security.tolerations | indent 6 }}
+{{- else if .Values.global.defaultTolerations }}
+      tolerations:
+{{ toYaml .Values.global.defaultTolerations | indent 6 }}
+{{- end }}
+`)
+
+func chartsSecurityCitadelTemplatesDeploymentYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplatesDeploymentYaml, nil
+}
+
+func chartsSecurityCitadelTemplatesDeploymentYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplatesDeploymentYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/deployment.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplatesPoddisruptionbudgetYaml = []byte(`{{- if .Values.global.defaultPodDisruptionBudget.enabled }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: istio-citadel
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: security
+    istio: citadel
+    release: {{ .Release.Name }}
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: citadel
+      istio: citadel
+{{- end }}
+`)
+
+func chartsSecurityCitadelTemplatesPoddisruptionbudgetYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplatesPoddisruptionbudgetYaml, nil
+}
+
+func chartsSecurityCitadelTemplatesPoddisruptionbudgetYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplatesPoddisruptionbudgetYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/poddisruptionbudget.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplatesServiceYaml = []byte(`apiVersion: v1
+kind: Service
+metadata:
+  # Must match the certificate, this is used in the node agent in same namespace.
+  name: istio-citadel
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: security
+    istio: citadel
+    release: {{ .Release.Name }}
+
+spec:
+  ports:
+    - name: grpc-citadel
+      port: 8060
+      targetPort: 8060
+      protocol: TCP
+    - name: http-monitoring
+      port: 15014
+  selector:
+    app: citadel
+`)
+
+func chartsSecurityCitadelTemplatesServiceYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplatesServiceYaml, nil
+}
+
+func chartsSecurityCitadelTemplatesServiceYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplatesServiceYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/service.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelTemplatesServiceaccountYaml = []byte(`apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: istio-citadel-service-account
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: security
+    release: {{ .Release.Name }}
+  {{- if .Values.global.imagePullSecrets }}
+spec:
+  imagePullSecrets:
+  {{- range .Values.global.imagePullSecrets }}
+  - name: {{ . }}
+  {{- end }}
+  {{- end }}
+`)
+
+func chartsSecurityCitadelTemplatesServiceaccountYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelTemplatesServiceaccountYaml, nil
+}
+
+func chartsSecurityCitadelTemplatesServiceaccountYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelTemplatesServiceaccountYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/templates/serviceaccount.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityCitadelValuesYaml = []byte(`#
+# security (citadel) configuration
+#
+security:
+  enabled: true
+  replicaCount: 1
+  rollingMaxSurge: 100%
+  rollingMaxUnavailable: 25%
+  image: citadel
+  selfSigned: true # indicate if self-signed CA is used.
+  citadelHealthCheck: false
+
+  # 90*24hour = 2160h
+  workloadCertTtl: 2160h
+
+  # Environment variables that configure Citadel.
+  env: {}
+
+  # Determines Citadel default behavior if the ca.istio.io/env or ca.istio.io/override
+  # labels are not found on a given namespace.
+  #
+  # For example: consider a namespace called "target", which has neither the "ca.istio.io/env"
+  # nor the "ca.istio.io/override" namespace labels. To decide whether or not to generate secrets
+  # for service accounts created in this "target" namespace, Citadel will defer to this option. If the value
+  # of this option is "true" in this case, secrets will be generated for the "target" namespace.
+  # If the value of this option is "false" Citadel will not generate secrets upon service account creation.
+  enableNamespacesByDefault: true
+
+  # Galley, pilot in each 'profile' must have a DNS cert.
+  dnsCerts:
+    istio-pilot-service-account.istio-control: istio-pilot.istio-control
+    istio-pilot-service-account.istio-pilot11: istio-pilot.istio-system
+
+    istio-sidecar-injector-service-account.istio-remote: istio-sidecar-injector.istio-remote.svc
+    istio-sidecar-injector-service-account.istio-pilot11: istio-sidecar-injector.istio-pilot11.svc
+    istio-sidecar-injector-service-account.istio-control: istio-sidecar-injector.istio-control.svc
+    istio-sidecar-injector-service-account.istio-master: istio-sidecar-injector.istio-master.svc
+    istio-sidecar-injector-service-account.istio-control-master: istio-sidecar-injector.istio-control-master.svc
+
+    istio-galley-service-account.istio-pilot11: istio-galley.istio-pilot11.svc
+    istio-galley-service-account.istio-control: istio-galley.istio-control.svc
+
+    istio-galley-service-account.istio-master: istio-galley.istio-master.svc
+    istio-galley-service-account.istio-control-master: istio-galley.istio-control-master.svc
+
+    istio-galley-service-account.istio-config: istio-galley.istio-config.svc
+
+  nodeSelector: {}
+  tolerations: []
+  podAnnotations: {}
+
+  # Specify the pod anti-affinity that allows you to constrain which nodes
+  # your pod is eligible to be scheduled based on labels on pods that are
+  # already running on the node rather than based on labels on nodes.
+  # There are currently two types of anti-affinity:
+  #    "requiredDuringSchedulingIgnoredDuringExecution"
+  #    "preferredDuringSchedulingIgnoredDuringExecution"
+  # which denote "hard" vs. "soft" requirements, you can define your values
+  # in "podAntiAffinityLabelSelector" and "podAntiAffinityTermLabelSelector"
+  # correspondingly.
+  # For example:
+  # podAntiAffinityLabelSelector:
+  # - key: security
+  #   operator: In
+  #   values: S1,S2
+  #   topologyKey: "kubernetes.io/hostname"
+  # This pod anti-affinity rule says that the pod requires not to be scheduled
+  # onto a node if that node is already running a pod with label having key
+  # "security" and value "S1".
+  podAntiAffinityLabelSelector: []
+  podAntiAffinityTermLabelSelector: []
+
+  resources: {}
+kustomize: false
+`)
+
+func chartsSecurityCitadelValuesYamlBytes() ([]byte, error) {
+	return _chartsSecurityCitadelValuesYaml, nil
+}
+
+func chartsSecurityCitadelValuesYaml() (*asset, error) {
+	bytes, err := chartsSecurityCitadelValuesYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/citadel/values.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityNodeagentChartYaml = []byte(`apiVersion: v1
+name: nodeagent
+version: 1.1.0
+appVersion: 1.1.0
+tillerVersion: ">=2.7.2"
+description: Helm chart for nodeagent deployment
+keywords:
+  - istio
+  - nodeagent
+sources:
+  - http://github.com/istio/istio
+engine: gotpl
+icon: https://istio.io/favicons/android-192x192.png
+`)
+
+func chartsSecurityNodeagentChartYamlBytes() ([]byte, error) {
+	return _chartsSecurityNodeagentChartYaml, nil
+}
+
+func chartsSecurityNodeagentChartYaml() (*asset, error) {
+	bytes, err := chartsSecurityNodeagentChartYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/nodeagent/Chart.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityNodeagentTemplates_affinityTpl = []byte(`{{/* affinity - https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ */}}
+
+{{- define "nodeaffinity" }}
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    {{- include "nodeAffinityRequiredDuringScheduling" . }}
+    preferredDuringSchedulingIgnoredDuringExecution:
+    {{- include "nodeAffinityPreferredDuringScheduling" . }}
+{{- end }}
+
+{{- define "nodeAffinityRequiredDuringScheduling" }}
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: beta.kubernetes.io/arch
+          operator: In
+          values:
+        {{- range $key, $val := .Values.global.arch }}
+          {{- if gt ($val | int) 0 }}
+          - {{ $key | quote }}
+          {{- end }}
+        {{- end }}
+        {{- $nodeSelector := default .Values.global.defaultNodeSelector .Values.nodeagent.nodeSelector -}}
+        {{- range $key, $val := $nodeSelector }}
+        - key: {{ $key }}
+          operator: In
+          values:
+          - {{ $val | quote }}
+        {{- end }}
+{{- end }}
+
+{{- define "nodeAffinityPreferredDuringScheduling" }}
+  {{- range $key, $val := .Values.global.arch }}
+    {{- if gt ($val | int) 0 }}
+    - weight: {{ $val | int }}
+      preference:
+        matchExpressions:
+        - key: beta.kubernetes.io/arch
+          operator: In
+          values:
+          - {{ $key | quote }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- define "podAntiAffinity" }}
+{{- if or .Values.nodeagent.podAntiAffinityLabelSelector .Values.nodeagent.podAntiAffinityTermLabelSelector}}
+  podAntiAffinity:
+    {{- if .Values.nodeagent.podAntiAffinityLabelSelector }}
+    requiredDuringSchedulingIgnoredDuringExecution:
+    {{- include "podAntiAffinityRequiredDuringScheduling" . }}
+    {{- end }}
+    {{- if .Values.nodeagent.podAntiAffinityTermLabelSelector }}
+    preferredDuringSchedulingIgnoredDuringExecution:
+    {{- include "podAntiAffinityPreferredDuringScheduling" . }}
+    {{- end }}
+{{- end }}
+{{- end }}
+
+{{- define "podAntiAffinityRequiredDuringScheduling" }}
+    {{- range $index, $item := .Values.nodeagent.podAntiAffinityLabelSelector }}
+    - labelSelector:
+        matchExpressions:
+        - key: {{ $item.key }}
+          operator: {{ $item.operator }}
+          {{- if $item.values }}
+          values:
+          {{- $vals := split "," $item.values }}
+          {{- range $i, $v := $vals }}
+          - {{ $v | quote }}
+          {{- end }}
+          {{- end }}
+      topologyKey: {{ $item.topologyKey }}
+    {{- end }}
+{{- end }}
+
+{{- define "podAntiAffinityPreferredDuringScheduling" }}
+    {{- range $index, $item := .Values.nodeagent.podAntiAffinityTermLabelSelector }}
+    - podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: {{ $item.key }}
+            operator: {{ $item.operator }}
+            {{- if $item.values }}
+            values:
+            {{- $vals := split "," $item.values }}
+            {{- range $i, $v := $vals }}
+            - {{ $v | quote }}
+            {{- end }}
+            {{- end }}
+        topologyKey: {{ $item.topologyKey }}
+      weight: 100
+    {{- end }}
+{{- end }}
+`)
+
+func chartsSecurityNodeagentTemplates_affinityTplBytes() ([]byte, error) {
+	return _chartsSecurityNodeagentTemplates_affinityTpl, nil
+}
+
+func chartsSecurityNodeagentTemplates_affinityTpl() (*asset, error) {
+	bytes, err := chartsSecurityNodeagentTemplates_affinityTplBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/nodeagent/templates/_affinity.tpl", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityNodeagentTemplatesClusterroleYaml = []byte(`apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: istio-nodeagent-{{ .Release.Namespace }}
+  labels:
+    app: istio-nodeagent
+    release: {{ .Release.Name }}
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get"]
+`)
+
+func chartsSecurityNodeagentTemplatesClusterroleYamlBytes() ([]byte, error) {
+	return _chartsSecurityNodeagentTemplatesClusterroleYaml, nil
+}
+
+func chartsSecurityNodeagentTemplatesClusterroleYaml() (*asset, error) {
+	bytes, err := chartsSecurityNodeagentTemplatesClusterroleYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/nodeagent/templates/clusterrole.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityNodeagentTemplatesClusterrolebindingYaml = []byte(`apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: istio-nodeagent-{{ .Release.Namespace }}
+  labels:
+    app: istio-nodeagent
+    release: {{ .Release.Name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: istio-nodeagent-{{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: istio-nodeagent-service-account
+    namespace: {{ .Release.Namespace }}
+`)
+
+func chartsSecurityNodeagentTemplatesClusterrolebindingYamlBytes() ([]byte, error) {
+	return _chartsSecurityNodeagentTemplatesClusterrolebindingYaml, nil
+}
+
+func chartsSecurityNodeagentTemplatesClusterrolebindingYaml() (*asset, error) {
+	bytes, err := chartsSecurityNodeagentTemplatesClusterrolebindingYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/nodeagent/templates/clusterrolebinding.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityNodeagentTemplatesDaemonsetYaml = []byte(`apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: istio-nodeagent
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: istio-nodeagent
+    istio: nodeagent
+    release: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      istio: nodeagent
+  template:
+    metadata:
+      labels:
+        app: istio-nodeagent
+        istio: nodeagent
+        release: {{ .Release.Name }}
+      annotations:
+        sidecar.istio.io/inject: "false"
+        {{- if .Values.nodeagent.podAnnotations }}
+{{ toYaml .Values.nodeagent.podAnnotations | indent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: istio-nodeagent-service-account
+{{- if .Values.global.priorityClassName }}
+      priorityClassName: "{{ .Values.global.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: nodeagent
+{{- if contains "/" .Values.nodeagent.image }}
+          image: "{{ .Values.nodeagent.image }}"
+{{- else }}
+          image: "{{ .Values.nodeagent.hub | default .Values.global.hub }}/{{ .Values.nodeagent.image }}:{{ .Values.nodeagent.tag | default .Values.global.tag }}"
+{{- end }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
+          args:
+          {{- if .Values.global.logAsJson }}
+            - --log_as_json
+          {{- end }}
+          volumeMounts:
+            - mountPath: /var/run/sds
+              name: sdsudspath
+          env:
+          {{- if .Values.nodeagent.env }}
+          {{- range $key, $val := .Values.nodeagent.env }}
+            - name: {{ $key }}
+              value: "{{ $val }}"
+          {{- end }}
+          {{- end }}
+            - name: "TRUST_DOMAIN"
+              value: "{{ .Values.global.trustDomain }}"
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+      volumes:
+        - name: sdsudspath
+          hostPath:
+            path: /var/run/sds
+      affinity:
+      {{- include "nodeaffinity" . | indent 6 }}
+      {{- include "podAntiAffinity" . | indent 6 }}
+{{- if .Values.nodeagent.tolerations }}
+      tolerations:
+{{ toYaml .Values.nodeagent.tolerations | indent 6 }}
+{{- else if .Values.global.defaultTolerations }}
+      tolerations:
+{{ toYaml .Values.global.defaultTolerations | indent 6 }}
+{{- end }}
+  updateStrategy:
+    type: RollingUpdate
+`)
+
+func chartsSecurityNodeagentTemplatesDaemonsetYamlBytes() ([]byte, error) {
+	return _chartsSecurityNodeagentTemplatesDaemonsetYaml, nil
+}
+
+func chartsSecurityNodeagentTemplatesDaemonsetYaml() (*asset, error) {
+	bytes, err := chartsSecurityNodeagentTemplatesDaemonsetYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/nodeagent/templates/daemonset.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityNodeagentTemplatesServiceaccountYaml = []byte(`apiVersion: v1
+kind: ServiceAccount
+{{- if .Values.global.imagePullSecrets }}
+imagePullSecrets:
+{{- range .Values.global.imagePullSecrets }}
+  - name: {{ . }}
+{{- end }}
+{{- end }}
+metadata:
+  name: istio-nodeagent-service-account
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: istio-nodeagent
+    release: {{ .Release.Name }}
+`)
+
+func chartsSecurityNodeagentTemplatesServiceaccountYamlBytes() ([]byte, error) {
+	return _chartsSecurityNodeagentTemplatesServiceaccountYaml, nil
+}
+
+func chartsSecurityNodeagentTemplatesServiceaccountYaml() (*asset, error) {
+	bytes, err := chartsSecurityNodeagentTemplatesServiceaccountYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/nodeagent/templates/serviceaccount.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _chartsSecurityNodeagentValuesYaml = []byte(`#
+# nodeagent configuration
+#
+nodeagent:
+  enabled: false
+  hub: ""
+  tag: ""
+  image: node-agent-k8s
+  env:
+    # name of authentication provider.
+    CA_PROVIDER: ""
+    # CA endpoint.
+    CA_ADDR: ""  
+    # names of authentication provider's plugins.
+    PLUGINS: ""
+
+  nodeSelector: {}
+  tolerations: []
+  podAnnotations: {}
+
+  # Specify the pod anti-affinity that allows you to constrain which nodes
+  # your pod is eligible to be scheduled based on labels on pods that are
+  # already running on the node rather than based on labels on nodes.
+  # There are currently two types of anti-affinity:
+  #    "requiredDuringSchedulingIgnoredDuringExecution"
+  #    "preferredDuringSchedulingIgnoredDuringExecution"
+  # which denote "hard" vs. "soft" requirements, you can define your values
+  # in "podAntiAffinityLabelSelector" and "podAntiAffinityTermLabelSelector"
+  # correspondingly.
+  # For example:
+  # podAntiAffinityLabelSelector:
+  # - key: security
+  #   operator: In
+  #   values: S1,S2
+  #   topologyKey: "kubernetes.io/hostname"
+  # This pod anti-affinity rule says that the pod requires not to be scheduled
+  # onto a node if that node is already running a pod with label having key
+  # "security" and value "S1".
+  podAntiAffinityLabelSelector: []
+  podAntiAffinityTermLabelSelector: []
+`)
+
+func chartsSecurityNodeagentValuesYamlBytes() ([]byte, error) {
+	return _chartsSecurityNodeagentValuesYaml, nil
+}
+
+func chartsSecurityNodeagentValuesYaml() (*asset, error) {
+	bytes, err := chartsSecurityNodeagentValuesYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "charts/security/nodeagent/values.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _examplesCustomresourceIstio_v1alpha1_istiooperator_crYaml = []byte(`---
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
@@ -44292,6 +39256,48 @@ func examplesCustomresourceIstio_v1alpha1_istiooperator_crYaml() (*asset, error)
 	}
 
 	info := bindataFileInfo{name: "examples/customresource/istio_v1alpha1_istiooperator_cr.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _examplesGooglecaValuesIstioGoogleCaYaml = []byte(`apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  security:
+    components:
+      nodeAgent:
+        enabled: true
+  values:
+    global:
+      controlPlaneSecurityEnabled: true
+      mtls:
+        enabled: true
+      sds:
+        enabled: true
+        udsPath: "unix:/var/run/sds/uds_path"
+        token:
+          aud: "istio-ca"
+      useMCP: true
+    nodeagent:
+      image: node-agent-k8s
+      env:
+        CA_PROVIDER: "GoogleCA"
+        CA_ADDR: "meshca.googleapis.com:443"
+        PLUGINS: "GoogleTokenExchange"
+        GKE_CLUSTER_URL: ""
+`)
+
+func examplesGooglecaValuesIstioGoogleCaYamlBytes() ([]byte, error) {
+	return _examplesGooglecaValuesIstioGoogleCaYaml, nil
+}
+
+func examplesGooglecaValuesIstioGoogleCaYaml() (*asset, error) {
+	bytes, err := examplesGooglecaValuesIstioGoogleCaYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "examples/googleca/values-istio-google-ca.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -44351,6 +39357,8 @@ var _examplesMulticlusterValuesIstioMulticlusterPrimaryYaml = []byte(`apiVersion
 kind: IstioOperator
 spec:
   values:
+    security:
+      selfSigned: false
     gateways:
       istio-ingressgateway:
         env:
@@ -44719,7 +39727,7 @@ spec:
         status:
           description: 'Status describes each of istio control plane component status at the current time.
             0 means NONE, 1 means UPDATING, 2 means HEALTHY, 3 means ERROR, 4 means RECONCILING.
-            More info: https://github.com/istio/api/blob/master/operator/v1alpha1/istio.operator.v1alpha1.pb.html &
+            More info: https://github.com/istio/operator/blob/master/pkg/apis/istio/v1alpha2/v1alpha2.pb.html &
             https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status'
           type: object
   versions:
@@ -44916,6 +39924,10 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 5
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2048Mi
         strategy:
           rollingUpdate:
             maxSurge: "100%"
@@ -44994,6 +40006,9 @@ spec:
             maxSurge: "100%"
             maxUnavailable: "25%"
 
+    nodeAgent:
+      enabled: false
+
   # Config management feature
     galley:
       enabled: false
@@ -45002,6 +40017,16 @@ spec:
         resources:
           requests:
             cpu: 100m
+        strategy:
+          rollingUpdate:
+            maxSurge: "100%"
+            maxUnavailable: "25%"
+
+  # Auto injection feature
+    sidecarInjector:
+      enabled: false
+      k8s:
+        replicaCount: 1
         strategy:
           rollingUpdate:
             maxSurge: "100%"
@@ -45086,7 +40111,6 @@ spec:
       enabled: false
 
   # Global values passed through to helm global.yaml.
-  # Please keep this in sync with manifests/global.yaml
   values:
     global:
       istioNamespace: istio-system
@@ -45165,9 +40189,7 @@ spec:
           requests:
             cpu: 10m
             memory: 10Mi
-      # Specify image pull policy if default behavior isn't desired.
-      # Default behavior: latest images will be Always else IfNotPresent.
-      imagePullPolicy: ""
+      imagePullPolicy: IfNotPresent
       certificates: []
       operatorManageWebhooks: false
       controlPlaneSecurityEnabled: true
@@ -45219,6 +40241,8 @@ spec:
       outboundTrafficPolicy:
         mode: ALLOW_ANY
       sds:
+        enabled: false
+        udsPath: ""
         token:
           aud: istio-ca
       sts:
@@ -45330,6 +40354,9 @@ spec:
       dnsCerts:
         istio-pilot-service-account.istio-control: istio-pilot.istio-control
 
+    nodeagent:
+      image: node-agent-k8s
+
     gateways:
       istio-egressgateway:
         autoscaleEnabled: true
@@ -45359,6 +40386,19 @@ spec:
         debug: info
         domain: ""
         type: LoadBalancer
+        zvpn:
+          enabled: false
+          suffix: global
+        sds:
+          enabled: false
+          image: node-agent-k8s
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 2000m
+              memory: 1024Mi
         env:
           ISTIO_META_ROUTER_MODE: "sni-dnat"
         name: istio-ingressgateway
@@ -45367,10 +40407,9 @@ spec:
             targetPort: 15020
             name: status-port
           - port: 80
-            targetPort: 8080
+            targetPort: 80
             name: http2
           - port: 443
-            targetPort: 8443
             name: https
           - port: 15029
             targetPort: 15029
@@ -45398,7 +40437,7 @@ spec:
             targetPort: 8060
             name: tcp-citadel-grpc-tls
           - port: 853
-            targetPort: 8853
+            targetPort: 853
             name: tcp-dns-tls
         secretVolumes:
           - name: ingressgateway-certs
@@ -45409,8 +40448,10 @@ spec:
             mountPath: /etc/istio/ingressgateway-ca-certs
 
     sidecarInjectorWebhook:
+      image: sidecar_injector
       enableNamespacesByDefault: false
-      rewriteAppHTTPProbe: true
+      rewriteAppHTTPProbe: false
+      selfSigned: false
       injectLabel: istio-injection
       objectSelector:
         enabled: false
@@ -45500,13 +40541,13 @@ spec:
         accessMode: ReadWriteMany
       zipkin:
         hub: docker.io/openzipkin
-        tag: 2.20.0
-        probeStartupDelay: 10
+        tag: 2.14.2
+        probeStartupDelay: 200
         queryPort: 9411
         resources:
           limits:
-            cpu: 1000m
-            memory: 2048Mi
+            cpu: 300m
+            memory: 900Mi
           requests:
             cpu: 150m
             memory: 900Mi
@@ -45705,10 +40746,9 @@ spec:
           targetPort: 15020
           name: status-port
         - port: 80
-          targetPort: 8080
+          targetPort: 80
           name: http2
         - port: 443
-          targetPort: 8443
           name: https
         - port: 15029
           targetPort: 15029
@@ -45725,7 +40765,6 @@ spec:
         - port: 31400
           targetPort: 31400
           name: tcp
-          # This is the port where sni routing happens
         - port: 15443
           targetPort: 15443
           name: tls
@@ -45753,16 +40792,53 @@ var _profilesEmptyYaml = []byte(`# The empty profile has everything disabled
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
+  hub: gcr.io/istio-testing
+  tag: latest
+  meshConfig:
+    rootNamespace: istio-system
   components:
     base:
       enabled: false
     pilot:
       enabled: false
+    policy:
+      enabled: false
+    telemetry:
+      enabled: false
+    proxy:
+      enabled: false
+    sidecarInjector:
+      enabled: false
+    citadel:
+      enabled: false
+    nodeAgent:
+      enabled: false
+    galley:
+      enabled: false
+    cni:
+      enabled: false
     ingressGateways:
+    egressGateways:
 
   addonComponents:
     prometheus:
       enabled: false
+
+  values:
+    global:
+      useMCP: false
+      controlPlaneSecurityEnabled: false
+      proxy:
+        envoyStatsd:
+          enabled: false
+          host:
+          port:
+      mtls:
+        auto: false
+
+    pilot:
+      sidecar: false
+      useMCP: false
 `)
 
 func profilesEmptyYamlBytes() ([]byte, error) {
@@ -45785,7 +40861,30 @@ apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
   components:
+    pilot:
+      enabled: true
+    policy:
+      enabled: false
+    telemetry:
+      enabled: false
+    proxy:
+      enabled: false
+    sidecarInjector:
+      enabled: false
+    citadel:
+      enabled: false
+    nodeAgent:
+      enabled: false
+    galley:
+      enabled: false
+    cni:
+      enabled: false
     ingressGateways:
+    - name: istio-ingressgateway
+      enabled: false
+    egressGateways:
+    - name: istio-egressgateway
+      enabled: false
 
   addonComponents:
     prometheus:
@@ -45793,8 +40892,19 @@ spec:
 
   values:
     global:
+      useMCP: false
+      controlPlaneSecurityEnabled: false
+      proxy:
+        envoyStatsd:
+          enabled: false
+          host:
+          port:
       mtls:
         auto: false
+
+    pilot:
+      sidecar: false
+      useMCP: false
 `)
 
 func profilesMinimalYamlBytes() ([]byte, error) {
@@ -45808,35 +40918,6 @@ func profilesMinimalYaml() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "profiles/minimal.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _profilesPreviewYaml = []byte(`# The preview profile contains features that are experimental.
-# This is intended to explore new features coming to Istio.
-# Stability, security, and performance are not guaranteed - use at your own risk.
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-  values:
-    telemetry:
-      v2:
-        metadataExchange:
-          wasmEnabled: true
-        prometheus:
-          wasmEnabled: true`)
-
-func profilesPreviewYamlBytes() ([]byte, error) {
-	return _profilesPreviewYaml, nil
-}
-
-func profilesPreviewYaml() (*asset, error) {
-	bytes, err := profilesPreviewYamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "profiles/preview.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -45885,9 +40966,9 @@ spec:
         enabled: false
     global:
       pilotCertProvider: kubernetes
+      mountMtlsCerts: true
       istiod:
-        enabled: false
-`)
+        enabled: false`)
 
 func profilesSeparateYamlBytes() ([]byte, error) {
 	return _profilesSeparateYaml, nil
@@ -45929,34 +41010,6 @@ func translateconfigNames15Yaml() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "translateConfig/names-1.5.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _translateconfigNames16Yaml = []byte(`BundledAddonComponentNames:
-  - "Prometheus"
-  - "Kiali"
-  - "Grafana"
-  - "Tracing"
-  - "Istiocoredns"
-DeprecatedComponentNames:
-  - "Injector"
-  - "CertManager"
-  - "NodeAgent"
-  - "SidecarInjector"
-`)
-
-func translateconfigNames16YamlBytes() ([]byte, error) {
-	return _translateconfigNames16Yaml, nil
-}
-
-func translateconfigNames16Yaml() (*asset, error) {
-	bytes, err := translateconfigNames16YamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "translateConfig/names-1.6.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -46022,38 +41075,6 @@ func translateconfigReversetranslateconfig15Yaml() (*asset, error) {
 	return a, nil
 }
 
-var _translateconfigReversetranslateconfig16Yaml = []byte(`kubernetesPatternMapping:
-  "{{.ValueComponentName}}.env":                   "Components.{{.ComponentName}}.K8s.Env"
-  "{{.ValueComponentName}}.autoscaleEnabled":      "Components.{{.ComponentName}}.K8s.HpaSpec"
-  "{{.ValueComponentName}}.imagePullPolicy":       "Components.{{.ComponentName}}.K8s.ImagePullPolicy"
-  "{{.ValueComponentName}}.nodeSelector":          "Components.{{.ComponentName}}.K8s.NodeSelector"
-  "{{.ValueComponentName}}.tolerations":           "Components.{{.ComponentName}}.K8s.Tolerations"
-  "{{.ValueComponentName}}.podDisruptionBudget":   "Components.{{.ComponentName}}.K8s.PodDisruptionBudget"
-  "{{.ValueComponentName}}.podAnnotations":        "Components.{{.ComponentName}}.K8s.PodAnnotations"
-  "{{.ValueComponentName}}.priorityClassName":     "Components.{{.ComponentName}}.K8s.PriorityClassName"
-  "{{.ValueComponentName}}.readinessProbe":        "Components.{{.ComponentName}}.K8s.ReadinessProbe"
-  "{{.ValueComponentName}}.replicaCount":          "Components.{{.ComponentName}}.K8s.ReplicaCount"
-  "{{.ValueComponentName}}.resources":             "Components.{{.ComponentName}}.K8s.Resources"
-  "{{.ValueComponentName}}.rollingMaxSurge":       "Components.{{.ComponentName}}.K8s.Strategy"
-  "{{.ValueComponentName}}.rollingMaxUnavailable": "Components.{{.ComponentName}}.K8s.Strategy"
-  "{{.ValueComponentName}}.serviceAnnotations":    "Components.{{.ComponentName}}.K8s.ServiceAnnotations"
-`)
-
-func translateconfigReversetranslateconfig16YamlBytes() ([]byte, error) {
-	return _translateconfigReversetranslateconfig16Yaml, nil
-}
-
-func translateconfigReversetranslateconfig16Yaml() (*asset, error) {
-	bytes, err := translateconfigReversetranslateconfig16YamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "translateConfig/reverseTranslateConfig-1.6.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
 var _translateconfigTranslateIcpIop15Yaml = []byte(`trafficManagement.components.pilot: components.pilot
 policy.components.policy: components.policy
 telemetry.components.telemetry: components.telemetry
@@ -46089,45 +41110,6 @@ func translateconfigTranslateIcpIop15Yaml() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "translateConfig/translate-ICP-IOP-1.5.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _translateconfigTranslateIcpIop16Yaml = []byte(`trafficManagement.components.pilot: components.pilot
-policy.components.policy: components.policy
-telemetry.components.telemetry: components.telemetry
-security.components.citadel: components.citadel
-security.components.nodeAgent: components.nodeAgent
-configManagement.components.galley: components.galley
-autoInjection.components.injector: components.sidecarInjector
-cni: components.cni
-
-gateways.components.ingressGateway: components.ingressGateways.[name:istio-ingressgateway]
-gateways.components.egressGateway: components.egressGateways.[name:istio-egressgateway]
-
-security.components.certManager: addonComponents.certManager
-values.grafana.enabled: addonComponents.grafana.enabled
-values.kiali.enabled: addonComponents.kiali.enabled
-values.prometheus.enabled: addonComponents.prometheus.enabled
-values.tracing.enabled: addonComponents.tracing.enabled
-
-values: values
-unvalidatedValues: unvalidatedValues
-hub: hub
-tag: tag
-`)
-
-func translateconfigTranslateIcpIop16YamlBytes() ([]byte, error) {
-	return _translateconfigTranslateIcpIop16Yaml, nil
-}
-
-func translateconfigTranslateIcpIop16Yaml() (*asset, error) {
-	bytes, err := translateconfigTranslateIcpIop16YamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "translateConfig/translate-ICP-IOP-1.6.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -46608,7 +41590,7 @@ var _translateconfigTranslateconfig15Yaml = []byte(`apiMapping:
   MeshConfig.rootNamespace:
     outPath: "global.istioNamespace"
   Revision:
-    outPath: "revision"
+    outPath: "global.revision"
 kubernetesMapping:
   "Components.{{.ComponentName}}.K8S.Affinity":
     outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.affinity"
@@ -46671,7 +41653,6 @@ componentMaps:
     ContainerName:        "sidecar-injector-webhook"
     HelmSubdir:           "istio-control/istio-autoinject"
     ToHelmValuesTreeRoot: "sidecarInjectorWebhook"
-    SkipReverseTranslate: true
   Policy:
     ResourceType:         "Deployment"
     ResourceName:         "istio-policy"
@@ -46696,7 +41677,6 @@ componentMaps:
     ContainerName:        "nodeagent"
     HelmSubdir:           "security/nodeagent"
     ToHelmValuesTreeRoot: "nodeagent"
-    SkipReverseTranslate: true
   CertManager:
     ResourceType:        "Deployment"
     ResourceName:         "certmanager"
@@ -46772,177 +41752,6 @@ func translateconfigTranslateconfig15Yaml() (*asset, error) {
 	}
 
 	info := bindataFileInfo{name: "translateConfig/translateConfig-1.5.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _translateconfigTranslateconfig16Yaml = []byte(`apiMapping:
-  Hub:
-    outPath: "global.hub"
-  Tag:
-    outPath: "global.tag"
-  K8SDefaults:
-    outPath: "global.resources"
-  MeshConfig.rootNamespace:
-    outPath: "global.istioNamespace"
-  Revision:
-    outPath: "revision"
-kubernetesMapping:
-  "Components.{{.ComponentName}}.K8S.Affinity":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.affinity"
-  "Components.{{.ComponentName}}.K8S.Env":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.containers.[name:{{.ContainerName}}].env"
-  "Components.{{.ComponentName}}.K8S.HpaSpec":
-    outPath: "[HorizontalPodAutoscaler:{{.ResourceName}}].spec"
-  "Components.{{.ComponentName}}.K8S.ImagePullPolicy":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.containers.[name:{{.ContainerName}}].imagePullPolicy"
-  "Components.{{.ComponentName}}.K8S.NodeSelector":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.nodeSelector"
-  "Components.{{.ComponentName}}.K8S.PodDisruptionBudget":
-    outPath: "[PodDisruptionBudget:{{.ResourceName}}].spec"
-  "Components.{{.ComponentName}}.K8S.PodAnnotations":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.metadata.annotations"
-  "Components.{{.ComponentName}}.K8S.PriorityClassName":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.priorityClassName."
-  "Components.{{.ComponentName}}.K8S.ReadinessProbe":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.containers.[name:{{.ContainerName}}].readinessProbe"
-  "Components.{{.ComponentName}}.K8S.ReplicaCount":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.replicas"
-  "Components.{{.ComponentName}}.K8S.Resources":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.containers.[name:{{.ContainerName}}].resources"
-  "Components.{{.ComponentName}}.K8S.Strategy":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.strategy"
-  "Components.{{.ComponentName}}.K8S.Tolerations":
-    outPath: "[{{.ResourceType}}:{{.ResourceName}}].spec.template.spec.tolerations"
-  "Components.{{.ComponentName}}.K8S.ServiceAnnotations":
-    outPath: "[Service:{{.ResourceName}}].metadata.annotations"
-  "Components.{{.ComponentName}}.K8S.Service":
-    outPath: "[Service:{{.ResourceName}}].spec"
-globalNamespaces:
-  Pilot:      "istioNamespace"
-  Galley:     "configNamespace"
-  Telemetry:  "telemetryNamespace"
-  Policy:     "policyNamespace"
-  Prometheus: "prometheusNamespace"
-  Citadel:    "securityNamespace"
-
-componentMaps:
-  Base:
-    ToHelmValuesTreeRoot: "global"
-    HelmSubdir:           "base"
-    SkipReverseTranslate: true
-  Pilot:
-    ResourceType:         "Deployment"
-    ResourceName:         "istiod"
-    ContainerName:        "discovery"
-    HelmSubdir:           "istio-control/istio-discovery"
-    ToHelmValuesTreeRoot: "pilot"
-  Galley:
-    ResourceType:         "Deployment"
-    ResourceName:         "istio-galley"
-    ContainerName:        "galley"
-    HelmSubdir:           "istio-control/istio-config"
-    ToHelmValuesTreeRoot: "galley"
-  SidecarInjector:
-    ResourceType:         "Deployment"
-    ResourceName:         "istio-sidecar-injector"
-    ContainerName:        "sidecar-injector-webhook"
-    HelmSubdir:           "istio-control/istio-autoinject"
-    ToHelmValuesTreeRoot: "sidecarInjectorWebhook"
-    SkipReverseTranslate: true
-  Policy:
-    ResourceType:         "Deployment"
-    ResourceName:         "istio-policy"
-    ContainerName:        "mixer"
-    HelmSubdir:           "istio-policy"
-    ToHelmValuesTreeRoot: "mixer.policy"
-  Telemetry:
-    ResourceType:        "Deployment"
-    ResourceName:         "istio-telemetry"
-    ContainerName:        "mixer"
-    HelmSubdir:           "istio-telemetry/mixer-telemetry"
-    ToHelmValuesTreeRoot: "mixer.telemetry"
-  Citadel:
-    ResourceType:        "Deployment"
-    ResourceName:         "istio-citadel"
-    ContainerName:        "citadel"
-    HelmSubdir:           "security/citadel"
-    ToHelmValuesTreeRoot: "security"
-  NodeAgent:
-    ResourceType:         "DaemonSet"
-    ResourceName:         "istio-nodeagent"
-    ContainerName:        "nodeagent"
-    HelmSubdir:           "security/nodeagent"
-    ToHelmValuesTreeRoot: "nodeagent"
-    SkipReverseTranslate: true
-  IngressGateways:
-    ResourceType:         "Deployment"
-    ResourceName:         "istio-ingressgateway"
-    ContainerName:        "istio-proxy"
-    HelmSubdir:           "gateways/istio-ingress"
-    ToHelmValuesTreeRoot: "gateways.istio-ingressgateway"
-  EgressGateways:
-    ResourceType:         "Deployment"
-    ResourceName:         "istio-egressgateway"
-    ContainerName:        "istio-proxy"
-    HelmSubdir:           "gateways/istio-egress"
-    ToHelmValuesTreeRoot: "gateways.istio-egressgateway"
-  Cni:
-    ResourceType:         "DaemonSet"
-    ResourceName:         "istio-cni-node"
-    ContainerName:        "install-cni"
-    HelmSubdir:           "istio-cni"
-    ToHelmValuesTreeRoot: "cni"
-  Istiocoredns:
-    ResourceType:         "Deployment"
-    ResourceName:         "istiocoredns"
-    ContainerName:        "coredns"
-    HelmSubdir:           "istiocoredns"
-    ToHelmValuesTreeRoot: "istiocoredns"
-  Tracing:
-    ResourceType:         "Deployment"
-    ResourceName:         "istio-tracing"
-    ContainerName:        "jaeger"
-    HelmSubdir:           "istio-telemetry/tracing"
-    ToHelmValuesTreeRoot: "tracing.jaeger"
-  PrometheusOperator:
-    ResourceType:         "Deployment"
-    ResourceName:         "prometheus"
-    ContainerName:        "prometheus"
-    HelmSubdir:           "istio-telemetry/prometheus-operator"
-    ToHelmValuesTreeRoot: "prometheus"
-    SkipReverseTranslate: true
-  Kiali:
-    ResourceType:         "Deployment"
-    ResourceName:         "kiali"
-    ContainerName:        "kiali"
-    HelmSubdir:           "istio-telemetry/kiali"
-    ToHelmValuesTreeRoot: "kiali"
-  Grafana:
-    ResourceType:        "Deployment"
-    ResourceName:         "grafana"
-    ContainerName:        "grafana"
-    HelmSubdir:           "istio-telemetry/grafana"
-    ToHelmValuesTreeRoot: "grafana"
-  Prometheus:
-    ResourceType:         "Deployment"
-    ResourceName:         "prometheus"
-    ContainerName:        "prometheus"
-    HelmSubdir:           "istio-telemetry/prometheus"
-    ToHelmValuesTreeRoot: "prometheus"
-`)
-
-func translateconfigTranslateconfig16YamlBytes() ([]byte, error) {
-	return _translateconfigTranslateconfig16Yaml, nil
-}
-
-func translateconfigTranslateconfig16Yaml() (*asset, error) {
-	bytes, err := translateconfigTranslateconfig16YamlBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "translateConfig/translateConfig-1.6.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -47070,209 +41879,244 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"charts/base/Chart.yaml":                                                               chartsBaseChartYaml,
-	"charts/base/NOTES.txt":                                                                chartsBaseNotesTxt,
-	"charts/base/files/crd-all.gen.yaml":                                                   chartsBaseFilesCrdAllGenYaml,
-	"charts/base/files/crd-mixer.yaml":                                                     chartsBaseFilesCrdMixerYaml,
-	"charts/base/files/gen-istio-cluster.yaml":                                             chartsBaseFilesGenIstioClusterYaml,
-	"charts/base/kustomization.yaml":                                                       chartsBaseKustomizationYaml,
-	"charts/base/templates/clusterrole.yaml":                                               chartsBaseTemplatesClusterroleYaml,
-	"charts/base/templates/clusterrolebinding.yaml":                                        chartsBaseTemplatesClusterrolebindingYaml,
-	"charts/base/templates/crds.yaml":                                                      chartsBaseTemplatesCrdsYaml,
-	"charts/base/templates/endpoints.yaml":                                                 chartsBaseTemplatesEndpointsYaml,
-	"charts/base/templates/namespaces.yaml":                                                chartsBaseTemplatesNamespacesYaml,
-	"charts/base/templates/serviceaccount.yaml":                                            chartsBaseTemplatesServiceaccountYaml,
-	"charts/base/templates/services.yaml":                                                  chartsBaseTemplatesServicesYaml,
-	"charts/base/templates/validatingwebhookconfiguration.yaml":                            chartsBaseTemplatesValidatingwebhookconfigurationYaml,
-	"charts/base/values.yaml":                                                              chartsBaseValuesYaml,
-	"charts/gateways/istio-egress/Chart.yaml":                                              chartsGatewaysIstioEgressChartYaml,
-	"charts/gateways/istio-egress/NOTES.txt":                                               chartsGatewaysIstioEgressNotesTxt,
-	"charts/gateways/istio-egress/templates/_affinity.tpl":                                 chartsGatewaysIstioEgressTemplates_affinityTpl,
-	"charts/gateways/istio-egress/templates/_helpers.tpl":                                  chartsGatewaysIstioEgressTemplates_helpersTpl,
-	"charts/gateways/istio-egress/templates/autoscale.yaml":                                chartsGatewaysIstioEgressTemplatesAutoscaleYaml,
-	"charts/gateways/istio-egress/templates/deployment.yaml":                               chartsGatewaysIstioEgressTemplatesDeploymentYaml,
-	"charts/gateways/istio-egress/templates/poddisruptionbudget.yaml":                      chartsGatewaysIstioEgressTemplatesPoddisruptionbudgetYaml,
-	"charts/gateways/istio-egress/templates/preconfigured.yaml":                            chartsGatewaysIstioEgressTemplatesPreconfiguredYaml,
-	"charts/gateways/istio-egress/templates/service.yaml":                                  chartsGatewaysIstioEgressTemplatesServiceYaml,
-	"charts/gateways/istio-egress/templates/serviceaccount.yaml":                           chartsGatewaysIstioEgressTemplatesServiceaccountYaml,
-	"charts/gateways/istio-egress/values.yaml":                                             chartsGatewaysIstioEgressValuesYaml,
-	"charts/gateways/istio-ingress/Chart.yaml":                                             chartsGatewaysIstioIngressChartYaml,
-	"charts/gateways/istio-ingress/NOTES.txt":                                              chartsGatewaysIstioIngressNotesTxt,
-	"charts/gateways/istio-ingress/templates/_affinity.tpl":                                chartsGatewaysIstioIngressTemplates_affinityTpl,
-	"charts/gateways/istio-ingress/templates/autoscale.yaml":                               chartsGatewaysIstioIngressTemplatesAutoscaleYaml,
-	"charts/gateways/istio-ingress/templates/deployment.yaml":                              chartsGatewaysIstioIngressTemplatesDeploymentYaml,
-	"charts/gateways/istio-ingress/templates/meshexpansion.yaml":                           chartsGatewaysIstioIngressTemplatesMeshexpansionYaml,
-	"charts/gateways/istio-ingress/templates/poddisruptionbudget.yaml":                     chartsGatewaysIstioIngressTemplatesPoddisruptionbudgetYaml,
-	"charts/gateways/istio-ingress/templates/preconfigured.yaml":                           chartsGatewaysIstioIngressTemplatesPreconfiguredYaml,
-	"charts/gateways/istio-ingress/templates/role.yaml":                                    chartsGatewaysIstioIngressTemplatesRoleYaml,
-	"charts/gateways/istio-ingress/templates/rolebindings.yaml":                            chartsGatewaysIstioIngressTemplatesRolebindingsYaml,
-	"charts/gateways/istio-ingress/templates/service.yaml":                                 chartsGatewaysIstioIngressTemplatesServiceYaml,
-	"charts/gateways/istio-ingress/templates/serviceaccount.yaml":                          chartsGatewaysIstioIngressTemplatesServiceaccountYaml,
-	"charts/gateways/istio-ingress/values.yaml":                                            chartsGatewaysIstioIngressValuesYaml,
-	"charts/istio-cni/Chart.yaml":                                                          chartsIstioCniChartYaml,
-	"charts/istio-cni/templates/clusterrole.yaml":                                          chartsIstioCniTemplatesClusterroleYaml,
-	"charts/istio-cni/templates/clusterrolebinding.yaml":                                   chartsIstioCniTemplatesClusterrolebindingYaml,
-	"charts/istio-cni/templates/configmap-cni.yaml":                                        chartsIstioCniTemplatesConfigmapCniYaml,
-	"charts/istio-cni/templates/daemonset.yaml":                                            chartsIstioCniTemplatesDaemonsetYaml,
-	"charts/istio-cni/templates/serviceaccount.yaml":                                       chartsIstioCniTemplatesServiceaccountYaml,
-	"charts/istio-cni/values.yaml":                                                         chartsIstioCniValuesYaml,
-	"charts/istio-control/istio-config/Chart.yaml":                                         chartsIstioControlIstioConfigChartYaml,
-	"charts/istio-control/istio-config/OWNERS":                                             chartsIstioControlIstioConfigOwners,
-	"charts/istio-control/istio-config/README.md":                                          chartsIstioControlIstioConfigReadmeMd,
-	"charts/istio-control/istio-config/templates/_affinity.tpl":                            chartsIstioControlIstioConfigTemplates_affinityTpl,
-	"charts/istio-control/istio-config/templates/_helpers.tpl":                             chartsIstioControlIstioConfigTemplates_helpersTpl,
-	"charts/istio-control/istio-config/templates/clusterrole.yaml":                         chartsIstioControlIstioConfigTemplatesClusterroleYaml,
-	"charts/istio-control/istio-config/templates/clusterrolebinding.yaml":                  chartsIstioControlIstioConfigTemplatesClusterrolebindingYaml,
-	"charts/istio-control/istio-config/templates/configmap-envoy.yaml":                     chartsIstioControlIstioConfigTemplatesConfigmapEnvoyYaml,
-	"charts/istio-control/istio-config/templates/configmap-mesh.yaml":                      chartsIstioControlIstioConfigTemplatesConfigmapMeshYaml,
-	"charts/istio-control/istio-config/templates/configmap.yaml":                           chartsIstioControlIstioConfigTemplatesConfigmapYaml,
-	"charts/istio-control/istio-config/templates/deployment.yaml":                          chartsIstioControlIstioConfigTemplatesDeploymentYaml,
-	"charts/istio-control/istio-config/templates/poddisruptionbudget.yaml":                 chartsIstioControlIstioConfigTemplatesPoddisruptionbudgetYaml,
-	"charts/istio-control/istio-config/templates/service.yaml":                             chartsIstioControlIstioConfigTemplatesServiceYaml,
-	"charts/istio-control/istio-config/templates/serviceaccount.yaml":                      chartsIstioControlIstioConfigTemplatesServiceaccountYaml,
-	"charts/istio-control/istio-config/templates/validatingwebhookconfiguration-noop.yaml": chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationNoopYaml,
-	"charts/istio-control/istio-config/templates/validatingwebhookconfiguration.yaml.tpl":  chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlTpl,
-	"charts/istio-control/istio-config/values.yaml":                                        chartsIstioControlIstioConfigValuesYaml,
-	"charts/istio-control/istio-discovery/Chart.yaml":                                      chartsIstioControlIstioDiscoveryChartYaml,
-	"charts/istio-control/istio-discovery/NOTES.txt":                                       chartsIstioControlIstioDiscoveryNotesTxt,
-	"charts/istio-control/istio-discovery/files/gen-istio.yaml":                            chartsIstioControlIstioDiscoveryFilesGenIstioYaml,
-	"charts/istio-control/istio-discovery/files/injection-template.yaml":                   chartsIstioControlIstioDiscoveryFilesInjectionTemplateYaml,
-	"charts/istio-control/istio-discovery/kustomization.yaml":                              chartsIstioControlIstioDiscoveryKustomizationYaml,
-	"charts/istio-control/istio-discovery/templates/_affinity.tpl":                         chartsIstioControlIstioDiscoveryTemplates_affinityTpl,
-	"charts/istio-control/istio-discovery/templates/_helpers.tpl":                          chartsIstioControlIstioDiscoveryTemplates_helpersTpl,
-	"charts/istio-control/istio-discovery/templates/autoscale.yaml":                        chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml,
-	"charts/istio-control/istio-discovery/templates/configmap-jwks.yaml":                   chartsIstioControlIstioDiscoveryTemplatesConfigmapJwksYaml,
-	"charts/istio-control/istio-discovery/templates/configmap.yaml":                        chartsIstioControlIstioDiscoveryTemplatesConfigmapYaml,
-	"charts/istio-control/istio-discovery/templates/deployment.yaml":                       chartsIstioControlIstioDiscoveryTemplatesDeploymentYaml,
-	"charts/istio-control/istio-discovery/templates/istiod-injector-configmap.yaml":        chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYaml,
-	"charts/istio-control/istio-discovery/templates/mutatingwebhook.yaml":                  chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYaml,
-	"charts/istio-control/istio-discovery/templates/poddisruptionbudget.yaml":              chartsIstioControlIstioDiscoveryTemplatesPoddisruptionbudgetYaml,
-	"charts/istio-control/istio-discovery/templates/service.yaml":                          chartsIstioControlIstioDiscoveryTemplatesServiceYaml,
-	"charts/istio-control/istio-discovery/templates/telemetryv2_1.4.yaml":                  chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14Yaml,
-	"charts/istio-control/istio-discovery/templates/telemetryv2_1.5.yaml":                  chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15Yaml,
-	"charts/istio-control/istio-discovery/templates/telemetryv2_1.6.yaml":                  chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_16Yaml,
-	"charts/istio-control/istio-discovery/values.yaml":                                     chartsIstioControlIstioDiscoveryValuesYaml,
-	"charts/istio-policy/Chart.yaml":                                                       chartsIstioPolicyChartYaml,
-	"charts/istio-policy/templates/_affinity.tpl":                                          chartsIstioPolicyTemplates_affinityTpl,
-	"charts/istio-policy/templates/_helpers.tpl":                                           chartsIstioPolicyTemplates_helpersTpl,
-	"charts/istio-policy/templates/autoscale.yaml":                                         chartsIstioPolicyTemplatesAutoscaleYaml,
-	"charts/istio-policy/templates/clusterrole.yaml":                                       chartsIstioPolicyTemplatesClusterroleYaml,
-	"charts/istio-policy/templates/clusterrolebinding.yaml":                                chartsIstioPolicyTemplatesClusterrolebindingYaml,
-	"charts/istio-policy/templates/config.yaml":                                            chartsIstioPolicyTemplatesConfigYaml,
-	"charts/istio-policy/templates/deployment.yaml":                                        chartsIstioPolicyTemplatesDeploymentYaml,
-	"charts/istio-policy/templates/poddisruptionbudget.yaml":                               chartsIstioPolicyTemplatesPoddisruptionbudgetYaml,
-	"charts/istio-policy/templates/service.yaml":                                           chartsIstioPolicyTemplatesServiceYaml,
-	"charts/istio-policy/templates/serviceaccount.yaml":                                    chartsIstioPolicyTemplatesServiceaccountYaml,
-	"charts/istio-policy/values.yaml":                                                      chartsIstioPolicyValuesYaml,
-	"charts/istio-telemetry/grafana/Chart.yaml":                                            chartsIstioTelemetryGrafanaChartYaml,
-	"charts/istio-telemetry/grafana/dashboards/citadel-dashboard.json":                     chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson,
-	"charts/istio-telemetry/grafana/dashboards/galley-dashboard.json":                      chartsIstioTelemetryGrafanaDashboardsGalleyDashboardJson,
-	"charts/istio-telemetry/grafana/dashboards/istio-mesh-dashboard.json":                  chartsIstioTelemetryGrafanaDashboardsIstioMeshDashboardJson,
-	"charts/istio-telemetry/grafana/dashboards/istio-performance-dashboard.json":           chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson,
-	"charts/istio-telemetry/grafana/dashboards/istio-service-dashboard.json":               chartsIstioTelemetryGrafanaDashboardsIstioServiceDashboardJson,
-	"charts/istio-telemetry/grafana/dashboards/istio-workload-dashboard.json":              chartsIstioTelemetryGrafanaDashboardsIstioWorkloadDashboardJson,
-	"charts/istio-telemetry/grafana/dashboards/mixer-dashboard.json":                       chartsIstioTelemetryGrafanaDashboardsMixerDashboardJson,
-	"charts/istio-telemetry/grafana/dashboards/pilot-dashboard.json":                       chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson,
-	"charts/istio-telemetry/grafana/fix_datasources.sh":                                    chartsIstioTelemetryGrafanaFix_datasourcesSh,
-	"charts/istio-telemetry/grafana/templates/_affinity.tpl":                               chartsIstioTelemetryGrafanaTemplates_affinityTpl,
-	"charts/istio-telemetry/grafana/templates/configmap-dashboards.yaml":                   chartsIstioTelemetryGrafanaTemplatesConfigmapDashboardsYaml,
-	"charts/istio-telemetry/grafana/templates/configmap.yaml":                              chartsIstioTelemetryGrafanaTemplatesConfigmapYaml,
-	"charts/istio-telemetry/grafana/templates/deployment.yaml":                             chartsIstioTelemetryGrafanaTemplatesDeploymentYaml,
-	"charts/istio-telemetry/grafana/templates/grafana-policy.yaml":                         chartsIstioTelemetryGrafanaTemplatesGrafanaPolicyYaml,
-	"charts/istio-telemetry/grafana/templates/pvc.yaml":                                    chartsIstioTelemetryGrafanaTemplatesPvcYaml,
-	"charts/istio-telemetry/grafana/templates/service.yaml":                                chartsIstioTelemetryGrafanaTemplatesServiceYaml,
-	"charts/istio-telemetry/grafana/templates/tests/test-grafana-connection.yaml":          chartsIstioTelemetryGrafanaTemplatesTestsTestGrafanaConnectionYaml,
-	"charts/istio-telemetry/grafana/values.yaml":                                           chartsIstioTelemetryGrafanaValuesYaml,
-	"charts/istio-telemetry/kiali/Chart.yaml":                                              chartsIstioTelemetryKialiChartYaml,
-	"charts/istio-telemetry/kiali/templates/_affinity.tpl":                                 chartsIstioTelemetryKialiTemplates_affinityTpl,
-	"charts/istio-telemetry/kiali/templates/clusterrole.yaml":                              chartsIstioTelemetryKialiTemplatesClusterroleYaml,
-	"charts/istio-telemetry/kiali/templates/clusterrolebinding.yaml":                       chartsIstioTelemetryKialiTemplatesClusterrolebindingYaml,
-	"charts/istio-telemetry/kiali/templates/configmap.yaml":                                chartsIstioTelemetryKialiTemplatesConfigmapYaml,
-	"charts/istio-telemetry/kiali/templates/demosecret.yaml":                               chartsIstioTelemetryKialiTemplatesDemosecretYaml,
-	"charts/istio-telemetry/kiali/templates/deployment.yaml":                               chartsIstioTelemetryKialiTemplatesDeploymentYaml,
-	"charts/istio-telemetry/kiali/templates/service.yaml":                                  chartsIstioTelemetryKialiTemplatesServiceYaml,
-	"charts/istio-telemetry/kiali/templates/serviceaccount.yaml":                           chartsIstioTelemetryKialiTemplatesServiceaccountYaml,
-	"charts/istio-telemetry/kiali/values.yaml":                                             chartsIstioTelemetryKialiValuesYaml,
-	"charts/istio-telemetry/mixer-telemetry/Chart.yaml":                                    chartsIstioTelemetryMixerTelemetryChartYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/_affinity.tpl":                       chartsIstioTelemetryMixerTelemetryTemplates_affinityTpl,
-	"charts/istio-telemetry/mixer-telemetry/templates/autoscale.yaml":                      chartsIstioTelemetryMixerTelemetryTemplatesAutoscaleYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/clusterrole.yaml":                    chartsIstioTelemetryMixerTelemetryTemplatesClusterroleYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/clusterrolebinding.yaml":             chartsIstioTelemetryMixerTelemetryTemplatesClusterrolebindingYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/config.yaml":                         chartsIstioTelemetryMixerTelemetryTemplatesConfigYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/configmap-envoy.yaml":                chartsIstioTelemetryMixerTelemetryTemplatesConfigmapEnvoyYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/deployment.yaml":                     chartsIstioTelemetryMixerTelemetryTemplatesDeploymentYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/poddisruptionbudget.yaml":            chartsIstioTelemetryMixerTelemetryTemplatesPoddisruptionbudgetYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/service.yaml":                        chartsIstioTelemetryMixerTelemetryTemplatesServiceYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/serviceaccount.yaml":                 chartsIstioTelemetryMixerTelemetryTemplatesServiceaccountYaml,
-	"charts/istio-telemetry/mixer-telemetry/templates/stackdriver.yaml":                    chartsIstioTelemetryMixerTelemetryTemplatesStackdriverYaml,
-	"charts/istio-telemetry/mixer-telemetry/values.yaml":                                   chartsIstioTelemetryMixerTelemetryValuesYaml,
-	"charts/istio-telemetry/prometheus/Chart.yaml":                                         chartsIstioTelemetryPrometheusChartYaml,
-	"charts/istio-telemetry/prometheus/templates/_affinity.tpl":                            chartsIstioTelemetryPrometheusTemplates_affinityTpl,
-	"charts/istio-telemetry/prometheus/templates/clusterrole.yaml":                         chartsIstioTelemetryPrometheusTemplatesClusterroleYaml,
-	"charts/istio-telemetry/prometheus/templates/clusterrolebindings.yaml":                 chartsIstioTelemetryPrometheusTemplatesClusterrolebindingsYaml,
-	"charts/istio-telemetry/prometheus/templates/configmap.yaml":                           chartsIstioTelemetryPrometheusTemplatesConfigmapYaml,
-	"charts/istio-telemetry/prometheus/templates/deployment.yaml":                          chartsIstioTelemetryPrometheusTemplatesDeploymentYaml,
-	"charts/istio-telemetry/prometheus/templates/ingress.yaml":                             chartsIstioTelemetryPrometheusTemplatesIngressYaml,
-	"charts/istio-telemetry/prometheus/templates/service.yaml":                             chartsIstioTelemetryPrometheusTemplatesServiceYaml,
-	"charts/istio-telemetry/prometheus/templates/serviceaccount.yaml":                      chartsIstioTelemetryPrometheusTemplatesServiceaccountYaml,
-	"charts/istio-telemetry/prometheus/templates/tests/test-prometheus-connection.yaml":    chartsIstioTelemetryPrometheusTemplatesTestsTestPrometheusConnectionYaml,
-	"charts/istio-telemetry/prometheus/values.yaml":                                        chartsIstioTelemetryPrometheusValuesYaml,
-	"charts/istio-telemetry/prometheus-operator/Chart.yaml":                                chartsIstioTelemetryPrometheusOperatorChartYaml,
-	"charts/istio-telemetry/prometheus-operator/templates/_affinity.tpl":                   chartsIstioTelemetryPrometheusOperatorTemplates_affinityTpl,
-	"charts/istio-telemetry/prometheus-operator/templates/prometheus.yaml":                 chartsIstioTelemetryPrometheusOperatorTemplatesPrometheusYaml,
-	"charts/istio-telemetry/prometheus-operator/templates/servicemonitors.yaml":            chartsIstioTelemetryPrometheusOperatorTemplatesServicemonitorsYaml,
-	"charts/istio-telemetry/prometheus-operator/values.yaml":                               chartsIstioTelemetryPrometheusOperatorValuesYaml,
-	"charts/istio-telemetry/tracing/Chart.yaml":                                            chartsIstioTelemetryTracingChartYaml,
-	"charts/istio-telemetry/tracing/templates/_affinity.tpl":                               chartsIstioTelemetryTracingTemplates_affinityTpl,
-	"charts/istio-telemetry/tracing/templates/deployment-jaeger.yaml":                      chartsIstioTelemetryTracingTemplatesDeploymentJaegerYaml,
-	"charts/istio-telemetry/tracing/templates/deployment-opencensus.yaml":                  chartsIstioTelemetryTracingTemplatesDeploymentOpencensusYaml,
-	"charts/istio-telemetry/tracing/templates/deployment-zipkin.yaml":                      chartsIstioTelemetryTracingTemplatesDeploymentZipkinYaml,
-	"charts/istio-telemetry/tracing/templates/pvc.yaml":                                    chartsIstioTelemetryTracingTemplatesPvcYaml,
-	"charts/istio-telemetry/tracing/templates/service-jaeger.yaml":                         chartsIstioTelemetryTracingTemplatesServiceJaegerYaml,
-	"charts/istio-telemetry/tracing/templates/service.yaml":                                chartsIstioTelemetryTracingTemplatesServiceYaml,
-	"charts/istio-telemetry/tracing/values.yaml":                                           chartsIstioTelemetryTracingValuesYaml,
-	"charts/istiocoredns/Chart.yaml":                                                       chartsIstiocorednsChartYaml,
-	"charts/istiocoredns/templates/_affinity.tpl":                                          chartsIstiocorednsTemplates_affinityTpl,
-	"charts/istiocoredns/templates/clusterrole.yaml":                                       chartsIstiocorednsTemplatesClusterroleYaml,
-	"charts/istiocoredns/templates/clusterrolebinding.yaml":                                chartsIstiocorednsTemplatesClusterrolebindingYaml,
-	"charts/istiocoredns/templates/configmap.yaml":                                         chartsIstiocorednsTemplatesConfigmapYaml,
-	"charts/istiocoredns/templates/deployment.yaml":                                        chartsIstiocorednsTemplatesDeploymentYaml,
-	"charts/istiocoredns/templates/service.yaml":                                           chartsIstiocorednsTemplatesServiceYaml,
-	"charts/istiocoredns/templates/serviceaccount.yaml":                                    chartsIstiocorednsTemplatesServiceaccountYaml,
-	"charts/istiocoredns/values.yaml":                                                      chartsIstiocorednsValuesYaml,
-	"examples/customresource/istio_v1alpha1_istiooperator_cr.yaml":                         examplesCustomresourceIstio_v1alpha1_istiooperator_crYaml,
-	"examples/multicluster/values-istio-multicluster-gateways.yaml":                        examplesMulticlusterValuesIstioMulticlusterGatewaysYaml,
-	"examples/multicluster/values-istio-multicluster-primary.yaml":                         examplesMulticlusterValuesIstioMulticlusterPrimaryYaml,
-	"examples/user-gateway/ingress-gateway-only.yaml":                                      examplesUserGatewayIngressGatewayOnlyYaml,
-	"examples/vm/values-istio-meshexpansion-gateways.yaml":                                 examplesVmValuesIstioMeshexpansionGatewaysYaml,
-	"examples/vm/values-istio-meshexpansion.yaml":                                          examplesVmValuesIstioMeshexpansionYaml,
-	"operator-chart/Chart.yaml":                                                            operatorChartChartYaml,
-	"operator-chart/templates/clusterrole.yaml":                                            operatorChartTemplatesClusterroleYaml,
-	"operator-chart/templates/clusterrole_binding.yaml":                                    operatorChartTemplatesClusterrole_bindingYaml,
-	"operator-chart/templates/crd.yaml":                                                    operatorChartTemplatesCrdYaml,
-	"operator-chart/templates/deployment.yaml":                                             operatorChartTemplatesDeploymentYaml,
-	"operator-chart/templates/namespace.yaml":                                              operatorChartTemplatesNamespaceYaml,
-	"operator-chart/templates/service.yaml":                                                operatorChartTemplatesServiceYaml,
-	"operator-chart/templates/service_account.yaml":                                        operatorChartTemplatesService_accountYaml,
-	"profiles/default.yaml":                                                                profilesDefaultYaml,
-	"profiles/demo.yaml":                                                                   profilesDemoYaml,
-	"profiles/empty.yaml":                                                                  profilesEmptyYaml,
-	"profiles/minimal.yaml":                                                                profilesMinimalYaml,
-	"profiles/preview.yaml":                                                                profilesPreviewYaml,
-	"profiles/remote.yaml":                                                                 profilesRemoteYaml,
-	"profiles/separate.yaml":                                                               profilesSeparateYaml,
-	"translateConfig/names-1.5.yaml":                                                       translateconfigNames15Yaml,
-	"translateConfig/names-1.6.yaml":                                                       translateconfigNames16Yaml,
-	"translateConfig/reverseTranslateConfig-1.4.yaml":                                      translateconfigReversetranslateconfig14Yaml,
-	"translateConfig/reverseTranslateConfig-1.5.yaml":                                      translateconfigReversetranslateconfig15Yaml,
-	"translateConfig/reverseTranslateConfig-1.6.yaml":                                      translateconfigReversetranslateconfig16Yaml,
-	"translateConfig/translate-ICP-IOP-1.5.yaml":                                           translateconfigTranslateIcpIop15Yaml,
-	"translateConfig/translate-ICP-IOP-1.6.yaml":                                           translateconfigTranslateIcpIop16Yaml,
-	"translateConfig/translateConfig-1.3.yaml":                                             translateconfigTranslateconfig13Yaml,
-	"translateConfig/translateConfig-1.4.yaml":                                             translateconfigTranslateconfig14Yaml,
-	"translateConfig/translateConfig-1.5.yaml":                                             translateconfigTranslateconfig15Yaml,
-	"translateConfig/translateConfig-1.6.yaml":                                             translateconfigTranslateconfig16Yaml,
-	"versions.yaml":                                                                        versionsYaml,
+	"charts/base/Chart.yaml":                                                                 chartsBaseChartYaml,
+	"charts/base/files/crd-all.gen.yaml":                                                     chartsBaseFilesCrdAllGenYaml,
+	"charts/base/files/crd-mixer.yaml":                                                       chartsBaseFilesCrdMixerYaml,
+	"charts/base/kustomization.yaml":                                                         chartsBaseKustomizationYaml,
+	"charts/base/templates/clusterrole.yaml":                                                 chartsBaseTemplatesClusterroleYaml,
+	"charts/base/templates/clusterrolebinding.yaml":                                          chartsBaseTemplatesClusterrolebindingYaml,
+	"charts/base/templates/crds.yaml":                                                        chartsBaseTemplatesCrdsYaml,
+	"charts/base/templates/endpoints.yaml":                                                   chartsBaseTemplatesEndpointsYaml,
+	"charts/base/templates/namespaces.yaml":                                                  chartsBaseTemplatesNamespacesYaml,
+	"charts/base/templates/serviceaccount.yaml":                                              chartsBaseTemplatesServiceaccountYaml,
+	"charts/base/templates/services.yaml":                                                    chartsBaseTemplatesServicesYaml,
+	"charts/base/values.yaml":                                                                chartsBaseValuesYaml,
+	"charts/gateways/istio-egress/Chart.yaml":                                                chartsGatewaysIstioEgressChartYaml,
+	"charts/gateways/istio-egress/NOTES.txt":                                                 chartsGatewaysIstioEgressNotesTxt,
+	"charts/gateways/istio-egress/templates/_affinity.tpl":                                   chartsGatewaysIstioEgressTemplates_affinityTpl,
+	"charts/gateways/istio-egress/templates/_helpers.tpl":                                    chartsGatewaysIstioEgressTemplates_helpersTpl,
+	"charts/gateways/istio-egress/templates/autoscale.yaml":                                  chartsGatewaysIstioEgressTemplatesAutoscaleYaml,
+	"charts/gateways/istio-egress/templates/deployment.yaml":                                 chartsGatewaysIstioEgressTemplatesDeploymentYaml,
+	"charts/gateways/istio-egress/templates/poddisruptionbudget.yaml":                        chartsGatewaysIstioEgressTemplatesPoddisruptionbudgetYaml,
+	"charts/gateways/istio-egress/templates/preconfigured.yaml":                              chartsGatewaysIstioEgressTemplatesPreconfiguredYaml,
+	"charts/gateways/istio-egress/templates/service.yaml":                                    chartsGatewaysIstioEgressTemplatesServiceYaml,
+	"charts/gateways/istio-egress/templates/serviceaccount.yaml":                             chartsGatewaysIstioEgressTemplatesServiceaccountYaml,
+	"charts/gateways/istio-egress/values.yaml":                                               chartsGatewaysIstioEgressValuesYaml,
+	"charts/gateways/istio-ingress/Chart.yaml":                                               chartsGatewaysIstioIngressChartYaml,
+	"charts/gateways/istio-ingress/NOTES.txt":                                                chartsGatewaysIstioIngressNotesTxt,
+	"charts/gateways/istio-ingress/templates/_affinity.tpl":                                  chartsGatewaysIstioIngressTemplates_affinityTpl,
+	"charts/gateways/istio-ingress/templates/addongateway.yaml":                              chartsGatewaysIstioIngressTemplatesAddongatewayYaml,
+	"charts/gateways/istio-ingress/templates/autoscale.yaml":                                 chartsGatewaysIstioIngressTemplatesAutoscaleYaml,
+	"charts/gateways/istio-ingress/templates/certificate.yaml":                               chartsGatewaysIstioIngressTemplatesCertificateYaml,
+	"charts/gateways/istio-ingress/templates/deployment.yaml":                                chartsGatewaysIstioIngressTemplatesDeploymentYaml,
+	"charts/gateways/istio-ingress/templates/gateway.yaml":                                   chartsGatewaysIstioIngressTemplatesGatewayYaml,
+	"charts/gateways/istio-ingress/templates/hosts.yaml":                                     chartsGatewaysIstioIngressTemplatesHostsYaml,
+	"charts/gateways/istio-ingress/templates/meshexpansion.yaml":                             chartsGatewaysIstioIngressTemplatesMeshexpansionYaml,
+	"charts/gateways/istio-ingress/templates/poddisruptionbudget.yaml":                       chartsGatewaysIstioIngressTemplatesPoddisruptionbudgetYaml,
+	"charts/gateways/istio-ingress/templates/preconfigured.yaml":                             chartsGatewaysIstioIngressTemplatesPreconfiguredYaml,
+	"charts/gateways/istio-ingress/templates/role.yaml":                                      chartsGatewaysIstioIngressTemplatesRoleYaml,
+	"charts/gateways/istio-ingress/templates/rolebindings.yaml":                              chartsGatewaysIstioIngressTemplatesRolebindingsYaml,
+	"charts/gateways/istio-ingress/templates/service.yaml":                                   chartsGatewaysIstioIngressTemplatesServiceYaml,
+	"charts/gateways/istio-ingress/templates/serviceaccount.yaml":                            chartsGatewaysIstioIngressTemplatesServiceaccountYaml,
+	"charts/gateways/istio-ingress/templates/sidecar.yaml":                                   chartsGatewaysIstioIngressTemplatesSidecarYaml,
+	"charts/gateways/istio-ingress/values.yaml":                                              chartsGatewaysIstioIngressValuesYaml,
+	"charts/istio-cni/Chart.yaml":                                                            chartsIstioCniChartYaml,
+	"charts/istio-cni/templates/clusterrole.yaml":                                            chartsIstioCniTemplatesClusterroleYaml,
+	"charts/istio-cni/templates/clusterrolebinding.yaml":                                     chartsIstioCniTemplatesClusterrolebindingYaml,
+	"charts/istio-cni/templates/configmap-cni.yaml":                                          chartsIstioCniTemplatesConfigmapCniYaml,
+	"charts/istio-cni/templates/daemonset.yaml":                                              chartsIstioCniTemplatesDaemonsetYaml,
+	"charts/istio-cni/templates/serviceaccount.yaml":                                         chartsIstioCniTemplatesServiceaccountYaml,
+	"charts/istio-cni/values.yaml":                                                           chartsIstioCniValuesYaml,
+	"charts/istio-control/istio-autoinject/Chart.yaml":                                       chartsIstioControlIstioAutoinjectChartYaml,
+	"charts/istio-control/istio-autoinject/NOTES.txt":                                        chartsIstioControlIstioAutoinjectNotesTxt,
+	"charts/istio-control/istio-autoinject/files/injection-template.yaml":                    chartsIstioControlIstioAutoinjectFilesInjectionTemplateYaml,
+	"charts/istio-control/istio-autoinject/templates/_affinity.tpl":                          chartsIstioControlIstioAutoinjectTemplates_affinityTpl,
+	"charts/istio-control/istio-autoinject/templates/_helpers.tpl":                           chartsIstioControlIstioAutoinjectTemplates_helpersTpl,
+	"charts/istio-control/istio-autoinject/templates/clusterrole.yaml":                       chartsIstioControlIstioAutoinjectTemplatesClusterroleYaml,
+	"charts/istio-control/istio-autoinject/templates/clusterrolebinding.yaml":                chartsIstioControlIstioAutoinjectTemplatesClusterrolebindingYaml,
+	"charts/istio-control/istio-autoinject/templates/configmap.yaml":                         chartsIstioControlIstioAutoinjectTemplatesConfigmapYaml,
+	"charts/istio-control/istio-autoinject/templates/deployment.yaml":                        chartsIstioControlIstioAutoinjectTemplatesDeploymentYaml,
+	"charts/istio-control/istio-autoinject/templates/mutatingwebhook.yaml":                   chartsIstioControlIstioAutoinjectTemplatesMutatingwebhookYaml,
+	"charts/istio-control/istio-autoinject/templates/poddisruptionbudget.yaml":               chartsIstioControlIstioAutoinjectTemplatesPoddisruptionbudgetYaml,
+	"charts/istio-control/istio-autoinject/templates/service.yaml":                           chartsIstioControlIstioAutoinjectTemplatesServiceYaml,
+	"charts/istio-control/istio-autoinject/templates/serviceaccount.yaml":                    chartsIstioControlIstioAutoinjectTemplatesServiceaccountYaml,
+	"charts/istio-control/istio-autoinject/templates/sidecar-injector-configmap.yaml":        chartsIstioControlIstioAutoinjectTemplatesSidecarInjectorConfigmapYaml,
+	"charts/istio-control/istio-autoinject/values.yaml":                                      chartsIstioControlIstioAutoinjectValuesYaml,
+	"charts/istio-control/istio-config/Chart.yaml":                                           chartsIstioControlIstioConfigChartYaml,
+	"charts/istio-control/istio-config/OWNERS":                                               chartsIstioControlIstioConfigOwners,
+	"charts/istio-control/istio-config/README.md":                                            chartsIstioControlIstioConfigReadmeMd,
+	"charts/istio-control/istio-config/templates/_affinity.tpl":                              chartsIstioControlIstioConfigTemplates_affinityTpl,
+	"charts/istio-control/istio-config/templates/_helpers.tpl":                               chartsIstioControlIstioConfigTemplates_helpersTpl,
+	"charts/istio-control/istio-config/templates/clusterrole.yaml":                           chartsIstioControlIstioConfigTemplatesClusterroleYaml,
+	"charts/istio-control/istio-config/templates/clusterrolebinding.yaml":                    chartsIstioControlIstioConfigTemplatesClusterrolebindingYaml,
+	"charts/istio-control/istio-config/templates/configmap-envoy.yaml":                       chartsIstioControlIstioConfigTemplatesConfigmapEnvoyYaml,
+	"charts/istio-control/istio-config/templates/configmap-mesh.yaml":                        chartsIstioControlIstioConfigTemplatesConfigmapMeshYaml,
+	"charts/istio-control/istio-config/templates/configmap.yaml":                             chartsIstioControlIstioConfigTemplatesConfigmapYaml,
+	"charts/istio-control/istio-config/templates/deployment.yaml":                            chartsIstioControlIstioConfigTemplatesDeploymentYaml,
+	"charts/istio-control/istio-config/templates/poddisruptionbudget.yaml":                   chartsIstioControlIstioConfigTemplatesPoddisruptionbudgetYaml,
+	"charts/istio-control/istio-config/templates/service.yaml":                               chartsIstioControlIstioConfigTemplatesServiceYaml,
+	"charts/istio-control/istio-config/templates/serviceaccount.yaml":                        chartsIstioControlIstioConfigTemplatesServiceaccountYaml,
+	"charts/istio-control/istio-config/templates/validatingwebhookconfiguration.yaml":        chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYaml,
+	"charts/istio-control/istio-config/templates/validatingwebhookconfiguration.yaml.tpl":    chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlTpl,
+	"charts/istio-control/istio-config/values.yaml":                                          chartsIstioControlIstioConfigValuesYaml,
+	"charts/istio-control/istio-discovery/Chart.yaml":                                        chartsIstioControlIstioDiscoveryChartYaml,
+	"charts/istio-control/istio-discovery/NOTES.txt":                                         chartsIstioControlIstioDiscoveryNotesTxt,
+	"charts/istio-control/istio-discovery/files/injection-template.yaml":                     chartsIstioControlIstioDiscoveryFilesInjectionTemplateYaml,
+	"charts/istio-control/istio-discovery/templates/_affinity.tpl":                           chartsIstioControlIstioDiscoveryTemplates_affinityTpl,
+	"charts/istio-control/istio-discovery/templates/_helpers.tpl":                            chartsIstioControlIstioDiscoveryTemplates_helpersTpl,
+	"charts/istio-control/istio-discovery/templates/autoscale.yaml":                          chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml,
+	"charts/istio-control/istio-discovery/templates/clusterrole-galley-disable-webhook.yaml": chartsIstioControlIstioDiscoveryTemplatesClusterroleGalleyDisableWebhookYaml,
+	"charts/istio-control/istio-discovery/templates/clusterrole.yaml":                        chartsIstioControlIstioDiscoveryTemplatesClusterroleYaml,
+	"charts/istio-control/istio-discovery/templates/clusterrolebinding.yaml":                 chartsIstioControlIstioDiscoveryTemplatesClusterrolebindingYaml,
+	"charts/istio-control/istio-discovery/templates/configmap-envoy.yaml":                    chartsIstioControlIstioDiscoveryTemplatesConfigmapEnvoyYaml,
+	"charts/istio-control/istio-discovery/templates/configmap-jwks.yaml":                     chartsIstioControlIstioDiscoveryTemplatesConfigmapJwksYaml,
+	"charts/istio-control/istio-discovery/templates/configmap.yaml":                          chartsIstioControlIstioDiscoveryTemplatesConfigmapYaml,
+	"charts/istio-control/istio-discovery/templates/deployment.yaml":                         chartsIstioControlIstioDiscoveryTemplatesDeploymentYaml,
+	"charts/istio-control/istio-discovery/templates/enable-mesh-mtls.yaml":                   chartsIstioControlIstioDiscoveryTemplatesEnableMeshMtlsYaml,
+	"charts/istio-control/istio-discovery/templates/istiod-injector-configmap.yaml":          chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYaml,
+	"charts/istio-control/istio-discovery/templates/mutatingwebhook.yaml":                    chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYaml,
+	"charts/istio-control/istio-discovery/templates/poddisruptionbudget.yaml":                chartsIstioControlIstioDiscoveryTemplatesPoddisruptionbudgetYaml,
+	"charts/istio-control/istio-discovery/templates/service.yaml":                            chartsIstioControlIstioDiscoveryTemplatesServiceYaml,
+	"charts/istio-control/istio-discovery/templates/serviceaccount.yaml":                     chartsIstioControlIstioDiscoveryTemplatesServiceaccountYaml,
+	"charts/istio-control/istio-discovery/templates/telemetryv2_1.4.yaml":                    chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14Yaml,
+	"charts/istio-control/istio-discovery/templates/telemetryv2_1.5.yaml":                    chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15Yaml,
+	"charts/istio-control/istio-discovery/templates/validatingwebhookconfiguration.yaml":     chartsIstioControlIstioDiscoveryTemplatesValidatingwebhookconfigurationYaml,
+	"charts/istio-control/istio-discovery/values.yaml":                                       chartsIstioControlIstioDiscoveryValuesYaml,
+	"charts/istio-policy/Chart.yaml":                                                         chartsIstioPolicyChartYaml,
+	"charts/istio-policy/templates/_affinity.tpl":                                            chartsIstioPolicyTemplates_affinityTpl,
+	"charts/istio-policy/templates/_helpers.tpl":                                             chartsIstioPolicyTemplates_helpersTpl,
+	"charts/istio-policy/templates/autoscale.yaml":                                           chartsIstioPolicyTemplatesAutoscaleYaml,
+	"charts/istio-policy/templates/clusterrole.yaml":                                         chartsIstioPolicyTemplatesClusterroleYaml,
+	"charts/istio-policy/templates/clusterrolebinding.yaml":                                  chartsIstioPolicyTemplatesClusterrolebindingYaml,
+	"charts/istio-policy/templates/config.yaml":                                              chartsIstioPolicyTemplatesConfigYaml,
+	"charts/istio-policy/templates/deployment.yaml":                                          chartsIstioPolicyTemplatesDeploymentYaml,
+	"charts/istio-policy/templates/poddisruptionbudget.yaml":                                 chartsIstioPolicyTemplatesPoddisruptionbudgetYaml,
+	"charts/istio-policy/templates/service.yaml":                                             chartsIstioPolicyTemplatesServiceYaml,
+	"charts/istio-policy/templates/serviceaccount.yaml":                                      chartsIstioPolicyTemplatesServiceaccountYaml,
+	"charts/istio-policy/values.yaml":                                                        chartsIstioPolicyValuesYaml,
+	"charts/istio-telemetry/grafana/Chart.yaml":                                              chartsIstioTelemetryGrafanaChartYaml,
+	"charts/istio-telemetry/grafana/dashboards/citadel-dashboard.json":                       chartsIstioTelemetryGrafanaDashboardsCitadelDashboardJson,
+	"charts/istio-telemetry/grafana/dashboards/galley-dashboard.json":                        chartsIstioTelemetryGrafanaDashboardsGalleyDashboardJson,
+	"charts/istio-telemetry/grafana/dashboards/istio-mesh-dashboard.json":                    chartsIstioTelemetryGrafanaDashboardsIstioMeshDashboardJson,
+	"charts/istio-telemetry/grafana/dashboards/istio-performance-dashboard.json":             chartsIstioTelemetryGrafanaDashboardsIstioPerformanceDashboardJson,
+	"charts/istio-telemetry/grafana/dashboards/istio-service-dashboard.json":                 chartsIstioTelemetryGrafanaDashboardsIstioServiceDashboardJson,
+	"charts/istio-telemetry/grafana/dashboards/istio-workload-dashboard.json":                chartsIstioTelemetryGrafanaDashboardsIstioWorkloadDashboardJson,
+	"charts/istio-telemetry/grafana/dashboards/mixer-dashboard.json":                         chartsIstioTelemetryGrafanaDashboardsMixerDashboardJson,
+	"charts/istio-telemetry/grafana/dashboards/pilot-dashboard.json":                         chartsIstioTelemetryGrafanaDashboardsPilotDashboardJson,
+	"charts/istio-telemetry/grafana/fix_datasources.sh":                                      chartsIstioTelemetryGrafanaFix_datasourcesSh,
+	"charts/istio-telemetry/grafana/templates/_affinity.tpl":                                 chartsIstioTelemetryGrafanaTemplates_affinityTpl,
+	"charts/istio-telemetry/grafana/templates/configmap-dashboards.yaml":                     chartsIstioTelemetryGrafanaTemplatesConfigmapDashboardsYaml,
+	"charts/istio-telemetry/grafana/templates/configmap.yaml":                                chartsIstioTelemetryGrafanaTemplatesConfigmapYaml,
+	"charts/istio-telemetry/grafana/templates/deployment.yaml":                               chartsIstioTelemetryGrafanaTemplatesDeploymentYaml,
+	"charts/istio-telemetry/grafana/templates/grafana-policy.yaml":                           chartsIstioTelemetryGrafanaTemplatesGrafanaPolicyYaml,
+	"charts/istio-telemetry/grafana/templates/pvc.yaml":                                      chartsIstioTelemetryGrafanaTemplatesPvcYaml,
+	"charts/istio-telemetry/grafana/templates/service.yaml":                                  chartsIstioTelemetryGrafanaTemplatesServiceYaml,
+	"charts/istio-telemetry/grafana/templates/tests/test-grafana-connection.yaml":            chartsIstioTelemetryGrafanaTemplatesTestsTestGrafanaConnectionYaml,
+	"charts/istio-telemetry/grafana/values.yaml":                                             chartsIstioTelemetryGrafanaValuesYaml,
+	"charts/istio-telemetry/kiali/Chart.yaml":                                                chartsIstioTelemetryKialiChartYaml,
+	"charts/istio-telemetry/kiali/templates/_affinity.tpl":                                   chartsIstioTelemetryKialiTemplates_affinityTpl,
+	"charts/istio-telemetry/kiali/templates/clusterrole.yaml":                                chartsIstioTelemetryKialiTemplatesClusterroleYaml,
+	"charts/istio-telemetry/kiali/templates/clusterrolebinding.yaml":                         chartsIstioTelemetryKialiTemplatesClusterrolebindingYaml,
+	"charts/istio-telemetry/kiali/templates/configmap.yaml":                                  chartsIstioTelemetryKialiTemplatesConfigmapYaml,
+	"charts/istio-telemetry/kiali/templates/demosecret.yaml":                                 chartsIstioTelemetryKialiTemplatesDemosecretYaml,
+	"charts/istio-telemetry/kiali/templates/deployment.yaml":                                 chartsIstioTelemetryKialiTemplatesDeploymentYaml,
+	"charts/istio-telemetry/kiali/templates/service.yaml":                                    chartsIstioTelemetryKialiTemplatesServiceYaml,
+	"charts/istio-telemetry/kiali/templates/serviceaccount.yaml":                             chartsIstioTelemetryKialiTemplatesServiceaccountYaml,
+	"charts/istio-telemetry/kiali/values.yaml":                                               chartsIstioTelemetryKialiValuesYaml,
+	"charts/istio-telemetry/mixer-telemetry/Chart.yaml":                                      chartsIstioTelemetryMixerTelemetryChartYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/_affinity.tpl":                         chartsIstioTelemetryMixerTelemetryTemplates_affinityTpl,
+	"charts/istio-telemetry/mixer-telemetry/templates/autoscale.yaml":                        chartsIstioTelemetryMixerTelemetryTemplatesAutoscaleYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/clusterrole.yaml":                      chartsIstioTelemetryMixerTelemetryTemplatesClusterroleYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/clusterrolebinding.yaml":               chartsIstioTelemetryMixerTelemetryTemplatesClusterrolebindingYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/config.yaml":                           chartsIstioTelemetryMixerTelemetryTemplatesConfigYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/configmap-envoy.yaml":                  chartsIstioTelemetryMixerTelemetryTemplatesConfigmapEnvoyYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/deployment.yaml":                       chartsIstioTelemetryMixerTelemetryTemplatesDeploymentYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/poddisruptionbudget.yaml":              chartsIstioTelemetryMixerTelemetryTemplatesPoddisruptionbudgetYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/service.yaml":                          chartsIstioTelemetryMixerTelemetryTemplatesServiceYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/serviceaccount.yaml":                   chartsIstioTelemetryMixerTelemetryTemplatesServiceaccountYaml,
+	"charts/istio-telemetry/mixer-telemetry/templates/stackdriver.yaml":                      chartsIstioTelemetryMixerTelemetryTemplatesStackdriverYaml,
+	"charts/istio-telemetry/mixer-telemetry/values.yaml":                                     chartsIstioTelemetryMixerTelemetryValuesYaml,
+	"charts/istio-telemetry/prometheus/Chart.yaml":                                           chartsIstioTelemetryPrometheusChartYaml,
+	"charts/istio-telemetry/prometheus/templates/_affinity.tpl":                              chartsIstioTelemetryPrometheusTemplates_affinityTpl,
+	"charts/istio-telemetry/prometheus/templates/clusterrole.yaml":                           chartsIstioTelemetryPrometheusTemplatesClusterroleYaml,
+	"charts/istio-telemetry/prometheus/templates/clusterrolebindings.yaml":                   chartsIstioTelemetryPrometheusTemplatesClusterrolebindingsYaml,
+	"charts/istio-telemetry/prometheus/templates/configmap.yaml":                             chartsIstioTelemetryPrometheusTemplatesConfigmapYaml,
+	"charts/istio-telemetry/prometheus/templates/deployment.yaml":                            chartsIstioTelemetryPrometheusTemplatesDeploymentYaml,
+	"charts/istio-telemetry/prometheus/templates/ingress.yaml":                               chartsIstioTelemetryPrometheusTemplatesIngressYaml,
+	"charts/istio-telemetry/prometheus/templates/service.yaml":                               chartsIstioTelemetryPrometheusTemplatesServiceYaml,
+	"charts/istio-telemetry/prometheus/templates/serviceaccount.yaml":                        chartsIstioTelemetryPrometheusTemplatesServiceaccountYaml,
+	"charts/istio-telemetry/prometheus/templates/tests/test-prometheus-connection.yaml":      chartsIstioTelemetryPrometheusTemplatesTestsTestPrometheusConnectionYaml,
+	"charts/istio-telemetry/prometheus/values.yaml":                                          chartsIstioTelemetryPrometheusValuesYaml,
+	"charts/istio-telemetry/prometheus-operator/Chart.yaml":                                  chartsIstioTelemetryPrometheusOperatorChartYaml,
+	"charts/istio-telemetry/prometheus-operator/templates/_affinity.tpl":                     chartsIstioTelemetryPrometheusOperatorTemplates_affinityTpl,
+	"charts/istio-telemetry/prometheus-operator/templates/prometheus.yaml":                   chartsIstioTelemetryPrometheusOperatorTemplatesPrometheusYaml,
+	"charts/istio-telemetry/prometheus-operator/templates/servicemonitors.yaml":              chartsIstioTelemetryPrometheusOperatorTemplatesServicemonitorsYaml,
+	"charts/istio-telemetry/prometheus-operator/values.yaml":                                 chartsIstioTelemetryPrometheusOperatorValuesYaml,
+	"charts/istio-telemetry/tracing/Chart.yaml":                                              chartsIstioTelemetryTracingChartYaml,
+	"charts/istio-telemetry/tracing/templates/_affinity.tpl":                                 chartsIstioTelemetryTracingTemplates_affinityTpl,
+	"charts/istio-telemetry/tracing/templates/deployment-jaeger.yaml":                        chartsIstioTelemetryTracingTemplatesDeploymentJaegerYaml,
+	"charts/istio-telemetry/tracing/templates/deployment-opencensus.yaml":                    chartsIstioTelemetryTracingTemplatesDeploymentOpencensusYaml,
+	"charts/istio-telemetry/tracing/templates/deployment-zipkin.yaml":                        chartsIstioTelemetryTracingTemplatesDeploymentZipkinYaml,
+	"charts/istio-telemetry/tracing/templates/pvc.yaml":                                      chartsIstioTelemetryTracingTemplatesPvcYaml,
+	"charts/istio-telemetry/tracing/templates/service-jaeger.yaml":                           chartsIstioTelemetryTracingTemplatesServiceJaegerYaml,
+	"charts/istio-telemetry/tracing/templates/service.yaml":                                  chartsIstioTelemetryTracingTemplatesServiceYaml,
+	"charts/istio-telemetry/tracing/values.yaml":                                             chartsIstioTelemetryTracingValuesYaml,
+	"charts/istiocoredns/Chart.yaml":                                                         chartsIstiocorednsChartYaml,
+	"charts/istiocoredns/templates/_affinity.tpl":                                            chartsIstiocorednsTemplates_affinityTpl,
+	"charts/istiocoredns/templates/clusterrole.yaml":                                         chartsIstiocorednsTemplatesClusterroleYaml,
+	"charts/istiocoredns/templates/clusterrolebinding.yaml":                                  chartsIstiocorednsTemplatesClusterrolebindingYaml,
+	"charts/istiocoredns/templates/configmap.yaml":                                           chartsIstiocorednsTemplatesConfigmapYaml,
+	"charts/istiocoredns/templates/deployment.yaml":                                          chartsIstiocorednsTemplatesDeploymentYaml,
+	"charts/istiocoredns/templates/service.yaml":                                             chartsIstiocorednsTemplatesServiceYaml,
+	"charts/istiocoredns/templates/serviceaccount.yaml":                                      chartsIstiocorednsTemplatesServiceaccountYaml,
+	"charts/istiocoredns/values.yaml":                                                        chartsIstiocorednsValuesYaml,
+	"charts/security/citadel/Chart.yaml":                                                     chartsSecurityCitadelChartYaml,
+	"charts/security/citadel/templates/NOTES.txt":                                            chartsSecurityCitadelTemplatesNotesTxt,
+	"charts/security/citadel/templates/_affinity.tpl":                                        chartsSecurityCitadelTemplates_affinityTpl,
+	"charts/security/citadel/templates/_helpers.tpl":                                         chartsSecurityCitadelTemplates_helpersTpl,
+	"charts/security/citadel/templates/clusterrole.yaml":                                     chartsSecurityCitadelTemplatesClusterroleYaml,
+	"charts/security/citadel/templates/clusterrolebinding.yaml":                              chartsSecurityCitadelTemplatesClusterrolebindingYaml,
+	"charts/security/citadel/templates/deployment.yaml":                                      chartsSecurityCitadelTemplatesDeploymentYaml,
+	"charts/security/citadel/templates/poddisruptionbudget.yaml":                             chartsSecurityCitadelTemplatesPoddisruptionbudgetYaml,
+	"charts/security/citadel/templates/service.yaml":                                         chartsSecurityCitadelTemplatesServiceYaml,
+	"charts/security/citadel/templates/serviceaccount.yaml":                                  chartsSecurityCitadelTemplatesServiceaccountYaml,
+	"charts/security/citadel/values.yaml":                                                    chartsSecurityCitadelValuesYaml,
+	"charts/security/nodeagent/Chart.yaml":                                                   chartsSecurityNodeagentChartYaml,
+	"charts/security/nodeagent/templates/_affinity.tpl":                                      chartsSecurityNodeagentTemplates_affinityTpl,
+	"charts/security/nodeagent/templates/clusterrole.yaml":                                   chartsSecurityNodeagentTemplatesClusterroleYaml,
+	"charts/security/nodeagent/templates/clusterrolebinding.yaml":                            chartsSecurityNodeagentTemplatesClusterrolebindingYaml,
+	"charts/security/nodeagent/templates/daemonset.yaml":                                     chartsSecurityNodeagentTemplatesDaemonsetYaml,
+	"charts/security/nodeagent/templates/serviceaccount.yaml":                                chartsSecurityNodeagentTemplatesServiceaccountYaml,
+	"charts/security/nodeagent/values.yaml":                                                  chartsSecurityNodeagentValuesYaml,
+	"examples/customresource/istio_v1alpha1_istiooperator_cr.yaml":                           examplesCustomresourceIstio_v1alpha1_istiooperator_crYaml,
+	"examples/googleca/values-istio-google-ca.yaml":                                          examplesGooglecaValuesIstioGoogleCaYaml,
+	"examples/multicluster/values-istio-multicluster-gateways.yaml":                          examplesMulticlusterValuesIstioMulticlusterGatewaysYaml,
+	"examples/multicluster/values-istio-multicluster-primary.yaml":                           examplesMulticlusterValuesIstioMulticlusterPrimaryYaml,
+	"examples/user-gateway/ingress-gateway-only.yaml":                                        examplesUserGatewayIngressGatewayOnlyYaml,
+	"examples/vm/values-istio-meshexpansion-gateways.yaml":                                   examplesVmValuesIstioMeshexpansionGatewaysYaml,
+	"examples/vm/values-istio-meshexpansion.yaml":                                            examplesVmValuesIstioMeshexpansionYaml,
+	"operator-chart/Chart.yaml":                                                              operatorChartChartYaml,
+	"operator-chart/templates/clusterrole.yaml":                                              operatorChartTemplatesClusterroleYaml,
+	"operator-chart/templates/clusterrole_binding.yaml":                                      operatorChartTemplatesClusterrole_bindingYaml,
+	"operator-chart/templates/crd.yaml":                                                      operatorChartTemplatesCrdYaml,
+	"operator-chart/templates/deployment.yaml":                                               operatorChartTemplatesDeploymentYaml,
+	"operator-chart/templates/namespace.yaml":                                                operatorChartTemplatesNamespaceYaml,
+	"operator-chart/templates/service.yaml":                                                  operatorChartTemplatesServiceYaml,
+	"operator-chart/templates/service_account.yaml":                                          operatorChartTemplatesService_accountYaml,
+	"profiles/default.yaml":                                                                  profilesDefaultYaml,
+	"profiles/demo.yaml":                                                                     profilesDemoYaml,
+	"profiles/empty.yaml":                                                                    profilesEmptyYaml,
+	"profiles/minimal.yaml":                                                                  profilesMinimalYaml,
+	"profiles/remote.yaml":                                                                   profilesRemoteYaml,
+	"profiles/separate.yaml":                                                                 profilesSeparateYaml,
+	"translateConfig/names-1.5.yaml":                                                         translateconfigNames15Yaml,
+	"translateConfig/reverseTranslateConfig-1.4.yaml":                                        translateconfigReversetranslateconfig14Yaml,
+	"translateConfig/reverseTranslateConfig-1.5.yaml":                                        translateconfigReversetranslateconfig15Yaml,
+	"translateConfig/translate-ICP-IOP-1.5.yaml":                                             translateconfigTranslateIcpIop15Yaml,
+	"translateConfig/translateConfig-1.3.yaml":                                               translateconfigTranslateconfig13Yaml,
+	"translateConfig/translateConfig-1.4.yaml":                                               translateconfigTranslateconfig14Yaml,
+	"translateConfig/translateConfig-1.5.yaml":                                               translateconfigTranslateconfig15Yaml,
+	"versions.yaml":                                                                          versionsYaml,
 }
 
 // AssetDir returns the file names below a certain
@@ -47319,22 +42163,19 @@ var _bintree = &bintree{nil, map[string]*bintree{
 	"charts": &bintree{nil, map[string]*bintree{
 		"base": &bintree{nil, map[string]*bintree{
 			"Chart.yaml": &bintree{chartsBaseChartYaml, map[string]*bintree{}},
-			"NOTES.txt":  &bintree{chartsBaseNotesTxt, map[string]*bintree{}},
 			"files": &bintree{nil, map[string]*bintree{
-				"crd-all.gen.yaml":       &bintree{chartsBaseFilesCrdAllGenYaml, map[string]*bintree{}},
-				"crd-mixer.yaml":         &bintree{chartsBaseFilesCrdMixerYaml, map[string]*bintree{}},
-				"gen-istio-cluster.yaml": &bintree{chartsBaseFilesGenIstioClusterYaml, map[string]*bintree{}},
+				"crd-all.gen.yaml": &bintree{chartsBaseFilesCrdAllGenYaml, map[string]*bintree{}},
+				"crd-mixer.yaml":   &bintree{chartsBaseFilesCrdMixerYaml, map[string]*bintree{}},
 			}},
 			"kustomization.yaml": &bintree{chartsBaseKustomizationYaml, map[string]*bintree{}},
 			"templates": &bintree{nil, map[string]*bintree{
-				"clusterrole.yaml":                    &bintree{chartsBaseTemplatesClusterroleYaml, map[string]*bintree{}},
-				"clusterrolebinding.yaml":             &bintree{chartsBaseTemplatesClusterrolebindingYaml, map[string]*bintree{}},
-				"crds.yaml":                           &bintree{chartsBaseTemplatesCrdsYaml, map[string]*bintree{}},
-				"endpoints.yaml":                      &bintree{chartsBaseTemplatesEndpointsYaml, map[string]*bintree{}},
-				"namespaces.yaml":                     &bintree{chartsBaseTemplatesNamespacesYaml, map[string]*bintree{}},
-				"serviceaccount.yaml":                 &bintree{chartsBaseTemplatesServiceaccountYaml, map[string]*bintree{}},
-				"services.yaml":                       &bintree{chartsBaseTemplatesServicesYaml, map[string]*bintree{}},
-				"validatingwebhookconfiguration.yaml": &bintree{chartsBaseTemplatesValidatingwebhookconfigurationYaml, map[string]*bintree{}},
+				"clusterrole.yaml":        &bintree{chartsBaseTemplatesClusterroleYaml, map[string]*bintree{}},
+				"clusterrolebinding.yaml": &bintree{chartsBaseTemplatesClusterrolebindingYaml, map[string]*bintree{}},
+				"crds.yaml":               &bintree{chartsBaseTemplatesCrdsYaml, map[string]*bintree{}},
+				"endpoints.yaml":          &bintree{chartsBaseTemplatesEndpointsYaml, map[string]*bintree{}},
+				"namespaces.yaml":         &bintree{chartsBaseTemplatesNamespacesYaml, map[string]*bintree{}},
+				"serviceaccount.yaml":     &bintree{chartsBaseTemplatesServiceaccountYaml, map[string]*bintree{}},
+				"services.yaml":           &bintree{chartsBaseTemplatesServicesYaml, map[string]*bintree{}},
 			}},
 			"values.yaml": &bintree{chartsBaseValuesYaml, map[string]*bintree{}},
 		}},
@@ -47359,8 +42200,12 @@ var _bintree = &bintree{nil, map[string]*bintree{
 				"NOTES.txt":  &bintree{chartsGatewaysIstioIngressNotesTxt, map[string]*bintree{}},
 				"templates": &bintree{nil, map[string]*bintree{
 					"_affinity.tpl":            &bintree{chartsGatewaysIstioIngressTemplates_affinityTpl, map[string]*bintree{}},
+					"addongateway.yaml":        &bintree{chartsGatewaysIstioIngressTemplatesAddongatewayYaml, map[string]*bintree{}},
 					"autoscale.yaml":           &bintree{chartsGatewaysIstioIngressTemplatesAutoscaleYaml, map[string]*bintree{}},
+					"certificate.yaml":         &bintree{chartsGatewaysIstioIngressTemplatesCertificateYaml, map[string]*bintree{}},
 					"deployment.yaml":          &bintree{chartsGatewaysIstioIngressTemplatesDeploymentYaml, map[string]*bintree{}},
+					"gateway.yaml":             &bintree{chartsGatewaysIstioIngressTemplatesGatewayYaml, map[string]*bintree{}},
+					"hosts.yaml":               &bintree{chartsGatewaysIstioIngressTemplatesHostsYaml, map[string]*bintree{}},
 					"meshexpansion.yaml":       &bintree{chartsGatewaysIstioIngressTemplatesMeshexpansionYaml, map[string]*bintree{}},
 					"poddisruptionbudget.yaml": &bintree{chartsGatewaysIstioIngressTemplatesPoddisruptionbudgetYaml, map[string]*bintree{}},
 					"preconfigured.yaml":       &bintree{chartsGatewaysIstioIngressTemplatesPreconfiguredYaml, map[string]*bintree{}},
@@ -47368,6 +42213,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 					"rolebindings.yaml":        &bintree{chartsGatewaysIstioIngressTemplatesRolebindingsYaml, map[string]*bintree{}},
 					"service.yaml":             &bintree{chartsGatewaysIstioIngressTemplatesServiceYaml, map[string]*bintree{}},
 					"serviceaccount.yaml":      &bintree{chartsGatewaysIstioIngressTemplatesServiceaccountYaml, map[string]*bintree{}},
+					"sidecar.yaml":             &bintree{chartsGatewaysIstioIngressTemplatesSidecarYaml, map[string]*bintree{}},
 				}},
 				"values.yaml": &bintree{chartsGatewaysIstioIngressValuesYaml, map[string]*bintree{}},
 			}},
@@ -47384,24 +42230,45 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"values.yaml": &bintree{chartsIstioCniValuesYaml, map[string]*bintree{}},
 		}},
 		"istio-control": &bintree{nil, map[string]*bintree{
+			"istio-autoinject": &bintree{nil, map[string]*bintree{
+				"Chart.yaml": &bintree{chartsIstioControlIstioAutoinjectChartYaml, map[string]*bintree{}},
+				"NOTES.txt":  &bintree{chartsIstioControlIstioAutoinjectNotesTxt, map[string]*bintree{}},
+				"files": &bintree{nil, map[string]*bintree{
+					"injection-template.yaml": &bintree{chartsIstioControlIstioAutoinjectFilesInjectionTemplateYaml, map[string]*bintree{}},
+				}},
+				"templates": &bintree{nil, map[string]*bintree{
+					"_affinity.tpl":                   &bintree{chartsIstioControlIstioAutoinjectTemplates_affinityTpl, map[string]*bintree{}},
+					"_helpers.tpl":                    &bintree{chartsIstioControlIstioAutoinjectTemplates_helpersTpl, map[string]*bintree{}},
+					"clusterrole.yaml":                &bintree{chartsIstioControlIstioAutoinjectTemplatesClusterroleYaml, map[string]*bintree{}},
+					"clusterrolebinding.yaml":         &bintree{chartsIstioControlIstioAutoinjectTemplatesClusterrolebindingYaml, map[string]*bintree{}},
+					"configmap.yaml":                  &bintree{chartsIstioControlIstioAutoinjectTemplatesConfigmapYaml, map[string]*bintree{}},
+					"deployment.yaml":                 &bintree{chartsIstioControlIstioAutoinjectTemplatesDeploymentYaml, map[string]*bintree{}},
+					"mutatingwebhook.yaml":            &bintree{chartsIstioControlIstioAutoinjectTemplatesMutatingwebhookYaml, map[string]*bintree{}},
+					"poddisruptionbudget.yaml":        &bintree{chartsIstioControlIstioAutoinjectTemplatesPoddisruptionbudgetYaml, map[string]*bintree{}},
+					"service.yaml":                    &bintree{chartsIstioControlIstioAutoinjectTemplatesServiceYaml, map[string]*bintree{}},
+					"serviceaccount.yaml":             &bintree{chartsIstioControlIstioAutoinjectTemplatesServiceaccountYaml, map[string]*bintree{}},
+					"sidecar-injector-configmap.yaml": &bintree{chartsIstioControlIstioAutoinjectTemplatesSidecarInjectorConfigmapYaml, map[string]*bintree{}},
+				}},
+				"values.yaml": &bintree{chartsIstioControlIstioAutoinjectValuesYaml, map[string]*bintree{}},
+			}},
 			"istio-config": &bintree{nil, map[string]*bintree{
 				"Chart.yaml": &bintree{chartsIstioControlIstioConfigChartYaml, map[string]*bintree{}},
 				"OWNERS":     &bintree{chartsIstioControlIstioConfigOwners, map[string]*bintree{}},
 				"README.md":  &bintree{chartsIstioControlIstioConfigReadmeMd, map[string]*bintree{}},
 				"templates": &bintree{nil, map[string]*bintree{
-					"_affinity.tpl":                            &bintree{chartsIstioControlIstioConfigTemplates_affinityTpl, map[string]*bintree{}},
-					"_helpers.tpl":                             &bintree{chartsIstioControlIstioConfigTemplates_helpersTpl, map[string]*bintree{}},
-					"clusterrole.yaml":                         &bintree{chartsIstioControlIstioConfigTemplatesClusterroleYaml, map[string]*bintree{}},
-					"clusterrolebinding.yaml":                  &bintree{chartsIstioControlIstioConfigTemplatesClusterrolebindingYaml, map[string]*bintree{}},
-					"configmap-envoy.yaml":                     &bintree{chartsIstioControlIstioConfigTemplatesConfigmapEnvoyYaml, map[string]*bintree{}},
-					"configmap-mesh.yaml":                      &bintree{chartsIstioControlIstioConfigTemplatesConfigmapMeshYaml, map[string]*bintree{}},
-					"configmap.yaml":                           &bintree{chartsIstioControlIstioConfigTemplatesConfigmapYaml, map[string]*bintree{}},
-					"deployment.yaml":                          &bintree{chartsIstioControlIstioConfigTemplatesDeploymentYaml, map[string]*bintree{}},
-					"poddisruptionbudget.yaml":                 &bintree{chartsIstioControlIstioConfigTemplatesPoddisruptionbudgetYaml, map[string]*bintree{}},
-					"service.yaml":                             &bintree{chartsIstioControlIstioConfigTemplatesServiceYaml, map[string]*bintree{}},
-					"serviceaccount.yaml":                      &bintree{chartsIstioControlIstioConfigTemplatesServiceaccountYaml, map[string]*bintree{}},
-					"validatingwebhookconfiguration-noop.yaml": &bintree{chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationNoopYaml, map[string]*bintree{}},
-					"validatingwebhookconfiguration.yaml.tpl":  &bintree{chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlTpl, map[string]*bintree{}},
+					"_affinity.tpl":                           &bintree{chartsIstioControlIstioConfigTemplates_affinityTpl, map[string]*bintree{}},
+					"_helpers.tpl":                            &bintree{chartsIstioControlIstioConfigTemplates_helpersTpl, map[string]*bintree{}},
+					"clusterrole.yaml":                        &bintree{chartsIstioControlIstioConfigTemplatesClusterroleYaml, map[string]*bintree{}},
+					"clusterrolebinding.yaml":                 &bintree{chartsIstioControlIstioConfigTemplatesClusterrolebindingYaml, map[string]*bintree{}},
+					"configmap-envoy.yaml":                    &bintree{chartsIstioControlIstioConfigTemplatesConfigmapEnvoyYaml, map[string]*bintree{}},
+					"configmap-mesh.yaml":                     &bintree{chartsIstioControlIstioConfigTemplatesConfigmapMeshYaml, map[string]*bintree{}},
+					"configmap.yaml":                          &bintree{chartsIstioControlIstioConfigTemplatesConfigmapYaml, map[string]*bintree{}},
+					"deployment.yaml":                         &bintree{chartsIstioControlIstioConfigTemplatesDeploymentYaml, map[string]*bintree{}},
+					"poddisruptionbudget.yaml":                &bintree{chartsIstioControlIstioConfigTemplatesPoddisruptionbudgetYaml, map[string]*bintree{}},
+					"service.yaml":                            &bintree{chartsIstioControlIstioConfigTemplatesServiceYaml, map[string]*bintree{}},
+					"serviceaccount.yaml":                     &bintree{chartsIstioControlIstioConfigTemplatesServiceaccountYaml, map[string]*bintree{}},
+					"validatingwebhookconfiguration.yaml":     &bintree{chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYaml, map[string]*bintree{}},
+					"validatingwebhookconfiguration.yaml.tpl": &bintree{chartsIstioControlIstioConfigTemplatesValidatingwebhookconfigurationYamlTpl, map[string]*bintree{}},
 				}},
 				"values.yaml": &bintree{chartsIstioControlIstioConfigValuesYaml, map[string]*bintree{}},
 			}},
@@ -47409,24 +42276,28 @@ var _bintree = &bintree{nil, map[string]*bintree{
 				"Chart.yaml": &bintree{chartsIstioControlIstioDiscoveryChartYaml, map[string]*bintree{}},
 				"NOTES.txt":  &bintree{chartsIstioControlIstioDiscoveryNotesTxt, map[string]*bintree{}},
 				"files": &bintree{nil, map[string]*bintree{
-					"gen-istio.yaml":          &bintree{chartsIstioControlIstioDiscoveryFilesGenIstioYaml, map[string]*bintree{}},
 					"injection-template.yaml": &bintree{chartsIstioControlIstioDiscoveryFilesInjectionTemplateYaml, map[string]*bintree{}},
 				}},
-				"kustomization.yaml": &bintree{chartsIstioControlIstioDiscoveryKustomizationYaml, map[string]*bintree{}},
 				"templates": &bintree{nil, map[string]*bintree{
-					"_affinity.tpl":                  &bintree{chartsIstioControlIstioDiscoveryTemplates_affinityTpl, map[string]*bintree{}},
-					"_helpers.tpl":                   &bintree{chartsIstioControlIstioDiscoveryTemplates_helpersTpl, map[string]*bintree{}},
-					"autoscale.yaml":                 &bintree{chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml, map[string]*bintree{}},
-					"configmap-jwks.yaml":            &bintree{chartsIstioControlIstioDiscoveryTemplatesConfigmapJwksYaml, map[string]*bintree{}},
-					"configmap.yaml":                 &bintree{chartsIstioControlIstioDiscoveryTemplatesConfigmapYaml, map[string]*bintree{}},
-					"deployment.yaml":                &bintree{chartsIstioControlIstioDiscoveryTemplatesDeploymentYaml, map[string]*bintree{}},
-					"istiod-injector-configmap.yaml": &bintree{chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYaml, map[string]*bintree{}},
-					"mutatingwebhook.yaml":           &bintree{chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYaml, map[string]*bintree{}},
-					"poddisruptionbudget.yaml":       &bintree{chartsIstioControlIstioDiscoveryTemplatesPoddisruptionbudgetYaml, map[string]*bintree{}},
-					"service.yaml":                   &bintree{chartsIstioControlIstioDiscoveryTemplatesServiceYaml, map[string]*bintree{}},
-					"telemetryv2_1.4.yaml":           &bintree{chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14Yaml, map[string]*bintree{}},
-					"telemetryv2_1.5.yaml":           &bintree{chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15Yaml, map[string]*bintree{}},
-					"telemetryv2_1.6.yaml":           &bintree{chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_16Yaml, map[string]*bintree{}},
+					"_affinity.tpl":                           &bintree{chartsIstioControlIstioDiscoveryTemplates_affinityTpl, map[string]*bintree{}},
+					"_helpers.tpl":                            &bintree{chartsIstioControlIstioDiscoveryTemplates_helpersTpl, map[string]*bintree{}},
+					"autoscale.yaml":                          &bintree{chartsIstioControlIstioDiscoveryTemplatesAutoscaleYaml, map[string]*bintree{}},
+					"clusterrole-galley-disable-webhook.yaml": &bintree{chartsIstioControlIstioDiscoveryTemplatesClusterroleGalleyDisableWebhookYaml, map[string]*bintree{}},
+					"clusterrole.yaml":                        &bintree{chartsIstioControlIstioDiscoveryTemplatesClusterroleYaml, map[string]*bintree{}},
+					"clusterrolebinding.yaml":                 &bintree{chartsIstioControlIstioDiscoveryTemplatesClusterrolebindingYaml, map[string]*bintree{}},
+					"configmap-envoy.yaml":                    &bintree{chartsIstioControlIstioDiscoveryTemplatesConfigmapEnvoyYaml, map[string]*bintree{}},
+					"configmap-jwks.yaml":                     &bintree{chartsIstioControlIstioDiscoveryTemplatesConfigmapJwksYaml, map[string]*bintree{}},
+					"configmap.yaml":                          &bintree{chartsIstioControlIstioDiscoveryTemplatesConfigmapYaml, map[string]*bintree{}},
+					"deployment.yaml":                         &bintree{chartsIstioControlIstioDiscoveryTemplatesDeploymentYaml, map[string]*bintree{}},
+					"enable-mesh-mtls.yaml":                   &bintree{chartsIstioControlIstioDiscoveryTemplatesEnableMeshMtlsYaml, map[string]*bintree{}},
+					"istiod-injector-configmap.yaml":          &bintree{chartsIstioControlIstioDiscoveryTemplatesIstiodInjectorConfigmapYaml, map[string]*bintree{}},
+					"mutatingwebhook.yaml":                    &bintree{chartsIstioControlIstioDiscoveryTemplatesMutatingwebhookYaml, map[string]*bintree{}},
+					"poddisruptionbudget.yaml":                &bintree{chartsIstioControlIstioDiscoveryTemplatesPoddisruptionbudgetYaml, map[string]*bintree{}},
+					"service.yaml":                            &bintree{chartsIstioControlIstioDiscoveryTemplatesServiceYaml, map[string]*bintree{}},
+					"serviceaccount.yaml":                     &bintree{chartsIstioControlIstioDiscoveryTemplatesServiceaccountYaml, map[string]*bintree{}},
+					"telemetryv2_1.4.yaml":                    &bintree{chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_14Yaml, map[string]*bintree{}},
+					"telemetryv2_1.5.yaml":                    &bintree{chartsIstioControlIstioDiscoveryTemplatesTelemetryv2_15Yaml, map[string]*bintree{}},
+					"validatingwebhookconfiguration.yaml":     &bintree{chartsIstioControlIstioDiscoveryTemplatesValidatingwebhookconfigurationYaml, map[string]*bintree{}},
 				}},
 				"values.yaml": &bintree{chartsIstioControlIstioDiscoveryValuesYaml, map[string]*bintree{}},
 			}},
@@ -47559,10 +42430,41 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			}},
 			"values.yaml": &bintree{chartsIstiocorednsValuesYaml, map[string]*bintree{}},
 		}},
+		"security": &bintree{nil, map[string]*bintree{
+			"citadel": &bintree{nil, map[string]*bintree{
+				"Chart.yaml": &bintree{chartsSecurityCitadelChartYaml, map[string]*bintree{}},
+				"templates": &bintree{nil, map[string]*bintree{
+					"NOTES.txt":                &bintree{chartsSecurityCitadelTemplatesNotesTxt, map[string]*bintree{}},
+					"_affinity.tpl":            &bintree{chartsSecurityCitadelTemplates_affinityTpl, map[string]*bintree{}},
+					"_helpers.tpl":             &bintree{chartsSecurityCitadelTemplates_helpersTpl, map[string]*bintree{}},
+					"clusterrole.yaml":         &bintree{chartsSecurityCitadelTemplatesClusterroleYaml, map[string]*bintree{}},
+					"clusterrolebinding.yaml":  &bintree{chartsSecurityCitadelTemplatesClusterrolebindingYaml, map[string]*bintree{}},
+					"deployment.yaml":          &bintree{chartsSecurityCitadelTemplatesDeploymentYaml, map[string]*bintree{}},
+					"poddisruptionbudget.yaml": &bintree{chartsSecurityCitadelTemplatesPoddisruptionbudgetYaml, map[string]*bintree{}},
+					"service.yaml":             &bintree{chartsSecurityCitadelTemplatesServiceYaml, map[string]*bintree{}},
+					"serviceaccount.yaml":      &bintree{chartsSecurityCitadelTemplatesServiceaccountYaml, map[string]*bintree{}},
+				}},
+				"values.yaml": &bintree{chartsSecurityCitadelValuesYaml, map[string]*bintree{}},
+			}},
+			"nodeagent": &bintree{nil, map[string]*bintree{
+				"Chart.yaml": &bintree{chartsSecurityNodeagentChartYaml, map[string]*bintree{}},
+				"templates": &bintree{nil, map[string]*bintree{
+					"_affinity.tpl":           &bintree{chartsSecurityNodeagentTemplates_affinityTpl, map[string]*bintree{}},
+					"clusterrole.yaml":        &bintree{chartsSecurityNodeagentTemplatesClusterroleYaml, map[string]*bintree{}},
+					"clusterrolebinding.yaml": &bintree{chartsSecurityNodeagentTemplatesClusterrolebindingYaml, map[string]*bintree{}},
+					"daemonset.yaml":          &bintree{chartsSecurityNodeagentTemplatesDaemonsetYaml, map[string]*bintree{}},
+					"serviceaccount.yaml":     &bintree{chartsSecurityNodeagentTemplatesServiceaccountYaml, map[string]*bintree{}},
+				}},
+				"values.yaml": &bintree{chartsSecurityNodeagentValuesYaml, map[string]*bintree{}},
+			}},
+		}},
 	}},
 	"examples": &bintree{nil, map[string]*bintree{
 		"customresource": &bintree{nil, map[string]*bintree{
 			"istio_v1alpha1_istiooperator_cr.yaml": &bintree{examplesCustomresourceIstio_v1alpha1_istiooperator_crYaml, map[string]*bintree{}},
+		}},
+		"googleca": &bintree{nil, map[string]*bintree{
+			"values-istio-google-ca.yaml": &bintree{examplesGooglecaValuesIstioGoogleCaYaml, map[string]*bintree{}},
 		}},
 		"multicluster": &bintree{nil, map[string]*bintree{
 			"values-istio-multicluster-gateways.yaml": &bintree{examplesMulticlusterValuesIstioMulticlusterGatewaysYaml, map[string]*bintree{}},
@@ -47593,22 +42495,17 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"demo.yaml":     &bintree{profilesDemoYaml, map[string]*bintree{}},
 		"empty.yaml":    &bintree{profilesEmptyYaml, map[string]*bintree{}},
 		"minimal.yaml":  &bintree{profilesMinimalYaml, map[string]*bintree{}},
-		"preview.yaml":  &bintree{profilesPreviewYaml, map[string]*bintree{}},
 		"remote.yaml":   &bintree{profilesRemoteYaml, map[string]*bintree{}},
 		"separate.yaml": &bintree{profilesSeparateYaml, map[string]*bintree{}},
 	}},
 	"translateConfig": &bintree{nil, map[string]*bintree{
 		"names-1.5.yaml":                  &bintree{translateconfigNames15Yaml, map[string]*bintree{}},
-		"names-1.6.yaml":                  &bintree{translateconfigNames16Yaml, map[string]*bintree{}},
 		"reverseTranslateConfig-1.4.yaml": &bintree{translateconfigReversetranslateconfig14Yaml, map[string]*bintree{}},
 		"reverseTranslateConfig-1.5.yaml": &bintree{translateconfigReversetranslateconfig15Yaml, map[string]*bintree{}},
-		"reverseTranslateConfig-1.6.yaml": &bintree{translateconfigReversetranslateconfig16Yaml, map[string]*bintree{}},
 		"translate-ICP-IOP-1.5.yaml":      &bintree{translateconfigTranslateIcpIop15Yaml, map[string]*bintree{}},
-		"translate-ICP-IOP-1.6.yaml":      &bintree{translateconfigTranslateIcpIop16Yaml, map[string]*bintree{}},
 		"translateConfig-1.3.yaml":        &bintree{translateconfigTranslateconfig13Yaml, map[string]*bintree{}},
 		"translateConfig-1.4.yaml":        &bintree{translateconfigTranslateconfig14Yaml, map[string]*bintree{}},
 		"translateConfig-1.5.yaml":        &bintree{translateconfigTranslateconfig15Yaml, map[string]*bintree{}},
-		"translateConfig-1.6.yaml":        &bintree{translateconfigTranslateconfig16Yaml, map[string]*bintree{}},
 	}},
 	"versions.yaml": &bintree{versionsYaml, map[string]*bintree{}},
 }}

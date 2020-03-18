@@ -15,12 +15,14 @@
 package tcp
 
 import (
-	"fmt"
 	"testing"
+
+	"fmt"
 	"time"
 
 	"istio.io/istio/pkg/test/framework"
 	"istio.io/istio/pkg/test/framework/components/bookinfo"
+	"istio.io/istio/pkg/test/framework/components/environment"
 	"istio.io/istio/pkg/test/framework/components/galley"
 	"istio.io/istio/pkg/test/framework/components/ingress"
 	"istio.io/istio/pkg/test/framework/components/istio"
@@ -28,7 +30,6 @@ import (
 	"istio.io/istio/pkg/test/framework/components/prometheus"
 	"istio.io/istio/pkg/test/framework/label"
 	"istio.io/istio/pkg/test/framework/resource"
-	"istio.io/istio/pkg/test/framework/resource/environment"
 	"istio.io/istio/pkg/test/util/file"
 	"istio.io/istio/pkg/test/util/retry"
 	util "istio.io/istio/tests/integration/mixer"
@@ -40,14 +41,19 @@ const (
 )
 
 var (
-	ist        istio.Instance
-	bookinfoNs namespace.Instance
-	g          galley.Instance
-	ing        ingress.Instance
-	prom       prometheus.Instance
+	ist           istio.Instance
+	bookinfoNs    namespace.Instance
+	g             galley.Instance
+	ing           ingress.Instance
+	prom          prometheus.Instance
+	usingOperator bool
 )
 
 func TestTcpMetric(t *testing.T) { // nolint:interfacer
+	if !usingOperator {
+		t.Skip("Stats filter test only runs with operator")
+	}
+
 	framework.
 		NewTest(t).
 		RequiresEnvironment(environment.Kube).
@@ -101,7 +107,6 @@ func TestMain(m *testing.M) {
 	framework.
 		NewSuite("stats_tcp_filter", m).
 		RequireEnvironment(environment.Kube).
-		RequireSingleCluster().
 		Label(label.CustomSetup).
 		SetupOnEnv(environment.Kube, istio.Setup(&ist, setupConfig)).
 		Setup(testsetup).
@@ -117,7 +122,8 @@ func setupConfig(cfg *istio.Config) {
 	cfg.Values["telemetry.enabled"] = "true"
 	cfg.Values["telemetry.v1.enabled"] = "false"
 	cfg.Values["telemetry.v2.enabled"] = "true"
-	cfg.Values["prometheus.enabled"] = "true"
+
+	usingOperator = cfg.Operator
 }
 
 func testsetup(ctx resource.Context) (err error) {
@@ -145,7 +151,7 @@ func testsetup(ctx resource.Context) (err error) {
 	if err != nil {
 		return err
 	}
-	prom, err = prometheus.New(ctx, prometheus.Config{})
+	prom, err = prometheus.New(ctx)
 	if err != nil {
 		return err
 	}
@@ -165,9 +171,6 @@ func buildQuery() (destinationQuery string) {
 	destinationQuery = `istio_tcp_connections_opened_total{reporter="destination",`
 	labels := map[string]string{
 		"request_protocol":               "tcp",
-		"destination_service_name":       "mongodb",
-		"destination_canonical_revision": "v1",
-		"destination_canonical_service":  "mongodb",
 		"destination_app":                "mongodb",
 		"destination_version":            "v1",
 		"destination_workload_namespace": bookinfoNs.Name(),

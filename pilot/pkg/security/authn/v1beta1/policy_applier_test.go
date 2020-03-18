@@ -35,11 +35,10 @@ import (
 	authn_alpha_api "istio.io/api/authentication/v1alpha1"
 	"istio.io/api/security/v1beta1"
 	type_beta "istio.io/api/type/v1beta1"
-
 	"istio.io/istio/pilot/pkg/features"
 	"istio.io/istio/pilot/pkg/model"
 	"istio.io/istio/pilot/pkg/model/test"
-	"istio.io/istio/pilot/pkg/networking"
+	"istio.io/istio/pilot/pkg/networking/plugin"
 	pilotutil "istio.io/istio/pilot/pkg/networking/util"
 	protovalue "istio.io/istio/pkg/proto"
 	authn_alpha "istio.io/istio/security/proto/authentication/v1alpha1"
@@ -611,7 +610,7 @@ func TestJwtFilter(t *testing.T) {
 
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			if got := NewPolicyApplier("root-namespace", c.in, nil, c.alphaPolicyIn).JwtFilter(); !reflect.DeepEqual(c.expected, got) {
+			if got := NewPolicyApplier("root-namespace", c.in, nil, c.alphaPolicyIn).JwtFilter(true); !reflect.DeepEqual(c.expected, got) {
 				t.Errorf("got:\n%s\nwanted:\n%s", spew.Sdump(got), spew.Sdump(c.expected))
 			}
 		})
@@ -1758,7 +1757,7 @@ func TestAuthnFilterConfig(t *testing.T) {
 			if c.isGateway {
 				proxyType = model.Router
 			}
-			got := NewPolicyApplier("root-namespace", c.jwtIn, c.peerIn, c.alphaPolicyIn).AuthNFilter(proxyType, 80)
+			got := NewPolicyApplier("root-namespace", c.jwtIn, c.peerIn, c.alphaPolicyIn).AuthNFilter(proxyType, 80, true)
 			if !reflect.DeepEqual(c.expected, got) {
 				t.Errorf("got:\n%v\nwanted:\n%v\n", humanReadableAuthnFilterDump(got), humanReadableAuthnFilterDump(c.expected))
 			}
@@ -1798,14 +1797,14 @@ func TestOnInboundFilterChain(t *testing.T) {
 		RequireClientCertificate: protovalue.BoolTrue,
 	}
 
-	expectedStrict := []networking.FilterChain{
+	expectedStrict := []plugin.FilterChain{
 		{
 			TLSContext: tlsContext,
 		},
 	}
 
 	// Two filter chains, one for mtls traffic within the mesh, one for plain text traffic.
-	expectedPermissive := []networking.FilterChain{
+	expectedPermissive := []plugin.FilterChain{
 		{
 			TLSContext: tlsContext,
 			FilterChainMatch: &listener.FilterChainMatch{
@@ -1828,7 +1827,7 @@ func TestOnInboundFilterChain(t *testing.T) {
 		peerPolicies []*model.Config
 		alphaPolicy  *authn_alpha_api.Policy
 		sdsUdsPath   string
-		expected     []networking.FilterChain
+		expected     []plugin.FilterChain
 	}{
 		{
 			name:     "No policy - behave as permissive",

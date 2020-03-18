@@ -24,6 +24,8 @@ import (
 	"github.com/golang/protobuf/ptypes/any"
 
 	"istio.io/istio/pilot/pkg/features"
+	"istio.io/istio/pkg/jwt"
+	"istio.io/pkg/env"
 )
 
 const (
@@ -55,8 +57,8 @@ const (
 	// IngressGatewaySdsUdsPath is the UDS path for ingress gateway to get credentials via SDS.
 	IngressGatewaySdsUdsPath = "unix:/var/run/ingress_gateway/sds"
 
-	// SdsCaSuffix is the suffix of the sds resource name for root CA.
-	SdsCaSuffix = "-cacert"
+	// IngressGatewaySdsCaSuffix is the suffix of the sds resource name for root CA.
+	IngressGatewaySdsCaSuffix = "-cacert"
 
 	// IstioJwtFilterName is the name for the Istio Jwt filter. This should be the same
 	// as the name defined in
@@ -73,8 +75,13 @@ const (
 	AuthnFilterName = "istio_authn"
 )
 
-// ConstructSdsSecretConfigWithCustomUds constructs SDS secret configuration for ingress gateway.
-func ConstructSdsSecretConfigWithCustomUds(name, sdsUdsPath string) *auth.SdsSecretConfig {
+var (
+	JwtPolicy = env.RegisterStringVar("JWT_POLICY", jwt.JWTPolicyThirdPartyJWT,
+		"The JWT validation policy.")
+)
+
+// ConstructSdsSecretConfigForGatewayListener constructs SDS secret configuration for ingress gateway.
+func ConstructSdsSecretConfigForGatewayListener(name, sdsUdsPath string) *auth.SdsSecretConfig {
 	if name == "" || sdsUdsPath == "" {
 		return nil
 	}
@@ -104,10 +111,41 @@ func ConstructSdsSecretConfigWithCustomUds(name, sdsUdsPath string) *auth.SdsSec
 	}
 }
 
-// ConstructSdsSecretConfig constructs SDS Secret Configuration for workload proxy.
+// ConstructSdsSecretConfig constructs SDS Sececret Configuration for workload proxy.
 func ConstructSdsSecretConfig(name, sdsUdsPath string) *auth.SdsSecretConfig {
 	if name == "" || sdsUdsPath == "" {
 		return nil
+	}
+
+	// Legacy nodeagent based SDS
+	if sdsUdsPath == "unix:/var/run/sds/uds_path" {
+		gRPCConfig := &core.GrpcService_GoogleGrpc{
+			TargetUri:  sdsUdsPath,
+			StatPrefix: SDSStatPrefix,
+			ChannelCredentials: &core.GrpcService_GoogleGrpc_ChannelCredentials{
+				CredentialSpecifier: &core.GrpcService_GoogleGrpc_ChannelCredentials_LocalCredentials{
+					LocalCredentials: &core.GrpcService_GoogleGrpc_GoogleLocalCredentials{},
+				},
+			},
+			CredentialsFactoryName: FileBasedMetadataPlugName,
+			CallCredentials:        ConstructgRPCCallCredentials(K8sSATrustworthyJwtFileName, K8sSAJwtTokenHeaderKey),
+		}
+		return &auth.SdsSecretConfig{
+			Name: name,
+			SdsConfig: &core.ConfigSource{
+				ConfigSourceSpecifier: &core.ConfigSource_ApiConfigSource{
+					ApiConfigSource: &core.ApiConfigSource{
+						ApiType: core.ApiConfigSource_GRPC,
+						GrpcServices: []*core.GrpcService{
+							{
+								TargetSpecifier: &core.GrpcService_GoogleGrpc_{GoogleGrpc: gRPCConfig},
+							},
+						},
+					},
+				},
+				InitialFetchTimeout: features.InitialFetchTimeout,
+			},
+		}
 	}
 
 	return &auth.SdsSecretConfig{

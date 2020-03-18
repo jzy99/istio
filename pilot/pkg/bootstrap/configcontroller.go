@@ -24,10 +24,6 @@ import (
 	"sync"
 	"time"
 
-	"istio.io/istio/pilot/pkg/config/kube/gateway"
-	"istio.io/istio/pilot/pkg/features"
-	"istio.io/istio/pkg/config/schema/collection"
-
 	"google.golang.org/grpc/keepalive"
 
 	"github.com/hashicorp/go-multierror"
@@ -45,6 +41,7 @@ import (
 	configmonitor "istio.io/istio/pilot/pkg/config/monitor"
 	"istio.io/istio/pilot/pkg/model"
 	"istio.io/istio/pilot/pkg/serviceregistry/mcp"
+	"istio.io/istio/pilot/pkg/serviceregistry/synthetic/serviceentry"
 	"istio.io/istio/pkg/config/constants"
 	"istio.io/istio/pkg/config/schema/collections"
 	configz "istio.io/istio/pkg/mcp/configz/client"
@@ -84,9 +81,6 @@ func (s *Server) initConfigController(args *PilotArgs) error {
 			return err
 		}
 		s.ConfigStores = append(s.ConfigStores, configController)
-		if features.EnableServiceApis {
-			s.ConfigStores = append(s.ConfigStores, gateway.NewController(s.kubeClient, configController))
-		}
 	}
 
 	// If running in ingress mode (requires k8s), wrap the config controller.
@@ -172,6 +166,11 @@ func (s *Server) initMCPConfigController(args *PilotArgs) (err error) {
 		}
 		conns = append(conns, conn)
 		s.mcpController(mcpOptions, conn, reporter, &clients, &configStores)
+
+		// create MCP SyntheticServiceEntryController
+		if resourceContains(configSource.SubscribedResources, meshconfig.Resource_SERVICE_REGISTRY) {
+			s.sseMCPController(args, conn, reporter, &clients, &configStores)
+		}
 	}
 
 	s.addStartFunc(func(stop <-chan struct{}) error {
@@ -207,6 +206,15 @@ func (s *Server) initMCPConfigController(args *PilotArgs) (err error) {
 
 	s.ConfigStores = append(s.ConfigStores, configStores...)
 	return nil
+}
+
+func resourceContains(resources []meshconfig.Resource, resource meshconfig.Resource) bool {
+	for _, r := range resources {
+		if r == resource {
+			return true
+		}
+	}
+	return false
 }
 
 func mcpSecurityOptions(ctx context.Context, configSource *meshconfig.ConfigSource) (grpc.DialOption, error) {
@@ -296,24 +304,38 @@ func (s *Server) mcpController(
 	*configStores = append(*configStores, mcpController)
 }
 
+func (s *Server) sseMCPController(args *PilotArgs,
+	conn *grpc.ClientConn,
+	reporter monitoring.Reporter,
+	clients *[]*sink.Client,
+	configStores *[]model.ConfigStoreCache) {
+	clientNodeID := "SSEMCP"
+	sseOptions := &serviceentry.Options{
+		ClusterID:    s.clusterID,
+		DomainSuffix: args.Config.ControllerOptions.DomainSuffix,
+		XDSUpdater:   s.EnvoyXdsServer,
+	}
+	ctl := serviceentry.NewSyntheticServiceEntryController(sseOptions)
+	incrementalSinkOptions := &sink.Options{
+		CollectionOptions: []sink.CollectionOptions{
+			{
+				Name:        collections.IstioNetworkingV1Alpha3SyntheticServiceentries.Name().String(),
+				Incremental: true,
+			},
+		},
+		Updater:  ctl,
+		ID:       clientNodeID,
+		Reporter: reporter,
+	}
+	incSrcClient := mcpapi.NewResourceSourceClient(conn)
+	incMcpClient := sink.NewClient(incSrcClient, incrementalSinkOptions)
+	configz.Register(incMcpClient)
+	*clients = append(*clients, incMcpClient)
+	*configStores = append(*configStores, ctl)
+}
+
 func (s *Server) makeKubeConfigController(args *PilotArgs) (model.ConfigStoreCache, error) {
-	// TODO(howardjohn) allow the collection here to be configurable to allow running with only
-	// Kubernetes APIs.
-	schemas := collection.NewSchemasBuilder()
-	if features.EnableServiceApis {
-		schemas = schemas.
-			MustAdd(collections.K8SServiceApisV1Alpha1Tcproutes).
-			MustAdd(collections.K8SServiceApisV1Alpha1Gatewayclasses).
-			MustAdd(collections.K8SServiceApisV1Alpha1Gateways).
-			MustAdd(collections.K8SServiceApisV1Alpha1Httproutes).
-			MustAdd(collections.K8SServiceApisV1Alpha1Trafficsplits)
-	}
-	for _, schema := range collections.Pilot.All() {
-		if err := schemas.Add(schema); err != nil {
-			return nil, err
-		}
-	}
-	configClient, err := controller.NewClient(args.Config.KubeConfig, "", schemas.Build(),
+	configClient, err := controller.NewClient(args.Config.KubeConfig, "", collections.Pilot,
 		args.Config.ControllerOptions.DomainSuffix, buildLedger(args.Config), args.Revision)
 	if err != nil {
 		return nil, multierror.Prefix(err, "failed to open a config client.")
@@ -347,9 +369,9 @@ func grpcDial(ctx context.Context,
 		Timeout: args.KeepaliveOptions.Timeout,
 	})
 
-	initialWindowSizeOption := grpc.WithInitialWindowSize(int32(args.MCPOptions.InitialWindowSize))
-	initialConnWindowSizeOption := grpc.WithInitialConnWindowSize(int32(args.MCPOptions.InitialConnWindowSize))
-	msgSizeOption := grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(args.MCPOptions.MaxMessageSize))
+	initialWindowSizeOption := grpc.WithInitialWindowSize(int32(args.MCPInitialWindowSize))
+	initialConnWindowSizeOption := grpc.WithInitialConnWindowSize(int32(args.MCPInitialConnWindowSize))
+	msgSizeOption := grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(args.MCPMaxMessageSize))
 
 	return grpc.DialContext(
 		ctx,

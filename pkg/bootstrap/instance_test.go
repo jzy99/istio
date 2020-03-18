@@ -27,13 +27,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/golang/protobuf/ptypes"
-
 	v1 "github.com/census-instrumentation/opencensus-proto/gen-go/trace/v1"
 	core "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2 "github.com/envoyproxy/go-control-plane/envoy/config/bootstrap/v2"
 	tracev2 "github.com/envoyproxy/go-control-plane/envoy/config/trace/v2"
 	matcher "github.com/envoyproxy/go-control-plane/envoy/type/matcher"
+	"github.com/envoyproxy/go-control-plane/pkg/conversion"
 	"github.com/ghodss/yaml"
 	"github.com/gogo/protobuf/proto"
 	"github.com/golang/protobuf/jsonpb"
@@ -41,8 +40,8 @@ import (
 
 	"istio.io/api/annotation"
 	meshconfig "istio.io/api/mesh/v1alpha1"
-	"istio.io/istio/pilot/test/util"
 	"istio.io/istio/pkg/bootstrap/platform"
+	"istio.io/istio/pkg/test/env"
 )
 
 type stats struct {
@@ -75,7 +74,10 @@ var (
 // cp $TOP/out/linux_amd64/release/bootstrap/tracing_lightstep/envoy-rev0.json pkg/bootstrap/testdata/tracing_lightstep_golden.json
 // cp $TOP/out/linux_amd64/release/bootstrap/tracing_zipkin/envoy-rev0.json pkg/bootstrap/testdata/tracing_zipkin_golden.json
 func TestGolden(t *testing.T) {
-	out := "/tmp"
+	out := env.ISTIO_OUT.Value() // defined in the makefile
+	if out == "" {
+		out = "/tmp"
+	}
 	var ts *httptest.Server
 
 	cases := []struct {
@@ -169,9 +171,9 @@ func TestGolden(t *testing.T) {
 			},
 			check: func(got *v2.Bootstrap, t *testing.T) {
 				// nolint: staticcheck
-				cfg := got.Tracing.Http.GetTypedConfig()
+				cfg := got.Tracing.Http.GetConfig()
 				sdMsg := tracev2.OpenCensusConfig{}
-				if err := ptypes.UnmarshalAny(cfg, &sdMsg); err != nil {
+				if err := conversion.StructToMessage(cfg, &sdMsg); err != nil {
 					t.Fatalf("unable to parse: %v %v", cfg, err)
 				}
 
@@ -270,16 +272,17 @@ func TestGolden(t *testing.T) {
 			}
 
 			fn, err := New(Config{
-				Node:    "sidecar~1.2.3.4~foo~bar",
-				Proxy:   proxyConfig,
-				PlatEnv: &fakePlatform{},
+				Node:           "sidecar~1.2.3.4~foo~bar",
+				DNSRefreshRate: "60s",
+				Proxy:          proxyConfig,
+				PlatEnv:        &fakePlatform{},
 				PilotSubjectAltName: []string{
 					"spiffe://cluster.local/ns/istio-system/sa/istio-pilot-service-account"},
-				LocalEnv:          localEnv,
-				NodeIPs:           []string{"10.3.3.3", "10.4.4.4", "10.5.5.5", "10.6.6.6", "10.4.4.4"},
-				SDSUDSPath:        c.sdsUDSPath,
-				OutlierLogPath:    "/dev/stdout",
-				PilotCertProvider: "istiod",
+				LocalEnv:       localEnv,
+				NodeIPs:        []string{"10.3.3.3", "10.4.4.4", "10.5.5.5", "10.6.6.6", "10.4.4.4"},
+				SDSUDSPath:     c.sdsUDSPath,
+				SDSTokenPath:   c.sdsTokenPath,
+				OutlierLogPath: "/dev/stdout",
 			}).CreateFileForEpoch(0)
 			if err != nil {
 				t.Fatal(err)
@@ -306,10 +309,7 @@ func TestGolden(t *testing.T) {
 				return
 			}
 
-			goldenFile := "testdata/" + c.base + "_golden.json"
-			util.RefreshGoldenFile(read, goldenFile, t)
-
-			golden, err := ioutil.ReadFile(goldenFile)
+			golden, err := ioutil.ReadFile("testdata/" + c.base + "_golden.json")
 			if err != nil {
 				golden = []byte{}
 			}

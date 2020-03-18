@@ -76,20 +76,20 @@ type PushContext struct {
 	ServiceByHostnameAndNamespace map[host.Name]map[string]*Service `json:"-"`
 	// ServiceAccounts contains a map of hostname and port to service accounts.
 	ServiceAccounts map[host.Name]map[int][]string `json:"-"`
-	// QuotaSpec has all quota specs
-	QuotaSpec []Config `json:"-"`
-	// QuotaSpecBindings has all quota bindings
-	QuotaSpecBinding []Config `json:"-"`
 
 	// VirtualService related
 	privateVirtualServicesByNamespace map[string][]Config
 	publicVirtualServices             []Config
 
-	// destination rules are of two types:
+	// destination rules are of three types:
 	//  namespaceLocalDestRules: all public/private dest rules pertaining to a service defined in a given namespace
 	//  namespaceExportedDestRules: all public dest rules pertaining to a service defined in a namespace
+	//  allExportedDestRules: all (public) dest rules across all namespaces
+	// We need the allExportedDestRules in addition to namespaceExportedDestRules because we select
+	// the dest rule based on the most specific host match, and not just any destination rule
 	namespaceLocalDestRules    map[string]*processedDestRules
 	namespaceExportedDestRules map[string]*processedDestRules
+	allExportedDestRules       *processedDestRules
 
 	// sidecars for each namespace
 	sidecarsByNamespace map[string][]*SidecarScope
@@ -291,6 +291,11 @@ func (first *PushRequest) Merge(other *PushRequest) *PushRequest {
 		merged.EdsUpdates = nil
 	}
 
+	if !features.ScopePushes.Get() {
+		// If push scoping is not enabled, we do not care about target namespaces
+		return merged
+	}
+
 	// Merge the target namespaces
 	if len(first.NamespacesUpdated) > 0 && len(other.NamespacesUpdated) > 0 {
 		merged.NamespacesUpdated = make(map[string]struct{})
@@ -404,13 +409,6 @@ var (
 		"Number of conflicting tcp listeners with current tcp listener.",
 	)
 
-	// ProxyStatusConflictOutboundListenerTCPOverThrift metric tracks number of
-	// TCP listeners that conflicted with existing Thrift listeners on same port
-	ProxyStatusConflictOutboundListenerTCPOverThrift = monitoring.NewGauge(
-		"pilot_conflict_outbound_listener_tcp_over_current_thrift",
-		"Number of conflicting tcp listeners with current thrift listener.",
-	)
-
 	// ProxyStatusConflictOutboundListenerHTTPOverTCP metric tracks number of
 	// wildcard HTTP listeners that conflicted with existing wildcard TCP listener on same port
 	ProxyStatusConflictOutboundListenerHTTPOverTCP = monitoring.NewGauge(
@@ -429,13 +427,6 @@ var (
 	DuplicatedClusters = monitoring.NewGauge(
 		"pilot_duplicate_envoy_clusters",
 		"Duplicate envoy clusters caused by service entries with same hostname",
-	)
-
-	// DNSNoEndpointClusters tracks dns clusters without endpoints
-	DNSNoEndpointClusters = monitoring.NewGauge(
-		"pilot_dns_cluster_without_endpoints",
-		"DNS clusters without endpoints caused by the endpoint field in "+
-			"STRICT_DNS type cluster is not set or the corresponding subset cannot select any endpoint",
 	)
 
 	// ProxyStatusClusterNoInstances tracks clusters (services) without workloads.
@@ -503,13 +494,17 @@ func NewPushContext() *PushContext {
 		privateVirtualServicesByNamespace: map[string][]Config{},
 		namespaceLocalDestRules:           map[string]*processedDestRules{},
 		namespaceExportedDestRules:        map[string]*processedDestRules{},
-		sidecarsByNamespace:               map[string][]*SidecarScope{},
-		envoyFiltersByNamespace:           map[string][]*EnvoyFilterWrapper{},
-		gatewaysByNamespace:               map[string][]Config{},
-		allGateways:                       []Config{},
-		ServiceByHostnameAndNamespace:     map[host.Name]map[string]*Service{},
-		ProxyStatus:                       map[string]map[string]ProxyPushStatus{},
-		ServiceAccounts:                   map[host.Name]map[int][]string{},
+		allExportedDestRules: &processedDestRules{
+			hosts:    make([]host.Name, 0),
+			destRule: map[host.Name]*combinedDestinationRule{},
+		},
+		sidecarsByNamespace:           map[string][]*SidecarScope{},
+		envoyFiltersByNamespace:       map[string][]*EnvoyFilterWrapper{},
+		gatewaysByNamespace:           map[string][]Config{},
+		allGateways:                   []Config{},
+		ServiceByHostnameAndNamespace: map[host.Name]map[string]*Service{},
+		ProxyStatus:                   map[string]map[string]ProxyPushStatus{},
+		ServiceAccounts:               map[host.Name]map[int][]string{},
 		AuthnPolicies: processedAuthnPolicies{
 			policies: map[host.Name][]*authnPolicyByPort{},
 		},
@@ -588,12 +583,6 @@ func (ps *PushContext) GatewayServices(proxy *Proxy) []*Service {
 	gateways := map[string]bool{}
 	// host set.
 	hostsFromGateways := map[string]struct{}{}
-
-	// MergedGateway will be nil when there are no configs in the
-	// system during initial installation.
-	if proxy.MergedGateway == nil {
-		return nil
-	}
 
 	for _, gw := range proxy.MergedGateway.GatewayNameForServer {
 		gateways[gw] = true
@@ -759,6 +748,14 @@ func (ps *PushContext) GetAllSidecarScopes() map[string][]*SidecarScope {
 
 // DestinationRule returns a destination rule for a service name in a given domain.
 func (ps *PushContext) DestinationRule(proxy *Proxy, service *Service) *Config {
+	// FIXME: this code should be removed once the EDS issue is fixed
+	if proxy == nil {
+		if hostname, ok := MostSpecificHostMatch(service.Hostname, ps.allExportedDestRules.hosts); ok {
+			return ps.allExportedDestRules.destRule[hostname].config
+		}
+		return nil
+	}
+
 	// If proxy has a sidecar scope that is user supplied, then get the destination rules from the sidecar scope
 	// sidecarScope.config is nil if there is no sidecar scope for the namespace
 	if proxy.SidecarScope != nil && proxy.Type == SidecarProxy {
@@ -912,14 +909,6 @@ func (ps *PushContext) createNewContext(env *Environment) error {
 		return err
 	}
 
-	if err := ps.initQuotaSpecs(env); err != nil {
-		return err
-	}
-
-	if err := ps.initQuotaSpecBindings(env); err != nil {
-		return err
-	}
-
 	// Must be initialized in the end
 	if err := ps.initSidecarScopes(env); err != nil {
 		return err
@@ -933,11 +922,12 @@ func (ps *PushContext) updateContext(
 	pushReq *PushRequest) error {
 
 	var servicesChanged, virtualServicesChanged, destinationRulesChanged, gatewayChanged,
-		authnChanged, authzChanged, envoyFiltersChanged, sidecarsChanged, quotasChanged bool
+		authnChanged, authzChanged, envoyFiltersChanged, sidecarsChanged bool
 
 	for k := range pushReq.ConfigTypesUpdated {
 		switch k {
-		case collections.IstioNetworkingV1Alpha3Serviceentries.Resource().GroupVersionKind():
+		case collections.IstioNetworkingV1Alpha3Serviceentries.Resource().GroupVersionKind(),
+			collections.IstioNetworkingV1Alpha3SyntheticServiceentries.Resource().GroupVersionKind():
 			servicesChanged = true
 		case collections.IstioNetworkingV1Alpha3Destinationrules.Resource().GroupVersionKind():
 			destinationRulesChanged = true
@@ -960,16 +950,6 @@ func (ps *PushContext) updateContext(
 			collections.IstioSecurityV1Beta1Requestauthentications.Resource().GroupVersionKind(),
 			collections.IstioSecurityV1Beta1Peerauthentications.Resource().GroupVersionKind():
 			authnChanged = true
-		case collections.IstioMixerV1ConfigClientQuotaspecbindings.Resource().GroupVersionKind(),
-			collections.IstioMixerV1ConfigClientQuotaspecs.Resource().GroupVersionKind():
-			quotasChanged = true
-		case collections.K8SServiceApisV1Alpha1Trafficsplits.Resource().GroupVersionKind(),
-			collections.K8SServiceApisV1Alpha1Httproutes.Resource().GroupVersionKind(),
-			collections.K8SServiceApisV1Alpha1Tcproutes.Resource().GroupVersionKind(),
-			collections.K8SServiceApisV1Alpha1Gateways.Resource().GroupVersionKind(),
-			collections.K8SServiceApisV1Alpha1Gatewayclasses.Resource().GroupVersionKind():
-			virtualServicesChanged = true
-			gatewayChanged = true
 		}
 	}
 
@@ -1001,6 +981,7 @@ func (ps *PushContext) updateContext(
 	} else {
 		ps.namespaceLocalDestRules = oldPushContext.namespaceLocalDestRules
 		ps.namespaceExportedDestRules = oldPushContext.namespaceExportedDestRules
+		ps.allExportedDestRules = oldPushContext.allExportedDestRules
 	}
 
 	if authnChanged {
@@ -1036,18 +1017,6 @@ func (ps *PushContext) updateContext(
 	} else {
 		ps.gatewaysByNamespace = oldPushContext.gatewaysByNamespace
 		ps.allGateways = oldPushContext.allGateways
-	}
-
-	if quotasChanged {
-		if err := ps.initQuotaSpecs(env); err != nil {
-			return err
-		}
-		if err := ps.initQuotaSpecBindings(env); err != nil {
-			return err
-		}
-	} else {
-		ps.QuotaSpec = oldPushContext.QuotaSpec
-		ps.QuotaSpecBinding = oldPushContext.QuotaSpecBinding
 	}
 
 	// Must be initialized in the end
@@ -1415,16 +1384,7 @@ func (ps *PushContext) initDestinationRules(env *Environment) error {
 	if err != nil {
 		return err
 	}
-
-	// values returned from ConfigStore.List are immutable.
-	// Therefore, we make a copy
-	destRules := make([]Config, len(configs))
-
-	for i := range destRules {
-		destRules[i] = configs[i].DeepCopy()
-	}
-
-	ps.SetDestinationRules(destRules)
+	ps.SetDestinationRules(configs)
 	return nil
 }
 
@@ -1482,6 +1442,10 @@ func (ps *PushContext) SetDestinationRules(configs []Config) {
 	sortConfigByCreationTime(configs)
 	namespaceLocalDestRules := make(map[string]*processedDestRules)
 	namespaceExportedDestRules := make(map[string]*processedDestRules)
+	allExportedDestRules := &processedDestRules{
+		hosts:    make([]host.Name, 0),
+		destRule: map[host.Name]*combinedDestinationRule{},
+	}
 
 	for i := range configs {
 		rule := configs[i].Spec.(*networking.DestinationRule)
@@ -1534,6 +1498,11 @@ func (ps *PushContext) SetDestinationRules(configs []Config) {
 				namespaceExportedDestRules[configs[i].Namespace].hosts,
 				namespaceExportedDestRules[configs[i].Namespace].destRule,
 				configs[i])
+
+			// Merge this destination rule with any public dest rule for the same host
+			// across all namespaces. If there are no duplicates, the dest rule will be added to the list
+			allExportedDestRules.hosts = ps.combineSingleDestinationRule(
+				allExportedDestRules.hosts, allExportedDestRules.destRule, configs[i])
 		}
 	}
 
@@ -1545,9 +1514,11 @@ func (ps *PushContext) SetDestinationRules(configs []Config) {
 	for ns := range namespaceExportedDestRules {
 		sort.Sort(host.Names(namespaceExportedDestRules[ns].hosts))
 	}
+	sort.Sort(host.Names(allExportedDestRules.hosts))
 
 	ps.namespaceLocalDestRules = namespaceLocalDestRules
 	ps.namespaceExportedDestRules = namespaceExportedDestRules
+	ps.allExportedDestRules = allExportedDestRules
 }
 
 func (ps *PushContext) initAuthorizationPolicies(env *Environment) error {
@@ -1593,12 +1564,7 @@ func (ps *PushContext) EnvoyFilters(proxy *Proxy) *EnvoyFilterWrapper {
 		// if there is no workload selector, the config applies to all workloads
 		// if there is a workload selector, check for matching workload labels
 		for _, efw := range ps.envoyFiltersByNamespace[ps.Mesh.RootNamespace] {
-			var workloadLabels labels.Collection
-			// This should never happen except in tests.
-			if proxy.Metadata != nil && len(proxy.Metadata.Labels) > 0 {
-				workloadLabels = labels.Collection{proxy.Metadata.Labels}
-			}
-			if efw.workloadSelector == nil || workloadLabels.IsSupersetOf(efw.workloadSelector) {
+			if efw.workloadSelector == nil || proxy.WorkloadLabels.IsSupersetOf(efw.workloadSelector) {
 				matchedEnvoyFilters = append(matchedEnvoyFilters, efw)
 			}
 		}
@@ -1607,12 +1573,7 @@ func (ps *PushContext) EnvoyFilters(proxy *Proxy) *EnvoyFilterWrapper {
 	// To prevent duplicate envoyfilters in case root namespace equals proxy's namespace
 	if proxy.ConfigNamespace != ps.Mesh.RootNamespace {
 		for _, efw := range ps.envoyFiltersByNamespace[proxy.ConfigNamespace] {
-			var workloadLabels labels.Collection
-			// This should never happen except in tests.
-			if proxy.Metadata != nil && len(proxy.Metadata.Labels) > 0 {
-				workloadLabels = labels.Collection{proxy.Metadata.Labels}
-			}
-			if efw.workloadSelector == nil || workloadLabels.IsSupersetOf(efw.workloadSelector) {
+			if efw.workloadSelector == nil || proxy.WorkloadLabels.IsSupersetOf(efw.workloadSelector) {
 				matchedEnvoyFilters = append(matchedEnvoyFilters, efw)
 			}
 		}
@@ -1684,12 +1645,7 @@ func (ps *PushContext) mergeGateways(proxy *Proxy) *MergedGateway {
 			out = append(out, cfg)
 		} else {
 			gatewaySelector := labels.Instance(gw.GetSelector())
-			var workloadLabels labels.Collection
-			// This should never happen except in tests.
-			if proxy.Metadata != nil && len(proxy.Metadata.Labels) > 0 {
-				workloadLabels = labels.Collection{proxy.Metadata.Labels}
-			}
-			if workloadLabels.IsSupersetOf(gatewaySelector) {
+			if proxy.WorkloadLabels.IsSupersetOf(gatewaySelector) {
 				out = append(out, cfg)
 			}
 		}
@@ -1730,18 +1686,6 @@ func (ps *PushContext) initMeshNetworks() {
 
 		ps.networkGateways[network] = gateways
 	}
-}
-
-func (ps *PushContext) initQuotaSpecs(env *Environment) error {
-	var err error
-	ps.QuotaSpec, err = env.List(collections.IstioMixerV1ConfigClientQuotaspecs.Resource().GroupVersionKind(), NamespaceAll)
-	return err
-}
-
-func (ps *PushContext) initQuotaSpecBindings(env *Environment) error {
-	var err error
-	ps.QuotaSpecBinding, err = env.List(collections.IstioMixerV1ConfigClientQuotaspecbindings.Resource().GroupVersionKind(), NamespaceAll)
-	return err
 }
 
 func getNetworkRegistres(network *meshconfig.Network) []string {
@@ -1787,10 +1731,6 @@ func (ps *PushContext) NetworkGatewaysByNetwork(network string) []*Gateway {
 	}
 
 	return nil
-}
-
-func (ps *PushContext) QuotaSpecByDestination(instance *ServiceInstance) []Config {
-	return filterQuotaSpecsByDestination(instance, ps.QuotaSpecBinding, ps.QuotaSpec)
 }
 
 // BestEffortInferServiceMTLSMode infers the mTLS mode for the service + port from all authentication

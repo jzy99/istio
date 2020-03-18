@@ -176,17 +176,6 @@ var testGrid = []testCase{
 		},
 	},
 	{
-		name: "mtlsAnalyzerPeerAuthenticationDisablesAnalyzer",
-		inputFiles: []string{
-			"testdata/mtls-meshpolicy.yaml",
-			"testdata/peerauthentication-crd.yaml",
-		},
-		analyzer: &auth.MTLSAnalyzer{},
-		expected: []message{
-			// no messages, this test case verifies no false positives
-		},
-	},
-	{
 		name:       "mtlsAnalyzerWithPermissiveMeshPolicy",
 		inputFiles: []string{"testdata/mtls-meshpolicy-permissive.yaml"},
 		analyzer:   &auth.MTLSAnalyzer{},
@@ -232,7 +221,6 @@ var testGrid = []testCase{
 			{msg.Deprecated, "EnvoyFilter istio-multicluster-egressgateway.istio-system"},
 			{msg.Deprecated, "EnvoyFilter istio-multicluster-egressgateway.istio-system"}, // Duplicate, because resource has two problems
 			{msg.Deprecated, "ServiceRoleBinding bind-mongodb-viewer.default"},
-			{msg.Deprecated, "Policy policy-with-jwt.deprecation-policy"},
 		},
 	},
 	{
@@ -427,23 +415,6 @@ var testGrid = []testCase{
 			// no messages, this test case verifies no false positives
 		},
 	},
-	{
-		name: "regexes",
-		inputFiles: []string{
-			"testdata/virtualservice_regexes.yaml",
-		},
-		analyzer: &virtualservice.RegexAnalyzer{},
-		expected: []message{
-			{msg.InvalidRegexp, "VirtualService bad-match"},
-			{msg.InvalidRegexp, "VirtualService ecma-not-v2"},
-			{msg.InvalidRegexp, "VirtualService lots-of-regexes"},
-			{msg.InvalidRegexp, "VirtualService lots-of-regexes"},
-			{msg.InvalidRegexp, "VirtualService lots-of-regexes"},
-			{msg.InvalidRegexp, "VirtualService lots-of-regexes"},
-			{msg.InvalidRegexp, "VirtualService lots-of-regexes"},
-			{msg.InvalidRegexp, "VirtualService lots-of-regexes"},
-		},
-	},
 }
 
 // regex patterns for analyzer names that should be explicitly ignored for testing
@@ -541,10 +512,6 @@ func TestAnalyzersHaveUniqueNames(t *testing.T) {
 	for _, a := range All() {
 		n := a.Metadata().Name
 		_, ok := existingNames[n]
-		// TODO (Nino-K): remove this condition once metadata is clean up
-		if ok == true && n == "schema.ValidationAnalyzer.ServiceEntry" {
-			continue
-		}
 		g.Expect(ok).To(BeFalse(), fmt.Sprintf("Analyzer name %q is used more than once. "+
 			"Analyzers should be registered in All() exactly once and have a unique name.", n))
 

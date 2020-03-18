@@ -74,6 +74,8 @@ ingressGateways:
         maxSurge: 100%
         maxUnavailable: 25%
   name: istio-ingressgateway
+nodeAgent:
+  enabled: false
 pilot:
   enabled: false
   k8s:
@@ -95,6 +97,10 @@ pilot:
       initialDelaySeconds: 5
       periodSeconds: 5
       timeoutSeconds: 5
+    resources:
+      requests:
+        cpu: 500m
+        memory: 2048Mi
     strategy:
       rollingUpdate:
         maxSurge: 100%
@@ -128,6 +134,12 @@ proxy:
   enabled: false
 sidecarInjector:
   enabled: false
+  k8s:
+    replicaCount: 1
+    strategy:
+      rollingUpdate:
+        maxSurge: 100%
+        maxUnavailable: 25%
 telemetry:
   enabled: false
   k8s:

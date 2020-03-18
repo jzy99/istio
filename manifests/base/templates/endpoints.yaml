@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: istio-pilot
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 subsets:
 - addresses:
   - ip: {{ .Values.global.remotePilotAddress }}
@@ -13,6 +13,12 @@ subsets:
     name: grpc-xds # direct
   - port: 15011
     name: https-xds # mTLS or non-mTLS depending on auth setting
+  - port: 8080
+    name: http-legacy-discovery # direct
+  - port: 15012
+    name: tcp-istiod
+  - port: 15014
+    name: http-monitoring
   {{- else }}
 apiVersion: v1
 kind: Endpoints
@@ -33,7 +39,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: istio-policy
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 subsets:
 - addresses:
   - ip: {{ .Values.global.remotePolicyAddress }}
@@ -51,7 +57,7 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: istio-telemetry
-  namespace: {{ .Values.global.istioNamespace }}
+  namespace: {{ .Release.Namespace }}
 subsets:
 - addresses:
   - ip: {{ .Values.global.remoteTelemetryAddress }}

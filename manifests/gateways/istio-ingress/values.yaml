@@ -4,6 +4,22 @@
 gateways:
   istio-ingressgateway:
     name: istio-ingressgateway
+    #
+    # Secret Discovery Service (SDS) configuration for ingress gateway.
+    #
+    sds:
+      # If true, ingress gateway fetches credentials from SDS server to handle TLS connections.
+      enabled: false
+      # SDS server that watches kubernetes secrets and provisions credentials to ingress gateway.
+      # This server runs in the same pod as ingress gateway.
+      image: node-agent-k8s
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 2000m
+          memory: 1024Mi
     labels:
       app: istio-ingressgateway
       istio: ingressgateway
@@ -16,10 +32,9 @@ gateways:
       targetPort: 15020
       name: status-port
     - port: 80
-      targetPort: 8080
+      targetPort: 80
       name: http2
     - port: 443
-      targetPort: 8443
       name: https
     - port: 15029
       targetPort: 15029
@@ -181,6 +196,3 @@ gateways:
     # "security" and value "S1".
     podAntiAffinityLabelSelector: []
     podAntiAffinityTermLabelSelector: []
-
-# Revision is set as 'version' label and part of the resource names when installing multiple control planes.
-revision: ""

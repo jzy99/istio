@@ -28,19 +28,12 @@ import (
 )
 
 type testGroup []struct {
-	desc string
-	// Small changes to the input profile produce large changes to the golden output
-	// files. This makes it difficult to spot meaningful changes in pull requests.
-	// By default we hide these changes to make developers life's a bit easier. However,
-	// it is still useful to sometimes override this behavior and show the full diff.
-	// When this flag is true, use an alternative file suffix that is not hidden by
-	// default github in pull requests.
-	showOutputFileInPullRequest bool
-	flags                       string
-	noInput                     bool
-	outputDir                   string
-	diffSelect                  string
-	diffIgnore                  string
+	desc       string
+	flags      string
+	noInput    bool
+	outputDir  string
+	diffSelect string
+	diffIgnore string
 }
 
 func TestManifestGenerateFlags(t *testing.T) {
@@ -51,9 +44,8 @@ func TestManifestGenerateFlags(t *testing.T) {
 			desc: "all_off",
 		},
 		{
-			desc:                        "all_on",
-			diffIgnore:                  "ConfigMap:*:istio",
-			showOutputFileInPullRequest: true,
+			desc:       "all_on",
+			diffIgnore: "ConfigMap:*:istio",
 		},
 		{
 			desc:       "prometheus",
@@ -69,11 +61,11 @@ func TestManifestGenerateFlags(t *testing.T) {
 		},
 		{
 			desc:       "component_hub_tag",
-			diffSelect: "Deployment:*:*",
+			diffIgnore: "ConfigMap:*:istio",
 		},
 		{
 			desc:       "flag_set_values",
-			diffSelect: "Deployment:*:istio-ingressgateway,ConfigMap:*:istio-sidecar-injector",
+			diffIgnore: "ConfigMap:*:istio",
 			flags:      "-s values.global.proxy.image=myproxy --set values.global.proxy.includeIPRanges=172.30.0.0/16,172.21.0.0/16",
 			noInput:    true,
 		},
@@ -84,26 +76,24 @@ func TestManifestGenerateFlags(t *testing.T) {
 			noInput:    true,
 		},
 		{
-			desc:       "flag_override_values",
-			diffSelect: "Deployment:*:istiod",
-			flags:      "-s tag=my-tag",
+			desc:  "flag_override_values",
+			flags: "-s tag=my-tag",
 		},
 		{
-			desc:       "flag_output",
-			flags:      "-o " + flagOutputDir,
-			diffSelect: "Deployment:*:istiod",
-			outputDir:  flagOutputDir,
+			desc:      "flag_output",
+			flags:     "-o " + flagOutputDir,
+			outputDir: flagOutputDir,
 		},
 		{
 			desc:       "flag_output_set_values",
-			diffSelect: "Deployment:*:istio-ingressgateway",
+			diffIgnore: "ConfigMap:*:istio",
 			flags:      "-s values.global.proxy.image=mynewproxy -o " + flagOutputValuesDir,
 			outputDir:  flagOutputValuesDir,
 			noInput:    true,
 		},
 		{
 			desc:       "flag_force",
-			diffSelect: "no:resources:selected",
+			diffIgnore: "ConfigMap:*:istio",
 			flags:      "--force",
 		},
 		{
@@ -120,12 +110,13 @@ func TestManifestGenerateFlags(t *testing.T) {
 func TestManifestGeneratePilot(t *testing.T) {
 	runTestGroup(t, testGroup{
 		{
-			desc:       "pilot_default",
+			desc: "pilot_default",
+			// TODO: remove istio ConfigMap (istio/istio#16828)
 			diffIgnore: "CustomResourceDefinition:*:*,ConfigMap:*:istio",
 		},
 		{
 			desc:       "pilot_k8s_settings",
-			diffSelect: "Deployment:*:istiod,HorizontalPodAutoscaler:*:istiod",
+			diffIgnore: "CustomResourceDefinition:*:*,ConfigMap:*:istio",
 		},
 		{
 			desc:       "pilot_override_values",
@@ -175,8 +166,6 @@ func TestManifestGenerateGateway(t *testing.T) {
 	})
 }
 
-// TestManifestGenerateHelmValues tests whether enabling components through the values passthrough interface works as
-// expected i.e. without requiring enablement also in IstioOperator API.
 func TestManifestGenerateHelmValues(t *testing.T) {
 	runTestGroup(t, testGroup{
 		{
@@ -218,7 +207,7 @@ func TestMultiICPSFiles(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		outPath := filepath.Join(testDataDir, "output/telemetry_override_values"+goldenFileSuffixHideChangesInReview)
+		outPath := filepath.Join(testDataDir, "output/telemetry_override_values.yaml")
 
 		want, err := readFile(outPath)
 		if err != nil {
@@ -272,11 +261,7 @@ func runTestGroup(t *testing.T, tests testGroup) {
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			inPath := filepath.Join(testDataDir, "input", tt.desc+".yaml")
-			outputSuffix := goldenFileSuffixHideChangesInReview
-			if tt.showOutputFileInPullRequest {
-				outputSuffix = goldenFileSuffixShowChangesInReview
-			}
-			outPath := filepath.Join(testDataDir, "output", tt.desc+outputSuffix)
+			outPath := filepath.Join(testDataDir, "output", tt.desc+".yaml")
 
 			var filenames []string
 			if !tt.noInput {
@@ -288,21 +273,21 @@ func runTestGroup(t *testing.T, tests testGroup) {
 				t.Fatal(err)
 			}
 
-			if tt.outputDir != "" {
-				got, err = util.ReadFilesWithFilter(tt.outputDir, func(fileName string) bool {
-					return strings.HasSuffix(fileName, ".yaml")
-				})
-				if err != nil {
-					t.Fatal(err)
-				}
-			}
-
 			diffSelect := "*:*:*"
 			if tt.diffSelect != "" {
 				diffSelect = tt.diffSelect
 				got, err = compare.SelectAndIgnoreFromOutput(got, diffSelect, "")
 				if err != nil {
 					t.Errorf("error selecting from output manifest: %v", err)
+				}
+			}
+
+			if tt.outputDir != "" {
+				got, err = util.ReadFilesWithFilter(tt.outputDir, func(fileName string) bool {
+					return strings.HasSuffix(fileName, ".yaml")
+				})
+				if err != nil {
+					t.Fatal(err)
 				}
 			}
 

@@ -15,7 +15,7 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/interceptionMode: REDIRECT
-        sidecar.istio.io/status: '{"version":"","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-podinfo","istio-token","istiod-ca-cert"],"imagePullSecrets":null}'
+        sidecar.istio.io/status: '{"version":"","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","podinfo","istio-token","istiod-ca-cert"],"imagePullSecrets":null}'
         traffic.sidecar.istio.io/excludeInboundPorts: "123"
         traffic.sidecar.istio.io/includeInboundPorts: "80"
         traffic.sidecar.istio.io/includeOutboundIPRanges: '*'
@@ -39,10 +39,32 @@ spec:
         - sidecar
         - --domain
         - $(POD_NAMESPACE).svc.cluster.local
+        - --configPath
+        - /etc/istio/proxy
+        - --binaryPath
+        - /usr/local/bin/envoy
         - --serviceCluster
         - hello.$(POD_NAMESPACE)
+        - --drainDuration
+        - 45s
+        - --parentShutdownDuration
+        - 1m0s
+        - --discoveryAddress
+        - istio-pilot:15010
+        - --zipkinAddress
+        - ""
         - --proxyLogLevel=warning
         - --proxyComponentLogLevel=misc:error
+        - --connectTimeout
+        - 1s
+        - --proxyAdminPort
+        - "15000"
+        - --controlPlaneAuthPolicy
+        - NONE
+        - --dnsRefreshRate
+        - 300s
+        - --statusPort
+        - "123"
         - --trust-domain=cluster.local
         - --controlPlaneBootstrap=false
         - --concurrency
@@ -53,7 +75,7 @@ spec:
         - name: PILOT_CERT_PROVIDER
           value: istiod
         - name: CA_ADDR
-          value: istiod.istio-system.svc:15012
+          value: istio-pilot.istio-system.svc:15012
         - name: POD_NAME
           valueFrom:
             fieldRef:
@@ -74,9 +96,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        - name: MESH_CONFIG
-          value: |
-            {}
         - name: ISTIO_META_POD_PORTS
           value: |-
             [
@@ -103,10 +122,8 @@ spec:
           value: kubernetes://apis/apps/v1/namespaces/default/deployments/hello
         - name: ISTIO_META_MESH_ID
           value: cluster.local
-        - name: ISTIO_KUBE_APP_PROBERS
-          value: '{}'
         image: gcr.io/istio-testing/proxyv2:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: istio-proxy
         ports:
         - containerPort: 15090
@@ -116,7 +133,7 @@ spec:
           failureThreshold: 300
           httpGet:
             path: /healthz/ready
-            port: 15090
+            port: 123
           initialDelaySeconds: 100
           periodSeconds: 200
         resources:
@@ -144,9 +161,9 @@ spec:
         - mountPath: /var/run/secrets/tokens
           name: istio-token
         - mountPath: /etc/istio/pod
-          name: istio-podinfo
+          name: podinfo
       initContainers:
-      - args:
+      - command:
         - istio-iptables
         - -p
         - "15001"
@@ -167,7 +184,7 @@ spec:
         - -k
         - net1
         image: gcr.io/istio-testing/proxyv2:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: istio-init
         resources:
           limits:
@@ -201,7 +218,7 @@ spec:
           - fieldRef:
               fieldPath: metadata.annotations
             path: annotations
-        name: istio-podinfo
+        name: podinfo
       - name: istio-token
         projected:
           sources:

@@ -24,10 +24,11 @@ import (
 
 	"istio.io/istio/galley/testdatasets/validation"
 	"istio.io/istio/pkg/config/schema"
-	"istio.io/istio/pkg/test/framework/resource/environment"
 	"istio.io/istio/pkg/test/util/yml"
 
 	"istio.io/istio/pkg/test/framework"
+	"istio.io/istio/pkg/test/framework/components/environment"
+	"istio.io/istio/pkg/test/framework/components/environment/kube"
 	"istio.io/istio/pkg/test/framework/components/namespace"
 )
 
@@ -101,11 +102,12 @@ func TestValidation(t *testing.T) {
 						t.Fatalf("Unable to load test data: %v", err)
 					}
 
+					env := fctx.Environment().(*kube.Environment)
 					ns := namespace.NewOrFail(t, fctx, namespace.Config{
 						Prefix: "validation",
 					})
 
-					_, err = cluster.ApplyContentsDryRun(ns.Name(), ym)
+					err = env.ApplyContentsDryRun(ns.Name(), ym)
 
 					switch {
 					case err != nil && d.isValid():
@@ -122,8 +124,8 @@ func TestValidation(t *testing.T) {
 						}
 					}
 
-					_, wetRunErr := cluster.ApplyContents(ns.Name(), ym)
-					defer func() { _ = cluster.DeleteContents(ns.Name(), ym) }()
+					wetRunErr := env.ApplyContents(ns.Name(), ym)
+					defer func() { _ = env.DeleteContents(ns.Name(), ym) }()
 
 					if err != nil && wetRunErr == nil {
 						t.Fatalf("dry run returned no errors, but wet run returned: %v", wetRunErr)
@@ -148,6 +150,7 @@ var ignoredCRDs = []string{
 	"apiextensions.k8s.io/v1beta1/CustomResourceDefinition",
 	"apps/v1/Deployment",
 	"extensions/v1beta1/Ingress",
+	"networking.istio.io/v1alpha3/SyntheticServiceEntry",
 }
 
 func TestEnsureNoMissingCRDs(t *testing.T) {
@@ -176,16 +179,6 @@ func TestEnsureNoMissingCRDs(t *testing.T) {
 				"networking.istio.io/v1beta1/Sidecar",
 			} {
 				recognized[gvk] = struct{}{}
-			}
-			// These CRDs are validated outside of Istio
-			for _, gvk := range []string{
-				"networking.x.k8s.io/v1alpha1/Gateway",
-				"networking.x.k8s.io/v1alpha1/GatewayClass",
-				"networking.x.k8s.io/v1alpha1/HTTPRoute",
-				"networking.x.k8s.io/v1alpha1/TcpRoute",
-				"networking.x.k8s.io/v1alpha1/TrafficSplit",
-			} {
-				delete(recognized, gvk)
 			}
 
 			testedValid := make(map[string]struct{})

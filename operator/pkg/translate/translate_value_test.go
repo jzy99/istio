@@ -180,6 +180,8 @@ mixer:
     enabled: true
 pilot:
   enabled: true
+nodeagent:
+  enabled: true
 istiocoredns:
   enabled: true
 gateways:
@@ -209,6 +211,10 @@ components:
     enabled: true
   pilot:
     enabled: true
+  nodeAgent:
+    enabled: true
+  sidecarInjector:
+    enabled: true
   ingressGateways:
   - name: istio-ingressgateway
     enabled: true
@@ -229,8 +235,6 @@ values:
     policyNamespace: istio-policy
     telemetryNamespace: istio-telemetry
   certmanager:
-    enabled: true
-  sidecarInjectorWebhook:
     enabled: true
 `,
 		},

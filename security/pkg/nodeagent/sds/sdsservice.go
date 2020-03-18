@@ -256,8 +256,8 @@ func (s *sdsservice) StreamSecrets(stream sds.SecretDiscoveryService_StreamSecre
 			if con.conID == "" {
 				// first request
 				if discReq.Node == nil || len(discReq.Node.Id) == 0 {
-					sdsServiceLog.Errorf("%s close connection. Missing Node ID in the first request",
-						sdsLogPrefix(resourceName))
+					sdsServiceLog.Errorf("Resource: %s close connection. Missing Node ID in the first request",
+						resourceName)
 					return fmt.Errorf("missing Node ID in the first request")
 				}
 				con.conID = constructConnectionID(discReq.Node.Id)
@@ -269,7 +269,7 @@ func (s *sdsservice) StreamSecrets(stream sds.SecretDiscoveryService_StreamSecre
 				}
 				addConn(key, con)
 				firstRequestFlag = true
-				sdsServiceLog.Infof("%s new connection", sdsLogPrefix(resourceName))
+				sdsServiceLog.Infof("%s new connection", sdsLogPrefix(con.conID, resourceName))
 			}
 			conID := con.conID
 
@@ -278,7 +278,7 @@ func (s *sdsservice) StreamSecrets(stream sds.SecretDiscoveryService_StreamSecre
 			con.mutex.Unlock()
 			defer recycleConnection(conID, resourceName)
 
-			conIDresourceNamePrefix := sdsLogPrefix(resourceName)
+			conIDresourceNamePrefix := sdsLogPrefix(conID, resourceName)
 			if s.localJWT {
 				// Running in-process, no need to pass the token from envoy to agent as in-context - use the file
 				tok, err := ioutil.ReadFile(s.jwtPath)
@@ -358,6 +358,7 @@ func (s *sdsservice) StreamSecrets(stream sds.SecretDiscoveryService_StreamSecre
 					conIDresourceNamePrefix, discReq.Node.Id, err)
 				return err
 			}
+			sdsServiceLog.Infof("%s pushed secret", conIDresourceNamePrefix)
 		case <-con.pushChannel:
 			con.mutex.RLock()
 			proxyID := con.proxyID
@@ -365,7 +366,7 @@ func (s *sdsservice) StreamSecrets(stream sds.SecretDiscoveryService_StreamSecre
 			resourceName := con.ResourceName
 			secret := con.secret
 			con.mutex.RUnlock()
-			conIDresourceNamePrefix := sdsLogPrefix(resourceName)
+			conIDresourceNamePrefix := sdsLogPrefix(conID, resourceName)
 			sdsServiceLog.Debugf("%s received push channel request for proxy %q", conIDresourceNamePrefix, proxyID)
 
 			if secret == nil {
@@ -432,7 +433,7 @@ func (s *sdsservice) FetchSecrets(ctx context.Context, discReq *xdsapi.Discovery
 			connID, err)
 		return nil, err
 	}
-	return sdsDiscoveryResponse(secret, resourceName)
+	return sdsDiscoveryResponse(secret, connID, resourceName)
 }
 
 func (s *sdsservice) Stop() {
@@ -470,7 +471,7 @@ func clearStaledClients() {
 // NotifyProxy sends notification to proxy about secret update,
 // SDS will close streaming connection if secret is nil.
 func NotifyProxy(connKey cache.ConnKey, secret *model.SecretItem) error {
-	conIDresourceNamePrefix := sdsLogPrefix(connKey.ResourceName)
+	conIDresourceNamePrefix := sdsLogPrefix(connKey.ConnectionID, connKey.ResourceName)
 	sdsClientsMutex.Lock()
 	conn := sdsClients[connKey]
 	if conn == nil {
@@ -556,7 +557,7 @@ func getCredentialToken(ctx context.Context) (string, error) {
 func addConn(k cache.ConnKey, conn *sdsConnection) {
 	sdsClientsMutex.Lock()
 	defer sdsClientsMutex.Unlock()
-	conIDresourceNamePrefix := sdsLogPrefix(k.ResourceName)
+	conIDresourceNamePrefix := sdsLogPrefix(k.ConnectionID, k.ResourceName)
 	sdsServiceLog.Debugf("%s add a new connection", conIDresourceNamePrefix)
 	sdsClients[k] = conn
 }
@@ -568,11 +569,12 @@ func pushSDS(con *sdsConnection) error {
 
 	con.mutex.Lock()
 	defer con.mutex.Unlock()
+	conID := con.conID
 	secret := con.secret
 	resourceName := con.ResourceName
 	sdsPushTime := con.sdsPushTime
 
-	conIDresourceNamePrefix := sdsLogPrefix(resourceName)
+	conIDresourceNamePrefix := sdsLogPrefix(conID, resourceName)
 	if !sdsPushTime.IsZero() {
 		sdsServiceLog.Errorf("%s skip multiple push, last push finishes at %s and is "+
 			"waiting for next SDS request", conIDresourceNamePrefix, sdsPushTime.String())
@@ -583,7 +585,7 @@ func pushSDS(con *sdsConnection) error {
 		return fmt.Errorf("sdsConnection %v passed into pushSDS() contains nil secret", con)
 	}
 
-	response, err := sdsDiscoveryResponse(secret, resourceName)
+	response, err := sdsDiscoveryResponse(secret, conID, resourceName)
 	if err != nil {
 		sdsServiceLog.Errorf("%s failed to construct response for SDS push: %v", conIDresourceNamePrefix, err)
 		return err
@@ -611,11 +613,11 @@ func pushSDS(con *sdsConnection) error {
 	return nil
 }
 
-func sdsDiscoveryResponse(s *model.SecretItem, resourceName string) (*xdsapi.DiscoveryResponse, error) {
+func sdsDiscoveryResponse(s *model.SecretItem, conID, resourceName string) (*xdsapi.DiscoveryResponse, error) {
 	resp := &xdsapi.DiscoveryResponse{
 		TypeUrl: SecretType,
 	}
-	conIDresourceNamePrefix := sdsLogPrefix(resourceName)
+	conIDresourceNamePrefix := sdsLogPrefix(conID, resourceName)
 	if s == nil {
 		sdsServiceLog.Warnf("%s got nil secret for proxy", conIDresourceNamePrefix)
 		return resp, nil
@@ -678,7 +680,7 @@ func receiveThread(con *sdsConnection, reqChannel chan *xdsapi.DiscoveryRequest,
 		if err != nil {
 			// Add read lock to avoid race condition with set con.conID in StreamSecrets.
 			con.mutex.RLock()
-			conIDresourceNamePrefix := sdsLogPrefix(con.ResourceName)
+			conIDresourceNamePrefix := sdsLogPrefix(con.conID, con.ResourceName)
 			con.mutex.RUnlock()
 			if status.Code(err) == codes.Canceled || err == io.EOF {
 				sdsServiceLog.Infof("%s connection is terminated: %v", conIDresourceNamePrefix, err)
@@ -698,7 +700,7 @@ func constructConnectionID(proxyID string) string {
 }
 
 // sdsLogPrefix returns a unified log prefix.
-func sdsLogPrefix(resourceName string) string {
-	lPrefix := fmt.Sprintf("resource:%s", resourceName)
+func sdsLogPrefix(conID, resourceName string) string {
+	lPrefix := fmt.Sprintf("node:%s resource:%s", conID, resourceName)
 	return lPrefix
 }

@@ -106,10 +106,16 @@ func NewCoreComponent(cn name.ComponentName, opts *Options) IstioComponent {
 		component = NewPilotComponent(opts)
 	case name.GalleyComponentName:
 		component = NewGalleyComponent(opts)
+	case name.SidecarInjectorComponentName:
+		component = NewSidecarInjectorComponent(opts)
 	case name.PolicyComponentName:
 		component = NewPolicyComponent(opts)
 	case name.TelemetryComponentName:
 		component = NewTelemetryComponent(opts)
+	case name.CitadelComponentName:
+		component = NewCitadelComponent(opts)
+	case name.NodeAgentComponentName:
+		component = NewNodeAgentComponent(opts)
 	case name.CNIComponentName:
 		component = NewCNIComponent(opts)
 	default:
@@ -279,6 +285,98 @@ func (c *PilotComponent) Enabled() bool {
 	return isCoreComponentEnabled(c.CommonComponentFields)
 }
 
+// CitadelComponent is the pilot component.
+type CitadelComponent struct {
+	*CommonComponentFields
+}
+
+// NewCitadelComponent creates a new PilotComponent and returns a pointer to it.
+func NewCitadelComponent(opts *Options) *CitadelComponent {
+	cn := name.CitadelComponentName
+	return &CitadelComponent{
+		&CommonComponentFields{
+			Options:       opts,
+			componentName: cn,
+		},
+	}
+}
+
+// Run implements the IstioComponent interface.
+func (c *CitadelComponent) Run() error {
+	return runComponent(c.CommonComponentFields)
+}
+
+// RenderManifest implements the IstioComponent interface.
+func (c *CitadelComponent) RenderManifest() (string, error) {
+	return renderManifest(c, c.CommonComponentFields)
+}
+
+// ComponentName implements the IstioComponent interface.
+func (c *CitadelComponent) ComponentName() name.ComponentName {
+	return c.CommonComponentFields.componentName
+}
+
+// ResourceName implements the IstioComponent interface.
+func (c *CitadelComponent) ResourceName() string {
+	return c.CommonComponentFields.resourceName
+}
+
+// Namespace implements the IstioComponent interface.
+func (c *CitadelComponent) Namespace() string {
+	return c.CommonComponentFields.Namespace
+}
+
+// Enabled implements the IstioComponent interface.
+func (c *CitadelComponent) Enabled() bool {
+	return isCoreComponentEnabled(c.CommonComponentFields)
+}
+
+// NodeAgentComponent is the pilot component.
+type NodeAgentComponent struct {
+	*CommonComponentFields
+}
+
+// NewNodeAgentComponent creates a new PilotComponent and returns a pointer to it.
+func NewNodeAgentComponent(opts *Options) *NodeAgentComponent {
+	cn := name.NodeAgentComponentName
+	return &NodeAgentComponent{
+		&CommonComponentFields{
+			Options:       opts,
+			componentName: cn,
+		},
+	}
+}
+
+// Run implements the IstioComponent interface.
+func (c *NodeAgentComponent) Run() error {
+	return runComponent(c.CommonComponentFields)
+}
+
+// RenderManifest implements the IstioComponent interface.
+func (c *NodeAgentComponent) RenderManifest() (string, error) {
+	return renderManifest(c, c.CommonComponentFields)
+}
+
+// ComponentName implements the IstioComponent interface.
+func (c *NodeAgentComponent) ComponentName() name.ComponentName {
+	return c.CommonComponentFields.componentName
+}
+
+// ResourceName implements the IstioComponent interface.
+func (c *NodeAgentComponent) ResourceName() string {
+	return c.CommonComponentFields.resourceName
+}
+
+// Namespace implements the IstioComponent interface.
+func (c *NodeAgentComponent) Namespace() string {
+	return c.CommonComponentFields.Namespace
+}
+
+// Enabled implements the IstioComponent interface.
+func (c *NodeAgentComponent) Enabled() bool {
+	return isCoreComponentEnabled(c.CommonComponentFields)
+}
+
 // PolicyComponent is the pilot component.
 type PolicyComponent struct {
 	*CommonComponentFields
@@ -414,6 +512,52 @@ func (c *GalleyComponent) Namespace() string {
 
 // Enabled implements the IstioComponent interface.
 func (c *GalleyComponent) Enabled() bool {
+	return isCoreComponentEnabled(c.CommonComponentFields)
+}
+
+// SidecarInjectorComponent is the pilot component.
+type SidecarInjectorComponent struct {
+	*CommonComponentFields
+}
+
+// NewSidecarInjectorComponent creates a new PilotComponent and returns a pointer to it.
+func NewSidecarInjectorComponent(opts *Options) *SidecarInjectorComponent {
+	cn := name.SidecarInjectorComponentName
+	return &SidecarInjectorComponent{
+		&CommonComponentFields{
+			Options:       opts,
+			componentName: cn,
+		},
+	}
+}
+
+// Run implements the IstioComponent interface.
+func (c *SidecarInjectorComponent) Run() error {
+	return runComponent(c.CommonComponentFields)
+}
+
+// RenderManifest implements the IstioComponent interface.
+func (c *SidecarInjectorComponent) RenderManifest() (string, error) {
+	return renderManifest(c, c.CommonComponentFields)
+}
+
+// ComponentName implements the IstioComponent interface.
+func (c *SidecarInjectorComponent) ComponentName() name.ComponentName {
+	return c.CommonComponentFields.componentName
+}
+
+// ResourceName implements the IstioComponent interface.
+func (c *SidecarInjectorComponent) ResourceName() string {
+	return c.CommonComponentFields.resourceName
+}
+
+// Namespace implements the IstioComponent interface.
+func (c *SidecarInjectorComponent) Namespace() string {
+	return c.CommonComponentFields.Namespace
+}
+
+// Enabled implements the IstioComponent interface.
+func (c *SidecarInjectorComponent) Enabled() bool {
 	return isCoreComponentEnabled(c.CommonComponentFields)
 }
 

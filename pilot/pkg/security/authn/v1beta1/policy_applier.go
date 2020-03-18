@@ -27,12 +27,9 @@ import (
 
 	authn_alpha_api "istio.io/api/authentication/v1alpha1"
 	"istio.io/api/security/v1beta1"
-	"istio.io/pkg/log"
-	istiolog "istio.io/pkg/log"
-
 	"istio.io/istio/pilot/pkg/features"
 	"istio.io/istio/pilot/pkg/model"
-	"istio.io/istio/pilot/pkg/networking"
+	"istio.io/istio/pilot/pkg/networking/plugin"
 	"istio.io/istio/pilot/pkg/networking/util"
 	"istio.io/istio/pilot/pkg/security/authn"
 	authn_utils "istio.io/istio/pilot/pkg/security/authn/utils"
@@ -41,6 +38,8 @@ import (
 	authn_alpha "istio.io/istio/security/proto/authentication/v1alpha1"
 	authn_filter_policy "istio.io/istio/security/proto/authentication/v1alpha1"
 	authn_filter "istio.io/istio/security/proto/envoy/config/filter/http/authn/v2alpha1"
+	"istio.io/pkg/log"
+	istiolog "istio.io/pkg/log"
 )
 
 var (
@@ -63,10 +62,10 @@ type v1beta1PolicyApplier struct {
 	alphaApplier       authn.PolicyApplier
 }
 
-func (a *v1beta1PolicyApplier) JwtFilter() *http_conn.HttpFilter {
+func (a *v1beta1PolicyApplier) JwtFilter(isXDSMarshalingToAnyEnabled bool) *http_conn.HttpFilter {
 	if len(a.processedJwtRules) == 0 {
 		authnLog.Debug("JwtFilter: RequestAuthentication (beta policy) not found, fallback to alpha if available")
-		return a.alphaApplier.JwtFilter()
+		return a.alphaApplier.JwtFilter(isXDSMarshalingToAnyEnabled)
 	}
 
 	filterConfigProto := convertToEnvoyJwtConfig(a.processedJwtRules)
@@ -74,10 +73,15 @@ func (a *v1beta1PolicyApplier) JwtFilter() *http_conn.HttpFilter {
 	if filterConfigProto == nil {
 		return nil
 	}
-	return &http_conn.HttpFilter{
-		Name:       authn_model.EnvoyJwtFilterName,
-		ConfigType: &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)},
+	out := &http_conn.HttpFilter{
+		Name: authn_model.EnvoyJwtFilterName,
 	}
+	if isXDSMarshalingToAnyEnabled {
+		out.ConfigType = &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)}
+	} else {
+		out.ConfigType = &http_conn.HttpFilter_Config{Config: util.MessageToStruct(filterConfigProto)}
+	}
+	return out
 }
 
 func (a *v1beta1PolicyApplier) shouldUseAlphaMtlsPolicy() bool {
@@ -168,7 +172,7 @@ func (a *v1beta1PolicyApplier) setAuthnFilterForRequestAuthn(config *authn_filte
 // - If PeerAuthentication is used, it overwrite the settings for peer principal validation and extraction based on the new API.
 // - If RequestAuthentication is used, it overwrite the settings for request principal validation and extraction based on the new API.
 // - If RequestAuthentication is used, principal binding is always set to ORIGIN.
-func (a *v1beta1PolicyApplier) AuthNFilter(proxyType model.NodeType, port uint32) *http_conn.HttpFilter {
+func (a *v1beta1PolicyApplier) AuthNFilter(proxyType model.NodeType, port uint32, isXDSMarshalingToAnyEnabled bool) *http_conn.HttpFilter {
 	// Use the authn filter config from alpha API as base.
 	filterConfigProto := alpha_applier.AuthNFilterConfigForBackwarding(a.alphaApplier, proxyType)
 
@@ -180,14 +184,18 @@ func (a *v1beta1PolicyApplier) AuthNFilter(proxyType model.NodeType, port uint32
 	if filterConfigProto == nil {
 		return nil
 	}
-
-	return &http_conn.HttpFilter{
-		Name:       authn_model.AuthnFilterName,
-		ConfigType: &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)},
+	out := &http_conn.HttpFilter{
+		Name: authn_model.AuthnFilterName,
 	}
+	if isXDSMarshalingToAnyEnabled {
+		out.ConfigType = &http_conn.HttpFilter_TypedConfig{TypedConfig: util.MessageToAny(filterConfigProto)}
+	} else {
+		out.ConfigType = &http_conn.HttpFilter_Config{Config: util.MessageToStruct(filterConfigProto)}
+	}
+	return out
 }
 
-func (a *v1beta1PolicyApplier) InboundFilterChain(endpointPort uint32, sdsUdsPath string, node *model.Proxy) []networking.FilterChain {
+func (a *v1beta1PolicyApplier) InboundFilterChain(endpointPort uint32, sdsUdsPath string, node *model.Proxy) []plugin.FilterChain {
 	// If beta mTLS policy (PeerAuthentication) is not used for this workload, fallback to alpha policy.
 	if a.shouldUseAlphaMtlsPolicy() {
 		authnLog.Debugf("InboundFilterChain [%v:%d]: fallback to alpha policy applier", node.ID, endpointPort)

@@ -383,7 +383,7 @@ func validateServerPort(port *networking.Port) (errs error) {
 		return appendErrors(errs, fmt.Errorf("port is required"))
 	}
 	if protocol.Parse(port.Protocol) == protocol.Unsupported {
-		errs = appendErrors(errs, fmt.Errorf("invalid protocol %q, supported protocols are HTTP, HTTP2, GRPC, GRPC-WEB, MONGO, REDIS, MYSQL, TCP", port.Protocol))
+		errs = appendErrors(errs, fmt.Errorf("invalid protocol %q, supported protocols are HTTP, HTTP2, GRPC, MONGO, REDIS, MYSQL, TCP", port.Protocol))
 	}
 	if port.Number > 0 {
 		errs = appendErrors(errs, ValidatePort(int(port.Number)))
@@ -718,16 +718,6 @@ var ValidateSidecar = registerValidateFunc("ValidateSidecar",
 					}
 				}
 			}
-
-			errs = appendErrors(errs, validateSidecarIngressTLS(i.InboundTls))
-
-			// If inbound TLS defined, the port must be either TLS or HTTPS
-			if i.InboundTls != nil {
-				p := protocol.Parse(i.Port.Protocol)
-				if !p.IsTLS() {
-					errs = appendErrors(errs, fmt.Errorf("sidecar: ingress cannot have TLS settings for non HTTPS/TLS ports"))
-				}
-			}
 		}
 
 		portMap = make(map[uint32]struct{})
@@ -773,52 +763,10 @@ var ValidateSidecar = registerValidateFunc("ValidateSidecar",
 					errs = appendErrors(errs, validateNamespaceSlashWildcardHostname(hostname, false))
 				}
 			}
-
 		}
-
-		errs = appendErrors(errs, validateSidecarOutboundTrafficPolicy(rule.OutboundTrafficPolicy))
 
 		return
 	})
-
-func validateSidecarIngressTLS(tls *networking.Server_TLSOptions) (errs error) {
-	if tls == nil {
-		return nil
-	}
-
-	if tls.HttpsRedirect {
-		errs = appendErrors(errs, fmt.Errorf("sidecar: inbound tls must not set 'httpsRedirect'"))
-	}
-
-	if tls.Mode == networking.Server_TLSOptions_AUTO_PASSTHROUGH ||
-		tls.Mode == networking.Server_TLSOptions_ISTIO_MUTUAL {
-		errs = appendErrors(errs, fmt.Errorf("sidecar: inbound tls mode must not be %s", tls.Mode.String()))
-	}
-	errs = appendErrors(errs, validateTLSOptions(tls))
-	return
-}
-
-func validateSidecarOutboundTrafficPolicy(tp *networking.OutboundTrafficPolicy) (errs error) {
-	if tp == nil {
-		return
-	}
-	mode := tp.GetMode()
-	if tp.EgressProxy != nil {
-		if mode != networking.OutboundTrafficPolicy_ALLOW_ANY {
-			errs = appendErrors(errs, fmt.Errorf("sidecar: egress_proxy must be set only with ALLOW_ANY outbound_traffic_policy mode"))
-			return
-		}
-
-		errs = appendErrors(errs, ValidateFQDN(tp.EgressProxy.GetHost()))
-
-		if tp.EgressProxy.Port == nil {
-			errs = appendErrors(errs, fmt.Errorf("sidecar: egress_proxy port must be non-nil"))
-			return
-		}
-		errs = appendErrors(errs, validateDestination(tp.EgressProxy))
-	}
-	return
-}
 
 func validateSidecarEgressPortBindAndCaptureMode(port *networking.Port, bind string,
 	captureMode networking.CaptureMode) (errs error) {
@@ -1655,6 +1603,7 @@ var ValidateAuthorizationPolicy = registerValidateFunc("ValidateAuthorizationPol
 					}
 					errs = appendErrors(errs, security.ValidateIPs(from.Source.GetIpBlocks()))
 					errs = appendErrors(errs, security.ValidateIPs(from.Source.GetNotIpBlocks()))
+					errs = appendErrors(errs, security.ValidateIPs(from.Source.GetNotIpBlocks()))
 					errs = appendErrors(errs, security.CheckEmptyValues("Principals", src.Principals))
 					errs = appendErrors(errs, security.CheckEmptyValues("RequestPrincipals", src.RequestPrincipals))
 					errs = appendErrors(errs, security.CheckEmptyValues("Namespaces", src.Namespaces))
@@ -1678,6 +1627,7 @@ var ValidateAuthorizationPolicy = registerValidateFunc("ValidateAuthorizationPol
 						errs = appendErrors(errs, fmt.Errorf("`to.operation` must not be empty, found at rule %d in %s.%s", i, name, namespace))
 					}
 					errs = appendErrors(errs, security.ValidatePorts(to.Operation.GetPorts()))
+					errs = appendErrors(errs, security.ValidatePorts(to.Operation.GetNotPorts()))
 					errs = appendErrors(errs, security.ValidatePorts(to.Operation.GetNotPorts()))
 					errs = appendErrors(errs, security.CheckEmptyValues("Ports", op.Ports))
 					errs = appendErrors(errs, security.CheckEmptyValues("Methods", op.Methods))
@@ -1759,11 +1709,6 @@ func validateJwtRule(rule *security_beta.JWTRule) (errs error) {
 		}
 	}
 	return
-}
-
-// ValidateAccept always returns true
-func ValidateAccept(_, _ string, _ proto.Message) error {
-	return nil
 }
 
 // ValidatePeerAuthentication checks that peer authentication spec is well-formed.
@@ -2265,12 +2210,6 @@ func validateHTTPRoute(http *networking.HTTPRoute) (errs error) {
 		}
 	}
 
-	if http.MirrorPercentage != nil {
-		if value := http.MirrorPercentage.GetValue(); value > 100 {
-			errs = appendErrors(errs, fmt.Errorf("mirror_percentage must have a max value of 100 (it has %f)", value))
-		}
-	}
-
 	errs = appendErrors(errs, validateDestination(http.Mirror))
 	errs = appendErrors(errs, validateHTTPRedirect(http.Redirect))
 	errs = appendErrors(errs, validateHTTPRetry(http.Retries))
@@ -2546,7 +2485,7 @@ func validateHTTPRetry(retries *networking.HTTPRetry) (errs error) {
 		errs = multierror.Append(errs, errors.New("attempts cannot be negative"))
 	}
 
-	if retries.Attempts == 0 && (retries.PerTryTimeout != nil || retries.RetryOn != "" || retries.RetryRemoteLocalities != nil) {
+	if retries.Attempts == 0 && (retries.PerTryTimeout != nil || retries.RetryOn != "") {
 		errs = appendErrors(errs, errors.New("http retry policy configured when attempts are set to 0 (disabled)"))
 	}
 
@@ -2587,6 +2526,12 @@ func validateHTTPRewrite(rewrite *networking.HTTPRewrite) error {
 	}
 	return nil
 }
+
+// ValidateSyntheticServiceEntry validates a synthetic service entry.
+var ValidateSyntheticServiceEntry = registerValidateFunc("ValidateSyntheticServiceEntry",
+	func(_, _ string, config proto.Message) (errs error) {
+		return ValidateServiceEntry("", "", config)
+	})
 
 // ValidateServiceEntry validates a service entry.
 var ValidateServiceEntry = registerValidateFunc("ValidateServiceEntry",

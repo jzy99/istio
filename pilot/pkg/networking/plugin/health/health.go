@@ -159,3 +159,8 @@ func (Plugin) OnInboundPassthrough(in *plugin.InputParams, mutable *networking.M
 func (Plugin) OnInboundPassthroughFilterChains(in *plugin.InputParams) []networking.FilterChain {
 	return nil
 }
+
+// OnInboundPassthroughFilterChains is called for plugin to update the pass through filter chain.
+func (Plugin) OnInboundPassthroughFilterChains(in *plugin.InputParams) []plugin.FilterChain {
+	return nil
+}

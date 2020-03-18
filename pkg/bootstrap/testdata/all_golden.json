@@ -2,9 +2,8 @@
   "node": {
     "id": "sidecar~1.2.3.4~foo~bar",
     "cluster": "istio-proxy",
-    "locality": {
-    },
-    "metadata": {"EXCHANGE_KEYS":"NAME,NAMESPACE,INSTANCE_IPS,LABELS,OWNER,PLATFORM_METADATA,WORKLOAD_NAME,CANONICAL_TELEMETRY_SERVICE,MESH_ID,SERVICE_ACCOUNT","INSTANCE_IPS":"10.3.3.3,10.4.4.4,10.5.5.5,10.6.6.6"}
+    "locality": {},
+    "metadata": {"INSTANCE_IPS":"10.3.3.3,10.4.4.4,10.5.5.5,10.6.6.6","EXCHANGE_KEYS":"NAME,NAMESPACE,INSTANCE_IPS,LABELS,OWNER,PLATFORM_METADATA,WORKLOAD_NAME,CANONICAL_TELEMETRY_SERVICE,MESH_ID,SERVICE_ACCOUNT"}
   },
   "stats_config": {
     "use_all_default_tags": false,
@@ -18,8 +17,8 @@
         "regex": "^tcp\\.((.*?)\\.)\\w+?$"
       },
       {
-          "regex": "(response_code=\\.=(.+?);\\.;)|_rq(_(\\.d{3}))$",
-          "tag_name": "response_code"
+        "tag_name": "response_code",
+        "regex": "(response_code=\\.=(.+?);\\.;)|_rq(_(\\.d{3}))$",
       },
       {
         "tag_name": "response_code_class",
@@ -42,108 +41,104 @@
         "regex": "^mongo\\.(.+?)\\.(collection|cmd|cx_|op_|delays_|decoding_)(.*?)$"
       },
       {
-          "regex": "(reporter=\\.=(.+?);\\.;)",
-          "tag_name": "reporter"
+        "regex": "(reporter=\\.=(.+?);\\.;)",
+        "tag_name": "reporter"
       },
       {
-          "regex": "(source_namespace=\\.=(.+?);\\.;)",
-          "tag_name": "source_namespace"
+        "regex": "(source_namespace=\\.=(.+?);\\.;)",
+        "tag_name": "source_namespace"
       },
       {
-          "regex": "(source_workload=\\.=(.+?);\\.;)",
-          "tag_name": "source_workload"
+        "regex": "(source_workload=\\.=(.+?);\\.;)",
+        "tag_name": "source_workload"
       },
       {
-          "regex": "(source_workload_namespace=\\.=(.+?);\\.;)",
-          "tag_name": "source_workload_namespace"
+        "regex": "(source_workload_namespace=\\.=(.+?);\\.;)",
+        "tag_name": "source_workload_namespace"
       },
       {
-          "regex": "(source_principal=\\.=(.+?);\\.;)",
-          "tag_name": "source_principal"
+        "regex": "(source_principal=\\.=(.+?);\\.;)",
+        "tag_name": "source_principal"
       },
       {
-          "regex": "(source_app=\\.=(.+?);\\.;)",
-          "tag_name": "source_app"
+        "regex": "(source_app=\\.=(.+?);\\.;)",
+        "tag_name": "source_app"
       },
       {
-          "regex": "(source_version=\\.=(.+?);\\.;)",
-          "tag_name": "source_version"
+        "regex": "(source_version=\\.=(.+?);\\.;)",
+        "tag_name": "source_version"
       },
       {
-          "regex": "(destination_namespace=\\.=(.+?);\\.;)",
-          "tag_name": "destination_namespace"
+        "regex": "(destination_namespace=\\.=(.+?);\\.;)",
+        "tag_name": "destination_namespace"
       },
       {
-          "regex": "(destination_workload=\\.=(.+?);\\.;)",
-          "tag_name": "destination_workload"
+        "regex": "(destination_workload=\\.=(.+?);\\.;)",
+        "tag_name": "destination_workload"
       },
       {
-          "regex": "(destination_workload_namespace=\\.=(.+?);\\.;)",
-          "tag_name": "destination_workload_namespace"
+        "regex": "(destination_workload_namespace=\\.=(.+?);\\.;)",
+        "tag_name": "destination_workload_namespace"
       },
       {
-          "regex": "(destination_principal=\\.=(.+?);\\.;)",
-          "tag_name": "destination_principal"
+        "regex": "(destination_principal=\\.=(.+?);\\.;)",
+        "tag_name": "destination_principal"
       },
       {
-          "regex": "(destination_app=\\.=(.+?);\\.;)",
-          "tag_name": "destination_app"
+        "regex": "(destination_app=\\.=(.+?);\\.;)",
+        "tag_name": "destination_app"
       },
       {
-          "regex": "(destination_version=\\.=(.+?);\\.;)",
-          "tag_name": "destination_version"
+        "regex": "(destination_version=\\.=(.+?);\\.;)",
+        "tag_name": "destination_version"
       },
       {
-          "regex": "(destination_service=\\.=(.+?);\\.;)",
-          "tag_name": "destination_service"
+        "regex": "(destination_service=\\.=(.+?);\\.;)",
+        "tag_name": "destination_service"
       },
       {
-          "regex": "(destination_service_name=\\.=(.+?);\\.;)",
-          "tag_name": "destination_service_name"
+        "regex": "(destination_service_name=\\.=(.+?);\\.;)",
+        "tag_name": "destination_service_name"
       },
       {
-          "regex": "(destination_service_namespace=\\.=(.+?);\\.;)",
-          "tag_name": "destination_service_namespace"
+        "regex": "(destination_service_namespace=\\.=(.+?);\\.;)",
+        "tag_name": "destination_service_namespace"
       },
       {
-        "regex": "(destination_port=\\.=(.+?);\\.;)",
-        "tag_name": "destination_port"
+        "regex": "(request_protocol=\\.=(.+?);\\.;)",
+        "tag_name": "request_protocol"
       },
       {
-          "regex": "(request_protocol=\\.=(.+?);\\.;)",
-          "tag_name": "request_protocol"
+        "regex": "(response_flags=\\.=(.+?);\\.;)",
+        "tag_name": "response_flags"
       },
       {
-          "regex": "(response_flags=\\.=(.+?);\\.;)",
-          "tag_name": "response_flags"
+        "regex": "(grpc_response_status=\\.=(.*?);\\.;)",
+        "tag_name": "grpc_response_status"
       },
       {
-          "regex": "(grpc_response_status=\\.=(.*?);\\.;)",
-          "tag_name": "grpc_response_status"
+        "regex": "(connection_security_policy=\\.=(.+?);\\.;)",
+        "tag_name": "connection_security_policy"
       },
       {
-          "regex": "(connection_security_policy=\\.=(.+?);\\.;)",
-          "tag_name": "connection_security_policy"
+        "regex": "(permissive_response_code=\\.=(.+?);\\.;)",
+        "tag_name": "permissive_response_code"
       },
       {
-          "regex": "(permissive_response_code=\\.=(.+?);\\.;)",
-          "tag_name": "permissive_response_code"
+        "regex": "(permissive_response_policyid=\\.=(.+?);\\.;)",
+        "tag_name": "permissive_response_policyid"
       },
       {
-          "regex": "(permissive_response_policyid=\\.=(.+?);\\.;)",
-          "tag_name": "permissive_response_policyid"
+        "regex": "(cache\\.(.+?)\\.)",
+        "tag_name": "cache"
       },
       {
-          "regex": "(cache\\.(.+?)\\.)",
-          "tag_name": "cache"
+        "regex": "(component\\.(.+?)\\.)",
+        "tag_name": "component"
       },
       {
-          "regex": "(component\\.(.+?)\\.)",
-          "tag_name": "component"
-      },
-      {
-          "regex": "(tag\\.(.+?);\\.)",
-          "tag_name": "tag"
+        "regex": "(tag\\.(.+?)\\.)",
+        "tag_name": "tag"
       },
       {
           "regex": "(source_canonical_service=\\.=(.+?);\\.;)",
@@ -164,41 +159,34 @@
     ],
     "stats_matcher": {
       "inclusion_list": {
-        "patterns": [
+        "patterns": [{"prefix": "reporter="},
           {
-          "prefix": "reporter="
+            "prefix": "cluster_manager"
           },
           {
-          "prefix": "component"
+            "prefix": "listener_manager"
           },
           {
-          "prefix": "cluster_manager"
+            "prefix": "http_mixer_filter"
           },
           {
-          "prefix": "listener_manager"
+            "prefix": "tcp_mixer_filter"
           },
           {
-          "prefix": "http_mixer_filter"
+            "prefix": "server"
           },
           {
-          "prefix": "tcp_mixer_filter"
+            "prefix": "cluster.xds-grpc"
           },
           {
-          "prefix": "server"
-          },
-          {
-          "prefix": "cluster.xds-grpc"
-          },
-          {
-          "suffix": "ssl_context_update_by_sds"
-          },
+            "suffix": "ssl_context_update_by_sds"
+          }
         ]
       }
     }
   },
   "admin": {
     "access_log_path": "/dev/null",
-    "profile_path": "/tmp/bootstrap/all/envoy.prof",
     "address": {
       "socket_address": {
         "address": "127.0.0.1",
@@ -231,117 +219,55 @@
         "type": "STATIC",
         "connect_timeout": "0.250s",
         "lb_policy": "ROUND_ROBIN",
-        "load_assignment": {
-          "cluster_name": "prometheus_stats",
-          "endpoints": [{
-            "lb_endpoints": [{
-              "endpoint": {
-                "address":{
-                  "socket_address": {
-                    "protocol": "TCP",
-                    "address": "127.0.0.1",
-                    "port_value": 15005
-                  }
-                }
-              }
-            }]
-          }]
-        }
-      },
-      {
-        "name": "agent",
-        "type": "STATIC",
-        "connect_timeout": "0.250s",
-        "lb_policy": "ROUND_ROBIN",
-        "load_assignment": {
-          "cluster_name": "prometheus_stats",
-          "endpoints": [{
-            "lb_endpoints": [{
-              "endpoint": {
-                "address":{
-                  "socket_address": {
-                    "protocol": "TCP",
-                    "address": "127.0.0.1",
-                    "port_value": 15020
-                  }
-                }
-              }
-            }]
-          }]
-        }
-      },
-      {
-        "name": "sds-grpc",
-        "type": "STATIC",
-        "http2_protocol_options": {},
-        "connect_timeout": "7s",
-        "lb_policy": "ROUND_ROBIN",
-        "load_assignment": {
-          "cluster_name": "sds-grpc",
-          "endpoints": [{
-            "lb_endpoints": [{
-              "endpoint": {
-                "address":{
-                  "pipe": {
-                    "path": "/etc/istio/proxy/SDS"
-                  }
-                }
-              }
-            }]
-          }]
-        }
+        "hosts": [
+          {
+            "socket_address": {
+              "protocol": "TCP",
+              "address": "127.0.0.1",
+              "port_value": 15005
+            }
+          }
+        ]
       },
       {
         "name": "xds-grpc",
         "type": "STRICT_DNS",
-        "respect_dns_ttl": true,
+        "dns_refresh_rate": "60s",
         "dns_lookup_family": "V4_ONLY",
         "connect_timeout": "7s",
         "lb_policy": "ROUND_ROBIN",
-        "transport_socket": {
-          "name": "envoy.transport_sockets.tls",
-          "typed_config": {
-            "@type": "type.googleapis.com/envoy.api.v2.auth.UpstreamTlsContext",
-            "common_tls_context": {
-              "alpn_protocols": [
-                "h2"
-              ],
-              "tls_certificate_sds_secret_configs": [
-                {
-                  "name": "default",
-                  "sds_config": {
-                    "api_config_source": {
-                      "api_type": "GRPC",
-                      "grpc_services": [
-                        {
-                          "envoy_grpc": { "cluster_name": "sds-grpc" }
-                        }
-                      ]
-                    }
-                  }
-                }
-              ],
-              "validation_context": {
-                "trusted_ca": {
-                  "filename": "./var/run/secrets/istio/root-cert.pem"
+        
+        "tls_context": {
+          "common_tls_context": {
+            "alpn_protocols": [
+              "h2"
+            ],
+            "tls_certificates": [
+              {
+                "certificate_chain": {
+                  "filename": "/etc/certs/cert-chain.pem"
                 },
-                "verify_subject_alt_name": ["spiffe://cluster.local/ns/istio-system/sa/istio-pilot-service-account"]
+                "private_key": {
+                  "filename": "/etc/certs/key.pem"
+                }
               }
+            ],
+            "validation_context": {
+              "trusted_ca": {
+                "filename": "/etc/certs/root-cert.pem"
+              },
+              "verify_subject_alt_name": [
+                "spiffe://cluster.local/ns/istio-system/sa/istio-pilot-service-account"
+              ]
             }
           }
         },
-        "load_assignment": {
-          "cluster_name": "xds-grpc",
-          "endpoints": [{
-            "lb_endpoints": [{
-              "endpoint": {
-                "address":{
-                  "socket_address": {"address": "mypilot", "port_value": 15011}
-                }
-              }
-            }]
-          }]
-        },
+        
+        "hosts": [
+          {
+            "socket_address": {"address": "mypilot", "port_value": 15011}
+          }
+        ],
         "circuit_breakers": {
           "thresholds": [
             {
@@ -371,76 +297,69 @@
       {
         "name": "zipkin",
         "type": "STRICT_DNS",
-        "respect_dns_ttl": true,
+        "dns_refresh_rate": "60s",
         "dns_lookup_family": "V4_ONLY",
         "connect_timeout": "1s",
         "lb_policy": "ROUND_ROBIN",
-        "load_assignment": {
-          "cluster_name": "zipkin",
-          "endpoints": [{
-            "lb_endpoints": [{
-              "endpoint": {
-                "address":{
-                  "socket_address": {"address": "localhost", "port_value": 6000}
-                }
-              }
-            }]
-          }]
-        }
+        "hosts": [
+          {
+            "socket_address": {"address": "localhost", "port_value": 6000}
+          }
+        ]
       }
-      
-      
+
       ,
       {
         "name": "envoy_metrics_service",
         "type": "STRICT_DNS",
-      
-        "tls_context": {"common_tls_context":{"tls_certificates":[{"certificate_chain":{"filename":"/etc/istio/ms/client.pem"},"private_key":{"filename":"/etc/istio/ms/key.pem"}}],"validation_context":{"trusted_ca":{"filename":"/etc/istio/ms/ca.pem"}},"alpn_protocols":["h2"]}},
-      
-      
-        "respect_dns_ttl": true,
+        "dns_refresh_rate": "60s",
         "dns_lookup_family": "V4_ONLY",
         "connect_timeout": "1s",
         "lb_policy": "ROUND_ROBIN",
         "http2_protocol_options": {},
-        "load_assignment": {
-          "cluster_name": "envoy_metrics_service",
-          "endpoints": [{
-            "lb_endpoints": [{
-              "endpoint": {
-                "address":{
-                  "socket_address": {"address": "metrics-service", "port_value": 15000}
+        "hosts": [
+          {
+            "socket_address": {"address": "metrics-service", "port_value": 15000}
+          }
+        ],
+        "tls_context":{ 
+          "common_tls_context":{ 
+             "alpn_protocols":[ 
+                "h2"
+             ],
+             "tls_certificates":[ 
+                { 
+                   "certificate_chain":{ 
+                      "filename":"/etc/istio/ms/client.pem"
+                   },
+                   "private_key":{ 
+                      "filename":"/etc/istio/ms/key.pem"
+                   }
                 }
-              }
-            }]
-          }]
-        }
+             ],
+             "validation_context":{ 
+                "trusted_ca":{ 
+                   "filename":"/etc/istio/ms/ca.pem"
+                }
+             }
+          }
+       }
       }
-      
-      
+
       ,
       {
         "name": "envoy_accesslog_service",
         "type": "STRICT_DNS",
-      
-      
-        "respect_dns_ttl": true,
+        "dns_refresh_rate": "60s",
         "dns_lookup_family": "V4_ONLY",
         "connect_timeout": "1s",
         "lb_policy": "ROUND_ROBIN",
         "http2_protocol_options": {},
-        "load_assignment": {
-          "cluster_name": "envoy_accesslog_service",
-          "endpoints": [{
-            "lb_endpoints": [{
-              "endpoint": {
-                "address":{
-                  "socket_address": {"address": "accesslog-service", "port_value": 15000}
-                }
-              }
-            }]
-          }]
-        }
+        "hosts": [
+           {
+             "socket_address": {"address": "accesslog-service", "port_value": 15000}
+           }
+        ]
       }
       
     ],
@@ -458,8 +377,7 @@
             "filters": [
               {
                 "name": "envoy.http_connection_manager",
-                "typed_config": {
-                  "@type": "type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager",
+                "config": {
                   "codec_type": "AUTO",
                   "stat_prefix": "stats",
                   "route_config": {
@@ -477,22 +395,14 @@
                             "route": {
                               "cluster": "prometheus_stats"
                             }
-                          },
-                          {
-                            "match": {
-                              "prefix": "/healthz/ready"
-                            },
-                            "route": {
-                              "cluster": "agent"
-                            }
                           }
                         ]
                       }
                     ]
                   },
-                  "http_filters": [{
+                  "http_filters": {
                     "name": "envoy.router"
-                  }]
+                  }
                 }
               }
             ]
@@ -506,13 +416,12 @@
   "tracing": {
     "http": {
       "name": "envoy.zipkin",
-      "typed_config": {
-        "@type": "type.googleapis.com/envoy.config.trace.v2.ZipkinConfig",
+      "config": {
         "collector_cluster": "zipkin",
         "collector_endpoint": "/api/v2/spans",
         "collector_endpoint_version": "HTTP_JSON",
-        "trace_id_128bit": true,
-        "shared_span_context": false
+        "trace_id_128bit":"true",
+        "shared_span_context": "false"
       }
     }
   }
@@ -520,7 +429,7 @@
   
   ,
   "stats_sinks": [
-    
+
     {
       "name": "envoy.metrics_service",
       "config": {
@@ -531,8 +440,7 @@
         }
       }
     },
-    
-    
+
     {
       "name": "envoy.statsd",
       "config": {
@@ -540,16 +448,14 @@
           "socket_address": {"address": "10.1.1.1", "port_value": 9125}
         }
       }
-    },
-    
+    }
+
   ]
-  
   
   ,
   "cluster_manager": {
     "outlier_detection": {
-      "event_log_path": /dev/stdout
+      "event_log_path": "/dev/stdout"
     }
   }
-  
 }

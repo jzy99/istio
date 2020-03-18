@@ -26,7 +26,7 @@ import (
 
 	"istio.io/istio/pilot/pkg/features"
 	"istio.io/istio/pilot/pkg/model"
-	"istio.io/istio/pilot/pkg/networking"
+	"istio.io/istio/pilot/pkg/networking/plugin"
 	authn_model "istio.io/istio/pilot/pkg/security/model"
 	protovalue "istio.io/istio/pkg/proto"
 )
@@ -70,7 +70,7 @@ func TestBuildInboundFilterChain(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want []networking.FilterChain
+		want []plugin.FilterChain
 	}{
 		{
 			name: "MTLSUnknown",
@@ -101,7 +101,7 @@ func TestBuildInboundFilterChain(t *testing.T) {
 					Metadata: &model.NodeMetadata{},
 				},
 			},
-			want: []networking.FilterChain{
+			want: []plugin.FilterChain{
 				{
 					TLSContext: tlsContext,
 				},
@@ -116,7 +116,7 @@ func TestBuildInboundFilterChain(t *testing.T) {
 				},
 			},
 			// Two filter chains, one for mtls traffic within the mesh, one for plain text traffic.
-			want: []networking.FilterChain{
+			want: []plugin.FilterChain{
 				{
 					TLSContext: tlsContext,
 					FilterChainMatch: &listener.FilterChainMatch{
@@ -145,7 +145,7 @@ func TestBuildInboundFilterChain(t *testing.T) {
 					},
 				},
 			},
-			want: []networking.FilterChain{
+			want: []plugin.FilterChain{
 				{
 					TLSContext: &auth.DownstreamTlsContext{
 						CommonTlsContext: &auth.CommonTlsContext{
@@ -208,7 +208,7 @@ func TestBuildInboundFilterChain(t *testing.T) {
 					Metadata: &model.NodeMetadata{},
 				},
 			},
-			want: []networking.FilterChain{
+			want: []plugin.FilterChain{
 				{
 					TLSContext: tlsContext,
 				},
@@ -227,7 +227,7 @@ func TestBuildInboundFilterChain(t *testing.T) {
 				},
 			},
 			// Only one filter chain with mTLS settings should be generated.
-			want: []networking.FilterChain{
+			want: []plugin.FilterChain{
 				{
 					TLSContext: &auth.DownstreamTlsContext{
 						CommonTlsContext: &auth.CommonTlsContext{
